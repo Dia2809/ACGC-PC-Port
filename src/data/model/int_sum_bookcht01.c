@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_bookcht01_v[];
+#ifdef TARGET_PC
+u16 int_sum_bookcht01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_bookcht01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_bookcht01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_bookcht01_mirror_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_bookcht01_mirror_tex_rgb_ci4_pal[] = {
 #include "assets/int_sum_bookcht01_mirror_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bookcht01_front_tex[0x180];
+#else
 u8 int_sum_bookcht01_front_tex[] = {
 #include "assets/int_sum_bookcht01_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bookcht01_side_tex[0x180];
+#else
 u8 int_sum_bookcht01_side_tex[] = {
 #include "assets/int_sum_bookcht01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bookcht01_back_tex[0x180];
+#else
 u8 int_sum_bookcht01_back_tex[] = {
 #include "assets/int_sum_bookcht01_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bookcht01_top_tex[0x80];
+#else
 u8 int_sum_bookcht01_top_tex[] = {
 #include "assets/int_sum_bookcht01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bookcht01_book_tex[0x200];
+#else
 u8 int_sum_bookcht01_book_tex[] = {
 #include "assets/int_sum_bookcht01_book_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bookcht01_mirror_tex[0x80];
+#else
 u8 int_sum_bookcht01_mirror_tex[] = {
 #include "assets/int_sum_bookcht01_mirror_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_bookcht01_v[0x240 / sizeof(Vtx)];
+#else
 Vtx int_sum_bookcht01_v[] = {
 #include "assets/int_sum_bookcht01_v.inc"
 };
+#endif
 
 Gfx int_sum_bookcht01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

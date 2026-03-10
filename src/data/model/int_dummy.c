@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 int_dummy_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_dummy_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_dummy_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_dummy_tex[0x80];
+#else
 u8 int_dummy_tex[] = {
 #include "assets/int_dummy_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_dummy_v[0x30 / sizeof(Vtx)];
+#else
 Vtx int_dummy_v[] = {
 #include "assets/int_dummy_v.inc"
 };
+#endif
 
 Gfx int_dummy_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

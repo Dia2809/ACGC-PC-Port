@@ -9,9 +9,13 @@ extern u8 ef_s_cedar_trunk_modeset[];
 extern u8 ef_s_cedar_leaf_modeset[];
 extern u8 obj_s_cedar_cutS_tex_txt[];
 extern Vtx ef_s_cedar3_cutR_v[];
+#ifdef TARGET_PC
+Vtx ef_s_cedar3_cutR_v[0x1D0 / sizeof(Vtx)];
+#else
 Vtx ef_s_cedar3_cutR_v[] = {
 #include "assets/ef_s_cedar3_cutR_v.inc"
 };
+#endif
 
 Gfx ef_s_cedar3_cutR_leaf_model[] = {
     gsSPDisplayList(ef_s_cedar_leaf_modeset),

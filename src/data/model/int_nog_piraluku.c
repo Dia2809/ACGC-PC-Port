@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_piraluku_v[];
+#ifdef TARGET_PC
+static u16 int_nog_piraluku_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_nog_piraluku_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_piraluku/int_nog_piraluku_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_nog_piraluku_glass_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_nog_piraluku_glass_tex_pic_ci4_pal[] = {
 #include "assets/int_nog_piraluku_glass_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_pireluku_body_tex_txt[0x400];
+#else
 u8 int_nog_pireluku_body_tex_txt[] = {
 #include "assets/int_nog_pireluku_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_pireluku_side_tex_txt[0x200];
+#else
 u8 int_nog_pireluku_side_tex_txt[] = {
 #include "assets/int_nog_pireluku_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_pireluku_base_tex_txt[0x80];
+#else
 u8 int_nog_pireluku_base_tex_txt[] = {
 #include "assets/int_nog_pireluku_base_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_pireluku_top_tex_txt[0x80];
+#else
 u8 int_nog_pireluku_top_tex_txt[] = {
 #include "assets/int_nog_pireluku_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_pireluku_glass_tex_txt[0x100];
+#else
 u8 int_nog_pireluku_glass_tex_txt[] = {
 #include "assets/int_nog_pireluku_glass_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_piraluku_v[0x3F0 / sizeof(Vtx)];
+#else
 Vtx int_nog_piraluku_v[] = {
 #include "assets/int_nog_piraluku_v.inc"
 };
+#endif
 
 Gfx int_nog_piraluku_sakana_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -143,3 +175,10 @@ cKF_Joint_R_c cKF_je_r_int_nog_piraluku_tbl[] = {
 
 cKF_Skeleton_R_c cKF_bs_r_int_nog_piraluku = { ARRAY_COUNT(cKF_je_r_int_nog_piraluku_tbl), 4,
                                                cKF_je_r_int_nog_piraluku_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_nog_piraluku_c(void) {
+    pc_load_asset("assets/int_nog_piraluku/int_nog_piraluku_pal.bin", int_nog_piraluku_pal, 0x20, 0xBEC3A0, 0, 1);
+}
+#endif

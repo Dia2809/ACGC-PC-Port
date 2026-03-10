@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 lat_mes_win_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 lat_mes_win_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/lat_mes_win_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx lat_mes_v[0x40 / sizeof(Vtx)];
+#else
 Vtx lat_mes_v[] = {
 #include "assets/lat_mes_v.inc"
 };
+#endif
 
 Gfx lat_mes_winT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

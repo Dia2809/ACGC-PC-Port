@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kob_ncube_v[];
+#ifdef TARGET_PC
+u16 int_kob_ncube_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kob_ncube_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kob_ncube_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_ncube_gn[0x200];
+#else
 u8 int_kob_ncube_gn[] = {
 #include "assets/int_kob_ncube_gn.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_ncube_bn[0x200];
+#else
 u8 int_kob_ncube_bn[] = {
 #include "assets/int_kob_ncube_bn.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_ncube_top[0x80];
+#else
 u8 int_kob_ncube_top[] = {
 #include "assets/int_kob_ncube_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_ncube_r[0x80];
+#else
 u8 int_kob_ncube_r[] = {
 #include "assets/int_kob_ncube_r.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_ncube_g[0x80];
+#else
 u8 int_kob_ncube_g[] = {
 #include "assets/int_kob_ncube_g.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_ncube_b[0x80];
+#else
 u8 int_kob_ncube_b[] = {
 #include "assets/int_kob_ncube_b.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kob_ncube_v[0x480 / sizeof(Vtx)];
+#else
 Vtx int_kob_ncube_v[] = {
 #include "assets/int_kob_ncube_v.inc"
 };
+#endif
 
 Gfx int_kob_ncube_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

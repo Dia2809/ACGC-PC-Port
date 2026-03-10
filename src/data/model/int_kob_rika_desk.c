@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kob_rika_desk_v[];
+#ifdef TARGET_PC
+u16 int_kob_rika_desk_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kob_rika_desk_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kob_rika_desk_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_top_tex[0x200];
+#else
 u8 int_kob_rika_desk_top_tex[] = {
 #include "assets/int_kob_rika_desk_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_side1_tex[0x200];
+#else
 u8 int_kob_rika_desk_side1_tex[] = {
 #include "assets/int_kob_rika_desk_side1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_side2_tex[0x80];
+#else
 u8 int_kob_rika_desk_side2_tex[] = {
 #include "assets/int_kob_rika_desk_side2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_side3_tex[0x80];
+#else
 u8 int_kob_rika_desk_side3_tex[] = {
 #include "assets/int_kob_rika_desk_side3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_nagashi1_tex[0x80];
+#else
 u8 int_kob_rika_desk_nagashi1_tex[] = {
 #include "assets/int_kob_rika_desk_nagashi1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_nagashi2_tex[0x80];
+#else
 u8 int_kob_rika_desk_nagashi2_tex[] = {
 #include "assets/int_kob_rika_desk_nagashi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_jyaguti1_tex[0x80];
+#else
 u8 int_kob_rika_desk_jyaguti1_tex[] = {
 #include "assets/int_kob_rika_desk_jyaguti1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_jyaguti2_tex[0x80];
+#else
 u8 int_kob_rika_desk_jyaguti2_tex[] = {
 #include "assets/int_kob_rika_desk_jyaguti2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_jikken1_tex[0x80];
+#else
 u8 int_kob_rika_desk_jikken1_tex[] = {
 #include "assets/int_kob_rika_desk_jikken1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_rika_desk_jikken2_tex[0x80];
+#else
 u8 int_kob_rika_desk_jikken2_tex[] = {
 #include "assets/int_kob_rika_desk_jikken2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kob_rika_desk_v[0x4E0 / sizeof(Vtx)];
+#else
 Vtx int_kob_rika_desk_v[] = {
 #include "assets/int_kob_rika_desk_v.inc"
 };
+#endif
 
 Gfx int_kob_rika_desk_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

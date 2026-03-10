@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_k_kid02_v[];
+#ifdef TARGET_PC
+u16 int_ike_k_kid02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_k_kid02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_k_kid02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2door1_tex[0x100];
+#else
 u8 int_ike_k_kid2door1_tex[] = {
 #include "assets/int_ike_k_kid2door1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2yane1_tex[0x100];
+#else
 u8 int_ike_k_kid2yane1_tex[] = {
 #include "assets/int_ike_k_kid2yane1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2door2_tex[0x100];
+#else
 u8 int_ike_k_kid2door2_tex[] = {
 #include "assets/int_ike_k_kid2door2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2under_tex[0x40];
+#else
 u8 int_ike_k_kid2under_tex[] = {
 #include "assets/int_ike_k_kid2under_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2kousi_tex[0x80];
+#else
 u8 int_ike_k_kid2kousi_tex[] = {
 #include "assets/int_ike_k_kid2kousi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2side1_tex[0x100];
+#else
 u8 int_ike_k_kid2side1_tex[] = {
 #include "assets/int_ike_k_kid2side1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2sunoko_tex[0x80];
+#else
 u8 int_ike_k_kid2sunoko_tex[] = {
 #include "assets/int_ike_k_kid2sunoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2tire_tex[0x80];
+#else
 u8 int_ike_k_kid2tire_tex[] = {
 #include "assets/int_ike_k_kid2tire_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2tire2_tex[0x100];
+#else
 u8 int_ike_k_kid2tire2_tex[] = {
 #include "assets/int_ike_k_kid2tire2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kid2base_tex[0x80];
+#else
 u8 int_ike_k_kid2base_tex[] = {
 #include "assets/int_ike_k_kid2base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_k_kid02_v[0x780 / sizeof(Vtx)];
+#else
 Vtx int_ike_k_kid02_v[] = {
 #include "assets/int_ike_k_kid02_v.inc"
 };
+#endif
 
 Gfx int_ike_k_kid02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

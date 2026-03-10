@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_liccachair_v[];
+#ifdef TARGET_PC
+u16 int_sum_liccachair_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_liccachair_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_liccachair_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccachair_seat_tex[0x100];
+#else
 u8 int_sum_liccachair_seat_tex[] = {
 #include "assets/int_sum_liccachair_seat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccachair_splat_tex[0x200];
+#else
 u8 int_sum_liccachair_splat_tex[] = {
 #include "assets/int_sum_liccachair_splat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccachair_leg_tex[0x200];
+#else
 u8 int_sum_liccachair_leg_tex[] = {
 #include "assets/int_sum_liccachair_leg_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccachair_seatside_tex[0x100];
+#else
 u8 int_sum_liccachair_seatside_tex[] = {
 #include "assets/int_sum_liccachair_seatside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_liccachair_v[0x3B0 / sizeof(Vtx)];
+#else
 Vtx int_sum_liccachair_v[] = {
 #include "assets/int_sum_liccachair_v.inc"
 };
+#endif
 
 Gfx int_sum_liccachair_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

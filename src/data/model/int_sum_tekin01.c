@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_tekin01_v[];
+#ifdef TARGET_PC
+u16 int_sum_tekin01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_tekin01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_tekin01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_front_tex[0x100];
+#else
 u8 int_sum_tekin01_front_tex[] = {
 #include "assets/int_sum_tekin01_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_top_tex[0x200];
+#else
 u8 int_sum_tekin01_top_tex[] = {
 #include "assets/int_sum_tekin01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_side_tex[0x100];
+#else
 u8 int_sum_tekin01_side_tex[] = {
 #include "assets/int_sum_tekin01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_tube_tex[0x100];
+#else
 u8 int_sum_tekin01_tube_tex[] = {
 #include "assets/int_sum_tekin01_tube_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_stand_tex[0x80];
+#else
 u8 int_sum_tekin01_stand_tex[] = {
 #include "assets/int_sum_tekin01_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_onlytube_tex[0x40];
+#else
 u8 int_sum_tekin01_onlytube_tex[] = {
 #include "assets/int_sum_tekin01_onlytube_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_koro_tex[0x80];
+#else
 u8 int_sum_tekin01_koro_tex[] = {
 #include "assets/int_sum_tekin01_koro_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_pedal_tex[0x40];
+#else
 u8 int_sum_tekin01_pedal_tex[] = {
 #include "assets/int_sum_tekin01_pedal_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_sen_tex[0x80];
+#else
 u8 int_sum_tekin01_sen_tex[] = {
 #include "assets/int_sum_tekin01_sen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_tekin01_beat_tex[0x100];
+#else
 u8 int_sum_tekin01_beat_tex[] = {
 #include "assets/int_sum_tekin01_beat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_tekin01_v[0x550 / sizeof(Vtx)];
+#else
 Vtx int_sum_tekin01_v[] = {
 #include "assets/int_sum_tekin01_v.inc"
 };
+#endif
 
 Gfx int_sum_tekin01_onT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

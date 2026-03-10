@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_sibuki01_1_int_i4[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_sibuki01_1_int_i4[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_sibuki01_1_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_sibuki01_2_int_i4[0x80];
+#else
 u8 ef_sibuki01_2_int_i4[] = {
 #include "assets/ef_sibuki01_2_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_sibuki01_3_int_i4[0x80];
+#else
 u8 ef_sibuki01_3_int_i4[] = {
 #include "assets/ef_sibuki01_3_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_sibuki01_4_int_i4[0x80];
+#else
 u8 ef_sibuki01_4_int_i4[] = {
 #include "assets/ef_sibuki01_4_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_sibuki01_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_sibuki01_00_v[] = {
 #include "assets/ef_sibuki01_00_v.inc"
 };
+#endif
 
 Gfx ef_sibuki01_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -37,25 +57,45 @@ Gfx ef_sibuki01_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_sunahane01_0_inta_ia8[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_sunahane01_0_inta_ia8[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_sunahane01_0_inta_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_sunahane01_1_inta_ia8[0x100];
+#else
 u8 ef_sunahane01_1_inta_ia8[] = {
 #include "assets/ef_sunahane01_1_inta_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_sunahane01_2_inta_ia8[0x100];
+#else
 u8 ef_sunahane01_2_inta_ia8[] = {
 #include "assets/ef_sunahane01_2_inta_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_sunahane01_3_inta_ia8[0x100];
+#else
 u8 ef_sunahane01_3_inta_ia8[] = {
 #include "assets/ef_sunahane01_3_inta_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_sunahane01_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_sunahane01_00_v[] = {
 #include "assets/ef_sunahane01_00_v.inc"
 };
+#endif
 
 Gfx ef_sunahane01_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

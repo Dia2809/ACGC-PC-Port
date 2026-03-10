@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u16 obj_s_stoneA_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_stoneA_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_stoneA_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_stoneA_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_stoneA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_stoneA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_stoneA_v[0xA0 / sizeof(Vtx)];
+#else
 Vtx obj_s_stoneA_v[] = {
 #include "assets/obj_s_stoneA_v.inc"
 };
+#endif
 
 Gfx obj_s_stoneA_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_shop_horagai_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_shop_horagai_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_horagai_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_shop_horagai_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop_horagai_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_horagai_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop_horagai_v[0xA0 / sizeof(Vtx)];
+#else
 Vtx obj_shop_horagai_v[] = {
 #include "assets/obj_shop_horagai_v.inc"
 };
+#endif
 
 Gfx obj_horagaiT_mat_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

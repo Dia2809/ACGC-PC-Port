@@ -5,6 +5,10 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 mFM_grd_water2_tex[0x200];
+#else
 u8 mFM_grd_water2_tex[] = {
 #include "assets/mFM_grd_water2_tex.inc"
 };
+#endif

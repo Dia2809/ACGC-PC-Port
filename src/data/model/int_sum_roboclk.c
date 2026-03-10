@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_roboclk_v[];
+#ifdef TARGET_PC
+u16 int_roboclk_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_roboclk_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_roboclk_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_hari_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_hari_tex_txt[] = {
 #include "assets/int_sum_roboclk_hari_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_eye1_TA_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_eye1_TA_tex_txt[] = {
 #include "assets/int_sum_roboclk_eye1_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_eye2_TA_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_eye2_TA_tex_txt[] = {
 #include "assets/int_sum_roboclk_eye2_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_top_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_top_tex_txt[] = {
 #include "assets/int_sum_roboclk_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_base_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_base_tex_txt[] = {
 #include "assets/int_sum_roboclk_base_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_front_tex_txt[0x400];
+#else
 u8 int_sum_roboclk_front_tex_txt[] = {
 #include "assets/int_sum_roboclk_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_antena_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_antena_tex_txt[] = {
 #include "assets/int_sum_roboclk_antena_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_head_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_head_tex_txt[] = {
 #include "assets/int_sum_roboclk_head_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_hand_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_hand_tex_txt[] = {
 #include "assets/int_sum_roboclk_hand_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboclk_arm_tex_txt[0x80];
+#else
 u8 int_sum_roboclk_arm_tex_txt[] = {
 #include "assets/int_sum_roboclk_arm_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_roboclk_v[0x610 / sizeof(Vtx)];
+#else
 Vtx int_sum_roboclk_v[] = {
 #include "assets/int_sum_roboclk_v.inc"
 };
+#endif
 
 Gfx int_sum_roboclk_short_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

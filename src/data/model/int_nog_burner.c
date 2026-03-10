@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_burner_v[];
+#ifdef TARGET_PC
+u16 int_nog_burner_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_burner_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_burner_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_burner_gas_tex[0x100];
+#else
 u8 int_nog_burner_gas_tex[] = {
 #include "assets/int_nog_burner_gas_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_burner_side_tex[0x400];
+#else
 u8 int_nog_burner_side_tex[] = {
 #include "assets/int_nog_burner_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_burner_top_tex[0x200];
+#else
 u8 int_nog_burner_top_tex[] = {
 #include "assets/int_nog_burner_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_burner_v[0x6F0 / sizeof(Vtx)];
+#else
 Vtx int_nog_burner_v[] = {
 #include "assets/int_nog_burner_v.inc"
 };
+#endif
 
 Gfx int_nog_burner_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_liccakitchen_v[];
+#ifdef TARGET_PC
+u16 int_sum_liccakitchen_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_liccakitchen_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_liccakitchen_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccakitchen_side_tex[0x100];
+#else
 u8 int_sum_liccakitchen_side_tex[] = {
 #include "assets/int_sum_liccakitchen_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccakitchen_tail_tex[0x80];
+#else
 u8 int_sum_liccakitchen_tail_tex[] = {
 #include "assets/int_sum_liccakitchen_tail_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccakitchen_top_tex[0x100];
+#else
 u8 int_sum_liccakitchen_top_tex[] = {
 #include "assets/int_sum_liccakitchen_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccakitchen_back_tex[0x180];
+#else
 u8 int_sum_liccakitchen_back_tex[] = {
 #include "assets/int_sum_liccakitchen_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccakitchen_jyagu_tex[0x80];
+#else
 u8 int_sum_liccakitchen_jyagu_tex[] = {
 #include "assets/int_sum_liccakitchen_jyagu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccakitchen_etc_tex[0x100];
+#else
 u8 int_sum_liccakitchen_etc_tex[] = {
 #include "assets/int_sum_liccakitchen_etc_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccakitchen_front_tex[0x200];
+#else
 u8 int_sum_liccakitchen_front_tex[] = {
 #include "assets/int_sum_liccakitchen_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_liccakitchen_v[0x3A0 / sizeof(Vtx)];
+#else
 Vtx int_sum_liccakitchen_v[] = {
 #include "assets/int_sum_liccakitchen_v.inc"
 };
+#endif
 
 Gfx int_sum_liccakitchen_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_station_v[];
+#ifdef TARGET_PC
+u16 int_tak_station_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_station_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_station_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_station_wa_tex_txt[0x200];
+#else
 u8 int_tak_station_wa_tex_txt[] = {
 #include "assets/int_tak_station_wa_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_station_side_tex_txt[0x80];
+#else
 u8 int_tak_station_side_tex_txt[] = {
 #include "assets/int_tak_station_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_station_bou_tex_txt[0x80];
+#else
 u8 int_tak_station_bou_tex_txt[] = {
 #include "assets/int_tak_station_bou_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_station_top_tex_txt[0x80];
+#else
 u8 int_tak_station_top_tex_txt[] = {
 #include "assets/int_tak_station_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_station_mado_tex_txt[0x80];
+#else
 u8 int_tak_station_mado_tex_txt[] = {
 #include "assets/int_tak_station_mado_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_station_v[0x460 / sizeof(Vtx)];
+#else
 Vtx int_tak_station_v[] = {
 #include "assets/int_tak_station_v.inc"
 };
+#endif
 
 Gfx int_tak_station_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_s_yungtree_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_s_yungtree_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_s_yungtree_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_s_youngtree_00_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_s_youngtree_00_v[] = {
 #include "assets/ef_s_youngtree_00_v.inc"
 };
+#endif
 
 Gfx ef_s_youngtree_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -27,13 +35,21 @@ Gfx ef_s_youngtree_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_w_youngtree_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_w_youngtree_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_w_youngtree_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_w_youngtree_00_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_w_youngtree_00_v[] = {
 #include "assets/ef_w_youngtree_00_v.inc"
 };
+#endif
 
 Gfx ef_w_youngtree_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -49,13 +65,21 @@ Gfx ef_w_youngtree_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_f_youngtree_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_f_youngtree_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_f_youngtree_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_f_youngtree_00_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_f_youngtree_00_v[] = {
 #include "assets/ef_f_youngtree_00_v.inc"
 };
+#endif
 
 Gfx ef_f_youngtree_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -71,13 +95,21 @@ Gfx ef_f_youngtree_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_s_young_palm_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_s_young_palm_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_s_young_palm_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_s_young_palm_v[0x60 / sizeof(Vtx)];
+#else
 Vtx ef_s_young_palm_v[] = {
 #include "assets/ef_s_young_palm_v.inc"
 };
+#endif
 
 Gfx ef_s_young_palm_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -93,13 +125,21 @@ Gfx ef_s_young_palm_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_w_young_palm_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_w_young_palm_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_w_young_palm_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_w_young_palm_v[0x60 / sizeof(Vtx)];
+#else
 Vtx ef_w_young_palm_v[] = {
 #include "assets/ef_w_young_palm_v.inc"
 };
+#endif
 
 Gfx ef_w_young_palm_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -115,13 +155,21 @@ Gfx ef_w_young_palm_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_s_young_cedar_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_s_young_cedar_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_s_young_cedar_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_s_young_cedar_v[0x60 / sizeof(Vtx)];
+#else
 Vtx ef_s_young_cedar_v[] = {
 #include "assets/ef_s_young_cedar_v.inc"
 };
+#endif
 
 Gfx ef_s_young_cedar_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -137,13 +185,21 @@ Gfx ef_s_young_cedar_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_w_young_cedar_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_w_young_cedar_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_w_young_cedar_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_w_young_cedar_v[0x60 / sizeof(Vtx)];
+#else
 Vtx ef_w_young_cedar_v[] = {
 #include "assets/ef_w_young_cedar_v.inc"
 };
+#endif
 
 Gfx ef_w_young_cedar_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -66,8 +66,7 @@ include_directories(
     ${DECOMP_ROOT}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/glad/include
-    # Generated .inc asset files from decomp-toolkit extraction
-    ${DECOMP_ROOT}/build/GAFE01_00/include
+    # .inc assets are loaded at runtime from disc image (no build/GAFE01_00 needed)
 )
 
 # =============================================================================
@@ -278,6 +277,8 @@ set(PC_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_stubs.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_stubs_cpp.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_fontdata.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_assets.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_disc.c
 )
 
 # Rename game's main() to ac_entry() to avoid conflict with PC main() and game_main(GAME*)

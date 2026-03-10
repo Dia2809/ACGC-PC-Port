@@ -5,21 +5,37 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 ef_axe_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 ef_axe_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_axe_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_axe_tuka1_tex_txt[0x200];
+#else
 u8 ef_axe_tuka1_tex_txt[] = {
 #include "assets/ef_axe_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_axe_edge1_tex_txt[0x200];
+#else
 u8 ef_axe_edge1_tex_txt[] = {
 #include "assets/ef_axe_edge1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_axe1_v[0x1D0 / sizeof(Vtx)];
+#else
 Vtx ef_axe1_v[] = {
 #include "assets/ef_axe1_v.inc"
 };
+#endif
 
 Gfx ef_axe1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -43,17 +59,29 @@ Gfx ef_axe1_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_axe_tuka2_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_axe_tuka2_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_axe_tuka2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_axe_edge2_tex_txt[0x200];
+#else
 u8 ef_axe_edge2_tex_txt[] = {
 #include "assets/ef_axe_edge2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_axe2_v[0x1B0 / sizeof(Vtx)];
+#else
 Vtx ef_axe2_v[] = {
 #include "assets/ef_axe2_v.inc"
 };
+#endif
 
 Gfx ef_axe2_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -77,13 +105,21 @@ Gfx ef_axe2_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_axe_edge3_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_axe_edge3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_axe_edge3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_axe3_v[0xB0 / sizeof(Vtx)];
+#else
 Vtx ef_axe3_v[] = {
 #include "assets/ef_axe3_v.inc"
 };
+#endif
 
 Gfx ef_axe3_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

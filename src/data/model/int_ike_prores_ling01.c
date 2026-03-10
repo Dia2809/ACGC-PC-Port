@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_prores_ling01_v[];
+#ifdef TARGET_PC
+static u16 int_ike_prores_ling01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_ike_prores_ling01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_prores_ling01/int_ike_prores_ling01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_ike_prores_ling01_lope2_tex[0x80];
+#else
 static u8 int_ike_prores_ling01_lope2_tex[] = {
 #include "assets/int_ike_prores_ling01/int_ike_prores_ling01_lope2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_ike_prores_ling01_lope_tex[0x80];
+#else
 static u8 int_ike_prores_ling01_lope_tex[] = {
 #include "assets/int_ike_prores_ling01/int_ike_prores_ling01_lope_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling01_mat_tex[0x80];
+#else
 u8 int_ike_prores_ling01_mat_tex[] = {
 #include "assets/int_ike_prores_ling01_mat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_ike_prores_ling01_pole_tex[0x80];
+#else
 static u8 int_ike_prores_ling01_pole_tex[] = {
 #include "assets/int_ike_prores_ling01/int_ike_prores_ling01_pole_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_ike_prores_ling01_floor_tex[0x200];
+#else
 static u8 int_ike_prores_ling01_floor_tex[] = {
 #include "assets/int_ike_prores_ling01/int_ike_prores_ling01_floor_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_ike_prores_ling01_floorside_tex[0x80];
+#else
 static u8 int_ike_prores_ling01_floorside_tex[] = {
 #include "assets/int_ike_prores_ling01/int_ike_prores_ling01_floorside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_ike_prores_ling01_pole2_tex[0x80];
+#else
 static u8 int_ike_prores_ling01_pole2_tex[] = {
 #include "assets/int_ike_prores_ling01/int_ike_prores_ling01_pole2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_ike_prores_ling01_base_tex[0x80];
+#else
 static u8 int_ike_prores_ling01_base_tex[] = {
 #include "assets/int_ike_prores_ling01/int_ike_prores_ling01_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_prores_ling01_v[0x4C0 / sizeof(Vtx)];
+#else
 Vtx int_ike_prores_ling01_v[] = {
 #include "assets/int_ike_prores_ling01_v.inc"
 };
+#endif
 
 Gfx int_ike_prores_ling01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -105,3 +145,17 @@ Gfx int_ike_prores_ling01_onT_model[] = {
     gsSPNTriangles_5b(25, 26, 27, 25, 28, 26, 18, 20, 29, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_ike_prores_ling01_c(void) {
+    pc_load_asset("assets/int_ike_prores_ling01/int_ike_prores_ling01_pal.bin", int_ike_prores_ling01_pal, 0x20, 0xB20300, 0, 1);
+    pc_load_asset("assets/int_ike_prores_ling01/int_ike_prores_ling01_lope2_tex.bin", int_ike_prores_ling01_lope2_tex, 0x80, 0xB20320, 0, 0);
+    pc_load_asset("assets/int_ike_prores_ling01/int_ike_prores_ling01_lope_tex.bin", int_ike_prores_ling01_lope_tex, 0x80, 0xB203A0, 0, 0);
+    pc_load_asset("assets/int_ike_prores_ling01/int_ike_prores_ling01_pole_tex.bin", int_ike_prores_ling01_pole_tex, 0x80, 0xB204A0, 0, 0);
+    pc_load_asset("assets/int_ike_prores_ling01/int_ike_prores_ling01_floor_tex.bin", int_ike_prores_ling01_floor_tex, 0x200, 0xB20520, 0, 0);
+    pc_load_asset("assets/int_ike_prores_ling01/int_ike_prores_ling01_floorside_tex.bin", int_ike_prores_ling01_floorside_tex, 0x80, 0xB20720, 0, 0);
+    pc_load_asset("assets/int_ike_prores_ling01/int_ike_prores_ling01_pole2_tex.bin", int_ike_prores_ling01_pole2_tex, 0x80, 0xB207A0, 0, 0);
+    pc_load_asset("assets/int_ike_prores_ling01/int_ike_prores_ling01_base_tex.bin", int_ike_prores_ling01_base_tex, 0x80, 0xB20820, 0, 0);
+}
+#endif

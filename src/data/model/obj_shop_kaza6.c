@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 tol_kaza_6_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_6_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_kaza6/tol_kaza_6_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_6_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_6_a_tex_txt[] = {
 #include "assets/obj_shop_kaza6/tol_kaza_6_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_6_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_6_c_tex_txt[] = {
 #include "assets/obj_shop_kaza6/tol_kaza_6_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_6_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_6_b_tex_txt[] = {
 #include "assets/obj_shop_kaza6/tol_kaza_6_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop_kaza6_v[0x360 / sizeof(Vtx)];
+#else
 Vtx obj_shop_kaza6_v[] = {
 #include "assets/obj_shop_kaza6_v.inc"
 };
+#endif
 
 Gfx obj_shop_kaza6_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -58,3 +78,13 @@ gsSPNTrianglesInit_5b(1, 27, 28, 29, 0, 0, 0, 0, 0, 0),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_shop_kaza6_c(void) {
+    pc_load_asset("assets/obj_shop_kaza6/tol_kaza_6_pal.bin", tol_kaza_6_pal, 0x20, 0x66FF60, 0, 1);
+    pc_load_asset("assets/obj_shop_kaza6/tol_kaza_6_a_tex_txt.bin", tol_kaza_6_a_tex_txt, 0x200, 0x66FF80, 0, 0);
+    pc_load_asset("assets/obj_shop_kaza6/tol_kaza_6_c_tex_txt.bin", tol_kaza_6_c_tex_txt, 0x200, 0x670180, 0, 0);
+    pc_load_asset("assets/obj_shop_kaza6/tol_kaza_6_b_tex_txt.bin", tol_kaza_6_b_tex_txt, 0x100, 0x670380, 0, 0);
+}
+#endif

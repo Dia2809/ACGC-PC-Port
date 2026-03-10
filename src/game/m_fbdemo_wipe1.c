@@ -6,13 +6,21 @@
 #include "m_common_data.h"
 #include "m_rcp.h"
 
+#ifdef TARGET_PC
+Vtx wipe1_v[0x190 / sizeof(Vtx)];
+#else
 Vtx wipe1_v[] = {
 #include "assets/wipe1_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 g_wipe1_txt[0x800];
+#else
 u8 g_wipe1_txt[] = {
 #include "assets/g_wipe1_txt.inc"
 };
+#endif
 
 Gfx wipe1_modelT[] = {
     gsDPPipeSync(),

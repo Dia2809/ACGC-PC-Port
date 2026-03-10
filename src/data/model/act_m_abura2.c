@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_abura_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_abura_v[0x160 / sizeof(Vtx)];
+#else
 static Vtx act_m_abura_v[] = {
 #include "assets/act_m_abura2/act_m_abura_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_abura_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_abura_pal[] = {
 #include "assets/act_m_abura2/act_m_abura_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_abura[0x200];
+#else
 static u8 act_m_abura[] = {
 #include "assets/act_m_abura2/act_m_abura.inc"
 };
+#endif
 
 Gfx act_m_mu_abura1_1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -79,3 +91,12 @@ Gfx act_m_mu_abura1_2T_model[] = {
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_abura2_c(void) {
+    pc_load_asset("assets/act_m_abura2/act_m_abura_v.bin", act_m_abura_v, 0x160, 0xB48DE0, 0, 2);
+    pc_load_asset("assets/act_m_abura2/act_m_abura_pal.bin", act_m_abura_pal, 0x20, 0xB48F40, 0, 1);
+    pc_load_asset("assets/act_m_abura2/act_m_abura.bin", act_m_abura, 0x200, 0xB48F60, 0, 0);
+}
+#endif

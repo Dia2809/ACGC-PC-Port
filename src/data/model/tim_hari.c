@@ -5,33 +5,61 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 tim_hari_h1_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_hari_h1_pal[] = {
 #include "assets/tim_hari_h1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_hari_h2_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_hari_h2_pal[] = {
 #include "assets/tim_hari_h2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_hari_maru_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_hari_maru_pal[] = {
 #include "assets/tim_hari_maru_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_hari_h1_tex[0x400];
+#else
 u8 tim_hari_h1_tex[] = {
 #include "assets/tim_hari_h1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_hari_h2_tex[0x400];
+#else
 u8 tim_hari_h2_tex[] = {
 #include "assets/tim_hari_h2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_hari_maru_tex[0x80];
+#else
 u8 tim_hari_maru_tex[] = {
 #include "assets/tim_hari_maru_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tim_hari_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx tim_hari_v[] = {
 #include "assets/tim_hari_v.inc"
 };
+#endif
 
 Gfx tim_hari_mode[] = {
     gsDPPipeSync(),

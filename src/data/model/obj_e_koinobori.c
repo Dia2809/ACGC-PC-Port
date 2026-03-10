@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_e_koinobori_t1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_koinobori_t1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_koinobori_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_koinobori_t3_tex_txt[0x800];
+#else
 u8 obj_e_koinobori_t3_tex_txt[] = {
 #include "assets/obj_e_koinobori_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_koinobori_v[0xD10 / sizeof(Vtx)];
+#else
 Vtx obj_e_koinobori_v[] = {
 #include "assets/obj_e_koinobori_v.inc"
 };
+#endif
 
 Gfx obj_e_koinobori_pole_1_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, anime_1_txt),

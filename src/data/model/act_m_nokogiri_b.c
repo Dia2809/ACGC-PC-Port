@@ -6,13 +6,21 @@
 #include "ef_effect_control.h"
 
 extern Vtx act_m_nokogiri_b_v[];
+#ifdef TARGET_PC
+u8 act_m_nokogiri_txt[0x800];
+#else
 u8 act_m_nokogiri_txt[] = {
 #include "assets/act_m_nokogiri_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_m_nokogiri_b_v[0x120 / sizeof(Vtx)];
+#else
 Vtx act_m_nokogiri_b_v[] = {
 #include "assets/act_m_nokogiri_b_v.inc"
 };
+#endif
 
 Gfx act_m_nokogiri_b_left_model[] = {
     gsSPMatrix(anime_6_mdl, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),

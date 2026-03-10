@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_s_yamishop_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_yamishop_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_yamishop_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_yamishop_t2_tex_txt[0x800];
+#else
 u8 obj_s_yamishop_t2_tex_txt[] = {
 #include "assets/obj_s_yamishop_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_yamishop_t1_tex_txt[0x800];
+#else
 u8 obj_s_yamishop_t1_tex_txt[] = {
 #include "assets/obj_s_yamishop_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_yamishop_window_tex_txt[0x80];
+#else
 u8 obj_s_yamishop_window_tex_txt[] = {
 #include "assets/obj_s_yamishop_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_yamishop_v[0x420 / sizeof(Vtx)];
+#else
 Vtx obj_s_yamishop_v[] = {
 #include "assets/obj_s_yamishop_v.inc"
 };
+#endif
 
 Gfx obj_s_yamishop_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -135,21 +155,37 @@ cKF_Animation_R_c cKF_ba_r_obj_s_yamishop = { cKF_ckcb_r_obj_s_yamishop_tbl,
                                               -1,
                                               17 };
 
+#ifdef TARGET_PC
+u8 obj_w_yamishop_t2_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_yamishop_t2_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_yamishop_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_yamishop_t1_tex_txt[0x800];
+#else
 u8 obj_w_yamishop_t1_tex_txt[] = {
 #include "assets/obj_w_yamishop_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_yamishop_window_tex_txt[0x80];
+#else
 u8 obj_w_yamishop_window_tex_txt[] = {
 #include "assets/obj_w_yamishop_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_yamishop_v[0x420 / sizeof(Vtx)];
+#else
 Vtx obj_w_yamishop_v[] = {
 #include "assets/obj_w_yamishop_v.inc"
 };
+#endif
 
 Gfx obj_w_yamishop_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

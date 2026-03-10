@@ -11,17 +11,15 @@ Supported versions: GAFE01_00: Rev 0 (USA)
 ## Requirements
 
 - **MSYS2** (https://www.msys2.org/)
-- **Animal Crossing (USA) disc image** (ISO, GCM, RVZ, WIA, WBFS, CISO, or GCZ format)
+- **Animal Crossing (USA) disc image** (ISO, GCM, or CISO format)
 
 ### MSYS2 Packages
 
 Open **MSYS2 MINGW32** from your Start menu and install:
 
 ```bash
-pacman -S mingw-w64-i686-gcc mingw-w64-i686-cmake mingw-w64-i686-SDL2 mingw-w64-i686-ninja
+pacman -S mingw-w64-i686-gcc mingw-w64-i686-cmake mingw-w64-i686-SDL2
 ```
-
-You also need **Python 3** installed on your system. The build script will auto-detect it from common Windows install paths if it's not in your MSYS2 environment.
 
 ## Building
 
@@ -31,29 +29,25 @@ You also need **Python 3** installed on your system. The build script will auto-
    cd ac-decomp
    ```
 
-2. Place your disc image in the `orig/GAFE01_00/` directory
-
-3. Build (from **MSYS2 MINGW32** shell):
+2. Build (from **MSYS2 MINGW32** shell):
    ```bash
    ./build_pc.sh
    ```
 
-   This single command handles the entire pipeline:
-   - Runs the decomp toolchain (`configure.py` + `ninja`) to extract assets from the ROM
-   - Extracts runtime files (archives, audio) via dtk
-   - Configures and builds the PC port with CMake
-
-   The first build takes several minutes. Subsequent builds are incremental.
+3. Place your disc image in the `rom/` folder:
+   ```
+   pc/build32/bin/rom/YourGame.ciso
+   ```
 
 4. Run:
    ```bash
    pc/build32/bin/AnimalCrossing.exe
    ```
 
+The game reads all assets directly from the disc image at startup. No extraction or preprocessing step is needed.
+
 ## Controls
-
 Keybinding support is planned.
-
 ### Keyboard
 
 | Key | Action |
@@ -93,7 +87,7 @@ Graphics settings are stored in `pc/build32/bin/settings.ini` and can be edited 
 
 ## Texture Packs
 
-Custom textures can be placed in `pc/build32/bin/texture_pack/`.
+Custom textures can be placed in `pc/build32/bin/texture_pack/`. Dolphin-compatible format (XXHash64, DDS).
 
 ## Save Data
 
@@ -101,4 +95,4 @@ Save files are stored in `pc/build32/bin/save/` using the standard GCI format, c
 
 ## Credits
 
-This project would not be possible without the work of the [ACreTeam](https://github.com/ACreTeam) decompilation team. Their near-complete C decompilation of Animal Crossing is the foundation this port is built on. Huge thanks to them.
+This project would not be possible without the work of the [ACreTeam](https://github.com/ACreTeam) decompilation team. Their near-complete C decompilation of Animal Crossing is the foundation this port is built on.

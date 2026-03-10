@@ -1,232 +1,460 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_tailor_wall_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_wall_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_wall_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_floor_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_floor_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_floor_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_mado_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_mado_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_mado_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_reji_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_reji_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_reji_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_dogu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_dogu_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_dogu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_misin_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_misin_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_misin_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_table_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_table_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_table_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_box_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_box_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_quilt_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_quilt_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_quilt_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_tailor_ent_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_tailor_ent_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_ent_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_wallA_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_wallA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_wallA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_wallB_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_wallB_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_wallB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_floorA_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_floorA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_floorA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_floorB_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_floorB_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_floorB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_floorC_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_floorC_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_floorC_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_floorD_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_floorD_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_floorD_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_kage1_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_kage1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_kage1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_mado_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_mado_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_mado_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_pic1_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_pic1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_pic1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_pic2_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_pic2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_pic2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_pic3_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_pic3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_pic3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_pic4_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_pic4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_pic4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_pic5_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_pic5_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_pic5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_pic6_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_pic6_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_pic6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_pic7_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_pic7_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_pic7_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_pic8_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_pic8_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_pic8_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_tyoki_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_tyoki_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_tyoki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_cloth1_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_cloth1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_cloth1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_misin2_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_misin2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_misin2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_table_mae_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_table_mae_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_table_mae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_table_yoko_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_table_yoko_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_table_yoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_table_ue_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_table_ue_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_table_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_ito_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_ito_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_ito_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_table_reji_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_table_reji_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_table_reji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_misin1_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_misin1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_misin1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_misindai_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_misindai_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_misindai_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_table_misin1_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_table_misin1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_table_misin1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_reji_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_reji_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_reji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_table_misin2_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_table_misin2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_table_misin2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box1_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box2_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box3_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box4_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box5_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box5_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box6_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box6_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box7_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box7_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box7_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_box8_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_box8_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_box8_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_kage2_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_kage2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_kage2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_quilt_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_quilt_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_quilt_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_ent_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_ent_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_ent_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_misinbari1_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_misinbari1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_misinbari1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_misinbari2_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_misinbari2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_misinbari2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_tape_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_tape_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_tape_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_dogu1_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_dogu1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_dogu1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_tailor_dogu2_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_tailor_dogu2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_tailor_dogu2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx rom_tailor_v[0x1DE0 / sizeof(Vtx)];
+#else
 static Vtx rom_tailor_v[] = {
 #include "assets/field/bg/rom_tailor_v.inc"
 };
+#endif
 
 extern Gfx rom_tailor_modelT[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -928,3 +1156,66 @@ extern Gfx rom_tailor_model[] = {
                           ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_rom_tailor_rom_tailor_c(void) {
+    pc_load_asset("assets/field/bg/rom_tailor_wall_pal.bin", rom_tailor_wall_pal, 0x20, 0xBB90A0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_floor_pal.bin", rom_tailor_floor_pal, 0x20, 0xBB90C0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_mado_pal.bin", rom_tailor_mado_pal, 0x20, 0xBB90E0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_reji_pal.bin", rom_tailor_reji_pal, 0x20, 0xBB9100, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_dogu_pal.bin", rom_tailor_dogu_pal, 0x20, 0xBB9120, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_misin_pal.bin", rom_tailor_misin_pal, 0x20, 0xBB9140, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_table_pal.bin", rom_tailor_table_pal, 0x20, 0xBB9160, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_box_pal.bin", rom_tailor_box_pal, 0x20, 0xBB9180, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_quilt_pal.bin", rom_tailor_quilt_pal, 0x20, 0xBB91A0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_ent_pal.bin", rom_tailor_ent_pal, 0x20, 0xBB91C0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_tailor_wallA_tex.bin", rom_tailor_wallA_tex, 0x800, 0xBB91E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_wallB_tex.bin", rom_tailor_wallB_tex, 0x800, 0xBB99E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_floorA_tex.bin", rom_tailor_floorA_tex, 0x800, 0xBBA1E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_floorB_tex.bin", rom_tailor_floorB_tex, 0x800, 0xBBA9E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_floorC_tex.bin", rom_tailor_floorC_tex, 0x800, 0xBBB1E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_floorD_tex.bin", rom_tailor_floorD_tex, 0x800, 0xBBB9E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_kage1_tex.bin", rom_tailor_kage1_tex, 0x100, 0xBBC1E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_mado_tex.bin", rom_tailor_mado_tex, 0x200, 0xBBC2E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_pic1_tex.bin", rom_tailor_pic1_tex, 0x200, 0xBBC4E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_pic2_tex.bin", rom_tailor_pic2_tex, 0x200, 0xBBC6E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_pic3_tex.bin", rom_tailor_pic3_tex, 0x200, 0xBBC8E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_pic4_tex.bin", rom_tailor_pic4_tex, 0x200, 0xBBCAE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_pic5_tex.bin", rom_tailor_pic5_tex, 0x200, 0xBBCCE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_pic6_tex.bin", rom_tailor_pic6_tex, 0x200, 0xBBCEE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_pic7_tex.bin", rom_tailor_pic7_tex, 0x200, 0xBBD0E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_pic8_tex.bin", rom_tailor_pic8_tex, 0x200, 0xBBD2E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_tyoki_tex.bin", rom_tailor_tyoki_tex, 0x100, 0xBBD4E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_cloth1_tex.bin", rom_tailor_cloth1_tex, 0x80, 0xBBD5E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_misin2_tex.bin", rom_tailor_misin2_tex, 0x200, 0xBBD660, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_table_mae_tex.bin", rom_tailor_table_mae_tex, 0x100, 0xBBD860, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_table_yoko_tex.bin", rom_tailor_table_yoko_tex, 0x80, 0xBBD960, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_table_ue_tex.bin", rom_tailor_table_ue_tex, 0x100, 0xBBD9E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_ito_tex.bin", rom_tailor_ito_tex, 0x200, 0xBBDAE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_table_reji_tex.bin", rom_tailor_table_reji_tex, 0x80, 0xBBDCE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_misin1_tex.bin", rom_tailor_misin1_tex, 0x200, 0xBBDD60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_misindai_tex.bin", rom_tailor_misindai_tex, 0x200, 0xBBDF60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_table_misin1_tex.bin", rom_tailor_table_misin1_tex, 0x100, 0xBBE160, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_reji_tex.bin", rom_tailor_reji_tex, 0x200, 0xBBE260, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_table_misin2_tex.bin", rom_tailor_table_misin2_tex, 0x80, 0xBBE460, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box_tex.bin", rom_tailor_box_tex, 0x100, 0xBBE4E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box1_tex.bin", rom_tailor_box1_tex, 0x80, 0xBBE5E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box2_tex.bin", rom_tailor_box2_tex, 0x80, 0xBBE660, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box3_tex.bin", rom_tailor_box3_tex, 0x80, 0xBBE6E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box4_tex.bin", rom_tailor_box4_tex, 0x80, 0xBBE760, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box5_tex.bin", rom_tailor_box5_tex, 0x80, 0xBBE7E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box6_tex.bin", rom_tailor_box6_tex, 0x80, 0xBBE860, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box7_tex.bin", rom_tailor_box7_tex, 0x80, 0xBBE8E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_box8_tex.bin", rom_tailor_box8_tex, 0x80, 0xBBE960, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_kage2_tex.bin", rom_tailor_kage2_tex, 0x80, 0xBBE9E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_quilt_tex.bin", rom_tailor_quilt_tex, 0x800, 0xBBEA60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_ent_tex.bin", rom_tailor_ent_tex, 0x100, 0xBBF260, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_misinbari1_tex.bin", rom_tailor_misinbari1_tex, 0x80, 0xBBF360, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_misinbari2_tex.bin", rom_tailor_misinbari2_tex, 0x80, 0xBBF3E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_tape_tex.bin", rom_tailor_tape_tex, 0x200, 0xBBF460, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_dogu1_tex.bin", rom_tailor_dogu1_tex, 0x80, 0xBBF660, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_dogu2_tex.bin", rom_tailor_dogu2_tex, 0x80, 0xBBF6E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_tailor_v.bin", rom_tailor_v, 0x1DE0, 0xBBF760, 0, 2);
+}
+#endif

@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 clg_music_pal[0x20 / sizeof(u16)];
+#else
 u16 clg_music_pal[] = {
 #include "assets/clg_music_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clg_music_tex[0x200];
+#else
 u8 clg_music_tex[] = {
 #include "assets/clg_music_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx clg_music_v[0x40 / sizeof(Vtx)];
+#else
 Vtx clg_music_v[] = {
 #include "assets/clg_music_v.inc"
 };
+#endif
 
 Gfx mCL_music_model[] = {
     gsDPPipeSync(),

@@ -9,17 +9,29 @@ EVW_ANIME_SCROLL ef_siawase01_00_evw_anime_2[] ATTRIBUTE_ALIGN(32) = { { 1, -4, 
 
 EVW_ANIME_DATA ef_siawase01_00_evw_anime[] = { { -1, EVW_ANIME_TYPE_SCROLL2, ef_siawase01_00_evw_anime_2 } };
 
+#ifdef TARGET_PC
+u8 ef_siawase01_1[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_siawase01_1[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_siawase01_1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_siawase01_2_int_i4[0x80];
+#else
 u8 ef_siawase01_2_int_i4[] = {
 #include "assets/ef_siawase01_2_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_siawase01_00_v[0x110 / sizeof(Vtx)];
+#else
 Vtx ef_siawase01_00_v[] = {
 #include "assets/ef_siawase01_00_v.inc"
 };
+#endif
 
 Gfx ef_siawase01_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -40,13 +52,21 @@ Gfx ef_siawase01_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_siawase01_0[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_siawase01_0[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_siawase01_0.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_siawase01_01_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_siawase01_01_v[] = {
 #include "assets/ef_siawase01_01_v.inc"
 };
+#endif
 
 Gfx ef_siawase01_01_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

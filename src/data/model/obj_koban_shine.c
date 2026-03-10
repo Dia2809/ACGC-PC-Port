@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_koban_shine_1[0x80];
+#else
 u8 obj_koban_shine_1[]  = {
 #include "assets/obj_koban_shine_1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_koban_shine_2[0x200];
+#else
 u8 obj_koban_shine_2[] = {
 #include "assets/obj_koban_shine_2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_koban_shine_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_koban_shine_v[] = {
 #include "assets/obj_koban_shine_v.inc"
 };
+#endif
 
 Gfx obj_koban_shine_modelT[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

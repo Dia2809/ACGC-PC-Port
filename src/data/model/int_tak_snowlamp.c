@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_snowlamp_v[];
+#ifdef TARGET_PC
+u16 int_tak_snowlamp_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_snowlamp_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_snowlamp_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_snowlamp_face_tex[0x80];
+#else
 u8 int_tak_snowlamp_face_tex[] = {
 #include "assets/int_tak_snowlamp_face_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_snowlamp_back_tex[0x80];
+#else
 u8 int_tak_snowlamp_back_tex[] = {
 #include "assets/int_tak_snowlamp_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_snowlamp_bou_tex[0x100];
+#else
 u8 int_tak_snowlamp_bou_tex[] = {
 #include "assets/int_tak_snowlamp_bou_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_snowlamp_asi_tex[0x80];
+#else
 u8 int_tak_snowlamp_asi_tex[] = {
 #include "assets/int_tak_snowlamp_asi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_snowlamp_body_tex[0x200];
+#else
 u8 int_tak_snowlamp_body_tex[] = {
 #include "assets/int_tak_snowlamp_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_snowlamp_side_tex[0x80];
+#else
 u8 int_tak_snowlamp_side_tex[] = {
 #include "assets/int_tak_snowlamp_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_snowlamp_v[0x370 / sizeof(Vtx)];
+#else
 Vtx int_tak_snowlamp_v[] = {
 #include "assets/int_tak_snowlamp_v.inc"
 };
+#endif
 
 Gfx int_tak_snowlamp_off_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

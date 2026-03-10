@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_dump_t1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_dump_t1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_dump_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_dump_t2_tex[0x800];
+#else
 u8 obj_s_dump_t2_tex[] = {
 #include "assets/obj_s_dump_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_dump_v[0x440 / sizeof(Vtx)];
+#else
 Vtx obj_s_dump_v[] = {
 #include "assets/obj_s_dump_v.inc"
 };
+#endif
 
 Gfx obj_s_dump_t1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -61,17 +73,29 @@ Gfx dump_s_DL_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_w_dump_t1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_dump_t1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_dump_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_dump_t2_tex[0x800];
+#else
 u8 obj_w_dump_t2_tex[] = {
 #include "assets/obj_w_dump_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_dump_v[0x440 / sizeof(Vtx)];
+#else
 Vtx obj_w_dump_v[] = {
 #include "assets/obj_w_dump_v.inc"
 };
+#endif
 
 Gfx obj_w_dump_t1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 act_daruma_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_daruma_pal[] = {
 #include "assets/act_darumaA/act_daruma_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_darumaA_tex[0x200];
+#else
 u8 act_darumaA_tex[] = {
 #include "assets/act_darumaA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_darumaA_v[0x220 / sizeof(Vtx)];
+#else
 Vtx act_darumaA_v[] = {
 #include "assets/act_darumaA_v.inc"
 };
+#endif
 
 Gfx act_darumaA_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -63,3 +75,10 @@ Gfx act_darumaA_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_darumaA_c(void) {
+    pc_load_asset("assets/act_darumaA/act_daruma_pal.bin", act_daruma_pal, 0x20, 0x7C88C8, 0, 1);
+}
+#endif

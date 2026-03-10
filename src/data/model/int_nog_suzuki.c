@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_suzuki_v[];
+#ifdef TARGET_PC
+static u16 int_nog_suzuki_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_nog_suzuki_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_suzuki/int_nog_suzuki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_nog_suzuki_glass_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_nog_suzuki_glass_tex_pic_ci4_pal[] = {
 #include "assets/int_nog_suzuki_glass_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_suzuki_body_tex_txt[0x300];
+#else
 u8 int_nog_suzuki_body_tex_txt[] = {
 #include "assets/int_nog_suzuki_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_suzuki_top_tex_txt[0x100];
+#else
 u8 int_nog_suzuki_top_tex_txt[] = {
 #include "assets/int_nog_suzuki_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_suzuki_side_tex_txt[0x200];
+#else
 u8 int_nog_suzuki_side_tex_txt[] = {
 #include "assets/int_nog_suzuki_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_suzuki_base_tex_txt[0x80];
+#else
 u8 int_nog_suzuki_base_tex_txt[] = {
 #include "assets/int_nog_suzuki_base_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_suzuki_glass_tex_txt[0x100];
+#else
 u8 int_nog_suzuki_glass_tex_txt[] = {
 #include "assets/int_nog_suzuki_glass_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_suzuki_v[0x3F0 / sizeof(Vtx)];
+#else
 Vtx int_nog_suzuki_v[] = {
 #include "assets/int_nog_suzuki_v.inc"
 };
+#endif
 
 Gfx int_nog_suzuki_sakana_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -139,3 +171,10 @@ cKF_Joint_R_c cKF_je_r_int_nog_suzuki_tbl[] = {
 };
 
 cKF_Skeleton_R_c cKF_bs_r_int_nog_suzuki = { ARRAY_COUNT(cKF_je_r_int_nog_suzuki_tbl), 4, cKF_je_r_int_nog_suzuki_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_nog_suzuki_c(void) {
+    pc_load_asset("assets/int_nog_suzuki/int_nog_suzuki_pal.bin", int_nog_suzuki_pal, 0x20, 0xBF8B20, 0, 1);
+}
+#endif

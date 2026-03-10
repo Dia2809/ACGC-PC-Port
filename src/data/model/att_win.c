@@ -5,33 +5,61 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 att_win_waku1_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 att_win_waku1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/att_win_waku1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 att_win_waku2_tex[0x400];
+#else
 u8 att_win_waku2_tex[] = {
 #include "assets/att_win_waku2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 att_win_waku3_tex[0x400];
+#else
 u8 att_win_waku3_tex[] = {
 #include "assets/att_win_waku3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 att_win_waku4_tex[0x400];
+#else
 u8 att_win_waku4_tex[] = {
 #include "assets/att_win_waku4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 att_win_waku5_tex[0x400];
+#else
 u8 att_win_waku5_tex[] = {
 #include "assets/att_win_waku5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 att_win_waku6_tex[0x80];
+#else
 u8 att_win_waku6_tex[] = {
 #include "assets/att_win_waku6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx att_win_v[0x2F0 / sizeof(Vtx)];
+#else
 Vtx att_win_v[] = {
 #include "assets/att_win_v.inc"
 };
+#endif
 
 Gfx att_win_cursor_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

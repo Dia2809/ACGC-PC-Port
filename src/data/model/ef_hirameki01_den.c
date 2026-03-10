@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_hirameki01_0[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_hirameki01_0[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_hirameki01_0.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_hirameki01_den_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_hirameki01_den_v[] = {
 #include "assets/ef_hirameki01_den_v.inc"
 };
+#endif
 
 Gfx ef_hirameki01_den_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -26,13 +34,21 @@ Gfx ef_hirameki01_den_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_hirameki01_1[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_hirameki01_1[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_hirameki01_1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_hirameki01_hikari_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_hirameki01_hikari_v[] = {
 #include "assets/ef_hirameki01_hikari_v.inc"
 };
+#endif
 
 Gfx ef_hirameki01_hikari_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

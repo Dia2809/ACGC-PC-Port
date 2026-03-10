@@ -5,29 +5,53 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 des_tool_kao1_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_tool_kao1_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_tool_kao1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_kao2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_tool_kao2_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_tool_kao2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_kao3_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_tool_kao3_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_tool_kao3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_kao4_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_tool_kao4_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_tool_kao4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_kao5_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_tool_kao5_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_tool_kao5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx des_tool2_v[0x140 / sizeof(Vtx)];
+#else
 Vtx des_tool2_v[] = {
 #include "assets/des_tool2_v.inc"
 };
+#endif
 
 Gfx des_tool_kao1T_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

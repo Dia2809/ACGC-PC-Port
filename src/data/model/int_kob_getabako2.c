@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kob_getabako2_v[];
+#ifdef TARGET_PC
+u16 int_kob_getabako2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kob_getabako2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kob_getabako2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_naka1_tex[0x80];
+#else
 u8 int_kob_getabako2_naka1_tex[] = {
 #include "assets/int_kob_getabako2_naka1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_naka2_tex[0x80];
+#else
 u8 int_kob_getabako2_naka2_tex[] = {
 #include "assets/int_kob_getabako2_naka2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_side_tex[0x100];
+#else
 u8 int_kob_getabako2_side_tex[] = {
 #include "assets/int_kob_getabako2_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_top_tex[0x100];
+#else
 u8 int_kob_getabako2_top_tex[] = {
 #include "assets/int_kob_getabako2_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_ura_tex[0x200];
+#else
 u8 int_kob_getabako2_ura_tex[] = {
 #include "assets/int_kob_getabako2_ura_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_atumi_tex[0x200];
+#else
 u8 int_kob_getabako2_atumi_tex[] = {
 #include "assets/int_kob_getabako2_atumi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_wear_tex[0x80];
+#else
 u8 int_kob_getabako2_wear_tex[] = {
 #include "assets/int_kob_getabako2_wear_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_book3_tex[0x80];
+#else
 u8 int_kob_getabako2_book3_tex[] = {
 #include "assets/int_kob_getabako2_book3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_book1_tex[0x80];
+#else
 u8 int_kob_getabako2_book1_tex[] = {
 #include "assets/int_kob_getabako2_book1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_getabako2_loveletter_tex[0x80];
+#else
 u8 int_kob_getabako2_loveletter_tex[] = {
 #include "assets/int_kob_getabako2_loveletter_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kob_getabako2_v[0x590 / sizeof(Vtx)];
+#else
 Vtx int_kob_getabako2_v[] = {
 #include "assets/int_kob_getabako2_v.inc"
 };
+#endif
 
 Gfx int_kob_getabako2_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_tailor_1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_tailor_1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_tailor_1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tailor_3_tex_txt[0x800];
+#else
 u8 obj_s_tailor_3_tex_txt[] = {
 #include "assets/obj_s_tailor_3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tailor_2_tex_txt[0x800];
+#else
 u8 obj_s_tailor_2_tex_txt[] = {
 #include "assets/obj_s_tailor_2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tailor_window_tex_txt[0x80];
+#else
 u8 obj_s_tailor_window_tex_txt[] = {
 #include "assets/obj_s_tailor_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_tailor_v[0x5F0 / sizeof(Vtx)];
+#else
 Vtx obj_s_tailor_v[] = {
 #include "assets/obj_s_tailor_v.inc"
 };
+#endif
 
 Gfx obj_s_tailor_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -158,25 +178,45 @@ cKF_Animation_R_c cKF_ba_r_obj_s_tailor_out = { cKF_ckcb_r_obj_s_tailor_out_tbl,
                                                 -1,
                                                 51 };
 
+#ifdef TARGET_PC
+u8 obj_w_tailor_1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_tailor_1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_tailor_1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_tailor_window_tex_txt[0x100];
+#else
 u8 obj_w_tailor_window_tex_txt[] = {
 #include "assets/obj_w_tailor_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_tailor_2_tex_txt[0x800];
+#else
 u8 obj_w_tailor_2_tex_txt[] = {
 #include "assets/obj_w_tailor_2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_tailor_3_tex_txt[0x800];
+#else
 u8 obj_w_tailor_3_tex_txt[] = {
 #include "assets/obj_w_tailor_3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_tailor_v[0x5F0 / sizeof(Vtx)];
+#else
 Vtx obj_w_tailor_v[] = {
 #include "assets/obj_w_tailor_v.inc"
 };
+#endif
 
 Gfx obj_w_tailor_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,33 +5,61 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_s_tent_mat_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_tent_mat_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_tent_mat_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_s_tent_main_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_s_tent_main_pal[] = {
 #include "assets/obj_s_tent_main_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tent_mat[0x100];
+#else
 u8 obj_s_tent_mat[] = {
 #include "assets/obj_s_tent_mat.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tent_wall1[0x400];
+#else
 u8 obj_s_tent_wall1[] = {
 #include "assets/obj_s_tent_wall1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tent_wall2[0x800];
+#else
 u8 obj_s_tent_wall2[] = {
 #include "assets/obj_s_tent_wall2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tent_wall3[0x400];
+#else
 u8 obj_s_tent_wall3[] = {
 #include "assets/obj_s_tent_wall3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_tent_v[0x690 / sizeof(Vtx)];
+#else
 Vtx obj_s_tent_v[] = {
 #include "assets/obj_s_tent_v.inc"
 };
+#endif
 
 Gfx obj_s_tent_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

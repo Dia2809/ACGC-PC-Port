@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_stereo01_v[];
+#ifdef TARGET_PC
+u16 int_sum_stereo01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_stereo01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_stereo01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stereo01_top[0x100];
+#else
 u8 int_sum_stereo01_top[] = {
 #include "assets/int_sum_stereo01_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stereo01_front[0x400];
+#else
 u8 int_sum_stereo01_front[] = {
 #include "assets/int_sum_stereo01_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stereo01_back[0x100];
+#else
 u8 int_sum_stereo01_back[] = {
 #include "assets/int_sum_stereo01_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stereo01_side[0x80];
+#else
 u8 int_sum_stereo01_side[] = {
 #include "assets/int_sum_stereo01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stereo01_foot[0x80];
+#else
 u8 int_sum_stereo01_foot[] = {
 #include "assets/int_sum_stereo01_foot.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stereo01_record[0x80];
+#else
 u8 int_sum_stereo01_record[] = {
 #include "assets/int_sum_stereo01_record.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stereo01_armrest[0x80];
+#else
 u8 int_sum_stereo01_armrest[] = {
 #include "assets/int_sum_stereo01_armrest.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_stereo01_v[0x4D0 / sizeof(Vtx)];
+#else
 Vtx int_sum_stereo01_v[] = {
 #include "assets/int_sum_stereo01_v.inc"
 };
+#endif
 
 Gfx int_sum_stereo01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

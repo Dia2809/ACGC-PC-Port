@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_bla_lanp_v[];
+#ifdef TARGET_PC
+u16 int_sum_bla_lanp_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_bla_lanp_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_bla_lanp_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bla_lanp_shede_tex[0x100];
+#else
 u8 int_sum_bla_lanp_shede_tex[] = {
 #include "assets/int_sum_bla_lanp_shede_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bla_lanp_stand_tex[0x100];
+#else
 u8 int_sum_bla_lanp_stand_tex[] = {
 #include "assets/int_sum_bla_lanp_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bla_lanp_base_tex[0x80];
+#else
 u8 int_sum_bla_lanp_base_tex[] = {
 #include "assets/int_sum_bla_lanp_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bla_lanp_top_tex[0x80];
+#else
 u8 int_sum_bla_lanp_top_tex[] = {
 #include "assets/int_sum_bla_lanp_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bla_lanp_hand_tex[0x80];
+#else
 u8 int_sum_bla_lanp_hand_tex[] = {
 #include "assets/int_sum_bla_lanp_hand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_bla_lanp_v[0x380 / sizeof(Vtx)];
+#else
 Vtx int_sum_bla_lanp_v[] = {
 #include "assets/int_sum_bla_lanp_v.inc"
 };
+#endif
 
 Gfx int_sum_bla_lanp_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_col_chair01_v[];
+#ifdef TARGET_PC
+u16 int_sum_col_chair01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_col_chair01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_col_chair01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_col_chair01_backboard_tex[0x180];
+#else
 u8 int_sum_col_chair01_backboard_tex[] = {
 #include "assets/int_sum_col_chair01_backboard_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_col_chair01_front_tex[0x40];
+#else
 u8 int_sum_col_chair01_front_tex[] = {
 #include "assets/int_sum_col_chair01_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_col_chair01_seatside_tex[0x40];
+#else
 u8 int_sum_col_chair01_seatside_tex[] = {
 #include "assets/int_sum_col_chair01_seatside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_col_chair01_top_tex[0x80];
+#else
 u8 int_sum_col_chair01_top_tex[] = {
 #include "assets/int_sum_col_chair01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_col_chair01_boardside_tex[0x80];
+#else
 u8 int_sum_col_chair01_boardside_tex[] = {
 #include "assets/int_sum_col_chair01_boardside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_col_chair01_foot_tex[0x100];
+#else
 u8 int_sum_col_chair01_foot_tex[] = {
 #include "assets/int_sum_col_chair01_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_col_chair01_v[0x390 / sizeof(Vtx)];
+#else
 Vtx int_sum_col_chair01_v[] = {
 #include "assets/int_sum_col_chair01_v.inc"
 };
+#endif
 
 Gfx int_sum_col_chair01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

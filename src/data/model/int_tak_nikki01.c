@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_nikki01_v[];
+#ifdef TARGET_PC
+u16 int_tak_nikki01_name_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_nikki01_name_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_nikki01_name_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_nikki01_base_tex[0x200];
+#else
 u8 int_tak_nikki01_base_tex[] = {
 #include "assets/int_tak_nikki01_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_nikki01_himo_tex[0x100];
+#else
 u8 int_tak_nikki01_himo_tex[] = {
 #include "assets/int_tak_nikki01_himo_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_nikki01_name_tex[0x40];
+#else
 u8 int_tak_nikki01_name_tex[] = {
 #include "assets/int_tak_nikki01_name_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_nikki01_pen_tex[0x80];
+#else
 u8 int_tak_nikki01_pen_tex[] = {
 #include "assets/int_tak_nikki01_pen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_nikki01_maki_tex[0x20];
+#else
 u8 int_tak_nikki01_maki_tex[] = {
 #include "assets/int_tak_nikki01_maki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_nikki01_v[0x420 / sizeof(Vtx)];
+#else
 Vtx int_tak_nikki01_v[] = {
 #include "assets/int_tak_nikki01_v.inc"
 };
+#endif
 
 Gfx int_tak_nikki01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

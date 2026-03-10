@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 cal_win_cursor_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_cursor_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_cursor_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx cal_icon1_v[0x40 / sizeof(Vtx)];
+#else
 Vtx cal_icon1_v[] = {
 #include "assets/cal_icon1_v.inc"
 };
+#endif
 
 Gfx cal_icon_cursor_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

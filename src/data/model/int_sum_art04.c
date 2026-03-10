@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_art04_v[];
+#ifdef TARGET_PC
+u16 int_sum_art04_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_art04_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_art04_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_art04_front_tex[0x200];
+#else
 u8 int_sum_art04_front_tex[] = {
 #include "assets/int_sum_art04_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_art04_stand_tex[0x200];
+#else
 u8 int_sum_art04_stand_tex[] = {
 #include "assets/int_sum_art04_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_art04_binas_tex[0x300];
+#else
 u8 int_sum_art04_binas_tex[] = {
 #include "assets/int_sum_art04_binas_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_art04_gaku_tex[0x100];
+#else
 u8 int_sum_art04_gaku_tex[] = {
 #include "assets/int_sum_art04_gaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_art04_v[0x340 / sizeof(Vtx)];
+#else
 Vtx int_sum_art04_v[] = {
 #include "assets/int_sum_art04_v.inc"
 };
+#endif
 
 Gfx int_sum_art04_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

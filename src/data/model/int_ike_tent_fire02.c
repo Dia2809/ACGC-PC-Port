@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_tent_fire02_v[];
+#ifdef TARGET_PC
+u16 int_ike_tent_fire02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_tent_fire02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_tent_fire02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire02_tree3_tex_txt[0x80];
+#else
 u8 int_ike_tent_fire02_tree3_tex_txt[] = {
 #include "assets/int_ike_tent_fire02_tree3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire02_tree2_tex_txt[0x80];
+#else
 u8 int_ike_tent_fire02_tree2_tex_txt[] = {
 #include "assets/int_ike_tent_fire02_tree2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire02_tree5_tex_txt[0x80];
+#else
 u8 int_ike_tent_fire02_tree5_tex_txt[] = {
 #include "assets/int_ike_tent_fire02_tree5_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire02_tree1_tex_txt[0x80];
+#else
 u8 int_ike_tent_fire02_tree1_tex_txt[] = {
 #include "assets/int_ike_tent_fire02_tree1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire02_f2_4i4_pic_i4[0x400];
+#else
 u8 int_ike_tent_fire02_f2_4i4_pic_i4[] = {
 #include "assets/int_ike_tent_fire02_f2_4i4_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire02_tex_4i4_pic_i4[0x400];
+#else
 u8 int_ike_tent_fire02_tex_4i4_pic_i4[] = {
 #include "assets/int_ike_tent_fire02_tex_4i4_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_tent_fire02_v[0x630 / sizeof(Vtx)];
+#else
 Vtx int_ike_tent_fire02_v[] = {
 #include "assets/int_ike_tent_fire02_v.inc"
 };
+#endif
 
 Gfx int_ike_tent_firetree02_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

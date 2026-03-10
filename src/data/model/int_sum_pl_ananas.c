@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_pl_ananas_v[];
+#ifdef TARGET_PC
+u16 int_sum_pl_ananas_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_pl_ananas_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_pl_ananas_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_ananas_earth_tex[0x80];
+#else
 u8 int_sum_pl_ananas_earth_tex[] = {
 #include "assets/int_sum_pl_ananas_earth_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_ananas_hachi_tex[0x100];
+#else
 u8 int_sum_pl_ananas_hachi_tex[] = {
 #include "assets/int_sum_pl_ananas_hachi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_ananas_hana_tex[0x200];
+#else
 u8 int_sum_pl_ananas_hana_tex[] = {
 #include "assets/int_sum_pl_ananas_hana_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_ananas_leaf_tex[0x200];
+#else
 u8 int_sum_pl_ananas_leaf_tex[] = {
 #include "assets/int_sum_pl_ananas_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_pl_ananas_v[0x4E0 / sizeof(Vtx)];
+#else
 Vtx int_sum_pl_ananas_v[] = {
 #include "assets/int_sum_pl_ananas_v.inc"
 };
+#endif
 
 Gfx int_sum_pl_ananas_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

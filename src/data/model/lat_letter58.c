@@ -8,9 +8,13 @@
 extern u16 lat_letter58_pal[];
 extern u8 lat_letter58_ed_tex[];
 extern u8 lat_letter58_xk_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter58_v[0x1A0 / sizeof(Vtx)];
+#else
 Vtx lat_letter58_v[] = {
 #include "assets/lat_letter58_v.inc"
 };
+#endif
 
 Gfx lat_letter58_model[] = {
     gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),

@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_hal_chest02_v[];
+#ifdef TARGET_PC
+u16 int_sum_hal_chest02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_hal_chest02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_hal_chest02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_chest02_hiki_tex_txt[0x200];
+#else
 u8 int_sum_hal_chest02_hiki_tex_txt[] = {
 #include "assets/int_sum_hal_chest02_hiki_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_chest02_hiite_tex_txt[0x80];
+#else
 u8 int_sum_hal_chest02_hiite_tex_txt[] = {
 #include "assets/int_sum_hal_chest02_hiite_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_chest02_top_tex_txt[0x80];
+#else
 u8 int_sum_hal_chest02_top_tex_txt[] = {
 #include "assets/int_sum_hal_chest02_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_chest02_front_tex_txt[0x300];
+#else
 u8 int_sum_hal_chest02_front_tex_txt[] = {
 #include "assets/int_sum_hal_chest02_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_chest02_back_tex_txt[0x180];
+#else
 u8 int_sum_hal_chest02_back_tex_txt[] = {
 #include "assets/int_sum_hal_chest02_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_chest02_kuki_tex_txt[0x80];
+#else
 u8 int_sum_hal_chest02_kuki_tex_txt[] = {
 #include "assets/int_sum_hal_chest02_kuki_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_hal_chest02_v[0x4E0 / sizeof(Vtx)];
+#else
 Vtx int_sum_hal_chest02_v[] = {
 #include "assets/int_sum_hal_chest02_v.inc"
 };
+#endif
 
 Gfx int_sum_hal_chest01_door_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

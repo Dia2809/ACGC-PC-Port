@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yaz_tub_v[];
+#ifdef TARGET_PC
+u16 int_yaz_tub_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_yaz_tub_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yaz_tub_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_tub_wood2_txt[0x200];
+#else
 u8 int_yaz_tub_wood2_txt[] = {
 #include "assets/int_yaz_tub_wood2_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_tub_wood_txt[0x400];
+#else
 u8 int_yaz_tub_wood_txt[] = {
 #include "assets/int_yaz_tub_wood_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_tub_water_4i4_pic_i4[0x100];
+#else
 u8 int_yaz_tub_water_4i4_pic_i4[] = {
 #include "assets/int_yaz_tub_water_4i4_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yaz_tub_v[0x580 / sizeof(Vtx)];
+#else
 Vtx int_yaz_tub_v[] = {
 #include "assets/int_yaz_tub_v.inc"
 };
+#endif
 
 Gfx int_yaz_tub_water_model[] = {
     gsSPTexture(4000, 4000, 0, G_TX_RENDERTILE, G_ON),

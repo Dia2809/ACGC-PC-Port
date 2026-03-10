@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_trikera_tail_v[];
+#ifdef TARGET_PC
+static u16 int_din_trikera_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_trikera_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_trikera_tail/int_din_trikera_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_trikera_baceC_tex[0x200];
+#else
 u8 int_din_trikera_baceC_tex[] = {
 #include "assets/int_din_trikera_baceC_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_trikera_poleC_tex[0x80];
+#else
 u8 int_din_trikera_poleC_tex[] = {
 #include "assets/int_din_trikera_poleC_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_trikera_tail_tex[0x400];
+#else
 u8 int_din_trikera_tail_tex[] = {
 #include "assets/int_din_trikera_tail_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_trikera_tail_v[0x2A0 / sizeof(Vtx)];
+#else
 Vtx int_din_trikera_tail_v[] = {
 #include "assets/int_din_trikera_tail_v.inc"
 };
+#endif
 
 Gfx int_din_trikera_tail_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -63,3 +83,10 @@ Gfx int_din_trikera_tailT_model[] = {
     gsSPNTriangles_5b(8, 6, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_trikera_tail_c(void) {
+    pc_load_asset("assets/int_din_trikera_tail/int_din_trikera_pal.bin", int_din_trikera_pal, 0x20, 0x91EAC0, 0, 1);
+}
+#endif

@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_item_taisou_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_item_taisou_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_item_taisou_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_item_taisou_tex[0x200];
+#else
 u8 obj_item_taisou_tex[] = {
 #include "assets/obj_item_taisou_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_item_taisou_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_item_taisou_v[] = {
 #include "assets/obj_item_taisou_v.inc"
 };
+#endif
 
 Gfx obj_item_taisouT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

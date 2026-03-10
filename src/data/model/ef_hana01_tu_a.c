@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_hana01_tu_a_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_hana01_tu_a_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_hana01_tu_a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_hana01_tu_a_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_hana01_tu_a_v[] = {
 #include "assets/ef_hana01_tu_a_v.inc"
 };
+#endif
 
 Gfx ef_hana01_tu_a_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -27,13 +35,21 @@ Gfx ef_hana01_tu_a_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_hana01_co_a_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_hana01_co_a_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_hana01_co_a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_hana01_co_a_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_hana01_co_a_v[] = {
 #include "assets/ef_hana01_co_a_v.inc"
 };
+#endif
 
 Gfx ef_hana01_co_a_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -49,13 +65,21 @@ Gfx ef_hana01_co_a_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_hana01_pa_a_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_hana01_pa_a_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_hana01_pa_a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_hana01_pa_a_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_hana01_pa_a_v[] = {
 #include "assets/ef_hana01_pa_a_v.inc"
 };
+#endif
 
 Gfx ef_hana01_pa_a_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -71,13 +95,21 @@ Gfx ef_hana01_pa_a_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_hana01_ha_a_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_hana01_ha_a_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_hana01_ha_a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_hana01_ha_a_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_hana01_ha_a_v[] = {
 #include "assets/ef_hana01_ha_a_v.inc"
 };
+#endif
 
 Gfx ef_hana01_ha_a_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

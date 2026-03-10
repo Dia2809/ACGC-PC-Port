@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_kingyo_v[];
+#ifdef TARGET_PC
+static u16 int_sum_kingyo_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_sum_kingyo_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_kingyo/int_sum_kingyo_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_kingyo_top_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_kingyo_top_pic_ci4_pal[] = {
 #include "assets/int_sum_kingyo_top_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_kingyo_front_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_kingyo_front_pic_ci4_pal[] = {
 #include "assets/int_sum_kingyo_front_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kingyo_body_txt[0x200];
+#else
 u8 int_sum_kingyo_body_txt[] = {
 #include "assets/int_sum_kingyo_body_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kingyo_kuchi_txt[0x80];
+#else
 u8 int_sum_kingyo_kuchi_txt[] = {
 #include "assets/int_sum_kingyo_kuchi_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kingyo_etc_txt[0x80];
+#else
 u8 int_sum_kingyo_etc_txt[] = {
 #include "assets/int_sum_kingyo_etc_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kingyo_top_txt[0x80];
+#else
 u8 int_sum_kingyo_top_txt[] = {
 #include "assets/int_sum_kingyo_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kingyo_front_txt[0x200];
+#else
 u8 int_sum_kingyo_front_txt[] = {
 #include "assets/int_sum_kingyo_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_kingyo_v[0x320 / sizeof(Vtx)];
+#else
 Vtx int_sum_kingyo_v[] = {
 #include "assets/int_sum_kingyo_v.inc"
 };
+#endif
 
 Gfx int_sum_kingyo_sakana_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -140,3 +176,10 @@ cKF_Joint_R_c cKF_je_r_int_sum_kingyo_tbl[] = {
 };
 
 cKF_Skeleton_R_c cKF_bs_r_int_sum_kingyo = { ARRAY_COUNT(cKF_je_r_int_sum_kingyo_tbl), 4, cKF_je_r_int_sum_kingyo_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_kingyo_c(void) {
+    pc_load_asset("assets/int_sum_kingyo/int_sum_kingyo_pal.bin", int_sum_kingyo_pal, 0x20, 0xCEB880, 0, 1);
+}
+#endif

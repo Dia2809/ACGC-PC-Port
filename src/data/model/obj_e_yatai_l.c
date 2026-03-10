@@ -5,37 +5,69 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_e_yatai_3_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_e_yatai_3_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_yatai_3_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_e_yatai_2_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_e_yatai_2_pal[] = {
 #include "assets/obj_e_yatai_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_e_yatai_1_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_e_yatai_1_pal[] = {
 #include "assets/obj_e_yatai_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_yatai_3[0x400];
+#else
 u8 obj_e_yatai_3[] = {
 #include "assets/obj_e_yatai_3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_yatai_2[0x800];
+#else
 u8 obj_e_yatai_2[] = {
 #include "assets/obj_e_yatai_2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_yatai_4[0x100];
+#else
 u8 obj_e_yatai_4[] = {
 #include "assets/obj_e_yatai_4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_yatai_1[0x800];
+#else
 u8 obj_e_yatai_1[] = {
 #include "assets/obj_e_yatai_1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_yatai_l_v[0xE20 / sizeof(Vtx)];
+#else
 Vtx obj_e_yatai_l_v[] = {
 #include "assets/obj_e_yatai_l_v.inc"
 };
+#endif
 
 Gfx obj_e_yatai_l_modelT[] = {
     gsSPEndDisplayList(),
@@ -119,9 +151,13 @@ Gfx obj_e_yatai_l_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx obj_e_yatai_r_v[0xE20 / sizeof(Vtx)];
+#else
 Vtx obj_e_yatai_r_v[] = {
 #include "assets/obj_e_yatai_r_v.inc"
 };
+#endif
 
 Gfx obj_e_yatai_r_modelT[] = {
     gsSPEndDisplayList(),

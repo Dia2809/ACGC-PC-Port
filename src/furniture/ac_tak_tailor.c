@@ -1,9 +1,17 @@
+#ifdef TARGET_PC
+u16 int_tak_tailor_on_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 extern u16 int_tak_tailor_on_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/int_tak_tailor_on_pal.inc"
 };
+#endif
+#ifdef TARGET_PC
+u16 int_tak_tailor_off_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 extern u16 int_tak_tailor_off_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/int_tak_tailor_off_pal.inc"
 };
+#endif
 
 
 static void fTTR_ct(FTR_ACTOR* ftr_actor, u8* data) {

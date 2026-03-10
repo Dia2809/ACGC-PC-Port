@@ -5,9 +5,13 @@
 #include "sys_matrix.h"
 #include "m_name_table.h"
 
+#ifdef TARGET_PC
+static Vtx mbg_v[0x80 / sizeof(Vtx)];
+#else
 static Vtx mbg_v[] = {
 #include "assets/mbg_v.inc"
 };
+#endif
 
 static Gfx mbg_model[] = {
     gsDPPipeSync(),
@@ -93,3 +97,10 @@ static void Mbg_Actor_move(ACTOR* actorx, GAME* game) {
     actorx->world.position.x = mbg->original_pos.x + x_shift;
     actorx->shape_info.rotation.y += DEG2SHORT_ANGLE(0.258179f); // 0x002F
 }
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_actor_ac_mbg_c(void) {
+    pc_load_asset("assets/mbg_v.bin", mbg_v, 0x80, 0x3149F0, 0, 2);
+}
+#endif

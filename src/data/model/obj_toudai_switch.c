@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+u16 obj_toudai_switch_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_toudai_switch_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_toudai_switch_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_toudai_switch_tex_txt[0x80];
+#else
 u8 obj_toudai_switch_tex_txt[] = {
 #include "assets/obj_toudai_switch_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_toudai_switch_v[0xB0 / sizeof(Vtx)];
+#else
 Vtx obj_toudai_switch_v[] = {
 #include "assets/obj_toudai_switch_v.inc"
 };
+#endif
 
 Gfx obj_toudai_switch_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

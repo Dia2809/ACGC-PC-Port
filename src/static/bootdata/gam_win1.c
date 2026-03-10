@@ -1,6 +1,18 @@
 #include "bootdata.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+u8 gam_win_moji1_tex[0x280] ATTRIBUTE_ALIGN(32);
+u8 gam_win_moji2_tex[0x500] ATTRIBUTE_ALIGN(32);
+u8 yes[0x100] ATTRIBUTE_ALIGN(32);
+u8 no[0x80] ATTRIBUTE_ALIGN(32);
+static u8 att_win_waku1_tex[0x400] ATTRIBUTE_ALIGN(32);
+static u8 att_win_waku2_tex[0x400] ATTRIBUTE_ALIGN(32);
+static u8 att_win_waku3_tex[0x400] ATTRIBUTE_ALIGN(32);
+static u8 att_win_waku4_tex[0x400] ATTRIBUTE_ALIGN(32);
+static u8 att_win_waku5_tex[0x400] ATTRIBUTE_ALIGN(32);
+static u8 att_win_waku6_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 #include "assets/bootdata/win1/gam_win_moji1_tex.inc"
 #include "assets/bootdata/win1/gam_win_moji2_tex.inc"
 #include "assets/bootdata/win1/yes.inc"
@@ -11,10 +23,15 @@
 #include "assets/bootdata/win1/att_win_waku4_tex.inc"
 #include "assets/bootdata/win1/att_win_waku5_tex.inc"
 #include "assets/bootdata/win1/att_win_waku6_tex.inc"
+#endif
 
+#ifdef TARGET_PC
+static Vtx gam_win1_v[0x3F0 / sizeof(Vtx)];
+#else
 static Vtx gam_win1_v[] = {
 #include "assets/bootdata/win1/gam_win1_v.inc"
 };
+#endif
 
 Gfx gam_win1_cursor_model[] = {
   gsSPTexture(0, 0, 0, 0, G_ON),
@@ -172,3 +189,20 @@ Gfx gam_win1_winT_model[] = {
   ),
   gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_static_bootdata_gam_win1_c(void) {
+    pc_load_asset("assets/bootdata/win1/gam_win1_v.bin", gam_win1_v, 0x3F0, 0xB7EC0, 1, 2);
+    pc_load_asset("assets/bootdata/win1/gam_win_moji1_tex.bin", gam_win_moji1_tex, 0x280, 0xB6140, 1, 0);
+    pc_load_asset("assets/bootdata/win1/gam_win_moji2_tex.bin", gam_win_moji2_tex, 0x500, 0xB63C0, 1, 0);
+    pc_load_asset("assets/bootdata/win1/yes.bin", yes, 0x100, 0xB68C0, 1, 0);
+    pc_load_asset("assets/bootdata/win1/no.bin", no, 0x80, 0xB69C0, 1, 0);
+    pc_load_asset("assets/bootdata/win1/att_win_waku1_tex.bin", att_win_waku1_tex, 0x400, 0xB6A40, 1, 0);
+    pc_load_asset("assets/bootdata/win1/att_win_waku2_tex.bin", att_win_waku2_tex, 0x400, 0xB6E40, 1, 0);
+    pc_load_asset("assets/bootdata/win1/att_win_waku3_tex.bin", att_win_waku3_tex, 0x400, 0xB7240, 1, 0);
+    pc_load_asset("assets/bootdata/win1/att_win_waku4_tex.bin", att_win_waku4_tex, 0x400, 0xB7640, 1, 0);
+    pc_load_asset("assets/bootdata/win1/att_win_waku5_tex.bin", att_win_waku5_tex, 0x400, 0xB7A40, 1, 0);
+    pc_load_asset("assets/bootdata/win1/att_win_waku6_tex.bin", att_win_waku6_tex, 0x80, 0xB7E40, 1, 0);
+}
+#endif

@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_bon_pira_v[];
+#ifdef TARGET_PC
+u16 int_sum_bon_pira_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_bon_pira_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_bon_pira_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_pira_hachi_tex[0x100];
+#else
 u8 int_sum_bon_pira_hachi_tex[] = {
 #include "assets/int_sum_bon_pira_hachi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_pira_tree_tex[0x100];
+#else
 u8 int_sum_bon_pira_tree_tex[] = {
 #include "assets/int_sum_bon_pira_tree_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_pira_leaf_tex[0x300];
+#else
 u8 int_sum_bon_pira_leaf_tex[] = {
 #include "assets/int_sum_bon_pira_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_pira_treeside_tex[0x100];
+#else
 u8 int_sum_bon_pira_treeside_tex[] = {
 #include "assets/int_sum_bon_pira_treeside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_pira_mi_tex[0x100];
+#else
 u8 int_sum_bon_pira_mi_tex[] = {
 #include "assets/int_sum_bon_pira_mi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_pira_earth_tex[0x80];
+#else
 u8 int_sum_bon_pira_earth_tex[] = {
 #include "assets/int_sum_bon_pira_earth_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_pira_minileaf_tex[0x80];
+#else
 u8 int_sum_bon_pira_minileaf_tex[] = {
 #include "assets/int_sum_bon_pira_minileaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_bon_pira_v[0x6E0 / sizeof(Vtx)];
+#else
 Vtx int_sum_bon_pira_v[] = {
 #include "assets/int_sum_bon_pira_v.inc"
 };
+#endif
 
 Gfx int_sum_boke_pira_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -9,9 +9,13 @@ extern u16 lat_letter53_pal[];
 extern u8 lat_letter53_ki_tex[];
 extern u8 lat_letter53_xk_tex[];
 extern u8 lat_letter53_ed_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter53_v[0x160 / sizeof(Vtx)];
+#else
 Vtx lat_letter53_v[] = {
 #include "assets/lat_letter53_v.inc"
 };
+#endif
 
 Gfx lat_letter53_model[] = {
     gsDPSetRenderMode(G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2),

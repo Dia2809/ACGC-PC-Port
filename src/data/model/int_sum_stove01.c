@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_stove01_v[];
+#ifdef TARGET_PC
+u16 int_sum_stove01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_stove01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_stove01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_top[0x80];
+#else
 u8 int_sum_stove01_top[] = {
 #include "assets/int_sum_stove01_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_side[0x300];
+#else
 u8 int_sum_stove01_side[] = {
 #include "assets/int_sum_stove01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_net[0x80];
+#else
 u8 int_sum_stove01_net[] = {
 #include "assets/int_sum_stove01_net.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_douwn[0x80];
+#else
 u8 int_sum_stove01_douwn[] = {
 #include "assets/int_sum_stove01_douwn.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_side2[0x80];
+#else
 u8 int_sum_stove01_side2[] = {
 #include "assets/int_sum_stove01_side2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_top2[0x80];
+#else
 u8 int_sum_stove01_top2[] = {
 #include "assets/int_sum_stove01_top2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_side3[0x40];
+#else
 u8 int_sum_stove01_side3[] = {
 #include "assets/int_sum_stove01_side3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_swich[0x80];
+#else
 u8 int_sum_stove01_swich[] = {
 #include "assets/int_sum_stove01_swich.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_stove01_fire[0x80];
+#else
 u8 int_sum_stove01_fire[] = {
 #include "assets/int_sum_stove01_fire.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_stove01_v[0x430 / sizeof(Vtx)];
+#else
 Vtx int_sum_stove01_v[] = {
 #include "assets/int_sum_stove01_v.inc"
 };
+#endif
 
 Gfx int_sum_stove01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

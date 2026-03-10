@@ -1,28 +1,52 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 grd_s_cliff_pal[0x20 / sizeof(u16)];
+#else
 static u16 grd_s_cliff_pal[] = {
 #include "assets/field/bg/grd_s_cliff_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 grd_s_earth_pal[0x20 / sizeof(u16)];
+#else
 static u16 grd_s_earth_pal[] = {
 #include "assets/field/bg/grd_s_earth_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 grd_s_cliff_tex[0x800];
+#else
 static u8 grd_s_cliff_tex[] = {
 #include "assets/field/bg/grd_s_cliff_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 grd_s_earth_tex[0x800];
+#else
 static u8 grd_s_earth_tex[] = {
 #include "assets/field/bg/grd_s_earth_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 grd_s_grass_tex[0x200];
+#else
 static u8 grd_s_grass_tex[] = {
 #include "assets/field/bg/grd_s_grass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx tmp2_v[0xEC0 / sizeof(Vtx)];
+#else
 static Vtx tmp2_v[] = {
 #include "assets/field/bg/tmp2_v.inc"
 };
+#endif
 
 extern Gfx tmp2_modelT[] = {
     gsSPEndDisplayList(),
@@ -147,3 +171,15 @@ extern Gfx tmp2_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_tmp2_tmp2_c(void) {
+    pc_load_asset("assets/field/bg/grd_s_cliff_pal.bin", grd_s_cliff_pal, 0x20, 0x8FA708, 0, 1);
+    pc_load_asset("assets/field/bg/grd_s_earth_pal.bin", grd_s_earth_pal, 0x20, 0x8FA728, 0, 1);
+    pc_load_asset("assets/field/bg/grd_s_cliff_tex.bin", grd_s_cliff_tex, 0x800, 0x8FA748, 0, 0);
+    pc_load_asset("assets/field/bg/grd_s_earth_tex.bin", grd_s_earth_tex, 0x800, 0x8FAF48, 0, 0);
+    pc_load_asset("assets/field/bg/grd_s_grass_tex.bin", grd_s_grass_tex, 0x200, 0x8FD2D8, 0, 0);
+    pc_load_asset("assets/field/bg/tmp2_v.bin", tmp2_v, 0xEC0, 0x8FB948, 0, 2);
+}
+#endif

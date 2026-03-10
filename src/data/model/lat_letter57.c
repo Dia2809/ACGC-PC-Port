@@ -8,9 +8,13 @@
 extern u8 lat_letter57_xk_tex[];
 extern u8 lat_letter57_ce_tex[];
 extern u16 lat_letter57_pal[];
+#ifdef TARGET_PC
+Vtx lat_letter57_v[0xE0 / sizeof(Vtx)];
+#else
 Vtx lat_letter57_v[] = {
 #include "assets/lat_letter57_v.inc"
 };
+#endif
 
 Gfx lat_letter57_model[] = {
     gsDPSetRenderMode(G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2),

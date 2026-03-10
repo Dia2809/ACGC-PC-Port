@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_cupboard01_v[];
+#ifdef TARGET_PC
+u16 int_sum_cupboard01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_cupboard01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_cupboard01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_cupboard01_mirror_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_cupboard01_mirror_tex_rgb_ci4_pal[] = {
 #include "assets/int_sum_cupboard01_mirror_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cupboard01_front_tex[0x200];
+#else
 u8 int_sum_cupboard01_front_tex[] = {
 #include "assets/int_sum_cupboard01_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cupboard01_side_tex[0x200];
+#else
 u8 int_sum_cupboard01_side_tex[] = {
 #include "assets/int_sum_cupboard01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cupboard01_top_tex[0x80];
+#else
 u8 int_sum_cupboard01_top_tex[] = {
 #include "assets/int_sum_cupboard01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cupboard01_cup_tex[0x180];
+#else
 u8 int_sum_cupboard01_cup_tex[] = {
 #include "assets/int_sum_cupboard01_cup_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cupboard01_grass_tex[0x180];
+#else
 u8 int_sum_cupboard01_grass_tex[] = {
 #include "assets/int_sum_cupboard01_grass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cupboard01_mirror_tex[0x80];
+#else
 u8 int_sum_cupboard01_mirror_tex[] = {
 #include "assets/int_sum_cupboard01_mirror_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_cupboard01_v[0x280 / sizeof(Vtx)];
+#else
 Vtx int_sum_cupboard01_v[] = {
 #include "assets/int_sum_cupboard01_v.inc"
 };
+#endif
 
 Gfx int_sum_cupboard01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

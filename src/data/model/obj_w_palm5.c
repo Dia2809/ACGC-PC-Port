@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+static u8 obj_w_palm_leaf_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 obj_w_palm_leaf_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_palm5/obj_w_palm_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_w_palm_trunk_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 obj_w_palm_trunk_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_palm5/obj_w_palm_trunk_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_palm5_v[0x370 / sizeof(Vtx)];
+#else
 Vtx obj_w_palm5_v[] = {
 #include "assets/obj_w_palm5_v.inc"
 };
+#endif
 
 Gfx obj_w_palm5_trunkT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -49,3 +61,11 @@ Gfx obj_w_palm5_leafT_gfx_model[] = {
     gsSPNTriangles_5b(12, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_w_palm5_c(void) {
+    pc_load_asset("assets/obj_w_palm5/obj_w_palm_leaf_tex.bin", obj_w_palm_leaf_tex, 0x800, 0x3F7100, 0, 0);
+    pc_load_asset("assets/obj_w_palm5/obj_w_palm_trunk_tex.bin", obj_w_palm_trunk_tex, 0x800, 0x3F7900, 0, 0);
+}
+#endif

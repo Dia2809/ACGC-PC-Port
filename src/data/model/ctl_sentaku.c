@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u8 ctl_win_tagu3_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_win_tagu3_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/ctl_sentaku/ctl_win_tagu3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ctl_sentaku_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ctl_sentaku_v[] = {
 #include "assets/ctl_sentaku_v.inc"
 };
+#endif
 
 Gfx ctl_sentaku_taguT_model[] = {
 gsDPPipeSync(),
@@ -25,3 +33,10 @@ gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_ctl_sentaku_c(void) {
+    pc_load_asset("assets/ctl_sentaku/ctl_win_tagu3_tex.bin", ctl_win_tagu3_tex, 0x200, 0x6CCF60, 0, 0);
+}
+#endif

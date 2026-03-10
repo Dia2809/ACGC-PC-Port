@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_pl_draca02_v[];
+#ifdef TARGET_PC
+u16 int_sum_pl_draca02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_pl_draca02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_pl_draca02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 int_sum_pl_kuroton_pal[0x20 / sizeof(u16)];
+#else
 static u16 int_sum_pl_kuroton_pal[] = {
 #include "assets/int_sum_pl_draca02/int_sum_pl_kuroton_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_draca02_stand2_tex[0x100];
+#else
 u8 int_sum_pl_draca02_stand2_tex[] = {
 #include "assets/int_sum_pl_draca02_stand2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_draca02_stand_tex[0x180];
+#else
 u8 int_sum_pl_draca02_stand_tex[] = {
 #include "assets/int_sum_pl_draca02_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_draca02_leaf_tex[0x180];
+#else
 u8 int_sum_pl_draca02_leaf_tex[] = {
 #include "assets/int_sum_pl_draca02_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_draca02_hachi_tex[0x100];
+#else
 u8 int_sum_pl_draca02_hachi_tex[] = {
 #include "assets/int_sum_pl_draca02_hachi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_draca02_earth_tex[0x80];
+#else
 u8 int_sum_pl_draca02_earth_tex[] = {
 #include "assets/int_sum_pl_draca02_earth_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_pl_draca02_v[0x650 / sizeof(Vtx)];
+#else
 Vtx int_sum_pl_draca02_v[] = {
 #include "assets/int_sum_pl_draca02_v.inc"
 };
+#endif
 
 Gfx int_sum_pl_draca02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -88,3 +120,10 @@ Gfx int_sum_pl_draca02_onT_model[] = {
     gsSPNTrianglesInit_5b(2, 21, 22, 23, 21, 24, 25, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_pl_draca02_c(void) {
+    pc_load_asset("assets/int_sum_pl_draca02/int_sum_pl_kuroton_pal.bin", int_sum_pl_kuroton_pal, 0x20, 0xD21840, 0, 1);
+}
+#endif

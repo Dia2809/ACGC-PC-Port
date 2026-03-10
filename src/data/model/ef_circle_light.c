@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_circle_light_tex_4i4[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_circle_light_tex_4i4[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_circle_light_tex_4i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_circle_light_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_circle_light_v[] = {
 #include "assets/ef_circle_light_v.inc"
 };
+#endif
 
 Gfx ef_circle_light_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

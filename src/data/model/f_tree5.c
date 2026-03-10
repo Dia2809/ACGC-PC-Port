@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_f_tree5_v[0x160 / sizeof(Vtx)];
+#else
 Vtx obj_f_tree5_v[] = {
 #include "assets/obj_f_tree5_v.inc"
 };
+#endif
 
 extern u8 obj_f_tree_leaf_tex[];
 extern u8 obj_f_tree_trunk_tex[];

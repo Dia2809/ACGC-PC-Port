@@ -1,9 +1,13 @@
 #include "libforest/gbi_extensions.h"
 
 // clang-format off
+#ifdef TARGET_PC
+static Vtx obj_mural_v[0x40 / sizeof(Vtx)];
+#else
 static Vtx obj_mural_v[] = {
 #include "assets/obj_mural_v.inc"
 };
+#endif
 
 Gfx obj_mural_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -28,3 +32,10 @@ Gfx obj_mural_model[] = {
 };
 
 // clang-format on
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_mural_obj_mural_c(void) {
+    pc_load_asset("assets/obj_mural_v.bin", obj_mural_v, 0x40, 0x594440, 0, 2);
+}
+#endif

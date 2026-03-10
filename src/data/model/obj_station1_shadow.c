@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_station1_shadow_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_station1_shadow_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_station1_shadow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_station1_shadow_v[0x1F0 / sizeof(Vtx)];
+#else
 Vtx obj_station1_shadow_v[] = {
 #include "assets/obj_station1_shadow_v.inc"
 };
+#endif
 
 Gfx obj_station1_shadow_hiT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -41,13 +49,21 @@ Gfx obj_station1_shadow_lowT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_station2_shadow_tex_txt[0x200];
+#else
 u8 obj_station2_shadow_tex_txt[] = {
 #include "assets/obj_station2_shadow_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_station2_shadow_v[0x400 / sizeof(Vtx)];
+#else
 Vtx obj_station2_shadow_v[] = {
 #include "assets/obj_station2_shadow_v.inc"
 };
+#endif
 
 Gfx obj_station2_shadow_low_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -81,13 +97,21 @@ Gfx obj_station2_shadow_hi_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_station3_shadow_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_station3_shadow_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_station3_shadow_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_station3_shadow_v[0x3E0 / sizeof(Vtx)];
+#else
 Vtx obj_station3_shadow_v[] = {
 #include "assets/obj_station3_shadow_v.inc"
 };
+#endif
 
 Gfx obj_station3_shadow_low_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,37 +5,69 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u8 obj_fall_rainbow_1_tex_rgb_rgba16[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 obj_fall_rainbow_1_tex_rgb_rgba16[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_fallS/obj_fall_rainbow_1_tex_rgb_rgba16.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_fall_rainbowA_tex_rgb_i4[0x80];
+#else
 static u8 obj_fall_rainbowA_tex_rgb_i4[] = {
 #include "assets/obj_fallS/obj_fall_rainbowA_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_fallCA1_tex_rgb_ia8[0x400];
+#else
 static u8 obj_fallCA1_tex_rgb_ia8[] = {
 #include "assets/obj_fallS/obj_fallCA1_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_fallA2_tex_rgb_i4[0x200];
+#else
 static u8 obj_fallA2_tex_rgb_i4[] = {
 #include "assets/obj_fallS/obj_fallA2_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_fallA3_tex_rgb_i4[0x80];
+#else
 static u8 obj_fallA3_tex_rgb_i4[] = {
 #include "assets/obj_fallS/obj_fallA3_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_fallC2_tex_rgb_i4[0x200];
+#else
 static u8 obj_fallC2_tex_rgb_i4[] = {
 #include "assets/obj_fallS/obj_fallC2_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_fallC3_tex_rgb_i4[0x80];
+#else
 static u8 obj_fallC3_tex_rgb_i4[] = {
 #include "assets/obj_fallS/obj_fallC3_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_fallS_v[0x550 / sizeof(Vtx)];
+#else
 Vtx obj_fallS_v[] = {
 #include "assets/obj_fallS_v.inc"
 };
+#endif
 
 Gfx obj_fallS_grpAT_model[] = {
     gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, ENVIRONMENT, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, PRIM_LOD_FRAC, COMBINED, 0, 0,
@@ -146,3 +178,16 @@ EVW_ANIME_DATA obj_fallS_evw_anime[] = { { 1, EVW_ANIME_TYPE_SCROLL2, obj_fallS_
                                          { 2, EVW_ANIME_TYPE_SCROLL2, obj_fallS_evw_anime_2 },
                                          { 3, EVW_ANIME_TYPE_SCROLL2, obj_fallS_evw_anime_3 },
                                          { -4, EVW_ANIME_TYPE_SCROLL2, obj_fallS_evw_anime_4 } };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_fallS_c(void) {
+    pc_load_asset("assets/obj_fallS/obj_fall_rainbow_1_tex_rgb_rgba16.bin", obj_fall_rainbow_1_tex_rgb_rgba16, 0x100, 0x801920, 0, 0);
+    pc_load_asset("assets/obj_fallS/obj_fall_rainbowA_tex_rgb_i4.bin", obj_fall_rainbowA_tex_rgb_i4, 0x80, 0x801A20, 0, 0);
+    pc_load_asset("assets/obj_fallS/obj_fallCA1_tex_rgb_ia8.bin", obj_fallCA1_tex_rgb_ia8, 0x400, 0x801AA0, 0, 0);
+    pc_load_asset("assets/obj_fallS/obj_fallA2_tex_rgb_i4.bin", obj_fallA2_tex_rgb_i4, 0x200, 0x801EA0, 0, 0);
+    pc_load_asset("assets/obj_fallS/obj_fallA3_tex_rgb_i4.bin", obj_fallA3_tex_rgb_i4, 0x80, 0x8020A0, 0, 0);
+    pc_load_asset("assets/obj_fallS/obj_fallC2_tex_rgb_i4.bin", obj_fallC2_tex_rgb_i4, 0x200, 0x802120, 0, 0);
+    pc_load_asset("assets/obj_fallS/obj_fallC3_tex_rgb_i4.bin", obj_fallC3_tex_rgb_i4, 0x80, 0x802320, 0, 0);
+}
+#endif

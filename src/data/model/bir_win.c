@@ -5,105 +5,205 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 brt_win_cake2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_cake2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_cake2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 brt_win_star_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_star_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_star_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 brt_win_sw1_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_sw1_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_sw1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 brt_win_sw2_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_sw2_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_sw2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 brt_win_sw3_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_sw3_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_sw3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 brt_win_sw4_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_sw4_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_sw4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 brt_win_sw5_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_sw5_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_sw5_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 brt_win_sw6_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_sw6_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_sw6_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 brt_win_sw7_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 brt_win_sw7_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_sw7_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_cake2_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 brt_win_cake2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_cake2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_ue1_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 brt_win_ue1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_ue1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_ue2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 brt_win_ue2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_ue2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_ue3_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 brt_win_ue3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_ue3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_ue4_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 brt_win_ue4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_ue4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_ue5_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 brt_win_ue5_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/brt_win_ue5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 mra_win_fuki_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 mra_win_fuki_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/bir_win/mra_win_fuki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_star_tex_rgb_ci4[0x200];
+#else
 u8 brt_win_star_tex_rgb_ci4[] = {
 #include "assets/brt_win_star_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_sw1_tex_rgb_ci4[0x400];
+#else
 u8 brt_win_sw1_tex_rgb_ci4[] = {
 #include "assets/brt_win_sw1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_sw2_tex_rgb_ci4[0x400];
+#else
 u8 brt_win_sw2_tex_rgb_ci4[] = {
 #include "assets/brt_win_sw2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_sw3_tex_rgb_ci4[0x400];
+#else
 u8 brt_win_sw3_tex_rgb_ci4[] = {
 #include "assets/brt_win_sw3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_sw4_tex_rgb_ci4[0x400];
+#else
 u8 brt_win_sw4_tex_rgb_ci4[] = {
 #include "assets/brt_win_sw4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_sw5_tex_rgb_ci4[0x400];
+#else
 u8 brt_win_sw5_tex_rgb_ci4[] = {
 #include "assets/brt_win_sw5_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_sw6_tex_rgb_ci4[0x400];
+#else
 u8 brt_win_sw6_tex_rgb_ci4[] = {
 #include "assets/brt_win_sw6_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 brt_win_sw7_tex_rgb_ci4[0x400];
+#else
 u8 brt_win_sw7_tex_rgb_ci4[] = {
 #include "assets/brt_win_sw7_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx bir_win_v[0x700 / sizeof(Vtx)];
+#else
 Vtx bir_win_v[] = {
 #include "assets/bir_win_v.inc"
 };
+#endif
 
 Gfx brt_win_month_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
@@ -327,3 +427,10 @@ Gfx birthday_win_model[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_bir_win_c(void) {
+    pc_load_asset("assets/bir_win/mra_win_fuki_tex.bin", mra_win_fuki_tex, 0x800, 0x754720, 0, 0);
+}
+#endif

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_pl_yamayasi_v[];
+#ifdef TARGET_PC
+u16 int_sum_pl_yamayasi_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_pl_yamayasi_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_pl_yamayasi_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_yamayasi_earth_tex[0x80];
+#else
 u8 int_sum_pl_yamayasi_earth_tex[] = {
 #include "assets/int_sum_pl_yamayasi_earth_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_yamayasi_hachi_tex[0x100];
+#else
 u8 int_sum_pl_yamayasi_hachi_tex[] = {
 #include "assets/int_sum_pl_yamayasi_hachi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_yamayasi_leaf_tex[0x400];
+#else
 u8 int_sum_pl_yamayasi_leaf_tex[] = {
 #include "assets/int_sum_pl_yamayasi_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_yamayasi_stand_tex[0x100];
+#else
 u8 int_sum_pl_yamayasi_stand_tex[] = {
 #include "assets/int_sum_pl_yamayasi_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_pl_yamayasi_v[0x540 / sizeof(Vtx)];
+#else
 Vtx int_sum_pl_yamayasi_v[] = {
 #include "assets/int_sum_pl_yamayasi_v.inc"
 };
+#endif
 
 Gfx int_sum_pl_yamayasi_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

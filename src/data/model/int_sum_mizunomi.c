@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_mizunomi_v[];
+#ifdef TARGET_PC
+u16 int_sum_mizunomitori_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_mizunomitori_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_mizunomitori_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_mizunomi_body_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_mizunomi_body_tex_pic_ci4_pal[] = {
 #include "assets/int_sum_mizunomi_body_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_mizunomi_neck_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_mizunomi_neck_tex_pic_ci4_pal[] = {
 #include "assets/int_sum_mizunomi_neck_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_mizunomi_face_tex_txt[0x200];
+#else
 u8 int_sum_mizunomi_face_tex_txt[] = {
 #include "assets/int_sum_mizunomi_face_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_mizunomi_hat_tex_txt[0x80];
+#else
 u8 int_sum_mizunomi_hat_tex_txt[] = {
 #include "assets/int_sum_mizunomi_hat_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_mizunomi_foot_tex_txt[0x100];
+#else
 u8 int_sum_mizunomi_foot_tex_txt[] = {
 #include "assets/int_sum_mizunomi_foot_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_mizunomi_kuchi_tex_txt[0x80];
+#else
 u8 int_sum_mizunomi_kuchi_tex_txt[] = {
 #include "assets/int_sum_mizunomi_kuchi_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_mizunomi_hane_tex_txt[0x100];
+#else
 u8 int_sum_mizunomi_hane_tex_txt[] = {
 #include "assets/int_sum_mizunomi_hane_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_mizunomi_body_tex_txt[0x80];
+#else
 u8 int_sum_mizunomi_body_tex_txt[] = {
 #include "assets/int_sum_mizunomi_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_mizunomi_neck_tex_txt[0x100];
+#else
 u8 int_sum_mizunomi_neck_tex_txt[] = {
 #include "assets/int_sum_mizunomi_neck_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_mizunomi_v[0x370 / sizeof(Vtx)];
+#else
 Vtx int_sum_mizunomi_v[] = {
 #include "assets/int_sum_mizunomi_v.inc"
 };
+#endif
 
 Gfx int_sum_mizunomi_head_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

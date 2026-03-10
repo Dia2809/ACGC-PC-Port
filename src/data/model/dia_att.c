@@ -5,33 +5,61 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ctl_att_w1_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 ctl_att_w1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ctl_att_w2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 ctl_att_w2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ctl_att_w3_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 ctl_att_w3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ctl_att_w4_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 ctl_att_w4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ctl_att_w5_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 ctl_att_w5_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ctl_att_w6_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ctl_att_w6_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx dia_att_v[0x2F0 / sizeof(Vtx)];
+#else
 Vtx dia_att_v[] = {
 #include "assets/dia_att_v.inc"
 };
+#endif
 
 Gfx dia_att_cursor_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_house_i_1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_house_i_1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_house_i_1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_house_i_window_tex_txt[0x100];
+#else
 u8 obj_s_house_i_window_tex_txt[] = {
 #include "assets/obj_s_house_i_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_house_i_2_tex_txt[0x800];
+#else
 u8 obj_s_house_i_2_tex_txt[] = {
 #include "assets/obj_s_house_i_2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_house_i_3_us_tex_txt[0x400];
+#else
 u8 obj_s_house_i_3_us_tex_txt[] = {
 #include "assets/obj_s_house_i_3_us_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_house_i_v[0xA40 / sizeof(Vtx)];
+#else
 Vtx obj_s_house_i_v[] = {
 #include "assets/obj_s_house_i_v.inc"
 };
+#endif
 
 Gfx obj_s_house_i_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -58,17 +58,21 @@ static void mChoice_UnSetMatrixDisplay(GAME* game, int type) {
     CLOSE_DISP(graph);
 }
 
+#ifdef TARGET_PC
+static u8 con_waku_swaku3_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 static u8 con_waku_swaku3_tex[] ATTRIBUTE_ALIGN(32) = {
-#ifndef __INTELLISENSE__
 #include "assets/con_waku_swaku3_tex.inc"
-#endif
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx con_sentaku2_v[0x40 / sizeof(Vtx)];
+#else
 static Vtx con_sentaku2_v[] = {
-#ifndef __INTELLISENSE__
 #include "assets/con_sentaku2_v.inc"
-#endif
 };
+#endif
 
 static Gfx con_sentaku2_modelT[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -145,3 +149,11 @@ static void mChoice_DrawFont(mChoice_c* choice, GAME* game, int type) {
         y += 16.0f;
     }
 }
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_game_m_choice_draw_c_inc(void) {
+    pc_load_asset("assets/con_waku_swaku3_tex.bin", con_waku_swaku3_tex, 0x1000, 0x2DF6C0, 0, 0);
+    pc_load_asset("assets/con_sentaku2_v.bin", con_sentaku2_v, 0x40, 0x2E06C0, 0, 2);
+}
+#endif

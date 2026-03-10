@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_e_kago_r_t1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_kago_r_t1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_kago_r_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_kago_r_t2_tex[0x800];
+#else
 u8 obj_e_kago_r_t2_tex[] = {
 #include "assets/obj_e_kago_r_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_kago_r_v[0x290 / sizeof(Vtx)];
+#else
 Vtx obj_e_kago_r_v[] = {
 #include "assets/obj_e_kago_r_v.inc"
 };
+#endif
 
 Gfx obj_e_kago_r_t1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -58,17 +70,29 @@ Gfx kago_r_DL_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 zobj_e_kago_r_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 zobj_e_kago_r_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/zobj_e_kago_r_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_kago_r_ball_t1_tex[0x800];
+#else
 u8 obj_e_kago_r_ball_t1_tex[] = {
 #include "assets/obj_e_kago_r_ball_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_kago_r_ball_v[0x270 / sizeof(Vtx)];
+#else
 Vtx obj_e_kago_r_ball_v[] = {
 #include "assets/obj_e_kago_r_ball_v.inc"
 };
+#endif
 
 Gfx kago_r_ball_DL_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -88,17 +112,29 @@ Gfx kago_r_ball_DL_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_e_kago_w_t1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_kago_w_t1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_kago_w_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_kago_w_t2_tex[0x800];
+#else
 u8 obj_e_kago_w_t2_tex[] = {
 #include "assets/obj_e_kago_w_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_kago_w_v[0x290 / sizeof(Vtx)];
+#else
 Vtx obj_e_kago_w_v[] = {
 #include "assets/obj_e_kago_w_v.inc"
 };
+#endif
 
 Gfx obj_e_kago_w_t1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -141,17 +177,29 @@ Gfx kago_w_DL_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 zobj_e_kago_w_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 zobj_e_kago_w_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/zobj_e_kago_w_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_kago_w_ball_t1_tex[0x800];
+#else
 u8 obj_e_kago_w_ball_t1_tex[] = {
 #include "assets/obj_e_kago_w_ball_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_kago_w_ball_v[0x240 / sizeof(Vtx)];
+#else
 Vtx obj_e_kago_w_ball_v[] = {
 #include "assets/obj_e_kago_w_ball_v.inc"
 };
+#endif
 
 Gfx kago_w_ball_DL_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

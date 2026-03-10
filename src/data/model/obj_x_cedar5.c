@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+static u16 obj_cedar_light_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_cedar_light_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_x_cedar5/obj_cedar_light_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_x_cedar_light_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_x_cedar_light_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_x_cedar_light_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_x_cedar5_light_v[0x1C0 / sizeof(Vtx)];
+#else
 Vtx obj_x_cedar5_light_v[] = {
 #include "assets/obj_x_cedar5_light_v.inc"
 };
+#endif
 
 Gfx obj_x_ceder5_lightT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -37,3 +49,10 @@ Gfx obj_x_ceder5_lightT_gfx_model[] = {
     gsSPNTriangles_5b(19, 22, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_x_cedar5_c(void) {
+    pc_load_asset("assets/obj_x_cedar5/obj_cedar_light_pal.bin", obj_cedar_light_pal, 0x20, 0x9349A0, 0, 1);
+}
+#endif

@@ -4,9 +4,13 @@
 #include "c_keyframe.h"
 
 
+#ifdef TARGET_PC
+Vtx obj_stoneC_shadow_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_stoneC_shadow_v[] = { 
 #include "assets/obj_stoneC_shadow_v.inc"
 };
+#endif
 
 Gfx obj_stoneC_shadowT_gfx_model[] = { 
 gsSPNTrianglesInit_5b(10, 0, 1, 2, 0, 2, 3, 4, 5, 6),

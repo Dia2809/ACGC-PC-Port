@@ -1,9 +1,17 @@
+#ifdef TARGET_PC
+u16 int_nog_shop1_on_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_shop1_on_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/int_nog_shop1_on_pal.inc"
 };
+#endif
+#ifdef TARGET_PC
+u16 int_nog_shop1_off_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_shop1_off_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/int_nog_shop1_off_pal.inc"
 };
+#endif
 
 static void fNS1_ct(FTR_ACTOR* ftr_actor, u8* data) {
     ftr_actor->pal_p = (u16*)zelda_malloc_align(16 * sizeof(u16), 32);

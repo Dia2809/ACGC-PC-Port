@@ -6,65 +6,125 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iid_snow_v[];
+#ifdef TARGET_PC
+u16 int_iid_snow_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iid_snow_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iid_snow_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_ashiue_tex[0x80];
+#else
 u8 int_iid_snow_ashiue_tex[] = {
 #include "assets/int_iid_snow_ashiue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_ashiyoko_tex[0x100];
+#else
 u8 int_iid_snow_ashiyoko_tex[] = {
 #include "assets/int_iid_snow_ashiyoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_ashimae_tex[0x80];
+#else
 u8 int_iid_snow_ashimae_tex[] = {
 #include "assets/int_iid_snow_ashimae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_ashisoko_tex[0x100];
+#else
 u8 int_iid_snow_ashisoko_tex[] = {
 #include "assets/int_iid_snow_ashisoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_ashiback_tex[0x80];
+#else
 u8 int_iid_snow_ashiback_tex[] = {
 #include "assets/int_iid_snow_ashiback_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_bordue_tex[0x100];
+#else
 u8 int_iid_snow_bordue_tex[] = {
 #include "assets/int_iid_snow_bordue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_bordshita_tex[0x80];
+#else
 u8 int_iid_snow_bordshita_tex[] = {
 #include "assets/int_iid_snow_bordshita_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_bordyoko_tex[0x20];
+#else
 u8 int_iid_snow_bordyoko_tex[] = {
 #include "assets/int_iid_snow_bordyoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_bordkakato_tex[0x100];
+#else
 u8 int_iid_snow_bordkakato_tex[] = {
 #include "assets/int_iid_snow_bordkakato_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_bordura_tex[0x80];
+#else
 u8 int_iid_snow_bordura_tex[] = {
 #include "assets/int_iid_snow_bordura_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_bordana_tex[0x20];
+#else
 u8 int_iid_snow_bordana_tex[] = {
 #include "assets/int_iid_snow_bordana_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_bordpin_tex[0x20];
+#else
 u8 int_iid_snow_bordpin_tex[] = {
 #include "assets/int_iid_snow_bordpin_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_snow_bordtate_tex[0x20];
+#else
 u8 int_iid_snow_bordtate_tex[] = {
 #include "assets/int_iid_snow_bordtate_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iid_snow_v[0x18D0 / sizeof(Vtx)];
+#else
 Vtx int_iid_snow_v[] = {
 #include "assets/int_iid_snow_v.inc"
 };
+#endif
 
 Gfx int_iid_snow_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

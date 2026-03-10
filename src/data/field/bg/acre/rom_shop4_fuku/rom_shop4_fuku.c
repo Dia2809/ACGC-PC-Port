@@ -1,148 +1,292 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_floor_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_floor_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_floor_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_base_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_base_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_base_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_stair_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_stair_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_stair_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_table_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_table_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_table_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_wall_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_wall_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_wall_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_sign01_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_sign01_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_sign01_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_kaunta_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_kaunta_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_kaunta_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_2_sign01_us_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_2_sign01_us_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_2_sign01_us_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_us_sign02_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_us_sign02_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_us_sign02_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_us_sign0_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_us_sign0_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_us_sign0_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_sign03_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_sign03_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_sign03_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_reji_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_reji_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_reji_tex_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop_kouhaku_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop_kouhaku_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop_kouhaku_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_floor01_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_floor01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_floor01_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_base_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_base_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_base_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_stair01_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_stair01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_stair01_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_table01_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_table01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_table01_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_table02_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_table02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_table02_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_wall01_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_wall01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_wall01_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_wall02_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_wall02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_wall02_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_sign05_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_sign05_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_sign05_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_kaunta01_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_kaunta01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_kaunta01_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_kaunta02_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_kaunta02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_kaunta02_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_2_us_sign01_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_2_us_sign01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_2_us_sign01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_us_sign02_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_us_sign02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_us_sign02_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_us_sign0_tex[0x600] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_us_sign0_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_us_sign0_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_sign04_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_sign04_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_sign04_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_reji01_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_reji01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_reji01_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_reji02_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_reji02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_reji02_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_reji03_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_reji03_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_reji03_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_floor02_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_floor02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_floor02_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_floor03_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_floor03_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_floor03_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_floor04_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_floor04_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_floor04_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_1_shadow02_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop4_1_shadow02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop4_1_shadow02_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop_kouhaku_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_shop_kouhaku_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_shop_kouhaku_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx rom_shop4_fuku_v[0x1720 / sizeof(Vtx)];
+#else
 static Vtx rom_shop4_fuku_v[] = {
 #include "assets/field/bg/rom_shop4_fuku_v.inc"
 };
+#endif
 
 extern Gfx rom_shop4_fuku_modelT[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -602,3 +746,45 @@ extern Gfx rom_shop4_fuku_model[] = {
                           ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_rom_shop4_fuku_rom_shop4_fuku_c(void) {
+    pc_load_asset("assets/field/bg/rom_shop4_1_floor_tex_pal2.bin", rom_shop4_1_floor_tex_pal, 0x20, 0xC3CC60, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_base_tex_pal2.bin", rom_shop4_1_base_tex_pal, 0x20, 0xC36260, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_stair_tex_pal2.bin", rom_shop4_1_stair_tex_pal, 0x20, 0xC36280, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_table_tex_pal2.bin", rom_shop4_1_table_tex_pal, 0x20, 0xC3CCA0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_wall_tex_pal2.bin", rom_shop4_1_wall_tex_pal, 0x20, 0xC362C0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_sign01_tex_pal2.bin", rom_shop4_1_sign01_tex_pal, 0x20, 0xC362E0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_kaunta_tex_pal2.bin", rom_shop4_1_kaunta_tex_pal, 0x20, 0xC36300, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_2_sign01_us_tex_pal.bin", rom_shop4_2_sign01_us_tex_pal, 0x20, 0xC3CD00, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_us_sign02_tex_pal2.bin", rom_shop4_1_us_sign02_tex_pal, 0x20, 0xC36340, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_us_sign0_tex_pal.bin", rom_shop4_1_us_sign0_tex_pal, 0x20, 0xC36360, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_sign03_tex_pal2.bin", rom_shop4_1_sign03_tex_pal, 0x20, 0xC36380, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_reji_tex_pal2.bin", rom_shop4_1_reji_tex_pal, 0x20, 0xC363A0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop_kouhaku_pal2.bin", rom_shop_kouhaku_pal, 0x20, 0xC4F520, 0, 1);
+    pc_load_asset("assets/field/bg/rom_shop4_1_floor01_tex2.bin", rom_shop4_1_floor01_tex, 0x800, 0xC363E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_base_tex2.bin", rom_shop4_1_base_tex, 0x200, 0xC36BE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_stair01_tex2.bin", rom_shop4_1_stair01_tex, 0x100, 0xC36DE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_table01_tex2.bin", rom_shop4_1_table01_tex, 0x100, 0xC36EE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_table02_tex2.bin", rom_shop4_1_table02_tex, 0x100, 0xC36FE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_wall01_tex2.bin", rom_shop4_1_wall01_tex, 0x800, 0xC370E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_wall02_tex2.bin", rom_shop4_1_wall02_tex, 0x200, 0xC378E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_sign05_tex2.bin", rom_shop4_1_sign05_tex, 0x80, 0xC37AE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_kaunta01_tex2.bin", rom_shop4_1_kaunta01_tex, 0x200, 0xC37B60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_kaunta02_tex2.bin", rom_shop4_1_kaunta02_tex, 0x80, 0xC37D60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_2_us_sign01_tex.bin", rom_shop4_2_us_sign01_tex, 0x400, 0xC3E0C0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_us_sign02_tex2.bin", rom_shop4_1_us_sign02_tex, 0x100, 0xC381E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_us_sign0_tex.bin", rom_shop4_1_us_sign0_tex, 0x600, 0xC382E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_sign04_tex2.bin", rom_shop4_1_sign04_tex, 0x100, 0xC388E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_reji01_tex2.bin", rom_shop4_1_reji01_tex, 0x300, 0xC389E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_reji02_tex2.bin", rom_shop4_1_reji02_tex, 0x100, 0xC38CE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_reji03_tex2.bin", rom_shop4_1_reji03_tex, 0x100, 0xC38DE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_floor02_tex2.bin", rom_shop4_1_floor02_tex, 0x800, 0xC38EE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_floor03_tex2.bin", rom_shop4_1_floor03_tex, 0x800, 0xC396E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_floor04_tex2.bin", rom_shop4_1_floor04_tex, 0x800, 0xC39EE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_1_shadow02_tex2.bin", rom_shop4_1_shadow02_tex, 0x100, 0xC3A6E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop_kouhaku_tex2.bin", rom_shop_kouhaku_tex, 0x800, 0xC53740, 0, 0);
+    pc_load_asset("assets/field/bg/rom_shop4_fuku_v.bin", rom_shop4_fuku_v, 0x1720, 0xC3AFE0, 0, 2);
+}
+#endif

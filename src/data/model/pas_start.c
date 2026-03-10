@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u8 kai_sousa_button3_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 kai_sousa_button3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/pas_start/kai_sousa_button3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx pas_start_v[0xB0 / sizeof(Vtx)];
+#else
 Vtx pas_start_v[] = {
 #include "assets/pas_start_v.inc"
 };
+#endif
 
 Gfx pas_start_yaji_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE),
@@ -38,3 +46,10 @@ Gfx pas_start_model[] = {
     gsSPDisplayList(pas_start_buttonT_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_pas_start_c(void) {
+    pc_load_asset("assets/pas_start/kai_sousa_button3_tex.bin", kai_sousa_button3_tex, 0x100, 0x7B14C0, 0, 0);
+}
+#endif

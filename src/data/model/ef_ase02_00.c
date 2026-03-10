@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u8 ef_ase01_0[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ef_ase01_0[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_ase02_00/ef_ase01_0.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_ase02_00_v[0x140 / sizeof(Vtx)];
+#else
 Vtx ef_ase02_00_v[] = {
 #include "assets/ef_ase02_00_v.inc"
 };
+#endif
 
 Gfx ef_ase02_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -28,9 +36,13 @@ Gfx ef_ase02_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx ef_ase02_01_v[0x140 / sizeof(Vtx)];
+#else
 Vtx ef_ase02_01_v[] = {
 #include "assets/ef_ase02_01_v.inc"
 };
+#endif
 
 Gfx ef_ase02_01_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -49,9 +61,13 @@ Gfx ef_ase02_01_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx ef_ase02_02_v[0x140 / sizeof(Vtx)];
+#else
 Vtx ef_ase02_02_v[] = {
 #include "assets/ef_ase02_02_v.inc"
 };
+#endif
 
 Gfx ef_ase02_02_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -70,9 +86,13 @@ Gfx ef_ase02_02_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx ef_ase02_03_v[0x140 / sizeof(Vtx)];
+#else
 Vtx ef_ase02_03_v[] = {
 #include "assets/ef_ase02_03_v.inc"
 };
+#endif
 
 Gfx ef_ase02_03_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -90,3 +110,10 @@ Gfx ef_ase02_03_modelT[] = {
     gsSPNTriangles_5b(13, 15, 14, 16, 17, 18, 17, 19, 18, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_ef_ase02_00_c(void) {
+    pc_load_asset("assets/ef_ase02_00/ef_ase01_0.bin", ef_ase01_0, 0x80, 0x93D480, 0, 0);
+}
+#endif

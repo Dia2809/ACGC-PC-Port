@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx tol_umb_22_v[];
+#ifdef TARGET_PC
+static u16 tol_umb_22_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_umb_22_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_umb_22/tol_umb_22_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_umb_22_kasa_tex_txt[0x200];
+#else
 u8 tol_umb_22_kasa_tex_txt[] = {
 #include "assets/tol_umb_22_kasa_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_umb_22_e_tex_txt[0x100];
+#else
 u8 tol_umb_22_e_tex_txt[] = {
 #include "assets/tol_umb_22_e_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_umb_22_v[0x480 / sizeof(Vtx)];
+#else
 Vtx tol_umb_22_v[] = {
 #include "assets/tol_umb_22_v.inc"
 };
+#endif
 
 Gfx kasa_umb22_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -60,3 +76,10 @@ Gfx e_umb22_model[] = {
     gsSPNTriangles_5b(12, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_tol_umb_22_c(void) {
+    pc_load_asset("assets/tol_umb_22/tol_umb_22_pal.bin", tol_umb_22_pal, 0x20, 0x8B4500, 0, 1);
+}
+#endif

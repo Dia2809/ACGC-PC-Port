@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_clock_yub_v[];
+#ifdef TARGET_PC
+u16 obj_clock_yub_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_clock_yub_pal[] = {
 #include "assets/obj_clock_yub_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_yub_t3_txt[0x100];
+#else
 u8 obj_clock_yub_t3_txt[] = {
 #include "assets/obj_clock_yub_t3_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_yub_t1_txt[0x200];
+#else
 u8 obj_clock_yub_t1_txt[] = {
 #include "assets/obj_clock_yub_t1_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_yub_t2_txt[0x200];
+#else
 u8 obj_clock_yub_t2_txt[] = {
 #include "assets/obj_clock_yub_t2_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_clock_yub_v[0x1A0 / sizeof(Vtx)];
+#else
 Vtx obj_clock_yub_v[] = {
 #include "assets/obj_clock_yub_v.inc"
 };
+#endif
 
 Gfx obj_clock_yub_side_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

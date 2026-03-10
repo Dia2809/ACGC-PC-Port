@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yaz_turkey_chair_v[];
+#ifdef TARGET_PC
+u16 int_yaz_turkey_chair_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_yaz_turkey_chair_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yaz_turkey_chair_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_chair_side_tex_txt[0x200];
+#else
 u8 int_yaz_turkey_chair_side_tex_txt[] = {
 #include "assets/int_yaz_turkey_chair_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_chair_seet_tex_txt[0x200];
+#else
 u8 int_yaz_turkey_chair_seet_tex_txt[] = {
 #include "assets/int_yaz_turkey_chair_seet_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_chair_hane_asi_tex_txt[0x400];
+#else
 u8 int_yaz_turkey_chair_hane_asi_tex_txt[] = {
 #include "assets/int_yaz_turkey_chair_hane_asi_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yaz_turkey_chair_v[0x5A0 / sizeof(Vtx)];
+#else
 Vtx int_yaz_turkey_chair_v[] = {
 #include "assets/int_yaz_turkey_chair_v.inc"
 };
+#endif
 
 Gfx int_yaz_turkey_chair_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

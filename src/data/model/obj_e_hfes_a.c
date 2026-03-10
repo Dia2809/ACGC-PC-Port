@@ -5,49 +5,93 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_e_hfes01_t1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_e_hfes01_t1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_hfes01_t1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_e_hfes01_t4_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_e_hfes01_t4_pal[] = {
 #include "assets/obj_e_hfes01_t4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_e_hfes01_t2_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_e_hfes01_t2_pal[] = {
 #include "assets/obj_e_hfes01_t2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_e_hfes01_t3_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_e_hfes01_t3_pal[] = {
 #include "assets/obj_e_hfes01_t3_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_hfes01_t1[0x800];
+#else
 u8 obj_e_hfes01_t1[] = {
 #include "assets/obj_e_hfes01_t1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_hfes01_t6[0x80];
+#else
 u8 obj_e_hfes01_t6[] = {
 #include "assets/obj_e_hfes01_t6.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_hfes01_t2[0x400];
+#else
 u8 obj_e_hfes01_t2[] = {
 #include "assets/obj_e_hfes01_t2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_hfes01_t7[0x20];
+#else
 u8 obj_e_hfes01_t7[] = {
 #include "assets/obj_e_hfes01_t7.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_hfes01_t3[0x400];
+#else
 u8 obj_e_hfes01_t3[] = {
 #include "assets/obj_e_hfes01_t3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_hfes01_t4[0x40];
+#else
 u8 obj_e_hfes01_t4[] = {
 #include "assets/obj_e_hfes01_t4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_hfes_a_v[0xB40 / sizeof(Vtx)];
+#else
 Vtx obj_e_hfes_a_v[] = {
 #include "assets/obj_e_hfes_a_v.inc"
 };
+#endif
 
 Gfx obj_e_hfes_a_modelT[] = {
     gsSPEndDisplayList(),
@@ -124,9 +168,13 @@ Gfx obj_e_hfes_a_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx obj_e_hfes_b_v[0xAA0 / sizeof(Vtx)];
+#else
 Vtx obj_e_hfes_b_v[] = {
 #include "assets/obj_e_hfes_b_v.inc"
 };
+#endif
 
 Gfx obj_e_hfes_b_modelT[] = {
     gsSPEndDisplayList(),
@@ -202,17 +250,29 @@ Gfx obj_e_hfes_b_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 obj_e_hfes01_t5_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_e_hfes01_t5_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_hfes01_t5_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_hfes01_t5[0x400];
+#else
 u8 obj_e_hfes01_t5[] = {
 #include "assets/obj_e_hfes01_t5.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_hfes_c_v[0x1440 / sizeof(Vtx)];
+#else
 Vtx obj_e_hfes_c_v[] = {
 #include "assets/obj_e_hfes_c_v.inc"
 };
+#endif
 
 Gfx obj_e_hfes_c_modelT[] = {
     gsSPEndDisplayList(),

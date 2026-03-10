@@ -5,97 +5,189 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 onp_win_shiro_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 onp_win_shiro_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/onp_win_shiro_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ok_tex[0x100];
+#else
 u8 onp_win_ok_tex[] = {
 #include "assets/onp_win_ok_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ga_tex[0x100];
+#else
 u8 onp_win_ga_tex[] = {
 #include "assets/onp_win_ga_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ga4_tex[0x100];
+#else
 u8 onp_win_ga4_tex[] = {
 #include "assets/onp_win_ga4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ga3_tex[0x100];
+#else
 u8 onp_win_ga3_tex[] = {
 #include "assets/onp_win_ga3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ga2_tex[0x100];
+#else
 u8 onp_win_ga2_tex[] = {
 #include "assets/onp_win_ga2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ottpo_tex[0x200];
+#else
 u8 onp_win_ottpo_tex[] = {
 #include "assets/onp_win_ottpo_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_tama1_tex[0x100];
+#else
 u8 onp_win_tama1_tex[] = {
 #include "assets/onp_win_tama1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_tama2_tex[0x400];
+#else
 u8 onp_win_tama2_tex[] = {
 #include "assets/onp_win_tama2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_tama5_tex[0x100];
+#else
 u8 onp_win_tama5_tex[] = {
 #include "assets/onp_win_tama5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_w1_tex[0x800];
+#else
 u8 onp_win_w1_tex[] = {
 #include "assets/onp_win_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_me_tex[0x100];
+#else
 u8 onp_win_me_tex[] = {
 #include "assets/onp_win_me_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ohana_tex[0x100];
+#else
 u8 onp_win_ohana_tex[] = {
 #include "assets/onp_win_ohana_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_w2_tex[0x800];
+#else
 u8 onp_win_w2_tex[] = {
 #include "assets/onp_win_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_w3_tex[0x400];
+#else
 u8 onp_win_w3_tex[] = {
 #include "assets/onp_win_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ha_tex[0x800];
+#else
 u8 onp_win_ha_tex[] = {
 #include "assets/onp_win_ha_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_ha2_tex[0x800];
+#else
 u8 onp_win_ha2_tex[] = {
 #include "assets/onp_win_ha2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_carde_tex[0x400];
+#else
 u8 onp_win_carde_tex[] = {
 #include "assets/onp_win_carde_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rmoji[0x80];
+#else
 u8 rmoji[] = {
 #include "assets/rmoji.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_rbutton2_tex_rgb_ia8[0x200];
+#else
 u8 onp_win_rbutton2_tex_rgb_ia8[] = {
 #include "assets/onp_win_rbutton2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 onp_win_rbutton_tex_rgb_ia8[0x200];
+#else
 u8 onp_win_rbutton_tex_rgb_ia8[] = {
 #include "assets/onp_win_rbutton_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx onp_win_v[0x9E0 / sizeof(Vtx)];
+#else
 Vtx onp_win_v[] = {
 #include "assets/onp_win_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx onp_carde_v[0x100 / sizeof(Vtx)];
+#else
 Vtx onp_carde_v[] = {
 #include "assets/onp_carde_v.inc"
 };
+#endif
 
 Gfx onp_win_ga3_model[] = {
     gsDPSetPrimColor(0, 255, 255, 255, 230, 255),

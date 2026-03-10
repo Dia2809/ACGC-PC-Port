@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx mny_win_v[];
+#ifdef TARGET_PC
+u8 mny_win_money_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 mny_win_money_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/mny_win_money_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fri_win_bell_tex[0x100];
+#else
 static u8 fri_win_bell_tex[] = {
 #include "assets/mny_win/fri_win_bell_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 mny_win_u_tex[0x800];
+#else
 u8 mny_win_u_tex[] = {
 #include "assets/mny_win_u_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx mny_win_v[0x100 / sizeof(Vtx)];
+#else
 Vtx mny_win_v[] = {
 #include "assets/mny_win_v.inc"
 };
+#endif
 
 Gfx mny_win_beruT_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0),
@@ -49,3 +65,10 @@ Gfx mny_win_ueT_model[] = {
     gsSPNTriangles_5b(5, 7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_mny_win_c(void) {
+    pc_load_asset("assets/mny_win/fri_win_bell_tex.bin", fri_win_bell_tex, 0x100, 0xB73BE0, 0, 0);
+}
+#endif

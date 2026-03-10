@@ -2,9 +2,13 @@
 #include "PR/gbi.h"
 #include "evw_anime.h"
 
+#ifdef TARGET_PC
+Vtx glider_v[0xB0 / sizeof(Vtx)];
+#else
 Vtx glider_v[] = {
 #include "assets/glider_v.inc"
 };
+#endif
 
 Gfx glider_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_OFF),

@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 lat_tegami_sw_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 lat_tegami_sw_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/lat_tegami_sw_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx onp_sentaku_v[0xB0 / sizeof(Vtx)];
+#else
 Vtx onp_sentaku_v[] = {
 #include "assets/onp_sentaku_v.inc"
 };
+#endif
 
 Gfx lat_sentaku_c_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

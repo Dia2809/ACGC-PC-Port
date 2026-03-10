@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx hip_1_v[0x1C60 / sizeof(Vtx)];
+#else
 static Vtx hip_1_v[] = {
 #include "assets/npc/mdl/hip_1_v.inc"
 };
+#endif
 
 static Gfx head_hip_model[] = {
     gsSPMatrix(anime_6_model, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -727,3 +731,10 @@ static cKF_Joint_R_c cKF_je_r_hip_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_hip_1 = { 26, 14, cKF_je_r_hip_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_hip_1_c(void) {
+    pc_load_asset("assets/npc/mdl/hip_1_v.bin", hip_1_v, 0x1C60, 0x52DC80, 0, 2);
+}
+#endif

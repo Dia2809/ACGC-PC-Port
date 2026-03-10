@@ -5,141 +5,277 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kan_win_map_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 kan_win_map_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kan_win_map_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_waku2a_tex[0x1000];
+#else
 u8 kan_win_waku2a_tex[] = {
 #include "assets/kan_win_waku2a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 testa[0x100];
+#else
 u8 testa[] = {
 #include "assets/testa.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_b_tex[0x100];
+#else
 u8 kan_win_b_tex[] = {
 #include "assets/kan_win_b_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_c_tex[0x100];
+#else
 u8 kan_win_c_tex[] = {
 #include "assets/kan_win_c_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_w1_tex[0x1000];
+#else
 u8 kan_win_w1_tex[] = {
 #include "assets/kan_win_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_w2_tex[0x800];
+#else
 u8 kan_win_w2_tex[] = {
 #include "assets/kan_win_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_w3_tex[0x400];
+#else
 u8 kan_win_w3_tex[] = {
 #include "assets/kan_win_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_d_tex[0x100];
+#else
 u8 kan_win_d_tex[] = {
 #include "assets/kan_win_d_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_e_tex[0x100];
+#else
 u8 kan_win_e_tex[] = {
 #include "assets/kan_win_e_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_f_tex[0x100];
+#else
 u8 kan_win_f_tex[] = {
 #include "assets/kan_win_f_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji1_tex[0x100];
+#else
 u8 kan_win_suuji1_tex[] = {
 #include "assets/kan_win_suuji1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_saki_tex[0x400];
+#else
 u8 kan_win_saki_tex[] = {
 #include "assets/kan_win_saki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_acre_tex[0x100];
+#else
 u8 kan_win_acre_tex[] = {
 #include "assets/kan_win_acre_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_ga_tex[0x100];
+#else
 u8 kan_win_ga_tex[] = {
 #include "assets/kan_win_ga_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_ga2_tex[0x100];
+#else
 u8 kan_win_ga2_tex[] = {
 #include "assets/kan_win_ga2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji2_tex[0x100];
+#else
 u8 kan_win_suuji2_tex[] = {
 #include "assets/kan_win_suuji2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji3_tex[0x100];
+#else
 u8 kan_win_suuji3_tex[] = {
 #include "assets/kan_win_suuji3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji4_tex[0x100];
+#else
 u8 kan_win_suuji4_tex[] = {
 #include "assets/kan_win_suuji4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji5_tex[0x100];
+#else
 u8 kan_win_suuji5_tex[] = {
 #include "assets/kan_win_suuji5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_ga3_tex[0x100];
+#else
 u8 kan_win_ga3_tex[] = {
 #include "assets/kan_win_ga3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_ga4_tex[0x100];
+#else
 u8 kan_win_ga4_tex[] = {
 #include "assets/kan_win_ga4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_a_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_a_tex_rgb_ia8[] = {
 #include "assets/kan_win_a_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_b_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_b_tex_rgb_ia8[] = {
 #include "assets/kan_win_b_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_c_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_c_tex_rgb_ia8[] = {
 #include "assets/kan_win_c_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_d_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_d_tex_rgb_ia8[] = {
 #include "assets/kan_win_d_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_e_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_e_tex_rgb_ia8[] = {
 #include "assets/kan_win_e_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_f_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_f_tex_rgb_ia8[] = {
 #include "assets/kan_win_f_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji1_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_suuji1_tex_rgb_ia8[] = {
 #include "assets/kan_win_suuji1_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji2_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_suuji2_tex_rgb_ia8[] = {
 #include "assets/kan_win_suuji2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji3_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_suuji3_tex_rgb_ia8[] = {
 #include "assets/kan_win_suuji3_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji4_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_suuji4_tex_rgb_ia8[] = {
 #include "assets/kan_win_suuji4_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_suuji5_tex_rgb_ia8[0x100];
+#else
 u8 kan_win_suuji5_tex_rgb_ia8[] = {
 #include "assets/kan_win_suuji5_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx kan_win_v[0x830 / sizeof(Vtx)];
+#else
 Vtx kan_win_v[] = {
 #include "assets/kan_win_v.inc"
 };
+#endif
 
 Gfx kan_win_moji1_model[] = {
     gsSPDisplayList(anime_4_txt + 0x48),

@@ -2,17 +2,29 @@
 #include "PR/gbi.h"
 #include "evw_anime.h"
 
+#ifdef TARGET_PC
+u16 act_ball_b_pal[0x20 / sizeof(u16)];
+#else
 u16 act_ball_b_pal[] = {
 #include "assets/act_ball_b_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_ball_b_1_tex[0x80];
+#else
 u8 act_ball_b_1_tex[] = {
 #include "assets/act_ball_b_1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_ball_b_v[0x1A0 / sizeof(Vtx)];
+#else
 Vtx act_ball_b_v[] = {
 #include "assets/act_ball_b_v.inc"
 };
+#endif
 
 Gfx act_ball_b_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

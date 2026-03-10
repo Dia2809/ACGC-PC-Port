@@ -5,29 +5,53 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 int_iku_mario_star_c_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iku_mario_star_c_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iku_mario_star_c_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_iku_mario_star_a_pal[0x20 / sizeof(u16)];
+#else
 u16 int_iku_mario_star_a_pal[] = {
 #include "assets/int_iku_mario_star_a_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_iku_mario_star_b_pal[0x20 / sizeof(u16)];
+#else
 u16 int_iku_mario_star_b_pal[] = {
 #include "assets/int_iku_mario_star_b_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_iku_mario_star_d_pal[0x20 / sizeof(u16)];
+#else
 u16 int_iku_mario_star_d_pal[] = {
 #include "assets/int_iku_mario_star_d_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_mario_star_a_tex_txt[0x80];
+#else
 u8 int_iku_mario_star_a_tex_txt[] = {
 #include "assets/int_iku_mario_star_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iku_mario_star_v[0x200 / sizeof(Vtx)];
+#else
 Vtx int_iku_mario_star_v[] = {
 #include "assets/int_iku_mario_star_v.inc"
 };
+#endif
 
 Gfx int_iku_mario_star_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_tree4_shadow_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_tree4_shadow_v[] = {
 #include "assets/obj_tree4_shadow_v.inc"
 };
+#endif
 
 extern u8 obj_tree_shadow_tex[];
 

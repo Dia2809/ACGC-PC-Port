@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_clchest03_v[];
+#ifdef TARGET_PC
+u16 int_sum_clchest03_pal01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_clchest03_pal01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_clchest03_pal01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest03_hiki_txt[0x100];
+#else
 u8 int_sum_clchest03_hiki_txt[] = {
 #include "assets/int_sum_clchest03_hiki_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest03_hikiura_txt[0x100];
+#else
 u8 int_sum_clchest03_hikiura_txt[] = {
 #include "assets/int_sum_clchest03_hikiura_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest03_top_txt[0x100];
+#else
 u8 int_sum_clchest03_top_txt[] = {
 #include "assets/int_sum_clchest03_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest03_stand_txt[0x80];
+#else
 u8 int_sum_clchest03_stand_txt[] = {
 #include "assets/int_sum_clchest03_stand_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest03_front_txt[0x180];
+#else
 u8 int_sum_clchest03_front_txt[] = {
 #include "assets/int_sum_clchest03_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest03_side_txt[0x180];
+#else
 u8 int_sum_clchest03_side_txt[] = {
 #include "assets/int_sum_clchest03_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest03_hisasi_txt[0x80];
+#else
 u8 int_sum_clchest03_hisasi_txt[] = {
 #include "assets/int_sum_clchest03_hisasi_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_clchest03_v[0x480 / sizeof(Vtx)];
+#else
 Vtx int_sum_clchest03_v[] = {
 #include "assets/int_sum_clchest03_v.inc"
 };
+#endif
 
 Gfx int_sum_clchest03_door_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

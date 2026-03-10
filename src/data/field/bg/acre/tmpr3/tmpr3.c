@@ -19,9 +19,13 @@ extern u8 river_tex_dummy[];
 extern u8 grass_tex_dummy[];
 extern u8 earth_tex_dummy[];
 
+#ifdef TARGET_PC
+static Vtx tmpr3_v[0x1160 / sizeof(Vtx)];
+#else
 static Vtx tmpr3_v[] = {
 #include "assets/field/bg/tmpr3_v.inc"
 };
+#endif
 
 extern Gfx tmpr3_modelT[] = {
     gsSPTexture(65535, 65535, 0, 0, G_ON),
@@ -240,3 +244,10 @@ extern Gfx tmpr3_model[] = {
     gsSP2Triangles(12, 10, 9, 0, 12, 13, 11, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_tmpr3_tmpr3_c(void) {
+    pc_load_asset("assets/field/bg/tmpr3_v.bin", tmpr3_v, 0x1160, 0x8F7678, 0, 2);
+}
+#endif

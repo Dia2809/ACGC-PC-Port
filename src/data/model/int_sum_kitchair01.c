@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_kitchair01_v[];
+#ifdef TARGET_PC
+u16 int_sum_kitchair01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_kitchair01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_kitchair01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kitchair01_board_tex[0x180];
+#else
 u8 int_sum_kitchair01_board_tex[] = {
 #include "assets/int_sum_kitchair01_board_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kitchair01_seat_tex[0x80];
+#else
 u8 int_sum_kitchair01_seat_tex[] = {
 #include "assets/int_sum_kitchair01_seat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kitchair01_seatside_tex[0x40];
+#else
 u8 int_sum_kitchair01_seatside_tex[] = {
 #include "assets/int_sum_kitchair01_seatside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kitchair01_side_tex[0x40];
+#else
 u8 int_sum_kitchair01_side_tex[] = {
 #include "assets/int_sum_kitchair01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kitchair01_backf_tex[0x200];
+#else
 u8 int_sum_kitchair01_backf_tex[] = {
 #include "assets/int_sum_kitchair01_backf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kitchair01_frontf_tex[0x100];
+#else
 u8 int_sum_kitchair01_frontf_tex[] = {
 #include "assets/int_sum_kitchair01_frontf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_kitchair01_support_tex[0x80];
+#else
 u8 int_sum_kitchair01_support_tex[] = {
 #include "assets/int_sum_kitchair01_support_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_kitchair01_v[0x480 / sizeof(Vtx)];
+#else
 Vtx int_sum_kitchair01_v[] = {
 #include "assets/int_sum_kitchair01_v.inc"
 };
+#endif
 
 Gfx it_sum_kitchair01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

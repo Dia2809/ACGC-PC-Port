@@ -5,9 +5,13 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+Vtx clg_floor2_v[0x240 / sizeof(Vtx)] ATTRIBUTE_ALIGN(32);
+#else
 Vtx clg_floor2_v[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/clg_floor2_v.inc"
 };
+#endif
 
 Gfx mCL_rom_myhome1_floor_model[] = {
     gsDPPipeSync(),

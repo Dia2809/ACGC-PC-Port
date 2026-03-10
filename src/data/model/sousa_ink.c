@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kai_sousa_ink_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_ink_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/kai_sousa_ink_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_inkmoji_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_inkmoji_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/kai_sousa_inkmoji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_ink2_tex_rgb_i4[0x200];
+#else
 u8 kai_sousa_ink2_tex_rgb_i4[] = {
 #include "assets/kai_sousa_ink2_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_ink3_tex_rgb_i4[0x200];
+#else
 u8 kai_sousa_ink3_tex_rgb_i4[] = {
 #include "assets/kai_sousa_ink3_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx sousa_ink_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx sousa_ink_v[] = {
 #include "assets/sousa_ink_v.inc"
 };
+#endif
 
 Gfx kai_sousa_ink_mode[] = {
 gsDPPipeSync(),

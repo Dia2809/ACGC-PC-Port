@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx rom_shop1w_v[];
+#ifdef TARGET_PC
+static u16 rom_shop1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_shop1w/rom_shop1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_shop1_tubo_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_shop1_tubo_pal[] = {
 #include "assets/rom_shop1_tubo_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop1_table_tex[0x600];
+#else
 static u8 rom_shop1_table_tex[] = {
 #include "assets/rom_shop1w/rom_shop1_table_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop1_window_tex[0x800];
+#else
 static u8 rom_shop1_window_tex[] = {
 #include "assets/rom_shop1w/rom_shop1_window_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop1_shadow_tex[0x400];
+#else
 static u8 rom_shop1_shadow_tex[] = {
 #include "assets/rom_shop1w/rom_shop1_shadow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop1_tubo_tex[0x400];
+#else
 u8 rom_shop1_tubo_tex[] = {
 #include "assets/rom_shop1_tubo_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_shop1w_v[0x12E0 / sizeof(Vtx)];
+#else
 Vtx rom_shop1w_v[] = {
 #include "assets/rom_shop1w_v.inc"
 };
+#endif
 
 Gfx rom_shop1w_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -166,3 +194,13 @@ Gfx rom_shop1w_model[] = {
     gsSPNTriangles_5b(7, 2, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_shop1w_c(void) {
+    pc_load_asset("assets/rom_shop1w/rom_shop1_pal.bin", rom_shop1_pal, 0x20, 0xC4F4C0, 0, 1);
+    pc_load_asset("assets/rom_shop1w/rom_shop1_table_tex.bin", rom_shop1_table_tex, 0x600, 0xC4F540, 0, 0);
+    pc_load_asset("assets/rom_shop1w/rom_shop1_window_tex.bin", rom_shop1_window_tex, 0x800, 0xC4FB40, 0, 0);
+    pc_load_asset("assets/rom_shop1w/rom_shop1_shadow_tex.bin", rom_shop1_shadow_tex, 0x400, 0xC50340, 0, 0);
+}
+#endif

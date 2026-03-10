@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 obj_item_apple_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_item_apple_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_item_apple2/obj_item_apple_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_item_apple_tex[0x200];
+#else
 static u8 obj_item_apple_tex[] = {
 #include "assets/obj_item_apple2/obj_item_apple_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx obj_item_apple_v[0x40 / sizeof(Vtx)];
+#else
 static Vtx obj_item_apple_v[] = {
 #include "assets/obj_item_apple2/obj_item_apple_v.inc"
 };
+#endif
 
 Gfx apple_DL_mode[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -34,3 +46,12 @@ Gfx apple_DL_vtx[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 0, 2, 3, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_item_apple2_c(void) {
+    pc_load_asset("assets/obj_item_apple2/obj_item_apple_pal.bin", obj_item_apple_pal, 0x20, 0xB6D940, 0, 1);
+    pc_load_asset("assets/obj_item_apple2/obj_item_apple_tex.bin", obj_item_apple_tex, 0x200, 0xB6D960, 0, 0);
+    pc_load_asset("assets/obj_item_apple2/obj_item_apple_v.bin", obj_item_apple_v, 0x40, 0xB6DB60, 0, 2);
+}
+#endif

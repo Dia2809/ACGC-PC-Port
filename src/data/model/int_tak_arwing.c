@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_arwing_v[];
+#ifdef TARGET_PC
+u16 int_tak_arwing_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_arwing_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_arwing_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_boost[0x80];
+#else
 u8 int_tak_arwing_boost[] = {
 #include "assets/int_tak_arwing_boost.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_bottom[0x100];
+#else
 u8 int_tak_arwing_bottom[] = {
 #include "assets/int_tak_arwing_bottom.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_bulue1[0x80];
+#else
 u8 int_tak_arwing_bulue1[] = {
 #include "assets/int_tak_arwing_bulue1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_front[0x100];
+#else
 u8 int_tak_arwing_front[] = {
 #include "assets/int_tak_arwing_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_mark[0x80];
+#else
 u8 int_tak_arwing_mark[] = {
 #include "assets/int_tak_arwing_mark.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_side[0x100];
+#else
 u8 int_tak_arwing_side[] = {
 #include "assets/int_tak_arwing_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_window[0x80];
+#else
 u8 int_tak_arwing_window[] = {
 #include "assets/int_tak_arwing_window.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_bou[0x80];
+#else
 u8 int_tak_arwing_bou[] = {
 #include "assets/int_tak_arwing_bou.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_dai[0x200];
+#else
 u8 int_tak_arwing_dai[] = {
 #include "assets/int_tak_arwing_dai.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_arwing_wing[0x80];
+#else
 u8 int_tak_arwing_wing[] = {
 #include "assets/int_tak_arwing_wing.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_arwing_v[0x710 / sizeof(Vtx)];
+#else
 Vtx int_tak_arwing_v[] = {
 #include "assets/int_tak_arwing_v.inc"
 };
+#endif
 
 Gfx int_tak_arwing_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

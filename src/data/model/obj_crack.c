@@ -4,9 +4,13 @@
 #include "c_keyframe.h"
 
 
+#ifdef TARGET_PC
+u8 obj_crack_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_crack_tex[] ATTRIBUTE_ALIGN(32)= { 
 #include "assets/obj_crack_tex.inc"
 };
+#endif
 
 Gfx obj_crack0T_g_mat_model[] = { 
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

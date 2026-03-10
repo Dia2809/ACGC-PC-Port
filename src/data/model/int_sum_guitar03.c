@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_guitar03_v[];
+#ifdef TARGET_PC
+u16 int_sum_guitar03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_guitar03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_guitar03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar03_back_tex[0x200];
+#else
 u8 int_sum_guitar03_back_tex[] = {
 #include "assets/int_sum_guitar03_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar03_side_tex[0x80];
+#else
 u8 int_sum_guitar03_side_tex[] = {
 #include "assets/int_sum_guitar03_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar03_head_tex[0x100];
+#else
 u8 int_sum_guitar03_head_tex[] = {
 #include "assets/int_sum_guitar03_head_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar03_backhead_tex[0x80];
+#else
 u8 int_sum_guitar03_backhead_tex[] = {
 #include "assets/int_sum_guitar03_backhead_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar03_front_tex[0x200];
+#else
 u8 int_sum_guitar03_front_tex[] = {
 #include "assets/int_sum_guitar03_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar03_hand_tex[0x80];
+#else
 u8 int_sum_guitar03_hand_tex[] = {
 #include "assets/int_sum_guitar03_hand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar03_chest_tex[0x100];
+#else
 u8 int_sum_guitar03_chest_tex[] = {
 #include "assets/int_sum_guitar03_chest_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar03_neck_tex[0x80];
+#else
 u8 int_sum_guitar03_neck_tex[] = {
 #include "assets/int_sum_guitar03_neck_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_guitar03_v[0x430 / sizeof(Vtx)];
+#else
 Vtx int_sum_guitar03_v[] = {
 #include "assets/int_sum_guitar03_v.inc"
 };
+#endif
 
 Gfx int_sum_guitar_03_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 
 
+#ifdef TARGET_PC
+u16 obj_s_honeycomb_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_honeycomb_pal[] ATTRIBUTE_ALIGN(32)= { 
 #include "assets/obj_s_honeycomb_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_honeycomb_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_honeycomb_tex[] ATTRIBUTE_ALIGN(32)= { 
 #include "assets/obj_s_honeycomb_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_honeycomb_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_s_honeycomb_v[] = { 
 #include "assets/obj_s_honeycomb_v.inc"
 };
+#endif
 
 Gfx obj_s_honeycombT_mat_model[] = { 
 gsDPPipeSync(),

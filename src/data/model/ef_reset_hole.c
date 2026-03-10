@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx ef_reset_hole_v[];
+#ifdef TARGET_PC
+u16 ef_reset_hole_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 ef_reset_hole_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_reset_hole_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_reset_hole_tex[0x100];
+#else
 u8 ef_reset_hole_tex[] = {
 #include "assets/ef_reset_hole_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_reset_hole_v[0x620 / sizeof(Vtx)];
+#else
 Vtx ef_reset_hole_v[] = {
 #include "assets/ef_reset_hole_v.inc"
 };
+#endif
 
 Gfx ef_reset_hole_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

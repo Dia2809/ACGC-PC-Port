@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 light_window[0x80];
+#else
 u8 light_window[] = {
 #include "assets/light_window.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx room_lightR_v[0xA0 / sizeof(Vtx)];
+#else
 Vtx room_lightR_v[] = {
 #include "assets/room_lightR_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx room_lightL_v[0xA0 / sizeof(Vtx)];
+#else
 Vtx room_lightL_v[] = {
 #include "assets/room_lightL_v.inc"
 };
+#endif
 
 Gfx light_shine01_mode[] = {
     gsDPPipeSync(),

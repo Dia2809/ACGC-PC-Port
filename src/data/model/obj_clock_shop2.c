@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_clock_shop2_v[];
+#ifdef TARGET_PC
+u16 obj_clock_shop2_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_clock_shop2_pal[] = {
 #include "assets/obj_clock_shop2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_shop2_body_tex_txt[0x100];
+#else
 u8 obj_clock_shop2_body_tex_txt[] = {
 #include "assets/obj_clock_shop2_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_clock_shop2_v[0x2C0 / sizeof(Vtx)];
+#else
 Vtx obj_clock_shop2_v[] = {
 #include "assets/obj_clock_shop2_v.inc"
 };
+#endif
 
 Gfx obj_clock_shop2_body_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

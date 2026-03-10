@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yos_gnome_v[];
+#ifdef TARGET_PC
+u16 int_yos_gnome_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_yos_gnome_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yos_gnome_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yos_gnome_all_tex_txt[0x800];
+#else
 u8 int_yos_gnome_all_tex_txt[] = {
 #include "assets/int_yos_gnome_all_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yos_gnome_v[0x480 / sizeof(Vtx)];
+#else
 Vtx int_yos_gnome_v[] = {
 #include "assets/int_yos_gnome_v.inc"
 };
+#endif
 
 Gfx int_yos_gnome_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_timpani01_v[];
+#ifdef TARGET_PC
+u16 int_sum_timpani01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_timpani01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_timpani01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_timpani01_legtop_tex_txt[0x80];
+#else
 u8 int_sum_timpani01_legtop_tex_txt[] = {
 #include "assets/int_sum_timpani01_legtop_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_timpani01_top_tex_txt[0x200];
+#else
 u8 int_sum_timpani01_top_tex_txt[] = {
 #include "assets/int_sum_timpani01_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_timpani01_leg_tex_txt[0x180];
+#else
 u8 int_sum_timpani01_leg_tex_txt[] = {
 #include "assets/int_sum_timpani01_leg_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_timpani01_pedal_tex_txt[0x100];
+#else
 u8 int_sum_timpani01_pedal_tex_txt[] = {
 #include "assets/int_sum_timpani01_pedal_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_timpani01_crown_tex_txt[0x200];
+#else
 u8 int_sum_timpani01_crown_tex_txt[] = {
 #include "assets/int_sum_timpani01_crown_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_timpani01_side_tex_txt[0x100];
+#else
 u8 int_sum_timpani01_side_tex_txt[] = {
 #include "assets/int_sum_timpani01_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_timpani01_v[0x500 / sizeof(Vtx)];
+#else
 Vtx int_sum_timpani01_v[] = {
 #include "assets/int_sum_timpani01_v.inc"
 };
+#endif
 
 Gfx int_sum_timpani01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_e_tukimi_shadow_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_tukimi_shadow_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_tukimi_shadow_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_tukimi_l_shadow_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_e_tukimi_l_shadow_v[] = {
 #include "assets/obj_e_tukimi_l_shadow_v.inc"
 };
+#endif
 
 Gfx obj_e_tukimi_l_shadow_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -26,13 +34,21 @@ Gfx obj_e_tukimi_l_shadow_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_e_tukimi_r_shadow_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_tukimi_r_shadow_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_tukimi_r_shadow_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_tukimi_r_shadow_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_e_tukimi_r_shadow_v[] = {
 #include "assets/obj_e_tukimi_r_shadow_v.inc"
 };
+#endif
 
 Gfx obj_e_tukimi_r_shadow_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

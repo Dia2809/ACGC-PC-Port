@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u16 act_f30_gupi_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 act_f30_gupi_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f30_gupi_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_f30_gupi_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_f30_gupi_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f30_gupi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_f30_gupi_a_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f30_gupi_a_v[] = {
 #include "assets/act_f30_gupi_a_v.inc"
 };
+#endif
 
 Gfx act_f30_gupi_aT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -31,9 +43,13 @@ Gfx act_f30_gupi_aT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f30_gupi_b_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f30_gupi_b_v[] = {
 #include "assets/act_f30_gupi_b_v.inc"
 };
+#endif
 
 Gfx act_f30_gupi_bT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -51,9 +67,13 @@ Gfx act_f30_gupi_bT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f30_gupi_c_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f30_gupi_c_v[] = {
 #include "assets/act_f30_gupi_c_v.inc"
 };
+#endif
 
 Gfx act_f30_gupi_cT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

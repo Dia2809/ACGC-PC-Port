@@ -5,33 +5,61 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_kanban_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_kanban_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_kanban_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 hakushi_pal[0x20 / sizeof(u16)];
+#else
 u16 hakushi_pal[] = {
 #include "assets/hakushi_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hakushi_tex[0x200];
+#else
 u8 hakushi_tex[] = {
 #include "assets/hakushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_kanban_base_tex[0x300];
+#else
 u8 obj_s_kanban_base_tex[] = {
 #include "assets/obj_s_kanban_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_kanban_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_s_kanban_v[] = {
 #include "assets/obj_s_kanban_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_kanban_base_tex[0x300];
+#else
 u8 obj_w_kanban_base_tex[] = {
 #include "assets/obj_w_kanban_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_kanban_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_w_kanban_v[] = {
 #include "assets/obj_w_kanban_v.inc"
 };
+#endif
 
 Gfx write_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -75,13 +103,21 @@ Gfx obj_sign_w_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_kanban_shadow_tex[0x200];
+#else
 u8 obj_kanban_shadow_tex[] = {
 #include "assets/obj_kanban_shadow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_kanban_shadow_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_kanban_shadow_v[] = {
 #include "assets/obj_kanban_shadow_v.inc"
 };
+#endif
 
 Gfx obj_kanban_shadowT_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

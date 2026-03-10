@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_lotus_flower_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_lotus_flower_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_lotus_flower_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_lotus_leaf_tex_txt[0x400];
+#else
 u8 obj_lotus_leaf_tex_txt[] = {
 #include "assets/obj_lotus_leaf_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_lotus_v[0x9C0 / sizeof(Vtx)];
+#else
 Vtx obj_s_lotus_v[] = {
 #include "assets/obj_s_lotus_v.inc"
 };
+#endif
 
 Gfx obj_s_lotus_flower1_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, anime_1_txt),

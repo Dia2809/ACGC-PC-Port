@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx act_mus_zari_v[];
+#ifdef TARGET_PC
+u16 act_mus_zari_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 act_mus_zari_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_mus_zari_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_mus_zari_tex_txt[0x400];
+#else
 u8 act_mus_zari_tex_txt[] = {
 #include "assets/act_mus_zari_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_mus_zari_v[0x370 / sizeof(Vtx)];
+#else
 Vtx act_mus_zari_v[] = {
 #include "assets/act_mus_zari_v.inc"
 };
+#endif
 
 Gfx act_mus_zari_tail_model[] = {
     gsSPMatrix(anime_6_mdl, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),

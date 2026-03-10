@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_doll01_v[];
+#ifdef TARGET_PC
+u16 int_sum_doll01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_doll01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_doll01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_doll01_byubu_txt[0x80];
+#else
 u8 int_sum_doll01_byubu_txt[] = {
 #include "assets/int_sum_doll01_byubu_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_doll01_hinadan_txt[0x180];
+#else
 u8 int_sum_doll01_hinadan_txt[] = {
 #include "assets/int_sum_doll01_hinadan_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_doll01_hina_txt[0x100];
+#else
 u8 int_sum_doll01_hina_txt[] = {
 #include "assets/int_sum_doll01_hina_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_doll01_dairi_txt[0x100];
+#else
 u8 int_sum_doll01_dairi_txt[] = {
 #include "assets/int_sum_doll01_dairi_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_doll01_kanjyo_txt[0x100];
+#else
 u8 int_sum_doll01_kanjyo_txt[] = {
 #include "assets/int_sum_doll01_kanjyo_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_doll01_gonin_txt[0x100];
+#else
 u8 int_sum_doll01_gonin_txt[] = {
 #include "assets/int_sum_doll01_gonin_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_doll01_bonbori_txt[0x100];
+#else
 u8 int_sum_doll01_bonbori_txt[] = {
 #include "assets/int_sum_doll01_bonbori_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_doll01_side_txt[0x100];
+#else
 u8 int_sum_doll01_side_txt[] = {
 #include "assets/int_sum_doll01_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_doll01_v[0x580 / sizeof(Vtx)];
+#else
 Vtx int_sum_doll01_v[] = {
 #include "assets/int_sum_doll01_v.inc"
 };
+#endif
 
 Gfx int_sum_doll01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

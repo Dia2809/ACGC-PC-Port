@@ -8,9 +8,13 @@
 extern u8 lat_letter33_ed_tex[];
 extern u8 lat_letter33_xk_tex[];
 extern u16 lat_letter33_pal[];
+#ifdef TARGET_PC
+Vtx lat_letter33_v[0x180 / sizeof(Vtx)];
+#else
 Vtx lat_letter33_v[] = {
 #include "assets/lat_letter33_v.inc"
 };
+#endif
 
 Gfx lat_letter33_sen_model[] = {
     gsDPSetPrimColor(0, 255, 215, 110, 0, 255),

@@ -8,9 +8,13 @@ extern u8 river_tex_dummy[];
 extern u8 grass_tex_dummy[];
 extern u8 earth_tex_dummy[];
 
+#ifdef TARGET_PC
+static Vtx grd_s_r1_4_v[0xAE0 / sizeof(Vtx)];
+#else
 static Vtx grd_s_r1_4_v[] = {
 #include "assets/field/bg/grd_s_r1_4_v.inc"
 };
+#endif
 
 extern Gfx grd_s_r1_4_modelT[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -222,3 +226,10 @@ extern Gfx grd_s_r1_4_model[] = {
                       ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_grd_s_r1_4_grd_s_r1_4_c(void) {
+    pc_load_asset("assets/field/bg/grd_s_r1_4_v.bin", grd_s_r1_4_v, 0xAE0, 0xA1CBE0, 0, 2);
+}
+#endif

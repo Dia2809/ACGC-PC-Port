@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_nabe_v[];
+#ifdef TARGET_PC
+u16 int_nog_nabe_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_nabe_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_nabe_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_nabe_switch_tex_txt[0x80];
+#else
 u8 int_nog_nabe_switch_tex_txt[] = {
 #include "assets/int_nog_nabe_switch_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_nabe_fire1_TA_tex_txt[0x80];
+#else
 u8 int_nog_nabe_fire1_TA_tex_txt[] = {
 #include "assets/int_nog_nabe_fire1_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_nabe_fire2_TA_tex_txt[0x80];
+#else
 u8 int_nog_nabe_fire2_TA_tex_txt[] = {
 #include "assets/int_nog_nabe_fire2_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_nabe_fire3_TA_tex_txt[0x80];
+#else
 u8 int_nog_nabe_fire3_TA_tex_txt[] = {
 #include "assets/int_nog_nabe_fire3_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_nabe_side_tex_txt[0x80];
+#else
 u8 int_nog_nabe_side_tex_txt[] = {
 #include "assets/int_nog_nabe_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_nabe_top_tex_txt[0x200];
+#else
 u8 int_nog_nabe_top_tex_txt[] = {
 #include "assets/int_nog_nabe_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_nabe_conro_tex_txt[0x200];
+#else
 u8 int_nog_nabe_conro_tex_txt[] = {
 #include "assets/int_nog_nabe_conro_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_nabe_v[0x5E0 / sizeof(Vtx)];
+#else
 Vtx int_nog_nabe_v[] = {
 #include "assets/int_nog_nabe_v.inc"
 };
+#endif
 
 Gfx int_nog_nabe_switch_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

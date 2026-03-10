@@ -6,73 +6,141 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_wc02_v[];
+#ifdef TARGET_PC
+u16 int_sum_wc02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_wc02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_wc02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_wc02_mizu_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_wc02_mizu_tex_rgb_ci4_pal[] = {
 #include "assets/int_sum_wc02_mizu_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_huta_tex[0x80];
+#else
 u8 int_sum_wc02_huta_tex[] = {
 #include "assets/int_sum_wc02_huta_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_washside_tex[0x80];
+#else
 u8 int_sum_wc02_washside_tex[] = {
 #include "assets/int_sum_wc02_washside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_tankfront_tex[0x100];
+#else
 u8 int_sum_wc02_tankfront_tex[] = {
 #include "assets/int_sum_wc02_tankfront_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_benzaside_tex[0x100];
+#else
 u8 int_sum_wc02_benzaside_tex[] = {
 #include "assets/int_sum_wc02_benzaside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_base_tex[0x80];
+#else
 u8 int_sum_wc02_base_tex[] = {
 #include "assets/int_sum_wc02_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_paipside_tex[0x40];
+#else
 u8 int_sum_wc02_paipside_tex[] = {
 #include "assets/int_sum_wc02_paipside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_paip_tex[0x40];
+#else
 u8 int_sum_wc02_paip_tex[] = {
 #include "assets/int_sum_wc02_paip_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_tankrevar_tex[0x40];
+#else
 u8 int_sum_wc02_tankrevar_tex[] = {
 #include "assets/int_sum_wc02_tankrevar_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_shawer_tex[0x40];
+#else
 u8 int_sum_wc02_shawer_tex[] = {
 #include "assets/int_sum_wc02_shawer_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_washtop_tex[0x80];
+#else
 u8 int_sum_wc02_washtop_tex[] = {
 #include "assets/int_sum_wc02_washtop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_tanktop_tex[0x40];
+#else
 u8 int_sum_wc02_tanktop_tex[] = {
 #include "assets/int_sum_wc02_tanktop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_benza_tex[0x100];
+#else
 u8 int_sum_wc02_benza_tex[] = {
 #include "assets/int_sum_wc02_benza_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_boxtop_tex[0x80];
+#else
 u8 int_sum_wc02_boxtop_tex[] = {
 #include "assets/int_sum_wc02_boxtop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_wc02_mizu_tex[0x40];
+#else
 u8 int_sum_wc02_mizu_tex[] = {
 #include "assets/int_sum_wc02_mizu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_wc02_v[0x580 / sizeof(Vtx)];
+#else
 Vtx int_sum_wc02_v[] = {
 #include "assets/int_sum_wc02_v.inc"
 };
+#endif
 
 Gfx int_sum_wc02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

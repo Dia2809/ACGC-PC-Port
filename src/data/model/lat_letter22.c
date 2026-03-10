@@ -11,9 +11,13 @@ extern u16 lat_letter22_pal[];
 extern u8 lat_letter22_3[];
 extern u8 lat_letter22_5[];
 extern u8 lat_letter22_4[];
+#ifdef TARGET_PC
+Vtx lat_letter22_v[0x1F0 / sizeof(Vtx)];
+#else
 Vtx lat_letter22_v[] = {
 #include "assets/lat_letter22_v.inc"
 };
+#endif
 
 Gfx lat_letter22_model[] = {
     gsDPSetRenderMode(G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2),

@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_jny_afmen01_v[];
+#ifdef TARGET_PC
+u16 int_ike_jny_afmen_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_jny_afmen_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_jny_afmen_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_afmen01_face1_tex[0x200];
+#else
 u8 int_ike_jny_afmen01_face1_tex[] = {
 #include "assets/int_ike_jny_afmen01_face1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_afmen01_under1_tex[0x100];
+#else
 u8 int_ike_jny_afmen01_under1_tex[] = {
 #include "assets/int_ike_jny_afmen01_under1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_afmen01_face2_tex[0x100];
+#else
 u8 int_ike_jny_afmen01_face2_tex[] = {
 #include "assets/int_ike_jny_afmen01_face2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_afmen01_base1_tex[0x80];
+#else
 u8 int_ike_jny_afmen01_base1_tex[] = {
 #include "assets/int_ike_jny_afmen01_base1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_afmen01_base2_tex[0x40];
+#else
 u8 int_ike_jny_afmen01_base2_tex[] = {
 #include "assets/int_ike_jny_afmen01_base2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_afmen01_base3_tex[0x40];
+#else
 u8 int_ike_jny_afmen01_base3_tex[] = {
 #include "assets/int_ike_jny_afmen01_base3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_jny_afmen01_v[0x4D0 / sizeof(Vtx)];
+#else
 Vtx int_ike_jny_afmen01_v[] = {
 #include "assets/int_ike_jny_afmen01_v.inc"
 };
+#endif
 
 Gfx int_ike_jny_afmen01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,113 +5,221 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 hni_nwin2_hani_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 hni_nwin2_hani_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/hni_nwin2_hani_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 hni_win_shita7_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 hni_win_shita7_tex_rgb_ci4_pal[] = {
 #include "assets/hni_win_shita7_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 hni_win_shita1_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 hni_win_shita1_tex_rgb_ci4_pal[] = {
 #include "assets/hni_win_shita1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 hni_win_shita2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 hni_win_shita2_tex_rgb_ci4_pal[] = {
 #include "assets/hni_win_shita2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 hni_win_shita3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 hni_win_shita3_tex_rgb_ci4_pal[] = {
 #include "assets/hni_win_shita3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 hni_win_shita4_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 hni_win_shita4_tex_rgb_ci4_pal[] = {
 #include "assets/hni_win_shita4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 hni_win_shita5_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 hni_win_shita5_tex_rgb_ci4_pal[] = {
 #include "assets/hni_win_shita5_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 hni_win_shita6_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 hni_win_shita6_tex_rgb_ci4_pal[] = {
 #include "assets/hni_win_shita6_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_nwaku_tex[0x400];
+#else
 static u8 inv_mwin_nwaku_tex[] = {
 #include "assets/hni_win/inv_mwin_nwaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_nwin2_w_tex[0xA00];
+#else
 u8 hni_nwin2_w_tex[] = {
 #include "assets/hni_nwin2_w_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_ue1_tex[0x800];
+#else
 u8 hni_win_ue1_tex[] = {
 #include "assets/hni_win_ue1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_ue2_tex[0x800];
+#else
 u8 hni_win_ue2_tex[] = {
 #include "assets/hni_win_ue2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_ue3_tex[0x400];
+#else
 u8 hni_win_ue3_tex[] = {
 #include "assets/hni_win_ue3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_ue4_tex[0x100];
+#else
 u8 hni_win_ue4_tex[] = {
 #include "assets/hni_win_ue4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_ue5_tex[0x800];
+#else
 u8 hni_win_ue5_tex[] = {
 #include "assets/hni_win_ue5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_ue6_tex[0x800];
+#else
 u8 hni_win_ue6_tex[] = {
 #include "assets/hni_win_ue6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_ue7_tex[0x800];
+#else
 u8 hni_win_ue7_tex[] = {
 #include "assets/hni_win_ue7_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_3Dma_tex[0x800];
+#else
 static u8 inv_mwin_3Dma_tex[] = {
 #include "assets/hni_win/inv_mwin_3Dma_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_nwin2_hani_tex_rgb_ci4[0x200];
+#else
 u8 hni_nwin2_hani_tex_rgb_ci4[] = {
 #include "assets/hni_nwin2_hani_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_shita7_tex_rgb_ci4[0x200];
+#else
 u8 hni_win_shita7_tex_rgb_ci4[] = {
 #include "assets/hni_win_shita7_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_shita1_tex_rgb_ci4[0x400];
+#else
 u8 hni_win_shita1_tex_rgb_ci4[] = {
 #include "assets/hni_win_shita1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_shita2_tex_rgb_ci4[0x400];
+#else
 u8 hni_win_shita2_tex_rgb_ci4[] = {
 #include "assets/hni_win_shita2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_shita3_tex_rgb_ci4[0x200];
+#else
 u8 hni_win_shita3_tex_rgb_ci4[] = {
 #include "assets/hni_win_shita3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_shita4_tex_rgb_ci4[0x400];
+#else
 u8 hni_win_shita4_tex_rgb_ci4[] = {
 #include "assets/hni_win_shita4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_shita5_tex_rgb_ci4[0x400];
+#else
 u8 hni_win_shita5_tex_rgb_ci4[] = {
 #include "assets/hni_win_shita5_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_win_shita6_tex_rgb_ci4[0x400];
+#else
 u8 hni_win_shita6_tex_rgb_ci4[] = {
 #include "assets/hni_win_shita6_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx hni_win_v[0x800 / sizeof(Vtx)];
+#else
 Vtx hni_win_v[] = {
 #include "assets/hni_win_v.inc"
 };
+#endif
 
 Gfx hni_win_w13_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, hni_win_shita7_tex_rgb_ci4_pal),
@@ -360,3 +468,11 @@ Gfx hni_win_modelT[] = {
     gsSPDisplayList(hni_nwin2_wakuT_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_hni_win_c(void) {
+    pc_load_asset("assets/hni_win/inv_mwin_nwaku_tex.bin", inv_mwin_nwaku_tex, 0x400, 0x7982E0, 0, 0);
+    pc_load_asset("assets/hni_win/inv_mwin_3Dma_tex.bin", inv_mwin_3Dma_tex, 0x800, 0x717820, 0, 0);
+}
+#endif

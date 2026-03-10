@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_tent_lamp_v[];
+#ifdef TARGET_PC
+u16 obj_tent_lamp1_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_tent_lamp1_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_tent_lamp1_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_tent_lamp2_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_tent_lamp2_rgb_ci4_pal[] = {
 #include "assets/obj_tent_lamp2_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_tent_lamp1[0x400];
+#else
 u8 obj_tent_lamp1[] = {
 #include "assets/obj_tent_lamp1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_tent_lamp2_rgb_ci4[0x400];
+#else
 u8 obj_tent_lamp2_rgb_ci4[] = {
 #include "assets/obj_tent_lamp2_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_tent_lamp_v[0x2D0 / sizeof(Vtx)];
+#else
 Vtx obj_tent_lamp_v[] = {
 #include "assets/obj_tent_lamp_v.inc"
 };
+#endif
 
 Gfx obj_tent_lamp_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

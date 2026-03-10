@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+static u16 act_m_ari_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 act_m_ari_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_ari/act_m_ari_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_ari_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 act_m_ari_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_ari/act_m_ari_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx act_m_ari_v[0x60 / sizeof(Vtx)];
+#else
 static Vtx act_m_ari_v[] = {
 #include "assets/act_m_ari/act_m_ari_v.inc"
 };
+#endif
 
 Gfx act_m_ariT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -30,3 +42,12 @@ Gfx act_m_ariT_model[] = {
     gsSPNTriangles_5b(1, 5, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_ari_c(void) {
+    pc_load_asset("assets/act_m_ari/act_m_ari_pal.bin", act_m_ari_pal, 0x20, 0xB49C78, 0, 1);
+    pc_load_asset("assets/act_m_ari/act_m_ari_tex.bin", act_m_ari_tex, 0x100, 0xB49C98, 0, 0);
+    pc_load_asset("assets/act_m_ari/act_m_ari_v.bin", act_m_ari_v, 0x60, 0xB49C18, 0, 2);
+}
+#endif

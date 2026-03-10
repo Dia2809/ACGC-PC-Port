@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kan_win_cursor_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 kan_win_cursor_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kan_win_cursor_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx kan_hyouji_v[0x80 / sizeof(Vtx)];
+#else
 static Vtx kan_hyouji_v[] = {
 #include "assets/kan_hyouji/kan_hyouji_v.inc"
 };
+#endif
 
 Gfx kan_win_cursorT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -23,3 +31,10 @@ Gfx kan_win_cursorT_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 1, 3, 2, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_kan_hyouji_c(void) {
+    pc_load_asset("assets/kan_hyouji/kan_hyouji_v.bin", kan_hyouji_v, 0x80, 0x78C540, 0, 2);
+}
+#endif

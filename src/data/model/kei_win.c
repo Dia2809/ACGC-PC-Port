@@ -5,41 +5,77 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 kei_win_pin_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 kei_win_pin_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kei_win_pin_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_pin_tex[0x200];
+#else
 u8 kei_win_pin_tex[] = {
 #include "assets/kei_win_pin_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_w1_tex[0x1000];
+#else
 u8 kei_win_w1_tex[] = {
 #include "assets/kei_win_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_w2_tex[0x800];
+#else
 u8 kei_win_w2_tex[] = {
 #include "assets/kei_win_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_w3_tex[0x400];
+#else
 u8 kei_win_w3_tex[] = {
 #include "assets/kei_win_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_kage2_tex[0x800];
+#else
 u8 kei_win_kage2_tex[] = {
 #include "assets/kei_win_kage2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_kage3_tex[0x400];
+#else
 u8 kei_win_kage3_tex[] = {
 #include "assets/kei_win_kage3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_kage4_tex[0x400];
+#else
 u8 kei_win_kage4_tex[] = {
 #include "assets/kei_win_kage4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx kei_win_v[0x3B0 / sizeof(Vtx)];
+#else
 Vtx kei_win_v[] = {
 #include "assets/kei_win_v.inc"
 };
+#endif
 
 Gfx kei_win_kamiT_model[] = {
     gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),

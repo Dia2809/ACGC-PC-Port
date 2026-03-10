@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 lat_tegami_point_tex[0x80];
+#else
 u8 lat_tegami_point_tex[] = {
 #include "assets/lat_tegami_point_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx lat_point_v[0x40 / sizeof(Vtx)];
+#else
 Vtx lat_point_v[] = {
 #include "assets/lat_point_v.inc"
 };
+#endif
 
 Gfx lat_point_mT_model[] = {
     gsDPPipeSync(),

@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 agb_win_yajirushi_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 agb_win_yajirushi_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/agb_win_yajirushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx agb_yajirushi_v[0x40 / sizeof(Vtx)];
+#else
 Vtx agb_yajirushi_v[] = {
 #include "assets/agb_yajirushi_v.inc"
 };
+#endif
 
 Gfx agb_win_yajirushiT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

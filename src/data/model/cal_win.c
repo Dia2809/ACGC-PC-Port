@@ -5,237 +5,469 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 cal_win_tuki1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 cal_win_tuki1_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_tuki1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_f1_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_f1_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_f1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_f2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_f2_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_f2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_f3_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_f3_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_f3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_f4_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_f4_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_f4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_event_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_event_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_event_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_m_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_m_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_m_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_f_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_f_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_f_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_s_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_s_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_s_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_t_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_t_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_t_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_w_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_w_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_w_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_tuki1_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_tuki1_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_tuki1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_april_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_april_tex_rgb_ia8[] = {
 #include "assets/cal_win_april_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_august_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_august_tex_rgb_ia8[] = {
 #include "assets/cal_win_august_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_december_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_december_tex_rgb_ia8[] = {
 #include "assets/cal_win_december_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_february_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_february_tex_rgb_ia8[] = {
 #include "assets/cal_win_february_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_january_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_january_tex_rgb_ia8[] = {
 #include "assets/cal_win_january_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_july_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_july_tex_rgb_ia8[] = {
 #include "assets/cal_win_july_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_june_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_june_tex_rgb_ia8[] = {
 #include "assets/cal_win_june_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_march_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_march_tex_rgb_ia8[] = {
 #include "assets/cal_win_march_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_may_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_may_tex_rgb_ia8[] = {
 #include "assets/cal_win_may_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_november_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_november_tex_rgb_ia8[] = {
 #include "assets/cal_win_november_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_october_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_october_tex_rgb_ia8[] = {
 #include "assets/cal_win_october_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_september_tex_rgb_ia8[0x1000];
+#else
 u8 cal_win_september_tex_rgb_ia8[] = {
 #include "assets/cal_win_september_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji10_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji10_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji10_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji11_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji11_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji11_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji12_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji12_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji12_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji13_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji13_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji13_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji14_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji14_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji14_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji15_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji15_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji15_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji16_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji16_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji16_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji17_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji17_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji17_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji18_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji18_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji18_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji19_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji19_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji19_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji1_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji1_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji1_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji20_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji20_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji20_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji21_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji21_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji21_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji22_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji22_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji22_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji23_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji23_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji23_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji24_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji24_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji24_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji25_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji25_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji25_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji26_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji26_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji26_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji27_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji27_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji27_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji28_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji28_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji28_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji29_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji29_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji29_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji2_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji2_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji2_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji30_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji30_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji30_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji31_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji31_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji31_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji3_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji3_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji3_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji4_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji4_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji4_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji5_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji5_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji5_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji6_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji6_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji6_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji7_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji7_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji7_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji8_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji8_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji8_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_suuji9_tex_rgb_i4[0x80];
+#else
 u8 cal_win_suuji9_tex_rgb_i4[] = {
 #include "assets/cal_win_suuji9_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_box2_tex_rgb_ia8[0x400];
+#else
 u8 cal_win_box2_tex_rgb_ia8[] = {
 #include "assets/cal_win_box2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_box_tex_rgb_ia8[0x400];
+#else
 u8 cal_win_box_tex_rgb_ia8[] = {
 #include "assets/cal_win_box_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx cal_win_v[0xA40 / sizeof(Vtx)];
+#else
 Vtx cal_win_v[] = {
 #include "assets/cal_win_v.inc"
 };
+#endif
 
 Gfx cal_win_tuki_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

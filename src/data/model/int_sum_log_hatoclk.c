@@ -6,57 +6,109 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_log_hatoclk_v[];
+#ifdef TARGET_PC
+u16 int_sum_hatoclock_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_hatoclock_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_hatoclock_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_log_clk_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_log_clk_pal[] = {
 #include "assets/int_sum_log_clk_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hatoclock_hari_tex_txt[0x80];
+#else
 u8 int_sum_hatoclock_hari_tex_txt[] = {
 #include "assets/int_sum_hatoclock_hari_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_hatoclk_stand_tex_txt[0x100];
+#else
 u8 int_sum_log_hatoclk_stand_tex_txt[] = {
 #include "assets/int_sum_log_hatoclk_stand_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_hatoclk_base_tex_txt[0x80];
+#else
 u8 int_sum_log_hatoclk_base_tex_txt[] = {
 #include "assets/int_sum_log_hatoclk_base_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_hatoclk_top_tex_txt[0x80];
+#else
 u8 int_sum_log_hatoclk_top_tex_txt[] = {
 #include "assets/int_sum_log_hatoclk_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_hatoclk_front_tex_txt[0x300];
+#else
 u8 int_sum_log_hatoclk_front_tex_txt[] = {
 #include "assets/int_sum_log_hatoclk_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_hatoclk_tana_tex_txt[0x80];
+#else
 u8 int_sum_log_hatoclk_tana_tex_txt[] = {
 #include "assets/int_sum_log_hatoclk_tana_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hatoclock_jyabara_tex_txt[0x80];
+#else
 u8 int_sum_hatoclock_jyabara_tex_txt[] = {
 #include "assets/int_sum_hatoclock_jyabara_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hatoclock_hatoside_tex_txt[0x80];
+#else
 u8 int_sum_hatoclock_hatoside_tex_txt[] = {
 #include "assets/int_sum_hatoclock_hatoside_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hatoclock_hatotop_tex_txt[0x80];
+#else
 u8 int_sum_hatoclock_hatotop_tex_txt[] = {
 #include "assets/int_sum_hatoclock_hatotop_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_hatoclk_door_tex_txt[0x80];
+#else
 u8 int_sum_log_hatoclk_door_tex_txt[] = {
 #include "assets/int_sum_log_hatoclk_door_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_log_hatoclk_v[0x500 / sizeof(Vtx)];
+#else
 Vtx int_sum_log_hatoclk_v[] = {
 #include "assets/int_sum_log_hatoclk_v.inc"
 };
+#endif
 
 Gfx int_sum_log_hatoclk_long_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

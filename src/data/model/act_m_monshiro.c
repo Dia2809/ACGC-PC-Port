@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+static u16 act_m_monshiro_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 act_m_monshiro_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_monshiro/act_m_monshiro_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_monshiro[0x80];
+#else
 static u8 act_m_monshiro[] = {
 #include "assets/act_m_monshiro/act_m_monshiro.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx act_m_monshiro_v[0xC0 / sizeof(Vtx)];
+#else
 static Vtx act_m_monshiro_v[] = {
 #include "assets/act_m_monshiro/act_m_monshiro_v.inc"
 };
+#endif
 
 Gfx act_m_monshiro1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -45,3 +57,12 @@ Gfx act_m_monshiro2T_model[] = {
     gsSPNTriangles_5b(4, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_monshiro_c(void) {
+    pc_load_asset("assets/act_m_monshiro/act_m_monshiro_pal.bin", act_m_monshiro_pal, 0x20, 0xB51D98, 0, 1);
+    pc_load_asset("assets/act_m_monshiro/act_m_monshiro.bin", act_m_monshiro, 0x80, 0xB51DB8, 0, 0);
+    pc_load_asset("assets/act_m_monshiro/act_m_monshiro_v.bin", act_m_monshiro_v, 0xC0, 0xB51CD8, 0, 2);
+}
+#endif

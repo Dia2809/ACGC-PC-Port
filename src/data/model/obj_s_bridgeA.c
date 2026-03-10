@@ -5,21 +5,37 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_s_bridgeA_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_bridgeA_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_bridgeA_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_bridgeA_t1_tex_txt[0x800];
+#else
 u8 obj_s_bridgeA_t1_tex_txt[] = {
 #include "assets/obj_s_bridgeA_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_bridgeA_t2_tex_txt[0x800];
+#else
 u8 obj_s_bridgeA_t2_tex_txt[] = {
 #include "assets/obj_s_bridgeA_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_bridgeA_v[0x8A0 / sizeof(Vtx)];
+#else
 Vtx obj_s_bridgeA_v[] = {
 #include "assets/obj_s_bridgeA_v.inc"
 };
+#endif
 
 Gfx obj_s_bridgeA_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -141,21 +157,37 @@ cKF_Animation_R_c cKF_ba_r_obj_s_bridgeA = {
     cKF_ckcb_r_obj_s_bridgeA_tbl, cKF_ds_obj_s_bridgeA_tbl, cKF_kn_obj_s_bridgeA_tbl, cKF_c_obj_s_bridgeA_tbl, -1, 33
 };
 
+#ifdef TARGET_PC
+u16 obj_w_bridgeA_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_w_bridgeA_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_bridgeA_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_bridgeA_t1_tex_txt[0x800];
+#else
 u8 obj_w_bridgeA_t1_tex_txt[] = {
 #include "assets/obj_w_bridgeA_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_bridgeA_t2_tex_txt[0x800];
+#else
 u8 obj_w_bridgeA_t2_tex_txt[] = {
 #include "assets/obj_w_bridgeA_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_bridgeA_v[0x8A0 / sizeof(Vtx)];
+#else
 Vtx obj_w_bridgeA_v[] = {
 #include "assets/obj_w_bridgeA_v.inc"
 };
+#endif
 
 Gfx obj_w_bridgeA_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

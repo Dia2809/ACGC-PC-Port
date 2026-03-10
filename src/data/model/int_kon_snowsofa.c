@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_snowsofa_v[];
+#ifdef TARGET_PC
+u16 int_kon_snowsofa_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_snowsofa_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_snowsofa_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowsofa01_tex[0x400];
+#else
 u8 int_kon_snowsofa01_tex[] = {
 #include "assets/int_kon_snowsofa01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowsofa02_tex[0x200];
+#else
 u8 int_kon_snowsofa02_tex[] = {
 #include "assets/int_kon_snowsofa02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowsofa03_tex[0x100];
+#else
 u8 int_kon_snowsofa03_tex[] = {
 #include "assets/int_kon_snowsofa03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowsofa04_tex[0x80];
+#else
 u8 int_kon_snowsofa04_tex[] = {
 #include "assets/int_kon_snowsofa04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_snowsofa_v[0x320 / sizeof(Vtx)];
+#else
 Vtx int_kon_snowsofa_v[] = {
 #include "assets/int_kon_snowsofa_v.inc"
 };
+#endif
 
 Gfx int_kon_snowsofa_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

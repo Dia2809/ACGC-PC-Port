@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u16 act_f28_akikan_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 act_f28_akikan_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f28_akikan_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_f28_akikan_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_f28_akikan_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f28_akikan_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_f28_akikan_v[0x60 / sizeof(Vtx)];
+#else
 Vtx act_f28_akikan_v[] = {
 #include "assets/act_f28_akikan_v.inc"
 };
+#endif
 
 Gfx act_f28_akikanT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

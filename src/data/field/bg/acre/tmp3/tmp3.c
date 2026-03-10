@@ -8,9 +8,13 @@ extern u8 bush_b_tex_dummy[];
 extern u8 bush_a_tex_dummy[];
 extern u8 earth_tex_dummy[];
 
+#ifdef TARGET_PC
+static Vtx tmp3_v[0x1020 / sizeof(Vtx)];
+#else
 static Vtx tmp3_v[] = {
 #include "assets/field/bg/tmp3_v.inc"
 };
+#endif
 
 extern Gfx tmp3_modelT[] = {
     gsSPEndDisplayList(),
@@ -139,3 +143,10 @@ extern Gfx tmp3_model[] = {
     gsSP2Triangles(9, 10, 11, 0, 10, 3, 12, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_tmp3_tmp3_c(void) {
+    pc_load_asset("assets/field/bg/tmp3_v.bin", tmp3_v, 0x1020, 0x8F60B8, 0, 2);
+}
+#endif

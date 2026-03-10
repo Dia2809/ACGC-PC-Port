@@ -1,40 +1,76 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_museum2_wall_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum2_wall_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum2_wall_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_museum2_floor_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum2_floor_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum2_floor_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_museum2_step1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum2_step1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum2_step1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum2_wallA_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum2_wallA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum2_wallA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum2_wallB_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum2_wallB_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum2_wallB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum2_floorA_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum2_floorA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum2_floorA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum2_step1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum2_step1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum2_step1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum2_plate_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum2_plate_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum2_plate_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx rom_museum2_v[0x1100 / sizeof(Vtx)];
+#else
 static Vtx rom_museum2_v[] = {
 #include "assets/field/bg/rom_museum2_v.inc"
 };
+#endif
 
 extern Gfx rom_museum2_modelT[] = {
     gsSPEndDisplayList(),
@@ -415,3 +451,18 @@ extern Gfx rom_museum2_model[] = {
                       ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_rom_museum2_rom_museum2_c(void) {
+    pc_load_asset("assets/field/bg/rom_museum2_wall_pal.bin", rom_museum2_wall_pal, 0x20, 0xBAD400, 0, 1);
+    pc_load_asset("assets/field/bg/rom_museum2_floor_pal.bin", rom_museum2_floor_pal, 0x20, 0xBAD420, 0, 1);
+    pc_load_asset("assets/field/bg/rom_museum2_step1_pal.bin", rom_museum2_step1_pal, 0x20, 0xBAD440, 0, 1);
+    pc_load_asset("assets/field/bg/rom_museum2_wallA_tex.bin", rom_museum2_wallA_tex, 0x800, 0xBAD460, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum2_wallB_tex.bin", rom_museum2_wallB_tex, 0x800, 0xBADC60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum2_floorA_tex.bin", rom_museum2_floorA_tex, 0x800, 0xBAE460, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum2_step1_tex.bin", rom_museum2_step1_tex, 0x800, 0xBAEC60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum2_plate_tex.bin", rom_museum2_plate_tex, 0x100, 0xBAF460, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum2_v.bin", rom_museum2_v, 0x1100, 0xBAF560, 0, 2);
+}
+#endif

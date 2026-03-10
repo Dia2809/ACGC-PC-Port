@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 act_balloon_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_balloon_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_balloon_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_balloon_head_tex_rgb_ia8[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_balloon_head_tex_rgb_ia8[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_balloon_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_balloon_v[0x340 / sizeof(Vtx)];
+#else
 Vtx act_balloon_v[] = {
 #include "assets/act_balloon_v.inc"
 };
+#endif
 
 Gfx act_balloon_head_model[] = {
     gsSPTexture(4000, 4000, 0, G_TX_RENDERTILE, G_ON),

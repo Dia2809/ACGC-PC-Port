@@ -5,73 +5,141 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 lat_letter01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 lat_letter01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dia_win/lat_letter01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_entry_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 dia_win_entry_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dia_win_entry_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_letter01_04_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 lat_letter01_04_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dia_win/lat_letter01_04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_tegami_fusen_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 lat_tegami_fusen_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dia_win/lat_tegami_fusen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_april_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_april_tex_rgb_ia8[] = {
 #include "assets/dia_win_april_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_august_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_august_tex_rgb_ia8[] = {
 #include "assets/dia_win_august_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_december_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_december_tex_rgb_ia8[] = {
 #include "assets/dia_win_december_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_february_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_february_tex_rgb_ia8[] = {
 #include "assets/dia_win_february_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_january_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_january_tex_rgb_ia8[] = {
 #include "assets/dia_win_january_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_july_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_july_tex_rgb_ia8[] = {
 #include "assets/dia_win_july_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_june_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_june_tex_rgb_ia8[] = {
 #include "assets/dia_win_june_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_march_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_march_tex_rgb_ia8[] = {
 #include "assets/dia_win_march_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_may_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_may_tex_rgb_ia8[] = {
 #include "assets/dia_win_may_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_november_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_november_tex_rgb_ia8[] = {
 #include "assets/dia_win_november_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_october_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_october_tex_rgb_ia8[] = {
 #include "assets/dia_win_october_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 dia_win_september_tex_rgb_ia8[0x400];
+#else
 u8 dia_win_september_tex_rgb_ia8[] = {
 #include "assets/dia_win_september_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx dia_win_v[0x1B0 / sizeof(Vtx)];
+#else
 Vtx dia_win_v[] = {
 #include "assets/dia_win_v.inc"
 };
+#endif
 
 Gfx dia_win_moji_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0),
@@ -115,3 +183,12 @@ Gfx dia_win_tukiT_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 1, 3, 2, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_dia_win_c(void) {
+    pc_load_asset("assets/dia_win/lat_letter01_pal.bin", lat_letter01_pal, 0x20, 0x763C00, 0, 1);
+    pc_load_asset("assets/dia_win/lat_letter01_04_tex.bin", lat_letter01_04_tex, 0x80, 0x7649C0, 0, 0);
+    pc_load_asset("assets/dia_win/lat_tegami_fusen_tex.bin", lat_tegami_fusen_tex, 0x80, 0x764A40, 0, 0);
+}
+#endif

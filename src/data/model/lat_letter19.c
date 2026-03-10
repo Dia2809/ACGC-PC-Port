@@ -8,9 +8,13 @@
 extern u16 lat_letter19_pal[];
 extern u8 lat_letter19_1[];
 extern u8 lat_letter19_2[];
+#ifdef TARGET_PC
+Vtx lat_letter19_v[0x180 / sizeof(Vtx)];
+#else
 Vtx lat_letter19_v[] = {
 #include "assets/lat_letter19_v.inc"
 };
+#endif
 
 Gfx lat_letter19_model[] = {
     gsDPSetTextureLUT(G_TT_NONE),

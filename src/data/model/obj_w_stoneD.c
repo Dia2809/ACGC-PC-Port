@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_w_stoneD_v[0xF0 / sizeof(Vtx)];
+#else
 Vtx obj_w_stoneD_v[] = {
 #include "assets/obj_w_stoneD_v.inc"
 };
+#endif
 
 Gfx obj_w_stoneD_gfx_model[] = {
     gsSPVertex(obj_w_stoneD_v, 15, 0),

@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_apollo1_v[];
+#ifdef TARGET_PC
+u16 int_tak_apollo1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_apollo1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_apollo1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_antena1_tex[0x80];
+#else
 u8 int_tak_apollo1_antena1_tex[] = {
 #include "assets/int_tak_apollo1_antena1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_antena2_tex[0x80];
+#else
 u8 int_tak_apollo1_antena2_tex[] = {
 #include "assets/int_tak_apollo1_antena2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_asi2_tex[0x80];
+#else
 u8 int_tak_apollo1_asi2_tex[] = {
 #include "assets/int_tak_apollo1_asi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_asi3_tex[0x80];
+#else
 u8 int_tak_apollo1_asi3_tex[] = {
 #include "assets/int_tak_apollo1_asi3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_asi_tex[0x80];
+#else
 u8 int_tak_apollo1_asi_tex[] = {
 #include "assets/int_tak_apollo1_asi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_atama_tex[0x80];
+#else
 u8 int_tak_apollo1_atama_tex[] = {
 #include "assets/int_tak_apollo1_atama_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_body_tex[0x100];
+#else
 u8 int_tak_apollo1_body_tex[] = {
 #include "assets/int_tak_apollo1_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_kosi_tex[0x80];
+#else
 u8 int_tak_apollo1_kosi_tex[] = {
 #include "assets/int_tak_apollo1_kosi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_kutu_tex[0x80];
+#else
 u8 int_tak_apollo1_kutu_tex[] = {
 #include "assets/int_tak_apollo1_kutu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_apollo1_kao_tex[0x100];
+#else
 u8 int_tak_apollo1_kao_tex[] = {
 #include "assets/int_tak_apollo1_kao_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_apollo1_v[0x600 / sizeof(Vtx)];
+#else
 Vtx int_tak_apollo1_v[] = {
 #include "assets/int_tak_apollo1_v.inc"
 };
+#endif
 
 Gfx int_tak_apollo1_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,13 +6,21 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_genji2_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_genji2_v[0x100 / sizeof(Vtx)];
+#else
 static Vtx act_m_genji2_v[] = {
 #include "assets/act_m_genji22/act_m_genji2_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_genji_h1_txt[0x200];
+#else
 static u8 act_m_genji_h1_txt[] = {
 #include "assets/act_m_genji22/act_m_genji_h1_txt.inc"
 };
+#endif
 
 Gfx act_m_mu_genji2_d_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -113,3 +121,11 @@ Gfx act_m_mu_genji2_a_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_genji22_c(void) {
+    pc_load_asset("assets/act_m_genji22/act_m_genji2_v.bin", act_m_genji2_v, 0x100, 0xB4A8A0, 0, 2);
+    pc_load_asset("assets/act_m_genji22/act_m_genji_h1_txt.bin", act_m_genji_h1_txt, 0x200, 0xB4A9A0, 0, 0);
+}
+#endif

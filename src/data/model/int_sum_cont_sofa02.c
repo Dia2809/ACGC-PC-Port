@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_cont_sofa02_v[];
+#ifdef TARGET_PC
+u16 int_sum_cont_sofa02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_cont_sofa02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_cont_sofa02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cont_sofa02_seat_tex[0x200];
+#else
 u8 int_sum_cont_sofa02_seat_tex[] = {
 #include "assets/int_sum_cont_sofa02_seat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cont_sofa02_board_tex[0x200];
+#else
 u8 int_sum_cont_sofa02_board_tex[] = {
 #include "assets/int_sum_cont_sofa02_board_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cont_sofa02_outside_tex[0x100];
+#else
 u8 int_sum_cont_sofa02_outside_tex[] = {
 #include "assets/int_sum_cont_sofa02_outside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cont_sofa02_topside_tex[0x40];
+#else
 u8 int_sum_cont_sofa02_topside_tex[] = {
 #include "assets/int_sum_cont_sofa02_topside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cont_sofa02_frontside_tex[0x100];
+#else
 u8 int_sum_cont_sofa02_frontside_tex[] = {
 #include "assets/int_sum_cont_sofa02_frontside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cont_sofa02_boardside_tex[0x100];
+#else
 u8 int_sum_cont_sofa02_boardside_tex[] = {
 #include "assets/int_sum_cont_sofa02_boardside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_cont_sofa02_seatside_tex[0x80];
+#else
 u8 int_sum_cont_sofa02_seatside_tex[] = {
 #include "assets/int_sum_cont_sofa02_seatside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_cont_sofa02_v[0x470 / sizeof(Vtx)];
+#else
 Vtx int_sum_cont_sofa02_v[] = {
 #include "assets/int_sum_cont_sofa02_v.inc"
 };
+#endif
 
 Gfx int_sum_cont_sofa02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,22 +5,42 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_mwin_okane1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_mwin_okane1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_mwin_okane1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_okane4_tex[0x200];
+#else
 u8 inv_mwin_okane4_tex[] = {
 #include "assets/inv_mwin_okane4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_okane1_tex[0x200];
+#else
 u8 inv_mwin_okane1_tex[] = {
 #include "assets/inv_mwin_okane1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_okane2_tex[0x200];
+#else
 u8 inv_mwin_okane2_tex[] = {
 #include "assets/inv_mwin_okane2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_okane3_tex[0x200];
+#else
 u8 inv_mwin_okane3_tex[] = {
 #include "assets/inv_mwin_okane3_tex.inc"
 };
+#endif

@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+static u16 int_nog_kaeru_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_nog_kaeru_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f36_kaeru/int_nog_kaeru_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_f36_kaeru_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_f36_kaeru_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f36_kaeru_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_f36_kaeru_a_v[0x80 / sizeof(Vtx)];
+#else
 Vtx act_f36_kaeru_a_v[] = {
 #include "assets/act_f36_kaeru_a_v.inc"
 };
+#endif
 
 Gfx act_f36_kaeru_aT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -30,9 +42,13 @@ Gfx act_f36_kaeru_aT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f36_kaeru_b_v[0x80 / sizeof(Vtx)];
+#else
 Vtx act_f36_kaeru_b_v[] = {
 #include "assets/act_f36_kaeru_b_v.inc"
 };
+#endif
 
 Gfx act_f36_kaeru_bT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -49,9 +65,13 @@ Gfx act_f36_kaeru_bT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f36_kaeru_c_v[0x80 / sizeof(Vtx)];
+#else
 Vtx act_f36_kaeru_c_v[] = {
 #include "assets/act_f36_kaeru_c_v.inc"
 };
+#endif
 
 Gfx act_f36_kaeru_cT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -67,3 +87,10 @@ Gfx act_f36_kaeru_cT_model[] = {
     gsSPNTriangles_5b(3, 5, 4, 6, 7, 3, 0, 2, 6, 0, 6, 3),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_f36_kaeru_c(void) {
+    pc_load_asset("assets/act_f36_kaeru/int_nog_kaeru_pal.bin", int_nog_kaeru_pal, 0x20, 0xBDA520, 0, 1);
+}
+#endif

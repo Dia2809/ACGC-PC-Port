@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_x_piano_v[];
+#ifdef TARGET_PC
+u16 int_sum_x_piano_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_x_piano_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_x_piano_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_piano_back_tex[0x180];
+#else
 u8 int_sum_x_piano_back_tex[] = {
 #include "assets/int_sum_x_piano_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_piano_side_tex[0x200];
+#else
 u8 int_sum_x_piano_side_tex[] = {
 #include "assets/int_sum_x_piano_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_piano_front_tex[0x180];
+#else
 u8 int_sum_x_piano_front_tex[] = {
 #include "assets/int_sum_x_piano_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_piano_head_tex[0x80];
+#else
 u8 int_sum_x_piano_head_tex[] = {
 #include "assets/int_sum_x_piano_head_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_piano_key_tex[0x100];
+#else
 u8 int_sum_x_piano_key_tex[] = {
 #include "assets/int_sum_x_piano_key_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_piano_down_tex[0x100];
+#else
 u8 int_sum_x_piano_down_tex[] = {
 #include "assets/int_sum_x_piano_down_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_piano_foot_tex[0x80];
+#else
 u8 int_sum_x_piano_foot_tex[] = {
 #include "assets/int_sum_x_piano_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_x_piano_v[0x560 / sizeof(Vtx)];
+#else
 Vtx int_sum_x_piano_v[] = {
 #include "assets/int_sum_x_piano_v.inc"
 };
+#endif
 
 Gfx int_sum_x_piano_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

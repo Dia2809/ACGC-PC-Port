@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_syouryou_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_syouryou_v[0x110 / sizeof(Vtx)];
+#else
 static Vtx act_m_syouryou_v[] = {
 #include "assets/act_m_syouryou2/act_m_syouryou_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_syouryou_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_syouryou_pal[] = {
 #include "assets/act_m_syouryou2/act_m_syouryou_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_syouryou[0x200];
+#else
 static u8 act_m_syouryou[] = {
 #include "assets/act_m_syouryou2/act_m_syouryou.inc"
 };
+#endif
 
 Gfx act_m_mu_syouryou1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -80,3 +92,12 @@ Gfx act_m_mu_syouryou2_2T_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_syouryou2_c(void) {
+    pc_load_asset("assets/act_m_syouryou2/act_m_syouryou_v.bin", act_m_syouryou_v, 0x110, 0xB557B0, 0, 2);
+    pc_load_asset("assets/act_m_syouryou2/act_m_syouryou_pal.bin", act_m_syouryou_pal, 0x20, 0xB558C0, 0, 1);
+    pc_load_asset("assets/act_m_syouryou2/act_m_syouryou.bin", act_m_syouryou, 0x200, 0xB558E0, 0, 0);
+}
+#endif

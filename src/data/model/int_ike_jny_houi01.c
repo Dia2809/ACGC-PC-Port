@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_jny_houi01_v[];
+#ifdef TARGET_PC
+u16 int_ike_jny_houi01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_jny_houi01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_jny_houi01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_houijisyaku_tex_txt[0x80];
+#else
 u8 int_ike_jny_houijisyaku_tex_txt[] = {
 #include "assets/int_ike_jny_houijisyaku_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_houi1_tex_txt[0x80];
+#else
 u8 int_ike_jny_houi1_tex_txt[] = {
 #include "assets/int_ike_jny_houi1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_houiface1_tex_txt[0x200];
+#else
 u8 int_ike_jny_houiface1_tex_txt[] = {
 #include "assets/int_ike_jny_houiface1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_houiface2_pic_i4[0x200];
+#else
 u8 int_ike_jny_houiface2_pic_i4[] = {
 #include "assets/int_ike_jny_houiface2_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_jny_houi01_v[0x270 / sizeof(Vtx)];
+#else
 Vtx int_ike_jny_houi01_v[] = {
 #include "assets/int_ike_jny_houi01_v.inc"
 };
+#endif
 
 Gfx int_ike_jny_houi01_on_hari_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

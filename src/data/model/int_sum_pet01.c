@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_pet01_v[];
+#ifdef TARGET_PC
+u16 int_sum_pet01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_pet01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_pet01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pet01_wing_tex_txt[0x180];
+#else
 u8 int_sum_pet01_wing_tex_txt[] = {
 #include "assets/int_sum_pet01_wing_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pet01_belly_tex_txt[0x180];
+#else
 u8 int_sum_pet01_belly_tex_txt[] = {
 #include "assets/int_sum_pet01_belly_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pet01_stand_tex_txt[0x180];
+#else
 u8 int_sum_pet01_stand_tex_txt[] = {
 #include "assets/int_sum_pet01_stand_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pet01_wood_tex_txt[0x40];
+#else
 u8 int_sum_pet01_wood_tex_txt[] = {
 #include "assets/int_sum_pet01_wood_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pet01_hand_tex_txt[0x80];
+#else
 u8 int_sum_pet01_hand_tex_txt[] = {
 #include "assets/int_sum_pet01_hand_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pet01_cagedown_tex_txt[0x80];
+#else
 u8 int_sum_pet01_cagedown_tex_txt[] = {
 #include "assets/int_sum_pet01_cagedown_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pet01_cage_tex_txt[0x180];
+#else
 u8 int_sum_pet01_cage_tex_txt[] = {
 #include "assets/int_sum_pet01_cage_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pet01_foot_tex_txt[0x80];
+#else
 u8 int_sum_pet01_foot_tex_txt[] = {
 #include "assets/int_sum_pet01_foot_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_pet01_v[0x510 / sizeof(Vtx)];
+#else
 Vtx int_sum_pet01_v[] = {
 #include "assets/int_sum_pet01_v.inc"
 };
+#endif
 
 Gfx int_sum_pet01_bard_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

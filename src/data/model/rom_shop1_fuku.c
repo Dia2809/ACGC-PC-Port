@@ -6,65 +6,125 @@
 #include "ef_effect_control.h"
 
 extern Vtx rom_shop1_fuku_v[];
+#ifdef TARGET_PC
+static u16 rom_shop1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_shop1_fuku/rom_shop1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_shop1_w_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_shop1_w_pal[] = {
 #include "assets/rom_shop1_w_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_shop1_f_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_shop1_f_pal[] = {
 #include "assets/rom_shop1_f_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop_kouhaku_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop_kouhaku_pal[] = {
 #include "assets/rom_shop1_fuku/rom_shop_kouhaku_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop1_table_tex[0x600];
+#else
 static u8 rom_shop1_table_tex[] = {
 #include "assets/rom_shop1_fuku/rom_shop1_table_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop1_window_tex[0x800];
+#else
 static u8 rom_shop1_window_tex[] = {
 #include "assets/rom_shop1_fuku/rom_shop1_window_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop1_shadow_tex[0x400];
+#else
 static u8 rom_shop1_shadow_tex[] = {
 #include "assets/rom_shop1_fuku/rom_shop1_shadow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop1_w1_tex[0x800];
+#else
 u8 rom_shop1_w1_tex[] = {
 #include "assets/rom_shop1_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop1_w2_tex[0x800];
+#else
 u8 rom_shop1_w2_tex[] = {
 #include "assets/rom_shop1_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop1_f1_tex[0x800];
+#else
 u8 rom_shop1_f1_tex[] = {
 #include "assets/rom_shop1_f1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop1_f2_tex[0x800];
+#else
 u8 rom_shop1_f2_tex[] = {
 #include "assets/rom_shop1_f2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop1_f3_tex[0x800];
+#else
 u8 rom_shop1_f3_tex[] = {
 #include "assets/rom_shop1_f3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop1_f4_tex[0x800];
+#else
 u8 rom_shop1_f4_tex[] = {
 #include "assets/rom_shop1_f4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop_kouhaku_tex[0x800];
+#else
 static u8 rom_shop_kouhaku_tex[] = {
 #include "assets/rom_shop1_fuku/rom_shop_kouhaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_shop1_fuku_v[0xE90 / sizeof(Vtx)];
+#else
 Vtx rom_shop1_fuku_v[] = {
 #include "assets/rom_shop1_fuku_v.inc"
 };
+#endif
 
 Gfx rom_shop1_fuku_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -189,3 +249,15 @@ Gfx rom_shop1_fuku_model[] = {
     gsSPNTriangles_5b(5, 7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_shop1_fuku_c(void) {
+    pc_load_asset("assets/rom_shop1_fuku/rom_shop1_pal.bin", rom_shop1_pal, 0x20, 0xC4F4C0, 0, 1);
+    pc_load_asset("assets/rom_shop1_fuku/rom_shop_kouhaku_pal.bin", rom_shop_kouhaku_pal, 0x20, 0xC4F520, 0, 1);
+    pc_load_asset("assets/rom_shop1_fuku/rom_shop1_table_tex.bin", rom_shop1_table_tex, 0x600, 0xC4F540, 0, 0);
+    pc_load_asset("assets/rom_shop1_fuku/rom_shop1_window_tex.bin", rom_shop1_window_tex, 0x800, 0xC4FB40, 0, 0);
+    pc_load_asset("assets/rom_shop1_fuku/rom_shop1_shadow_tex.bin", rom_shop1_shadow_tex, 0x400, 0xC50340, 0, 0);
+    pc_load_asset("assets/rom_shop1_fuku/rom_shop_kouhaku_tex.bin", rom_shop_kouhaku_tex, 0x800, 0xC53740, 0, 0);
+}
+#endif

@@ -1,156 +1,308 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 yubin_k_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_k_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_k_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 yubin_k2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_k2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_k2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 yubin_floor_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_floor_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_floor_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 yubin_hakari_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_hakari_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_hakari_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 yubin_wall_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_wall_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_wall_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 yubin_letter_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_letter_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_letter_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 yubin_us_bag_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_us_bag_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_us_bag_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 zzzyubin_tree_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 zzzyubin_tree_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/zzzyubin_tree_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 yubin_t_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_t_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_t_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 yubin_us_card_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 yubin_us_card_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_us_card_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yuibn_kaunta01_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yuibn_kaunta01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yuibn_kaunta01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yuibn_kaunta02_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yuibn_kaunta02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yuibn_kaunta02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yuibn_desk01_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yuibn_desk01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yuibn_desk01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_ark01_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_ark01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_ark01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yuibn_kaunta03_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yuibn_kaunta03_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yuibn_kaunta03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yuibn_kaunta04_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yuibn_kaunta04_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yuibn_kaunta04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_floor01_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_floor01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_floor01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_floor02_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_floor02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_floor02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_floor03_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_floor03_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_floor03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_hakari01_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_hakari01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_hakari01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_hakari02_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_hakari02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_hakari02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_hakari03_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_hakari03_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_hakari03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_wall04_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_wall04_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_wall04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_letter01_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_letter01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_letter01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_window_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_window_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_window_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_us_bag_tex[0x480] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_us_bag_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_us_bag_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_tree2_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_tree2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_tree2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_tree_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_tree_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_tree_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_tree3_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_tree3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_tree3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_tree4_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_tree4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_tree4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_step_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_step_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_step_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yubinkyoku_akril_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yubinkyoku_akril_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yubinkyoku_akril_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yubinkyoku_shede_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yubinkyoku_shede_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yubinkyoku_shede_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_us_card_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_us_card_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_us_card_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_us_mat_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_us_mat_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_us_mat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yubinkyoku_shadow_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yubinkyoku_shadow_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yubinkyoku_shadow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yubin_us_card2_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 yubin_us_card2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/yubin_us_card2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx grd_post_office_v[0x1700 / sizeof(Vtx)];
+#else
 static Vtx grd_post_office_v[] = {
 #include "assets/field/bg/grd_post_office_v.inc"
 };
+#endif
 
 extern Gfx grd_post_office_modelT[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -668,3 +820,47 @@ extern Gfx grd_post_office_model[] = {
                       ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_grd_post_office_grd_post_office_c(void) {
+    pc_load_asset("assets/field/bg/yubin_k_pal.bin", yubin_k_pal, 0x20, 0x8ED9E0, 0, 1);
+    pc_load_asset("assets/field/bg/yubin_k2_pal.bin", yubin_k2_pal, 0x20, 0x8EDA00, 0, 1);
+    pc_load_asset("assets/field/bg/yubin_floor_pal.bin", yubin_floor_pal, 0x20, 0x8EDA20, 0, 1);
+    pc_load_asset("assets/field/bg/yubin_hakari_pal.bin", yubin_hakari_pal, 0x20, 0x8EDA40, 0, 1);
+    pc_load_asset("assets/field/bg/yubin_wall_pal.bin", yubin_wall_pal, 0x20, 0x8EDA60, 0, 1);
+    pc_load_asset("assets/field/bg/yubin_letter_pal.bin", yubin_letter_pal, 0x20, 0x8EDA80, 0, 1);
+    pc_load_asset("assets/field/bg/yubin_us_bag_pal.bin", yubin_us_bag_pal, 0x20, 0x8EDAA0, 0, 1);
+    pc_load_asset("assets/field/bg/zzzyubin_tree_pal.bin", zzzyubin_tree_pal, 0x20, 0x8EDAC0, 0, 1);
+    pc_load_asset("assets/field/bg/yubin_t_pal.bin", yubin_t_pal, 0x20, 0x8EDAE0, 0, 1);
+    pc_load_asset("assets/field/bg/yubin_us_card_pal.bin", yubin_us_card_pal, 0x20, 0x8EDB00, 0, 1);
+    pc_load_asset("assets/field/bg/yuibn_kaunta01_tex.bin", yuibn_kaunta01_tex, 0x200, 0x8EDB20, 0, 0);
+    pc_load_asset("assets/field/bg/yuibn_kaunta02_tex.bin", yuibn_kaunta02_tex, 0x200, 0x8EDD20, 0, 0);
+    pc_load_asset("assets/field/bg/yuibn_desk01_tex.bin", yuibn_desk01_tex, 0x200, 0x8EDF20, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_ark01_tex.bin", yubin_ark01_tex, 0x400, 0x8EE120, 0, 0);
+    pc_load_asset("assets/field/bg/yuibn_kaunta03_tex.bin", yuibn_kaunta03_tex, 0x100, 0x8EE520, 0, 0);
+    pc_load_asset("assets/field/bg/yuibn_kaunta04_tex.bin", yuibn_kaunta04_tex, 0x200, 0x8EE620, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_floor01_tex.bin", yubin_floor01_tex, 0x800, 0x8EE820, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_floor02_tex.bin", yubin_floor02_tex, 0x800, 0x8EF020, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_floor03_tex.bin", yubin_floor03_tex, 0x100, 0x8EF820, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_hakari01_tex.bin", yubin_hakari01_tex, 0x100, 0x8EF920, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_hakari02_tex.bin", yubin_hakari02_tex, 0x80, 0x8EFA20, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_hakari03_tex.bin", yubin_hakari03_tex, 0x100, 0x8EFAA0, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_wall04_tex.bin", yubin_wall04_tex, 0x300, 0x8EFBA0, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_letter01_tex.bin", yubin_letter01_tex, 0x100, 0x8EFEA0, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_window_tex.bin", yubin_window_tex, 0x80, 0x8EFFA0, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_us_bag_tex.bin", yubin_us_bag_tex, 0x480, 0x8F0020, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_tree2_tex.bin", yubin_tree2_tex, 0x300, 0x8F04A0, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_tree_tex.bin", yubin_tree_tex, 0x100, 0x8F07A0, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_tree3_tex.bin", yubin_tree3_tex, 0x80, 0x8F08A0, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_tree4_tex.bin", yubin_tree4_tex, 0x80, 0x8F0920, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_step_tex.bin", yubin_step_tex, 0x100, 0x8F09A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yubinkyoku_akril_tex.bin", rom_yubinkyoku_akril_tex, 0x80, 0x8F0AA0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yubinkyoku_shede_tex.bin", rom_yubinkyoku_shede_tex, 0x100, 0x8F0B20, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_us_card_tex.bin", yubin_us_card_tex, 0x400, 0x8F0C20, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_us_mat_tex.bin", yubin_us_mat_tex, 0x300, 0x8F1020, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yubinkyoku_shadow_tex.bin", rom_yubinkyoku_shadow_tex, 0x100, 0x8F1320, 0, 0);
+    pc_load_asset("assets/field/bg/yubin_us_card2_tex.bin", yubin_us_card2_tex, 0x100, 0x8F1420, 0, 0);
+    pc_load_asset("assets/field/bg/grd_post_office_v.bin", grd_post_office_v, 0x1700, 0x8F1520, 0, 2);
+}
+#endif

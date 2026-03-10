@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_nikki_fan4_v[];
+#ifdef TARGET_PC
+u16 int_ike_nikki_fan4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_nikki_fan4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_nikki_fan4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_nikki_fan4face_tex[0x200];
+#else
 u8 int_ike_nikki_fan4face_tex[] = {
 #include "assets/int_ike_nikki_fan4face_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_nikki_fan4side_tex[0x40];
+#else
 u8 int_ike_nikki_fan4side_tex[] = {
 #include "assets/int_ike_nikki_fan4side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_nikki_fan4pen_tex[0x40];
+#else
 u8 int_ike_nikki_fan4pen_tex[] = {
 #include "assets/int_ike_nikki_fan4pen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_nikki_fan4_v[0x210 / sizeof(Vtx)];
+#else
 Vtx int_ike_nikki_fan4_v[] = {
 #include "assets/int_ike_nikki_fan4_v.inc"
 };
+#endif
 
 Gfx int_ike_nikki_fan4_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

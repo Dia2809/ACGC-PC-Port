@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_ratan_chest02_v[];
+#ifdef TARGET_PC
+u16 int_sum_ratan_chest02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_ratan_chest02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_ratan_chest02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_chest02_hiki_tax_txt[0x100];
+#else
 u8 int_sum_ratan_chest02_hiki_tax_txt[] = {
 #include "assets/int_sum_ratan_chest02_hiki_tax_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_chest02_intop_tax_txt[0x80];
+#else
 u8 int_sum_ratan_chest02_intop_tax_txt[] = {
 #include "assets/int_sum_ratan_chest02_intop_tax_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_chest02_top_tax_txt[0x80];
+#else
 u8 int_sum_ratan_chest02_top_tax_txt[] = {
 #include "assets/int_sum_ratan_chest02_top_tax_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_chest02_back_tax_txt[0x180];
+#else
 u8 int_sum_ratan_chest02_back_tax_txt[] = {
 #include "assets/int_sum_ratan_chest02_back_tax_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_chest02_front_tax_txt[0x300];
+#else
 u8 int_sum_ratan_chest02_front_tax_txt[] = {
 #include "assets/int_sum_ratan_chest02_front_tax_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_ratan_chest02_v[0x360 / sizeof(Vtx)];
+#else
 Vtx int_sum_ratan_chest02_v[] = {
 #include "assets/int_sum_ratan_chest02_v.inc"
 };
+#endif
 
 Gfx int_sum_ratan_chest02_doorL_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_lv_stereo_v[];
+#ifdef TARGET_PC
+u16 int_sum_lv_stereo_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_lv_stereo_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_lv_stereo_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_lv_stereo_foot_tex[0x80];
+#else
 u8 int_sum_lv_stereo_foot_tex[] = {
 #include "assets/int_sum_lv_stereo_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_lv_stereo_front_tex[0x400];
+#else
 u8 int_sum_lv_stereo_front_tex[] = {
 #include "assets/int_sum_lv_stereo_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_lv_stereo_side_tex[0x200];
+#else
 u8 int_sum_lv_stereo_side_tex[] = {
 #include "assets/int_sum_lv_stereo_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_lv_stereo_reco_tex[0x180];
+#else
 u8 int_sum_lv_stereo_reco_tex[] = {
 #include "assets/int_sum_lv_stereo_reco_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_lv_stereo_v[0x440 / sizeof(Vtx)];
+#else
 Vtx int_sum_lv_stereo_v[] = {
 #include "assets/int_sum_lv_stereo_v.inc"
 };
+#endif
 
 Gfx int_sum_lv_stereo_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

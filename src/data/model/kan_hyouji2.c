@@ -5,37 +5,69 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kan_win_yane_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 kan_win_yane_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kan_win_yane_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_yashiro_tex[0x80];
+#else
 u8 kan_win_yashiro_tex[] = {
 #include "assets/kan_win_yashiro_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_yubin_tex[0x80];
+#else
 u8 kan_win_yubin_tex[] = {
 #include "assets/kan_win_yubin_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_kouban_tex[0x80];
+#else
 u8 kan_win_kouban_tex[] = {
 #include "assets/kan_win_kouban_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_omise_tex[0x80];
+#else
 u8 kan_win_omise_tex[] = {
 #include "assets/kan_win_omise_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_play_tex[0x100];
+#else
 u8 kan_win_play_tex[] = {
 #include "assets/kan_win_play_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_ply_tex[0x100];
+#else
 u8 kan_win_ply_tex[] = {
 #include "assets/kan_win_ply_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx kan_hyouji2_v[0x240 / sizeof(Vtx)];
+#else
 Vtx kan_hyouji2_v[] = {
 #include "assets/kan_hyouji2_v.inc"
 };
+#endif
 
 Gfx kan_win_genzaiT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

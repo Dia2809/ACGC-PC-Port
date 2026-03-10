@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static Vtx act_m_okuwa_v[0xC0 / sizeof(Vtx)];
+#else
 static Vtx act_m_okuwa_v[] = {
 #include "assets/act_m_okuwa2/act_m_okuwa_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_okuwa_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_okuwa_pal[] = {
 #include "assets/act_m_okuwa2/act_m_okuwa_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_okuwa[0x200];
+#else
 static u8 act_m_okuwa[] = {
 #include "assets/act_m_okuwa2/act_m_okuwa.inc"
 };
+#endif
 
 Gfx act_m_mu_okuwa1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -47,3 +59,12 @@ Gfx act_m_mu_okuwa1T_model[] = {
     gsSP2Triangles(1, 4, 5, 0, 1, 5, 2, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_okuwa2_c(void) {
+    pc_load_asset("assets/act_m_okuwa2/act_m_okuwa_v.bin", act_m_okuwa_v, 0xC0, 0xB538C0, 0, 2);
+    pc_load_asset("assets/act_m_okuwa2/act_m_okuwa_pal.bin", act_m_okuwa_pal, 0x20, 0xB53980, 0, 1);
+    pc_load_asset("assets/act_m_okuwa2/act_m_okuwa.bin", act_m_okuwa, 0x200, 0xB539A0, 0, 0);
+}
+#endif

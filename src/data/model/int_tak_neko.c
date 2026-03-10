@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_neko_v[];
+#ifdef TARGET_PC
+u16 int_tak_neko_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_neko_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_neko_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_neko_asi_tex[0x200];
+#else
 u8 int_tak_neko_asi_tex[] = {
 #include "assets/int_tak_neko_asi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_neko_body_tex[0x80];
+#else
 u8 int_tak_neko_body_tex[] = {
 #include "assets/int_tak_neko_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_neko_hand_tex[0x80];
+#else
 u8 int_tak_neko_hand_tex[] = {
 #include "assets/int_tak_neko_hand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_neko_scop_tex[0x80];
+#else
 u8 int_tak_neko_scop_tex[] = {
 #include "assets/int_tak_neko_scop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_neko_tire_tex[0x80];
+#else
 u8 int_tak_neko_tire_tex[] = {
 #include "assets/int_tak_neko_tire_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_neko_tuti_tex[0x80];
+#else
 u8 int_tak_neko_tuti_tex[] = {
 #include "assets/int_tak_neko_tuti_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_neko_ude_tex[0x200];
+#else
 u8 int_tak_neko_ude_tex[] = {
 #include "assets/int_tak_neko_ude_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_neko_side_tex[0x100];
+#else
 u8 int_tak_neko_side_tex[] = {
 #include "assets/int_tak_neko_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_neko_v[0x4A0 / sizeof(Vtx)];
+#else
 Vtx int_tak_neko_v[] = {
 #include "assets/int_tak_neko_v.inc"
 };
+#endif
 
 Gfx int_tak_neko_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

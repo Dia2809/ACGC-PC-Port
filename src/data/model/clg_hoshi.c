@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 clg_win_star_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 clg_win_star_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/clg_win_star_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx clg_hoshi_v[0x40 / sizeof(Vtx)];
+#else
 Vtx clg_hoshi_v[] = {
 #include "assets/clg_hoshi_v.inc"
 };
+#endif
 
 Gfx clg_win_hoshiT_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

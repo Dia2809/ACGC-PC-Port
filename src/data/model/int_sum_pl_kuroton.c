@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_pl_kuroton_v[];
+#ifdef TARGET_PC
+static u16 int_sum_pl_kuroton_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_sum_pl_kuroton_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_pl_kuroton/int_sum_pl_kuroton_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_kuroton_leaf_tex[0x400];
+#else
 u8 int_sum_pl_kuroton_leaf_tex[] = {
 #include "assets/int_sum_pl_kuroton_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_kuroton_kuki_tex[0x100];
+#else
 u8 int_sum_pl_kuroton_kuki_tex[] = {
 #include "assets/int_sum_pl_kuroton_kuki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_kuroton_earth_tex[0x80];
+#else
 u8 int_sum_pl_kuroton_earth_tex[] = {
 #include "assets/int_sum_pl_kuroton_earth_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_pl_kuroton_hachi_tex[0x100];
+#else
 u8 int_sum_pl_kuroton_hachi_tex[] = {
 #include "assets/int_sum_pl_kuroton_hachi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_pl_kuroton_v[0x5C0 / sizeof(Vtx)];
+#else
 Vtx int_sum_pl_kuroton_v[] = {
 #include "assets/int_sum_pl_kuroton_v.inc"
 };
+#endif
 
 Gfx int_sum_pl_kuroton_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -76,3 +100,10 @@ Gfx int_sum_pl_kuroton_onT_model[] = {
     gsSPNTriangles_5b(8, 9, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_pl_kuroton_c(void) {
+    pc_load_asset("assets/int_sum_pl_kuroton/int_sum_pl_kuroton_pal.bin", int_sum_pl_kuroton_pal, 0x20, 0xD21840, 0, 1);
+}
+#endif

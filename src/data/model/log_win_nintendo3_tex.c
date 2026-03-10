@@ -5,6 +5,10 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 log_win_nintendo3_tex[0x400];
+#else
 u8 log_win_nintendo3_tex[] = {
 #include "assets/log_win_nintendo3_tex.inc"
 };
+#endif

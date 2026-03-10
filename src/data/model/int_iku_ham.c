@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iku_ham_v[];
+#ifdef TARGET_PC
+u16 int_iku_ham_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iku_ham_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iku_ham_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_ham_c_tex_txt[0x100];
+#else
 u8 int_iku_ham_c_tex_txt[] = {
 #include "assets/int_iku_ham_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_ham_e_tex_txt[0x80];
+#else
 u8 int_iku_ham_e_tex_txt[] = {
 #include "assets/int_iku_ham_e_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_ham_a_tex_txt[0x200];
+#else
 u8 int_iku_ham_a_tex_txt[] = {
 #include "assets/int_iku_ham_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_ham_f_tex_txt[0x400];
+#else
 u8 int_iku_ham_f_tex_txt[] = {
 #include "assets/int_iku_ham_f_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iku_ham_v[0x510 / sizeof(Vtx)];
+#else
 Vtx int_iku_ham_v[] = {
 #include "assets/int_iku_ham_v.inc"
 };
+#endif
 
 Gfx int_iku_ham_model_b_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

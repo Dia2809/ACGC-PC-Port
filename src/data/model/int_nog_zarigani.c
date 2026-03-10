@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_zarigani_v[];
+#ifdef TARGET_PC
+static u16 int_nog_zarigani_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_nog_zarigani_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_zarigani/int_nog_zarigani_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_nog_zarigani_glass_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_nog_zarigani_glass_tex_pic_ci4_pal[] = {
 #include "assets/int_nog_zarigani_glass_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_zarigani_body_tex_txt[0x100];
+#else
 u8 int_nog_zarigani_body_tex_txt[] = {
 #include "assets/int_nog_zarigani_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_zarigani_top_tex_txt[0x100];
+#else
 u8 int_nog_zarigani_top_tex_txt[] = {
 #include "assets/int_nog_zarigani_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_zarigani_side_tex_txt[0x200];
+#else
 u8 int_nog_zarigani_side_tex_txt[] = {
 #include "assets/int_nog_zarigani_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_zarigani_base_tex_txt[0x80];
+#else
 u8 int_nog_zarigani_base_tex_txt[] = {
 #include "assets/int_nog_zarigani_base_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_zarigani_etc_tex_txt[0x80];
+#else
 u8 int_nog_zarigani_etc_tex_txt[] = {
 #include "assets/int_nog_zarigani_etc_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_zarigani_glass_tex_txt[0x100];
+#else
 u8 int_nog_zarigani_glass_tex_txt[] = {
 #include "assets/int_nog_zarigani_glass_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_zarigani_v[0x360 / sizeof(Vtx)];
+#else
 Vtx int_nog_zarigani_v[] = {
 #include "assets/int_nog_zarigani_v.inc"
 };
+#endif
 
 Gfx int_nog_zarigani_sakana_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -142,3 +178,10 @@ cKF_Joint_R_c cKF_je_r_int_nog_zarigani_tbl[] = {
 
 cKF_Skeleton_R_c cKF_bs_r_int_nog_zarigani = { ARRAY_COUNT(cKF_je_r_int_nog_zarigani_tbl), 4,
                                                cKF_je_r_int_nog_zarigani_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_nog_zarigani_c(void) {
+    pc_load_asset("assets/int_nog_zarigani/int_nog_zarigani_pal.bin", int_nog_zarigani_pal, 0x20, 0xC08480, 0, 1);
+}
+#endif

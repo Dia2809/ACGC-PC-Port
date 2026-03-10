@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_takkyu_v[];
+#ifdef TARGET_PC
+u16 int_sum_takkyu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_takkyu_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_takkyu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_takkyu_top_tex[0x200];
+#else
 u8 int_sum_takkyu_top_tex[] = {
 #include "assets/int_sum_takkyu_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_takkyu_net_tex[0x100];
+#else
 u8 int_sum_takkyu_net_tex[] = {
 #include "assets/int_sum_takkyu_net_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_takkyu_foot_tex[0x100];
+#else
 u8 int_sum_takkyu_foot_tex[] = {
 #include "assets/int_sum_takkyu_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_takkyu_foot02_tex[0x100];
+#else
 u8 int_sum_takkyu_foot02_tex[] = {
 #include "assets/int_sum_takkyu_foot02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_takkyu_bat_tex[0x100];
+#else
 u8 int_sum_takkyu_bat_tex[] = {
 #include "assets/int_sum_takkyu_bat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_takkyu_ball_tex[0x80];
+#else
 u8 int_sum_takkyu_ball_tex[] = {
 #include "assets/int_sum_takkyu_ball_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_takkyu_v[0x450 / sizeof(Vtx)];
+#else
 Vtx int_sum_takkyu_v[] = {
 #include "assets/int_sum_takkyu_v.inc"
 };
+#endif
 
 Gfx int_sum_takkyu_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

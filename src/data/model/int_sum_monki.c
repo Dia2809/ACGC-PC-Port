@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_monki_v[];
+#ifdef TARGET_PC
+u16 int_sum_monki_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_monki_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_monki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_monki_hand_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_monki_hand_pic_ci4_pal[] = {
 #include "assets/int_sum_monki_hand_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_monki_body_txt[0x80];
+#else
 u8 int_sum_monki_body_txt[] = {
 #include "assets/int_sum_monki_body_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_monki_base_txt[0x80];
+#else
 u8 int_sum_monki_base_txt[] = {
 #include "assets/int_sum_monki_base_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_monki_top_txt[0x200];
+#else
 u8 int_sum_monki_top_txt[] = {
 #include "assets/int_sum_monki_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_monki_side_txt[0x200];
+#else
 u8 int_sum_monki_side_txt[] = {
 #include "assets/int_sum_monki_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_monki_hand_txt[0x100];
+#else
 u8 int_sum_monki_hand_txt[] = {
 #include "assets/int_sum_monki_hand_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_monki_v[0x430 / sizeof(Vtx)];
+#else
 Vtx int_sum_monki_v[] = {
 #include "assets/int_sum_monki_v.inc"
 };
+#endif
 
 Gfx int_sum_monki_body_L_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

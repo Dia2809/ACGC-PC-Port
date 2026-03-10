@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_snowclock_v[];
+#ifdef TARGET_PC
+u16 int_kon_snowclock_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_snowclock_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_snowclock_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowclock06_tex_txt[0x80];
+#else
 u8 int_kon_snowclock06_tex_txt[] = {
 #include "assets/int_kon_snowclock06_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowclock05_tex_txt[0x80];
+#else
 u8 int_kon_snowclock05_tex_txt[] = {
 #include "assets/int_kon_snowclock05_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowclock07_tex_txt[0x80];
+#else
 u8 int_kon_snowclock07_tex_txt[] = {
 #include "assets/int_kon_snowclock07_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowclock04_tex_txt[0x100];
+#else
 u8 int_kon_snowclock04_tex_txt[] = {
 #include "assets/int_kon_snowclock04_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowclock01_tex_txt[0x200];
+#else
 u8 int_kon_snowclock01_tex_txt[] = {
 #include "assets/int_kon_snowclock01_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowclock02_tex_txt[0x200];
+#else
 u8 int_kon_snowclock02_tex_txt[] = {
 #include "assets/int_kon_snowclock02_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowclock03_tex_txt[0x80];
+#else
 u8 int_kon_snowclock03_tex_txt[] = {
 #include "assets/int_kon_snowclock03_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_snowclock_v[0x410 / sizeof(Vtx)];
+#else
 Vtx int_kon_snowclock_v[] = {
 #include "assets/int_kon_snowclock_v.inc"
 };
+#endif
 
 Gfx int_kon_snowclock_long_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

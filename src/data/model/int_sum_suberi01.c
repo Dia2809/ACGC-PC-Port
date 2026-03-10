@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_suberi01_v[];
+#ifdef TARGET_PC
+u16 int_sum_suberi01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_suberi01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_suberi01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_suberi01_side_tex[0x400];
+#else
 u8 int_sum_suberi01_side_tex[] = {
 #include "assets/int_sum_suberi01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_suberi01_dan_tex[0x100];
+#else
 u8 int_sum_suberi01_dan_tex[] = {
 #include "assets/int_sum_suberi01_dan_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_suberi01_danue_tex[0x80];
+#else
 u8 int_sum_suberi01_danue_tex[] = {
 #include "assets/int_sum_suberi01_danue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_suberi01_suberu_tex[0x100];
+#else
 u8 int_sum_suberi01_suberu_tex[] = {
 #include "assets/int_sum_suberi01_suberu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_suberi01_danyoko_tex[0x40];
+#else
 u8 int_sum_suberi01_danyoko_tex[] = {
 #include "assets/int_sum_suberi01_danyoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_suberi01_v[0x440 / sizeof(Vtx)];
+#else
 Vtx int_sum_suberi01_v[] = {
 #include "assets/int_sum_suberi01_v.inc"
 };
+#endif
 
 Gfx int_sum_suberi01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

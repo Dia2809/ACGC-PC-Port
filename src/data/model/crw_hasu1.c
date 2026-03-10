@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx crw_hasu1_v[];
+#ifdef TARGET_PC
+u16 crw_hasu1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 crw_hasu1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/crw_hasu1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 crw_hasu1_tex_txt[0x200];
+#else
 u8 crw_hasu1_tex_txt[] = {
 #include "assets/crw_hasu1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx crw_hasu1_v[0x570 / sizeof(Vtx)];
+#else
 Vtx crw_hasu1_v[] = {
 #include "assets/crw_hasu1_v.inc"
 };
+#endif
 
 Gfx crw_hasu1_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

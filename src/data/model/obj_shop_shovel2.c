@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 obj_shop_shovel2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_shop_shovel2_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_shovel2/obj_shop_shovel2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_shop_shovel2_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop_shovel2_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_shovel2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop_shovel2_v[0x190 / sizeof(Vtx)];
+#else
 Vtx obj_shop_shovel2_v[] = {
 #include "assets/obj_shop_shovel2_v.inc"
 };
+#endif
 
 Gfx obj_shovel2T_mat_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -40,3 +52,10 @@ gsSPNTriangles_5b(19, 23, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_shop_shovel2_c(void) {
+    pc_load_asset("assets/obj_shop_shovel2/obj_shop_shovel2_pal.bin", obj_shop_shovel2_pal, 0x20, 0xB6CB80, 0, 1);
+}
+#endif

@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ut_mike[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ut_mike[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ut_mike.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 utPal_mike[0x20];
+#else
 u8 utPal_mike[] = {
 #include "assets/utPal_mike.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ut_mouth[0x80];
+#else
 u8 ut_mouth[] = {
 #include "assets/ut_mouth.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 utPal_mouth[0x20];
+#else
 u8 utPal_mouth[] = {
 #include "assets/utPal_mouth.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_ongen_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_ongen_v[] = {
 #include "assets/ef_ongen_v.inc"
 };
+#endif
 
 Gfx ef_ongen_mic_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

@@ -31,13 +31,21 @@ ACTOR_PROFILE Boat_Demo_Profile = {
 static mDemo_Clip_c aBTD_clip;
 
 #ifndef __INTELLISENSE__
+#ifdef TARGET_PC
+static u8 aBTD_island_prg[0x15244];
+#else
 static u8 aBTD_island_prg[] = {
 #include "assets/aBTD_island_prg.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 aBTD_island_ldr[0xC83C];
+#else
 static u8 aBTD_island_ldr[] = {
 #include "assets/aBTD_island_ldr.inc"
 };
+#endif
 #else
 extern u8 aBTD_island_prg[];
 extern u8 aBTD_island_ldr[];
@@ -73,3 +81,11 @@ static void aBTD_actor_dt(ACTOR* actorx, GAME* game) {
 #include "../src/actor/ac_boat_demo_move.c_inc"
 
 #pragma pop
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_actor_ac_boat_demo_c(void) {
+    pc_load_asset("assets/aBTD_island_prg.bin", aBTD_island_prg, 0x15244, 0x2EFB8C, 0, 0);
+    pc_load_asset("assets/aBTD_island_ldr.bin", aBTD_island_ldr, 0xC83C, 0x304DD0, 0, 0);
+}
+#endif

@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_taiju_v[];
+#ifdef TARGET_PC
+u16 int_kon_taiju_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_taiju_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_taiju_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_taiju_a_tex[0x80];
+#else
 u8 int_kon_taiju_a_tex[] = {
 #include "assets/int_kon_taiju_a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_taiju_kubi_tex[0x80];
+#else
 u8 int_kon_taiju_kubi_tex[] = {
 #include "assets/int_kon_taiju_kubi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_taiju_mae_tex[0x200];
+#else
 u8 int_kon_taiju_mae_tex[] = {
 #include "assets/int_kon_taiju_mae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_taiju_waki_tex[0x80];
+#else
 u8 int_kon_taiju_waki_tex[] = {
 #include "assets/int_kon_taiju_waki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_taiju_sokumen_tex[0x100];
+#else
 u8 int_kon_taiju_sokumen_tex[] = {
 #include "assets/int_kon_taiju_sokumen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_taiju_metal_tex[0x80];
+#else
 u8 int_kon_taiju_metal_tex[] = {
 #include "assets/int_kon_taiju_metal_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_taiju_dai2_tex[0x200];
+#else
 u8 int_kon_taiju_dai2_tex[] = {
 #include "assets/int_kon_taiju_dai2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_taiju_v[0x3C0 / sizeof(Vtx)];
+#else
 Vtx int_kon_taiju_v[] = {
 #include "assets/int_kon_taiju_v.inc"
 };
+#endif
 
 Gfx int_kon_taiju_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

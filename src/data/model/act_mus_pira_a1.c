@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx act_mus_pira_a1_v[];
+#ifdef TARGET_PC
+static u16 int_nog_piraluku_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_nog_piraluku_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_mus_pira_a1/int_nog_piraluku_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_mus_pireluku_body_txt[0x400];
+#else
 u8 act_mus_pireluku_body_txt[] = {
 #include "assets/act_mus_pireluku_body_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_mus_pira_a1_v[0x6E0 / sizeof(Vtx)];
+#else
 Vtx act_mus_pira_a1_v[] = {
 #include "assets/act_mus_pira_a1_v.inc"
 };
+#endif
 
 Gfx act_mus_pira_sakana_leg_model[] = {
     gsSPMatrix(&anime_6_mdl[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -82,3 +94,10 @@ cKF_Joint_R_c cKF_je_r_act_mus_pira_a1_tbl[] = {
 
 cKF_Skeleton_R_c cKF_bs_r_act_mus_pira_a1 = { ARRAY_COUNT(cKF_je_r_act_mus_pira_a1_tbl), 3,
                                               cKF_je_r_act_mus_pira_a1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_mus_pira_a1_c(void) {
+    pc_load_asset("assets/act_mus_pira_a1/int_nog_piraluku_pal.bin", int_nog_piraluku_pal, 0x20, 0xBEC3A0, 0, 1);
+}
+#endif

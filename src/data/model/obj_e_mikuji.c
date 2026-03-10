@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_e_mikuji_2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_e_mikuji_2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_mikuji_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_e_mikuji_1_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_e_mikuji_1_pal[] = {
 #include "assets/obj_e_mikuji_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_mikuji_2[0x200];
+#else
 u8 obj_e_mikuji_2[] = {
 #include "assets/obj_e_mikuji_2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_mikuji_1[0x800];
+#else
 u8 obj_e_mikuji_1[] = {
 #include "assets/obj_e_mikuji_1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_mikuji_v[0x330 / sizeof(Vtx)];
+#else
 Vtx obj_e_mikuji_v[] = {
 #include "assets/obj_e_mikuji_v.inc"
 };
+#endif
 
 Gfx obj_e_mikuji_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

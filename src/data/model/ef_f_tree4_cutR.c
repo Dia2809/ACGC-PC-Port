@@ -9,9 +9,13 @@ extern u8 obj_f_tree_cutL_tex_txt[];
 extern Vtx ef_f_tree4_cutR_v[];
 extern u8 ef_f_tree_trunk_modeset[];
 extern u8 ef_f_tree_leaf_modeset[];
+#ifdef TARGET_PC
+Vtx ef_f_tree4_cutR_v[0x100 / sizeof(Vtx)];
+#else
 Vtx ef_f_tree4_cutR_v[] = {
 #include "assets/ef_f_tree4_cutR_v.inc"
 };
+#endif
 
 Gfx ef_f_tree4_cutR_leaf_model[] = {
     gsSPDisplayList(ef_f_tree_leaf_modeset),

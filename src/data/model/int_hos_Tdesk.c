@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_hos_Tdesk_v[];
+#ifdef TARGET_PC
+u16 int_hos_Tdesk_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_hos_Tdesk_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_hos_Tdesk_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_T_desk_body_tex_txt[0x200];
+#else
 u8 int_hos_T_desk_body_tex_txt[] = {
 #include "assets/int_hos_T_desk_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_T_desk_hiki_tex_txt[0x200];
+#else
 u8 int_hos_T_desk_hiki_tex_txt[] = {
 #include "assets/int_hos_T_desk_hiki_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_T_desk_top_tex_txt[0x200];
+#else
 u8 int_hos_T_desk_top_tex_txt[] = {
 #include "assets/int_hos_T_desk_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_T_desk_side_tex_txt[0x100];
+#else
 u8 int_hos_T_desk_side_tex_txt[] = {
 #include "assets/int_hos_T_desk_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_hos_Tdesk_v[0x200 / sizeof(Vtx)];
+#else
 Vtx int_hos_Tdesk_v[] = {
 #include "assets/int_hos_Tdesk_v.inc"
 };
+#endif
 
 Gfx int_hos_Tdesk_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

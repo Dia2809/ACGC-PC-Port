@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_mwin_audio_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_mwin_audio_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_mwin_audio_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_audio_tex[0x200];
+#else
 u8 inv_mwin_audio_tex[] = {
 #include "assets/inv_mwin_audio_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx mus_icon_v[0x40 / sizeof(Vtx)];
+#else
 Vtx mus_icon_v[] = {
 #include "assets/mus_icon_v.inc"
 };
+#endif
 
 Gfx mus_icon_model_before[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,37 +5,69 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 tol_tamaire_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_tamaire_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_tamaire_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_tamaire_r1_tex[0x200];
+#else
 u8 tol_tamaire_r1_tex[] = {
 #include "assets/tol_tamaire_r1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_tamaire_r2_tex[0x200];
+#else
 u8 tol_tamaire_r2_tex[] = {
 #include "assets/tol_tamaire_r2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_tamaire_r3_tex[0x200];
+#else
 u8 tol_tamaire_r3_tex[] = {
 #include "assets/tol_tamaire_r3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_tamaire_w1_tex[0x200];
+#else
 u8 tol_tamaire_w1_tex[] = {
 #include "assets/tol_tamaire_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_tamaire_w2_tex[0x200];
+#else
 u8 tol_tamaire_w2_tex[] = {
 #include "assets/tol_tamaire_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_tamaire_w3_tex[0x200];
+#else
 u8 tol_tamaire_w3_tex[] = {
 #include "assets/tol_tamaire_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_tamaire_v[0x40 / sizeof(Vtx)];
+#else
 Vtx tol_tamaire_v[] = {
 #include "assets/tol_tamaire_v.inc"
 };
+#endif
 
 Gfx tol_tamaire_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_log_bed01_v[];
+#ifdef TARGET_PC
+u16 int_sum_log_bed01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_log_bed01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_log_bed01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_bed01_stand_tex[0x80];
+#else
 u8 int_sum_log_bed01_stand_tex[] = {
 #include "assets/int_sum_log_bed01_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_bed01_head_tex[0x300];
+#else
 u8 int_sum_log_bed01_head_tex[] = {
 #include "assets/int_sum_log_bed01_head_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_bed01_top_tex[0x300];
+#else
 u8 int_sum_log_bed01_top_tex[] = {
 #include "assets/int_sum_log_bed01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_bed01_pillow_tex[0x80];
+#else
 u8 int_sum_log_bed01_pillow_tex[] = {
 #include "assets/int_sum_log_bed01_pillow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_log_bed01_v[0x2E0 / sizeof(Vtx)];
+#else
 Vtx int_sum_log_bed01_v[] = {
 #include "assets/int_sum_log_bed01_v.inc"
 };
+#endif
 
 Gfx int_sum_log_bed01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

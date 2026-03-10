@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_asi_plant02_v[];
+#ifdef TARGET_PC
+u16 int_sum_asi_plant02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_asi_plant02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_asi_plant02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_asi_plant02_bin_tex[0x100];
+#else
 u8 int_sum_asi_plant02_bin_tex[] = {
 #include "assets/int_sum_asi_plant02_bin_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_asi_plant02_tuchi_tex[0x80];
+#else
 u8 int_sum_asi_plant02_tuchi_tex[] = {
 #include "assets/int_sum_asi_plant02_tuchi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_asi_plant02_leaf_tex[0x300];
+#else
 u8 int_sum_asi_plant02_leaf_tex[] = {
 #include "assets/int_sum_asi_plant02_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_asi_plant02_miki_tex[0x100];
+#else
 u8 int_sum_asi_plant02_miki_tex[] = {
 #include "assets/int_sum_asi_plant02_miki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_asi_plant02_kuki_tex[0x100];
+#else
 u8 int_sum_asi_plant02_kuki_tex[] = {
 #include "assets/int_sum_asi_plant02_kuki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_asi_plant02_v[0x460 / sizeof(Vtx)];
+#else
 Vtx int_sum_asi_plant02_v[] = {
 #include "assets/int_sum_asi_plant02_v.inc"
 };
+#endif
 
 Gfx int_sum_asi_plant02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

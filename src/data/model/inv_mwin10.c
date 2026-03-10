@@ -5,34 +5,66 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_mwin_apple_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_mwin_apple_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_mwin_apple_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_orange_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_orange_pal[] = {
 #include "assets/inv_mwin_orange_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_peach_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_peach_pal[] = {
 #include "assets/inv_mwin_peach_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_pear_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_pear_pal[] = {
 #include "assets/inv_mwin_pear_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_apple_tex[0x200];
+#else
 u8 inv_mwin_apple_tex[] = {
 #include "assets/inv_mwin_apple_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_orange_tex[0x200];
+#else
 u8 inv_mwin_orange_tex[] = {
 #include "assets/inv_mwin_orange_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_peach_tex[0x200];
+#else
 u8 inv_mwin_peach_tex[] = {
 #include "assets/inv_mwin_peach_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_pear_tex[0x200];
+#else
 u8 inv_mwin_pear_tex[] = {
 #include "assets/inv_mwin_pear_tex.inc"
 };
+#endif

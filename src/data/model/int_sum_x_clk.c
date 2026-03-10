@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_x_clk_v[];
+#ifdef TARGET_PC
+u16 int_sum_x_clk_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_x_clk_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_x_clk_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_x_clk_glass_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_x_clk_glass_pic_ci4_pal[] = {
 #include "assets/int_sum_x_clk_glass_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_clk_hari_txt[0x100];
+#else
 u8 int_sum_x_clk_hari_txt[] = {
 #include "assets/int_sum_x_clk_hari_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_clk_into_txt[0x80];
+#else
 u8 int_sum_x_clk_into_txt[] = {
 #include "assets/int_sum_x_clk_into_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_clk_front_txt[0x280];
+#else
 u8 int_sum_x_clk_front_txt[] = {
 #include "assets/int_sum_x_clk_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_clk_head_txt[0x80];
+#else
 u8 int_sum_x_clk_head_txt[] = {
 #include "assets/int_sum_x_clk_head_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_clk_side_txt[0x200];
+#else
 u8 int_sum_x_clk_side_txt[] = {
 #include "assets/int_sum_x_clk_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_clk_huriko_txt[0x80];
+#else
 u8 int_sum_x_clk_huriko_txt[] = {
 #include "assets/int_sum_x_clk_huriko_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_clk_glass_txt[0x80];
+#else
 u8 int_sum_x_clk_glass_txt[] = {
 #include "assets/int_sum_x_clk_glass_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_x_clk_v[0x420 / sizeof(Vtx)];
+#else
 Vtx int_sum_x_clk_v[] = {
 #include "assets/int_sum_x_clk_v.inc"
 };
+#endif
 
 Gfx int_sum_x_clk_long_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

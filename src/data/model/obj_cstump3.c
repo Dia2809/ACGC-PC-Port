@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_cstump3_shadow_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_cstump3_shadow_v[] = {
 #include "assets/obj_cstump3_shadow_v.inc"
 };
+#endif
 
 extern u8 obj_cstump_shadow_tex[];
 

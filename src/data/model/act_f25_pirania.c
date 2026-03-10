@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u16 act_f25_pirania_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 act_f25_pirania_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f25_pirania_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_f25_pirania_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_f25_pirania_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f25_pirania_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_f25_pirania_a_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f25_pirania_a_v[] = {
 #include "assets/act_f25_pirania_a_v.inc"
 };
+#endif
 
 Gfx act_f25_pirania_aT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -31,9 +43,13 @@ Gfx act_f25_pirania_aT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f25_pirania_b_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f25_pirania_b_v[] = {
 #include "assets/act_f25_pirania_b_v.inc"
 };
+#endif
 
 Gfx act_f25_pirania_bT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -51,9 +67,13 @@ Gfx act_f25_pirania_bT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f25_pirania_c_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f25_pirania_c_v[] = {
 #include "assets/act_f25_pirania_c_v.inc"
 };
+#endif
 
 Gfx act_f25_pirania_cT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -11,9 +11,13 @@ extern u8 lat_letter25_4[];
 extern u8 lat_letter25_5[];
 extern u8 lat_letter25_2[];
 extern u8 lat_letter25_3[];
+#ifdef TARGET_PC
+Vtx lat_letter25_v[0x340 / sizeof(Vtx)];
+#else
 Vtx lat_letter25_v[] = {
 #include "assets/lat_letter25_v.inc"
 };
+#endif
 
 Gfx lat_letter25_win_model[] = {
     gsDPSetCombineLERP(TEXEL0, 0, TEXEL0_ALPHA, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, TEXEL0_ALPHA, 0, TEXEL0, 0,

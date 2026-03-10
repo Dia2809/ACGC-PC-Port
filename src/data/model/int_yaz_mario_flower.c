@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yaz_mario_flower_v[];
+#ifdef TARGET_PC
+u16 int_yaz_mario_flower_a_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_yaz_mario_flower_a_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yaz_mario_flower_a_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_yaz_mario_flower_b_pal[0x20 / sizeof(u16)];
+#else
 u16 int_yaz_mario_flower_b_pal[] = {
 #include "assets/int_yaz_mario_flower_b_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_yaz_mario_flower_c_pal[0x20 / sizeof(u16)];
+#else
 u16 int_yaz_mario_flower_c_pal[] = {
 #include "assets/int_yaz_mario_flower_c_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_yaz_mario_flower_d_pal[0x20 / sizeof(u16)];
+#else
 u16 int_yaz_mario_flower_d_pal[] = {
 #include "assets/int_yaz_mario_flower_d_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_mario_flower_hana_a_tex_txt[0x200];
+#else
 u8 int_yaz_mario_flower_hana_a_tex_txt[] = {
 #include "assets/int_yaz_mario_flower_hana_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_mario_flower_ha_tex_txt[0x300];
+#else
 u8 int_yaz_mario_flower_ha_tex_txt[] = {
 #include "assets/int_yaz_mario_flower_ha_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yaz_mario_flower_v[0x1F0 / sizeof(Vtx)];
+#else
 Vtx int_yaz_mario_flower_v[] = {
 #include "assets/int_yaz_mario_flower_v.inc"
 };
+#endif
 
 Gfx int_yaz_mario_flower_hana_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

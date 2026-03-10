@@ -9,9 +9,13 @@ extern u8 ef_w_palm_trunk_modeset[];
 extern Vtx ef_w_palm5_cutR_v[];
 extern u8 ef_w_palm_leaf_modeset[];
 extern u8 obj_w_palm_cutL_tex_txt[];
+#ifdef TARGET_PC
+Vtx ef_w_palm5_cutR_v[0x360 / sizeof(Vtx)];
+#else
 Vtx ef_w_palm5_cutR_v[] = {
 #include "assets/ef_w_palm5_cutR_v.inc"
 };
+#endif
 
 Gfx ef_w_palm5_cutR_leaf_model[] = {
     gsSPDisplayList(ef_w_palm_leaf_modeset),

@@ -6,9 +6,13 @@
 #include "ef_effect_control.h"
 
 extern u8 ef_shadow_in_0[];
+#ifdef TARGET_PC
+static Vtx ef_shadow_in_v[0x40 / sizeof(Vtx)];
+#else
 static Vtx ef_shadow_in_v[] = {
 #include "assets/ef_shadow_in/ef_shadow_in_v.inc"
 };
+#endif
 
 Gfx ef_shadow_insect_modelT[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -31,3 +35,10 @@ Gfx ef_shadow_insect_modelT[] = {
     gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_ef_shadow_in_c(void) {
+    pc_load_asset("assets/ef_shadow_in/ef_shadow_in_v.bin", ef_shadow_in_v, 0x40, 0xB6A6B8, 0, 2);
+}
+#endif

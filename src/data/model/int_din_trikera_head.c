@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_trikera_head_v[];
+#ifdef TARGET_PC
+static u16 int_din_trikera_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_trikera_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_trikera_head/int_din_trikera_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_trikera_skull_tex[0x400];
+#else
 u8 int_din_trikera_skull_tex[] = {
 #include "assets/int_din_trikera_skull_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_trikera_horn_tex[0x100];
+#else
 u8 int_din_trikera_horn_tex[] = {
 #include "assets/int_din_trikera_horn_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_trikera_baceA_tex[0x200];
+#else
 u8 int_din_trikera_baceA_tex[] = {
 #include "assets/int_din_trikera_baceA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_trikera_poleA_tex[0x80];
+#else
 u8 int_din_trikera_poleA_tex[] = {
 #include "assets/int_din_trikera_poleA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_trikera_head_v[0x330 / sizeof(Vtx)];
+#else
 Vtx int_din_trikera_head_v[] = {
 #include "assets/int_din_trikera_head_v.inc"
 };
+#endif
 
 Gfx int_din_trikera_head_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -76,3 +100,10 @@ Gfx int_din_trikera_headT_model[] = {
     gsSPNTriangles_5b(7, 17, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_trikera_head_c(void) {
+    pc_load_asset("assets/int_din_trikera_head/int_din_trikera_pal.bin", int_din_trikera_pal, 0x20, 0x91EAC0, 0, 1);
+}
+#endif

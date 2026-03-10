@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+static u16 act_m_monki_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 act_m_monki_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_monki/act_m_monki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_monki[0x80];
+#else
 static u8 act_m_monki[] = {
 #include "assets/act_m_monki/act_m_monki.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx act_m_monki_v[0xC0 / sizeof(Vtx)];
+#else
 static Vtx act_m_monki_v[] = {
 #include "assets/act_m_monki/act_m_monki_v.inc"
 };
+#endif
 
 Gfx act_m_monki1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -45,3 +57,12 @@ Gfx act_m_monki2T_model[] = {
     gsSPNTriangles_5b(4, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_monki_c(void) {
+    pc_load_asset("assets/act_m_monki/act_m_monki_pal.bin", act_m_monki_pal, 0x20, 0xB51AA8, 0, 1);
+    pc_load_asset("assets/act_m_monki/act_m_monki.bin", act_m_monki, 0x80, 0xB51AC8, 0, 0);
+    pc_load_asset("assets/act_m_monki/act_m_monki_v.bin", act_m_monki_v, 0xC0, 0xB519E8, 0, 2);
+}
+#endif

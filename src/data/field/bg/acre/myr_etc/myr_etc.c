@@ -1,20 +1,36 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 myr_kotei_pal[0x20 / sizeof(u16)];
+#else
 static u16 myr_kotei_pal[] = {
 #include "assets/field/bg/myr_kotei_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 myr_enter[0x400];
+#else
 static u8 myr_enter[] = {
 #include "assets/field/bg/myr_enter.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 myr_window[0x800];
+#else
 static u8 myr_window[] = {
 #include "assets/field/bg/myr_window.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx myr_kotei_v[0x160 / sizeof(Vtx)];
+#else
 static Vtx myr_kotei_v[] = {
 #include "assets/field/bg/myr_kotei_v.inc"
 };
+#endif
 
 static Gfx myr_kotei_model[] = {
     gsSPTexture(65535, 65535, 0, 0, G_ON),
@@ -72,3 +88,13 @@ extern Gfx myr_etc_model[] = {
     gsSPDisplayList(myr_out_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_myr_etc_myr_etc_c(void) {
+    pc_load_asset("assets/field/bg/myr_kotei_pal.bin", myr_kotei_pal, 0x20, 0xC145C0, 0, 1);
+    pc_load_asset("assets/field/bg/myr_enter.bin", myr_enter, 0x400, 0xC145E0, 0, 0);
+    pc_load_asset("assets/field/bg/myr_window.bin", myr_window, 0x800, 0xC149E0, 0, 0);
+    pc_load_asset("assets/field/bg/myr_kotei_v.bin", myr_kotei_v, 0x160, 0xC151E0, 0, 2);
+}
+#endif

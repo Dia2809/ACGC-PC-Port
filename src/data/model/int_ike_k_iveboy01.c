@@ -6,65 +6,125 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_k_iveboy01_v[];
+#ifdef TARGET_PC
+u16 int_ike_k_iveboy01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_k_iveboy01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_k_iveboy01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboyseat2_tex[0x40];
+#else
 u8 int_ike_k_iveboyseat2_tex[] = {
 #include "assets/int_ike_k_iveboyseat2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboymir1_tex[0x80];
+#else
 u8 int_ike_k_iveboymir1_tex[] = {
 #include "assets/int_ike_k_iveboymir1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboylighttex[0x80];
+#else
 u8 int_ike_k_iveboylighttex[] = {
 #include "assets/int_ike_k_iveboylighttex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboyhand_tex[0x80];
+#else
 u8 int_ike_k_iveboyhand_tex[] = {
 #include "assets/int_ike_k_iveboyhand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboyback_tex[0x40];
+#else
 u8 int_ike_k_iveboyback_tex[] = {
 #include "assets/int_ike_k_iveboyback_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboybase1_tex[0x40];
+#else
 u8 int_ike_k_iveboybase1_tex[] = {
 #include "assets/int_ike_k_iveboybase1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboymir2_tex[0x40];
+#else
 u8 int_ike_k_iveboymir2_tex[] = {
 #include "assets/int_ike_k_iveboymir2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboyside1_tex[0x200];
+#else
 u8 int_ike_k_iveboyside1_tex[] = {
 #include "assets/int_ike_k_iveboyside1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboyseat_tex[0x100];
+#else
 u8 int_ike_k_iveboyseat_tex[] = {
 #include "assets/int_ike_k_iveboyseat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboytire_tex[0x80];
+#else
 u8 int_ike_k_iveboytire_tex[] = {
 #include "assets/int_ike_k_iveboytire_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboysidein_tex[0x80];
+#else
 u8 int_ike_k_iveboysidein_tex[] = {
 #include "assets/int_ike_k_iveboysidein_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboyfront1_tex[0x200];
+#else
 u8 int_ike_k_iveboyfront1_tex[] = {
 #include "assets/int_ike_k_iveboyfront1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_iveboybase3_rgb_i4[0x200];
+#else
 u8 int_ike_k_iveboybase3_rgb_i4[] = {
 #include "assets/int_ike_k_iveboybase3_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_k_iveboy01_v[0xAA0 / sizeof(Vtx)];
+#else
 Vtx int_ike_k_iveboy01_v[] = {
 #include "assets/int_ike_k_iveboy01_v.inc"
 };
+#endif
 
 Gfx int_ike_k_iveboy01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

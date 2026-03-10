@@ -4,9 +4,13 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+Vtx rom_myhome4_2_floor_v[0x5B0 / sizeof(Vtx)];
+#else
 Vtx rom_myhome4_2_floor_v[] = {
 #include "assets/rom_myhome4_2_floor_v.inc"
 };
+#endif
 
 Gfx rom_myhome4_2_floor_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

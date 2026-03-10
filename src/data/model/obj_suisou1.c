@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_suisou1_v[];
+#ifdef TARGET_PC
+u16 obj_suisou1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_suisou1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_suisou1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_suisou1_evw_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_suisou1_evw_tex_rgb_ci4_pal[] = {
 #include "assets/obj_suisou1_evw_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_suisou1_front_tex[0x200];
+#else
 u8 obj_suisou1_front_tex[] = {
 #include "assets/obj_suisou1_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_suisou1_futi_tex[0x80];
+#else
 u8 obj_suisou1_futi_tex[] = {
 #include "assets/obj_suisou1_futi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_suisou1_isi_tex[0x800];
+#else
 u8 obj_suisou1_isi_tex[] = {
 #include "assets/obj_suisou1_isi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_suisou1_mizu_tex[0x80];
+#else
 u8 obj_suisou1_mizu_tex[] = {
 #include "assets/obj_suisou1_mizu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_suisou1_evw_tex[0x80];
+#else
 u8 obj_suisou1_evw_tex[] = {
 #include "assets/obj_suisou1_evw_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_suisou1_water1_tex_rgb_i4[0x200];
+#else
 u8 obj_suisou1_water1_tex_rgb_i4[] = {
 #include "assets/obj_suisou1_water1_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_suisou1_water2_tex_rgb_i4[0x200];
+#else
 u8 obj_suisou1_water2_tex_rgb_i4[] = {
 #include "assets/obj_suisou1_water2_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_suisou1_v[0x6D0 / sizeof(Vtx)];
+#else
 Vtx obj_suisou1_v[] = {
 #include "assets/obj_suisou1_v.inc"
 };
+#endif
 
 Gfx obj_suisou1_modelT[] = {
     gsSPTexture(1500, 5000, 0, G_TX_RENDERTILE, G_ON),

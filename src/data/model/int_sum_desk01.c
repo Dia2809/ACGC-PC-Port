@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_desk01_v[];
+#ifdef TARGET_PC
+u16 int_sum_desk01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_desk01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_desk01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_side[0x100];
+#else
 u8 int_sum_desk01_side[] = {
 #include "assets/int_sum_desk01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_top[0x100];
+#else
 u8 int_sum_desk01_top[] = {
 #include "assets/int_sum_desk01_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_topside[0x100];
+#else
 u8 int_sum_desk01_topside[] = {
 #include "assets/int_sum_desk01_topside.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_drawer[0x100];
+#else
 u8 int_sum_desk01_drawer[] = {
 #include "assets/int_sum_desk01_drawer.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_back[0x200];
+#else
 u8 int_sum_desk01_back[] = {
 #include "assets/int_sum_desk01_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_front[0x100];
+#else
 u8 int_sum_desk01_front[] = {
 #include "assets/int_sum_desk01_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_light[0x80];
+#else
 u8 int_sum_desk01_light[] = {
 #include "assets/int_sum_desk01_light.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_mini[0x40];
+#else
 u8 int_sum_desk01_mini[] = {
 #include "assets/int_sum_desk01_mini.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_desk01_book[0x40];
+#else
 u8 int_sum_desk01_book[] = {
 #include "assets/int_sum_desk01_book.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_desk01_v[0x4A0 / sizeof(Vtx)];
+#else
 Vtx int_sum_desk01_v[] = {
 #include "assets/int_sum_desk01_v.inc"
 };
+#endif
 
 Gfx int_sum_desk01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

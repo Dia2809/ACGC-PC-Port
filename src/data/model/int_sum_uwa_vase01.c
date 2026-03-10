@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_uwa_vase01_v[];
+#ifdef TARGET_PC
+u16 int_sum_uwa_vase01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_uwa_vase01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_uwa_vase01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase01_side[0x100];
+#else
 u8 int_sum_uwa_vase01_side[] = {
 #include "assets/int_sum_uwa_vase01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase01_red[0x80];
+#else
 u8 int_sum_uwa_vase01_red[] = {
 #include "assets/int_sum_uwa_vase01_red.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase01_olange[0x80];
+#else
 u8 int_sum_uwa_vase01_olange[] = {
 #include "assets/int_sum_uwa_vase01_olange.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase01_top[0x80];
+#else
 u8 int_sum_uwa_vase01_top[] = {
 #include "assets/int_sum_uwa_vase01_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase01_kuki[0x100];
+#else
 u8 int_sum_uwa_vase01_kuki[] = {
 #include "assets/int_sum_uwa_vase01_kuki.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase01_kukiside[0x80];
+#else
 u8 int_sum_uwa_vase01_kukiside[] = {
 #include "assets/int_sum_uwa_vase01_kukiside.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_uwa_vase01_v[0x340 / sizeof(Vtx)];
+#else
 Vtx int_sum_uwa_vase01_v[] = {
 #include "assets/int_sum_uwa_vase01_v.inc"
 };
+#endif
 
 Gfx int_sum_uwa_vase01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_tukutuku_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_tukutuku_v[0x160 / sizeof(Vtx)];
+#else
 static Vtx act_m_tukutuku_v[] = {
 #include "assets/act_m_tukutuku2/act_m_tukutuku_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_tukutuku_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_tukutuku_pal[] = {
 #include "assets/act_m_tukutuku2/act_m_tukutuku_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_tukutuku[0x200];
+#else
 static u8 act_m_tukutuku[] = {
 #include "assets/act_m_tukutuku2/act_m_tukutuku.inc"
 };
+#endif
 
 Gfx act_m_mu_tukutuku1_1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -79,3 +91,12 @@ Gfx act_m_mu_tukutuku1_2T_model[] = {
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_tukutuku2_c(void) {
+    pc_load_asset("assets/act_m_tukutuku2/act_m_tukutuku_v.bin", act_m_tukutuku_v, 0x160, 0xB569D8, 0, 2);
+    pc_load_asset("assets/act_m_tukutuku2/act_m_tukutuku_pal.bin", act_m_tukutuku_pal, 0x20, 0xB56B38, 0, 1);
+    pc_load_asset("assets/act_m_tukutuku2/act_m_tukutuku.bin", act_m_tukutuku, 0x200, 0xB56B58, 0, 0);
+}
+#endif

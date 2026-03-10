@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_kiageha_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_kiageha_v[0xC0 / sizeof(Vtx)];
+#else
 static Vtx act_m_kiageha_v[] = {
 #include "assets/act_m_kiageha2/act_m_kiageha_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_kiageha_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_kiageha_pal[] = {
 #include "assets/act_m_kiageha2/act_m_kiageha_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_kiageha[0x200];
+#else
 static u8 act_m_kiageha[] = {
 #include "assets/act_m_kiageha2/act_m_kiageha.inc"
 };
+#endif
 
 Gfx act_m_mu_kiageha1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -79,3 +91,12 @@ Gfx act_m_mu_kiageha2T_model[] = {
     gsSP2Triangles(4, 0, 3, 0, 4, 3, 5, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_kiageha2_c(void) {
+    pc_load_asset("assets/act_m_kiageha2/act_m_kiageha_v.bin", act_m_kiageha_v, 0xC0, 0xB4E598, 0, 2);
+    pc_load_asset("assets/act_m_kiageha2/act_m_kiageha_pal.bin", act_m_kiageha_pal, 0x20, 0xB4E658, 0, 1);
+    pc_load_asset("assets/act_m_kiageha2/act_m_kiageha.bin", act_m_kiageha, 0x200, 0xB4E678, 0, 0);
+}
+#endif

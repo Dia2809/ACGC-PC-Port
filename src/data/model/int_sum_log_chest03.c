@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_log_chest03_v[];
+#ifdef TARGET_PC
+u16 int_sum_log_chest03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_log_chest03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_log_chest03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_back_tex[0x100];
+#else
 u8 int_sum_log_chest03_back_tex[] = {
 #include "assets/int_sum_log_chest03_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_front_tex[0x200];
+#else
 u8 int_sum_log_chest03_front_tex[] = {
 #include "assets/int_sum_log_chest03_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_top_tex[0x100];
+#else
 u8 int_sum_log_chest03_top_tex[] = {
 #include "assets/int_sum_log_chest03_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_top2_tex[0x80];
+#else
 u8 int_sum_log_chest03_top2_tex[] = {
 #include "assets/int_sum_log_chest03_top2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_draw_tex[0x80];
+#else
 u8 int_sum_log_chest03_draw_tex[] = {
 #include "assets/int_sum_log_chest03_draw_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_side_tex[0x100];
+#else
 u8 int_sum_log_chest03_side_tex[] = {
 #include "assets/int_sum_log_chest03_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_foot_tex[0x100];
+#else
 u8 int_sum_log_chest03_foot_tex[] = {
 #include "assets/int_sum_log_chest03_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_book_tex[0x80];
+#else
 u8 int_sum_log_chest03_book_tex[] = {
 #include "assets/int_sum_log_chest03_book_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chest03_book2_tex[0x80];
+#else
 u8 int_sum_log_chest03_book2_tex[] = {
 #include "assets/int_sum_log_chest03_book2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_log_chest03_v[0x4C0 / sizeof(Vtx)];
+#else
 Vtx int_sum_log_chest03_v[] = {
 #include "assets/int_sum_log_chest03_v.inc"
 };
+#endif
 
 Gfx int_sum_log_chest03_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

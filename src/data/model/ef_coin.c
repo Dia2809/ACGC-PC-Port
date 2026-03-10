@@ -6,13 +6,21 @@
 #include "ef_effect_control.h"
 
 extern Vtx ef_coin_v[];
+#ifdef TARGET_PC
+u8 ef_coin_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_coin_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_coin_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_coin_v[0x3C0 / sizeof(Vtx)];
+#else
 Vtx ef_coin_v[] = {
 #include "assets/ef_coin_v.inc"
 };
+#endif
 
 Gfx ef_coin_model[] = {
     gsSPTexture(4000, 4000, 0, G_TX_RENDERTILE, G_ON),

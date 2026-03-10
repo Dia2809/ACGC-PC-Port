@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx clk_win_v[];
+#ifdef TARGET_PC
+u8 maru[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 maru[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/maru.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_am_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_am_tex_rgb_ia8[] = {
 #include "assets/clk_win_am_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_pm_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_pm_tex_rgb_ia8[] = {
 #include "assets/clk_win_pm_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_fri_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_fri_tex_rgb_ia8[] = {
 #include "assets/clk_win_fri_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_mon_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_mon_tex_rgb_ia8[] = {
 #include "assets/clk_win_mon_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_sat_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_sat_tex_rgb_ia8[] = {
 #include "assets/clk_win_sat_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_sun_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_sun_tex_rgb_ia8[] = {
 #include "assets/clk_win_sun_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_thu_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_thu_tex_rgb_ia8[] = {
 #include "assets/clk_win_thu_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_tue_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_tue_tex_rgb_ia8[] = {
 #include "assets/clk_win_tue_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_wed_tex_rgb_ia8[0x400];
+#else
 u8 clk_win_wed_tex_rgb_ia8[] = {
 #include "assets/clk_win_wed_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx clk_win_v[0x140 / sizeof(Vtx)];
+#else
 Vtx clk_win_v[] = {
 #include "assets/clk_win_v.inc"
 };
+#endif
 
 Gfx clk_win_youbiT_model[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, anime_2_txt),

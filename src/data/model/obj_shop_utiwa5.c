@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 tol_fan5_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan5_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_utiwa5/tol_fan5_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan5_tex_txt[0x400];
+#else
 static u8 tol_fan5_tex_txt[] = {
 #include "assets/obj_shop_utiwa5/tol_fan5_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop_utiwa5_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_shop_utiwa5_v[] = {
 #include "assets/obj_shop_utiwa5_v.inc"
 };
+#endif
 
 Gfx obj_shop_utiwa5_mat_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -36,3 +48,11 @@ gsSPNTrianglesInit_5b(2, 4, 5, 6, 4, 6, 7, 0, 0, 0),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_shop_utiwa5_c(void) {
+    pc_load_asset("assets/obj_shop_utiwa5/tol_fan5_pal.bin", tol_fan5_pal, 0x20, 0x67A1E0, 0, 1);
+    pc_load_asset("assets/obj_shop_utiwa5/tol_fan5_tex_txt.bin", tol_fan5_tex_txt, 0x400, 0x67A200, 0, 0);
+}
+#endif

@@ -10,9 +10,13 @@ extern u8 lat_letter30_xk_tex[];
 extern u8 lat_letter30_tex[];
 extern u8 lat_letter30_ed_tex[];
 extern u8 lat_letter30_ba_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter30_v[0x400 / sizeof(Vtx)];
+#else
 Vtx lat_letter30_v[] = {
 #include "assets/lat_letter30_v.inc"
 };
+#endif
 
 Gfx lat_letter30_win_model[] = {
     gsDPSetRenderMode(G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2),

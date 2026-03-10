@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx cbr_1_v[0x15A0 / sizeof(Vtx)];
+#else
 static Vtx cbr_1_v[] = {
 #include "assets/npc/mdl/cbr_1_v.inc"
 };
+#endif
 
 static Gfx head_cbr_model[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -658,3 +662,10 @@ static cKF_Joint_R_c cKF_je_r_cbr_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_cbr_1 = { 26, 12, cKF_je_r_cbr_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_cbr_1_c(void) {
+    pc_load_asset("assets/npc/mdl/cbr_1_v.bin", cbr_1_v, 0x15A0, 0x48F580, 0, 2);
+}
+#endif

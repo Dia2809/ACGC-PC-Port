@@ -6,105 +6,205 @@
 #include "ef_effect_control.h"
 
 extern Vtx rom_kamakura_v[];
+#ifdef TARGET_PC
+u16 rom_kamakura_carp_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 rom_kamakura_carp_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_kamakura_carp_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_kamakura_goza_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_kamakura_goza_pal[] = {
 #include "assets/rom_kamakura_goza_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_kamakura_yuki_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_kamakura_yuki_pal[] = {
 #include "assets/rom_kamakura_yuki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_kamakura_rou_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_kamakura_rou_pal[] = {
 #include "assets/rom_kamakura_rou_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_kamakura_a1_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_kamakura_a1_pal[] = {
 #include "assets/rom_kamakura_a1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_kamakura_nabe_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_kamakura_nabe_pal[] = {
 #include "assets/rom_kamakura_nabe_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_carp[0x800];
+#else
 u8 rom_kamakura_carp[] = {
 #include "assets/rom_kamakura_carp.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_goza[0x200];
+#else
 u8 rom_kamakura_goza[] = {
 #include "assets/rom_kamakura_goza.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_yuki1[0x400];
+#else
 u8 rom_kamakura_yuki1[] = {
 #include "assets/rom_kamakura_yuki1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_yuki2[0x800];
+#else
 u8 rom_kamakura_yuki2[] = {
 #include "assets/rom_kamakura_yuki2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_yuki3[0x400];
+#else
 u8 rom_kamakura_yuki3[] = {
 #include "assets/rom_kamakura_yuki3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_yuki4[0x200];
+#else
 u8 rom_kamakura_yuki4[] = {
 #include "assets/rom_kamakura_yuki4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_rou[0x100];
+#else
 u8 rom_kamakura_rou[] = {
 #include "assets/rom_kamakura_rou.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_a1[0x200];
+#else
 u8 rom_kamakura_a1[] = {
 #include "assets/rom_kamakura_a1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_wa[0x80];
+#else
 u8 rom_kamakura_wa[] = {
 #include "assets/rom_kamakura_wa.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_nabe1[0x80];
+#else
 u8 rom_kamakura_nabe1[] = {
 #include "assets/rom_kamakura_nabe1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_etc[0x800];
+#else
 u8 rom_kamakura_etc[] = {
 #include "assets/rom_kamakura_etc.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_kage_us[0x80];
+#else
 u8 rom_kamakura_kage_us[] = {
 #include "assets/rom_kamakura_kage_us.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_a2_rgb_ci4[0x200];
+#else
 u8 rom_kamakura_a2_rgb_ci4[] = {
 #include "assets/rom_kamakura_a2_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura__takibi1_int_i4[0x100];
+#else
 u8 rom_kamakura__takibi1_int_i4[] = {
 #include "assets/rom_kamakura__takibi1_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura__takibi2_int_i4[0x100];
+#else
 u8 rom_kamakura__takibi2_int_i4[] = {
 #include "assets/rom_kamakura__takibi2_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_fire1_rgb_i4[0x80];
+#else
 u8 rom_kamakura_fire1_rgb_i4[] = {
 #include "assets/rom_kamakura_fire1_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_fire2_rgb_i4[0x80];
+#else
 u8 rom_kamakura_fire2_rgb_i4[] = {
 #include "assets/rom_kamakura_fire2_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_kamakura_fire3_rgb_i4[0x80];
+#else
 u8 rom_kamakura_fire3_rgb_i4[] = {
 #include "assets/rom_kamakura_fire3_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_kamakura_v[0x1390 / sizeof(Vtx)];
+#else
 Vtx rom_kamakura_v[] = {
 #include "assets/rom_kamakura_v.inc"
 };
+#endif
 
 Gfx rom_kamakura_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -270,13 +370,21 @@ Gfx rom_kamakura_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 rom_kamakura_ring1[0x100];
+#else
 u8 rom_kamakura_ring1[] = {
 #include "assets/rom_kamakura_ring1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_kamakura_ring_v[0x40 / sizeof(Vtx)];
+#else
 Vtx rom_kamakura_ring_v[] = {
 #include "assets/rom_kamakura_ring_v.inc"
 };
+#endif
 
 Gfx rom_kamakura_ring_modelT[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

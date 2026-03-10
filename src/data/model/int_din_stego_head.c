@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_stego_head_v[];
+#ifdef TARGET_PC
+static u16 int_din_stego_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_stego_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_stego_head/int_din_stego_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_finA_tex[0x80];
+#else
 u8 int_din_stego_finA_tex[] = {
 #include "assets/int_din_stego_finA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_h_tex[0x200];
+#else
 u8 int_din_stego_h_tex[] = {
 #include "assets/int_din_stego_h_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_kubi2_tex[0x80];
+#else
 u8 int_din_stego_kubi2_tex[] = {
 #include "assets/int_din_stego_kubi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_baceA_tex[0x200];
+#else
 u8 int_din_stego_baceA_tex[] = {
 #include "assets/int_din_stego_baceA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_poleA_tex[0x80];
+#else
 u8 int_din_stego_poleA_tex[] = {
 #include "assets/int_din_stego_poleA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_kubi_tex[0x80];
+#else
 u8 int_din_stego_kubi_tex[] = {
 #include "assets/int_din_stego_kubi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_stego_head_v[0x250 / sizeof(Vtx)];
+#else
 Vtx int_din_stego_head_v[] = {
 #include "assets/int_din_stego_head_v.inc"
 };
+#endif
 
 Gfx int_din_stego_head_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -83,3 +115,10 @@ Gfx int_din_stego_headT_model[] = {
     gsSPNTrianglesInit_5b(1, 26, 27, 28, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_stego_head_c(void) {
+    pc_load_asset("assets/int_din_stego_head/int_din_stego_pal.bin", int_din_stego_pal, 0x20, 0x919260, 0, 1);
+}
+#endif

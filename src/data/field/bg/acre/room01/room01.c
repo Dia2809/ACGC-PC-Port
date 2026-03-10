@@ -1,24 +1,44 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 room[0x20 / sizeof(u16)];
+#else
 static u16 room[] = {
 #include "assets/field/bg/room.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 room_floor[0x400];
+#else
 static u8 room_floor[] = {
 #include "assets/field/bg/room_floor.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 room_wall[0x800];
+#else
 static u8 room_wall[] = {
 #include "assets/field/bg/room_wall.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 room_window[0x800];
+#else
 static u8 room_window[] = {
 #include "assets/field/bg/room_window.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx room01_v[0x580 / sizeof(Vtx)];
+#else
 static Vtx room01_v[] = {
 #include "assets/field/bg/room01_v.inc"
 };
+#endif
 
 static Gfx room01_grp_room01__edge[] = {
     gsDPPipeSync(),
@@ -94,3 +114,14 @@ extern Gfx room01_model[] = {
     gsSPDisplayList(room01_grp_room01__edge),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_room01_room01_c(void) {
+    pc_load_asset("assets/field/bg/room.bin", room, 0x20, 0xD94E20, 0, 1);
+    pc_load_asset("assets/field/bg/room_floor.bin", room_floor, 0x400, 0xD94E40, 0, 0);
+    pc_load_asset("assets/field/bg/room_wall.bin", room_wall, 0x800, 0xD95240, 0, 0);
+    pc_load_asset("assets/field/bg/room_window.bin", room_window, 0x800, 0xD95A40, 0, 0);
+    pc_load_asset("assets/field/bg/room01_v.bin", room01_v, 0x580, 0xD96240, 0, 2);
+}
+#endif

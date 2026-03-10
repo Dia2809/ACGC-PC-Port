@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_conpo02_v[];
+#ifdef TARGET_PC
+u16 int_sum_conpo02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_conpo02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_conpo02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_conpo02_glass_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_conpo02_glass_tex_rgb_ci4_pal[] = {
 #include "assets/int_sum_conpo02_glass_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_conpo02_front_tex[0x400];
+#else
 u8 int_sum_conpo02_front_tex[] = {
 #include "assets/int_sum_conpo02_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_conpo02_p_top_tex[0x80];
+#else
 u8 int_sum_conpo02_p_top_tex[] = {
 #include "assets/int_sum_conpo02_p_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_conpo02_spika_tex[0x180];
+#else
 u8 int_sum_conpo02_spika_tex[] = {
 #include "assets/int_sum_conpo02_spika_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_conpo02_s_side_tex[0x180];
+#else
 u8 int_sum_conpo02_s_side_tex[] = {
 #include "assets/int_sum_conpo02_s_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_conpo02_glass_tex_rgb_ci4[0x80];
+#else
 u8 int_sum_conpo02_glass_tex_rgb_ci4[] = {
 #include "assets/int_sum_conpo02_glass_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_conpo02_v[0x4F0 / sizeof(Vtx)];
+#else
 Vtx int_sum_conpo02_v[] = {
 #include "assets/int_sum_conpo02_v.inc"
 };
+#endif
 
 Gfx int_sum_conpo02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

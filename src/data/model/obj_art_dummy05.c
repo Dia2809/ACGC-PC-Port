@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_art_dummy05_v[];
+#ifdef TARGET_PC
+u16 obj_art_dummy05_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_art_dummy05_pal[] = {
 #include "assets/obj_art_dummy05_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_art_dummy05_tex[0x80];
+#else
 u8 obj_art_dummy05_tex[] = {
 #include "assets/obj_art_dummy05_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_art_dummy05_back_tex[0x300];
+#else
 u8 obj_art_dummy05_back_tex[] = {
 #include "assets/obj_art_dummy05_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_art_dummy05_name_tex[0x80];
+#else
 u8 obj_art_dummy05_name_tex[] = {
 #include "assets/obj_art_dummy05_name_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_art_dummy05_v[0x1E0 / sizeof(Vtx)];
+#else
 Vtx obj_art_dummy05_v[] = {
 #include "assets/obj_art_dummy05_v.inc"
 };
+#endif
 
 Gfx obj_art_dummy05_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

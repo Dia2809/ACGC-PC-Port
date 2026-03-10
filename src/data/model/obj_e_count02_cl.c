@@ -5,49 +5,93 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_e_count02_0_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_count02_0_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_count02_0_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_1_tex[0x200];
+#else
 u8 obj_e_count02_1_tex[] = {
 #include "assets/obj_e_count02_1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_2_tex[0x200];
+#else
 u8 obj_e_count02_2_tex[] = {
 #include "assets/obj_e_count02_2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_3_tex[0x200];
+#else
 u8 obj_e_count02_3_tex[] = {
 #include "assets/obj_e_count02_3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_4_tex[0x200];
+#else
 u8 obj_e_count02_4_tex[] = {
 #include "assets/obj_e_count02_4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_5_tex[0x200];
+#else
 u8 obj_e_count02_5_tex[] = {
 #include "assets/obj_e_count02_5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_6_tex[0x200];
+#else
 u8 obj_e_count02_6_tex[] = {
 #include "assets/obj_e_count02_6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_7_tex[0x200];
+#else
 u8 obj_e_count02_7_tex[] = {
 #include "assets/obj_e_count02_7_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_8_tex[0x200];
+#else
 u8 obj_e_count02_8_tex[] = {
 #include "assets/obj_e_count02_8_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count02_9_tex[0x200];
+#else
 u8 obj_e_count02_9_tex[] = {
 #include "assets/obj_e_count02_9_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_count02_cl_v[0x100 / sizeof(Vtx)];
+#else
 Vtx obj_e_count02_cl_v[] = {
 #include "assets/obj_e_count02_cl_v.inc"
 };
+#endif
 
 Gfx obj_e_c2_ani_cl01_sita_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

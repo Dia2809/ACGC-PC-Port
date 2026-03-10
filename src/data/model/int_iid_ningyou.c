@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iid_ningyou_v[];
+#ifdef TARGET_PC
+u16 int_iid_ningyou_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iid_ningyou_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iid_ningyou_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_ningyou_hada_tex[0x80];
+#else
 u8 int_iid_ningyou_hada_tex[] = {
 #include "assets/int_iid_ningyou_hada_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_ningyou_boushi_tex[0x80];
+#else
 u8 int_iid_ningyou_boushi_tex[] = {
 #include "assets/int_iid_ningyou_boushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_ningyou_kao_tex[0x200];
+#else
 u8 int_iid_ningyou_kao_tex[] = {
 #include "assets/int_iid_ningyou_kao_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_ningyou_kutushita_tex[0x80];
+#else
 u8 int_iid_ningyou_kutushita_tex[] = {
 #include "assets/int_iid_ningyou_kutushita_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_ningyou_futi_tex[0x20];
+#else
 u8 int_iid_ningyou_futi_tex[] = {
 #include "assets/int_iid_ningyou_futi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_ningyou_fuku_tex[0x20];
+#else
 u8 int_iid_ningyou_fuku_tex[] = {
 #include "assets/int_iid_ningyou_fuku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_ningyou_ribbon_tex[0x80];
+#else
 u8 int_iid_ningyou_ribbon_tex[] = {
 #include "assets/int_iid_ningyou_ribbon_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_ningyou_ashi_tex[0x40];
+#else
 u8 int_iid_ningyou_ashi_tex[] = {
 #include "assets/int_iid_ningyou_ashi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iid_ningyou_v[0x1070 / sizeof(Vtx)];
+#else
 Vtx int_iid_ningyou_v[] = {
 #include "assets/int_iid_ningyou_v.inc"
 };
+#endif
 
 Gfx int_iid_ningyou_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

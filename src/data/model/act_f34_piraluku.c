@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+static u16 int_nog_piraluku_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_nog_piraluku_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f34_piraluku/int_nog_piraluku_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_f34_piraluku_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_f34_piraluku_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f34_piraluku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_f34_piraluku_a_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f34_piraluku_a_v[] = {
 #include "assets/act_f34_piraluku_a_v.inc"
 };
+#endif
 
 Gfx act_f34_piraluku_aT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -31,9 +43,13 @@ Gfx act_f34_piraluku_aT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f34_piraluku_b_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f34_piraluku_b_v[] = {
 #include "assets/act_f34_piraluku_b_v.inc"
 };
+#endif
 
 Gfx act_f34_piraluku_bT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -51,9 +67,13 @@ Gfx act_f34_piraluku_bT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f34_piraluku_c_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f34_piraluku_c_v[] = {
 #include "assets/act_f34_piraluku_c_v.inc"
 };
+#endif
 
 Gfx act_f34_piraluku_cT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -70,3 +90,10 @@ Gfx act_f34_piraluku_cT_model[] = {
     gsSPNTriangles_5b(1, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_f34_piraluku_c(void) {
+    pc_load_asset("assets/act_f34_piraluku/int_nog_piraluku_pal.bin", int_nog_piraluku_pal, 0x20, 0xBEC3A0, 0, 1);
+}
+#endif

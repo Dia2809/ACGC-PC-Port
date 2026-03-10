@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kob_pipeisu_v[];
+#ifdef TARGET_PC
+u16 int_kob_pipeisu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kob_pipeisu_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kob_pipeisu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_pipeisu_se1_tex[0x80];
+#else
 u8 int_kob_pipeisu_se1_tex[] = {
 #include "assets/int_kob_pipeisu_se1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_pipeisu_main1_tex[0x100];
+#else
 u8 int_kob_pipeisu_main1_tex[] = {
 #include "assets/int_kob_pipeisu_main1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_pipeisu_ashi1_tex[0x100];
+#else
 u8 int_kob_pipeisu_ashi1_tex[] = {
 #include "assets/int_kob_pipeisu_ashi1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_pipeisu_pipe1_tex[0x80];
+#else
 u8 int_kob_pipeisu_pipe1_tex[] = {
 #include "assets/int_kob_pipeisu_pipe1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_pipeisu_se2_tex[0x80];
+#else
 u8 int_kob_pipeisu_se2_tex[] = {
 #include "assets/int_kob_pipeisu_se2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_pipeisu_pipe2_tex[0x180];
+#else
 u8 int_kob_pipeisu_pipe2_tex[] = {
 #include "assets/int_kob_pipeisu_pipe2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kob_pipeisu_v[0x330 / sizeof(Vtx)];
+#else
 Vtx int_kob_pipeisu_v[] = {
 #include "assets/int_kob_pipeisu_v.inc"
 };
+#endif
 
 Gfx int_kob_pipeisu_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

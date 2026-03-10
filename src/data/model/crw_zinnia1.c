@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx crw_zinnia1_v[];
+#ifdef TARGET_PC
+u16 crw_zinnia1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 crw_zinnia1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/crw_zinnia1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 crw_zinnia1_tex_txt[0x200];
+#else
 u8 crw_zinnia1_tex_txt[] = {
 #include "assets/crw_zinnia1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 crw_zinnia2_tex_txt[0x80];
+#else
 u8 crw_zinnia2_tex_txt[] = {
 #include "assets/crw_zinnia2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx crw_zinnia1_v[0x440 / sizeof(Vtx)];
+#else
 Vtx crw_zinnia1_v[] = {
 #include "assets/crw_zinnia1_v.inc"
 };
+#endif
 
 Gfx crw_zinnia1_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

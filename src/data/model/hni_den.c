@@ -5,69 +5,133 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u8 lat_fusen_TXT[0x80];
+#else
 static u8 lat_fusen_TXT[] = {
 #include "assets/hni_den/lat_fusen_TXT.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2dl_tex[0x200];
+#else
 u8 hni_den_2dl_tex[] = {
 #include "assets/hni_den_2dl_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2dml_tex[0x400];
+#else
 u8 hni_den_2dml_tex[] = {
 #include "assets/hni_den_2dml_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2dmr_tex[0x400];
+#else
 u8 hni_den_2dmr_tex[] = {
 #include "assets/hni_den_2dmr_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2dm_tex[0x400];
+#else
 u8 hni_den_2dm_tex[] = {
 #include "assets/hni_den_2dm_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2dr_tex[0x200];
+#else
 u8 hni_den_2dr_tex[] = {
 #include "assets/hni_den_2dr_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2ml_tex[0x400];
+#else
 u8 hni_den_2ml_tex[] = {
 #include "assets/hni_den_2ml_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2mr_tex[0x400];
+#else
 u8 hni_den_2mr_tex[] = {
 #include "assets/hni_den_2mr_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2ul_tex[0x200];
+#else
 u8 hni_den_2ul_tex[] = {
 #include "assets/hni_den_2ul_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2uml_tex[0x400];
+#else
 u8 hni_den_2uml_tex[] = {
 #include "assets/hni_den_2uml_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2umr_tex[0x400];
+#else
 u8 hni_den_2umr_tex[] = {
 #include "assets/hni_den_2umr_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2um_tex[0x400];
+#else
 u8 hni_den_2um_tex[] = {
 #include "assets/hni_den_2um_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2m_tex[0x200];
+#else
 u8 hni_den_2m_tex[] = {
 #include "assets/hni_den_2m_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_3Dma_tex[0x800];
+#else
 static u8 inv_mwin_3Dma_tex[] = {
 #include "assets/hni_den/inv_mwin_3Dma_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 hni_den_2ur_tex[0x200];
+#else
 u8 hni_den_2ur_tex[] = {
 #include "assets/hni_den_2ur_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx hni_den_v[0x400 / sizeof(Vtx)];
+#else
 Vtx hni_den_v[] = {
 #include "assets/hni_den_v.inc"
 };
+#endif
 
 Gfx hni_den_senT_model[] = {
     gsDPPipeSync(),
@@ -287,3 +351,11 @@ Gfx hni_den_model[] = {
     gsSPDisplayList(hni_den_senT_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_hni_den_c(void) {
+    pc_load_asset("assets/hni_den/lat_fusen_TXT.bin", lat_fusen_TXT, 0x80, 0x704350, 0, 0);
+    pc_load_asset("assets/hni_den/inv_mwin_3Dma_tex.bin", inv_mwin_3Dma_tex, 0x800, 0x717820, 0, 0);
+}
+#endif

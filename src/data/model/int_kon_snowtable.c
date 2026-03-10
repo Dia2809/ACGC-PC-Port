@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_snowtable_v[];
+#ifdef TARGET_PC
+u16 int_kon_snowtable_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_snowtable_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_snowtable_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowtable01_tex[0x400];
+#else
 u8 int_kon_snowtable01_tex[] = {
 #include "assets/int_kon_snowtable01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowtable02_tex[0x80];
+#else
 u8 int_kon_snowtable02_tex[] = {
 #include "assets/int_kon_snowtable02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowtable03_tex[0x80];
+#else
 u8 int_kon_snowtable03_tex[] = {
 #include "assets/int_kon_snowtable03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_snowtable04_tex[0x80];
+#else
 u8 int_kon_snowtable04_tex[] = {
 #include "assets/int_kon_snowtable04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_snowtable_v[0x490 / sizeof(Vtx)];
+#else
 Vtx int_kon_snowtable_v[] = {
 #include "assets/int_kon_snowtable_v.inc"
 };
+#endif
 
 Gfx in_kon_snowtable_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

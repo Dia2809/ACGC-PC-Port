@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_nikki_wafu1_v[];
+#ifdef TARGET_PC
+u16 int_ike_nikki_wafu1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_nikki_wafu1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_nikki_wafu1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_nikki_wafu1face_tex[0x200];
+#else
 u8 int_ike_nikki_wafu1face_tex[] = {
 #include "assets/int_ike_nikki_wafu1face_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_nikki_wafu1side_tex[0x40];
+#else
 u8 int_ike_nikki_wafu1side_tex[] = {
 #include "assets/int_ike_nikki_wafu1side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_nikki_wafu1pen_tex[0x80];
+#else
 u8 int_ike_nikki_wafu1pen_tex[] = {
 #include "assets/int_ike_nikki_wafu1pen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_nikki_wafu1_v[0x420 / sizeof(Vtx)];
+#else
 Vtx int_ike_nikki_wafu1_v[] = {
 #include "assets/int_ike_nikki_wafu1_v.inc"
 };
+#endif
 
 Gfx int_ike_nikki_wafu1_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

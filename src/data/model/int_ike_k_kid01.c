@@ -6,69 +6,133 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_k_kid01_v[];
+#ifdef TARGET_PC
+u16 int_ike_k_kid01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_k_kid01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_k_kid01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidfront1_tex[0x80];
+#else
 u8 int_ike_k_kidfront1_tex[] = {
 #include "assets/int_ike_k_kidfront1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidfront2_tex[0x40];
+#else
 u8 int_ike_k_kidfront2_tex[] = {
 #include "assets/int_ike_k_kidfront2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidfront3_tex[0x200];
+#else
 u8 int_ike_k_kidfront3_tex[] = {
 #include "assets/int_ike_k_kidfront3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidfront4_tex[0x40];
+#else
 u8 int_ike_k_kidfront4_tex[] = {
 #include "assets/int_ike_k_kidfront4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidtire_tex[0x40];
+#else
 u8 int_ike_k_kidtire_tex[] = {
 #include "assets/int_ike_k_kidtire_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidtunagi_tex[0x40];
+#else
 u8 int_ike_k_kidtunagi_tex[] = {
 #include "assets/int_ike_k_kidtunagi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidsumi_tex[0x80];
+#else
 u8 int_ike_k_kidsumi_tex[] = {
 #include "assets/int_ike_k_kidsumi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidyane_tex[0x40];
+#else
 u8 int_ike_k_kidyane_tex[] = {
 #include "assets/int_ike_k_kidyane_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidunder_tex[0x40];
+#else
 u8 int_ike_k_kidunder_tex[] = {
 #include "assets/int_ike_k_kidunder_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidside2_tex[0x100];
+#else
 u8 int_ike_k_kidside2_tex[] = {
 #include "assets/int_ike_k_kidside2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidside3_tex[0x80];
+#else
 u8 int_ike_k_kidside3_tex[] = {
 #include "assets/int_ike_k_kidside3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidside4_tex[0x100];
+#else
 u8 int_ike_k_kidside4_tex[] = {
 #include "assets/int_ike_k_kidside4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidside1_tex[0x100];
+#else
 u8 int_ike_k_kidside1_tex[] = {
 #include "assets/int_ike_k_kidside1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_kidbase_tex[0x80];
+#else
 u8 int_ike_k_kidbase_tex[] = {
 #include "assets/int_ike_k_kidbase_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_k_kid01_v[0xB40 / sizeof(Vtx)];
+#else
 Vtx int_ike_k_kid01_v[] = {
 #include "assets/int_ike_k_kid01_v.inc"
 };
+#endif
 
 Gfx int_ike_k_kid01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

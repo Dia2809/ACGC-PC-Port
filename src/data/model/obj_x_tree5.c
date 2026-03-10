@@ -3,13 +3,21 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 obj_x_tree_light_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_x_tree_light_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_x_tree_light_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_x_tree5_light_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_x_tree5_light_v[] = {
 #include "assets/obj_x_tree5_light_v.inc"
 };
+#endif
 
 extern u16 obj_tree_light_pal[];
 

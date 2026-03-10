@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_jukebox_v[];
+#ifdef TARGET_PC
+u16 int_sum_jukebox_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_jukebox_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_jukebox_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_jukebox_glass_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_jukebox_glass_tex_rgb_ci4_pal[] = {
 #include "assets/int_sum_jukebox_glass_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_jukebox_front_tex[0x300];
+#else
 u8 int_sum_jukebox_front_tex[] = {
 #include "assets/int_sum_jukebox_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_jukebox_back_tex[0x180];
+#else
 u8 int_sum_jukebox_back_tex[] = {
 #include "assets/int_sum_jukebox_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_jukebox_in_tex[0x100];
+#else
 u8 int_sum_jukebox_in_tex[] = {
 #include "assets/int_sum_jukebox_in_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_jukebox_reco_tex[0x100];
+#else
 u8 int_sum_jukebox_reco_tex[] = {
 #include "assets/int_sum_jukebox_reco_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_jukebox_glass_tex[0x80];
+#else
 u8 int_sum_jukebox_glass_tex[] = {
 #include "assets/int_sum_jukebox_glass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_jukebox_v[0x2A0 / sizeof(Vtx)];
+#else
 Vtx int_sum_jukebox_v[] = {
 #include "assets/int_sum_jukebox_v.inc"
 };
+#endif
 
 Gfx int_sum_jukebox_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

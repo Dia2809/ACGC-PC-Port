@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_s_car_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_car_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_car_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_car_t1_tex[0x800];
+#else
 u8 obj_s_car_t1_tex[] = {
 #include "assets/obj_s_car_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_car_t2_tex[0x800];
+#else
 u8 obj_s_car_t2_tex[] = {
 #include "assets/obj_s_car_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_car_t3_tex[0x800];
+#else
 u8 obj_s_car_t3_tex[] = {
 #include "assets/obj_s_car_t3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_car_v[0x6E0 / sizeof(Vtx)];
+#else
 Vtx obj_s_car_v[] = {
 #include "assets/obj_s_car_v.inc"
 };
+#endif
 
 Gfx obj_s_car_t1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_pansy_v[];
+#ifdef TARGET_PC
+u8 int_nog_pansy_grass_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_nog_pansy_grass_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_pansy_grass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_pansy_leaf_tex[0x80];
+#else
 u8 int_nog_pansy_leaf_tex[] = {
 #include "assets/int_nog_pansy_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_pansy_flower_tex[0x100];
+#else
 u8 int_nog_pansy_flower_tex[] = {
 #include "assets/int_nog_pansy_flower_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_pansy_v[0x340 / sizeof(Vtx)];
+#else
 Vtx int_nog_pansy_v[] = {
 #include "assets/int_nog_pansy_v.inc"
 };
+#endif
 
 Gfx int_nog_pansy_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

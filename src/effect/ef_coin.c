@@ -131,13 +131,21 @@ static void eCoin_mv(eEC_Effect_c* effect, GAME* game) {
     }
 }
 
+#ifdef TARGET_PC
+static u16 ef_coin_gold_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 ef_coin_gold_pal[16] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_coin_gold_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 ef_coin_silver_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 ef_coin_silver_pal[16] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_coin_silver_pal.inc"
 };
+#endif
 
 static u16* eCoin_pal_table[2] = { ef_coin_gold_pal, ef_coin_silver_pal };
 
@@ -186,3 +194,11 @@ static void eCoin_dw(eEC_Effect_c* effect, GAME* game) {
         CLOSE_DISP(game->graph);
     }
 }
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_effect_ef_coin_c(void) {
+    pc_load_asset("assets/ef_coin_gold_pal.bin", ef_coin_gold_pal, 0x20, 0x361F20, 0, 1);
+    pc_load_asset("assets/ef_coin_silver_pal.bin", ef_coin_silver_pal, 0x20, 0x361F40, 0, 1);
+}
+#endif

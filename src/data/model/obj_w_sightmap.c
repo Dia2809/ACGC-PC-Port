@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+static u16 obj_sightmap_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_sightmap_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_sightmap/obj_sightmap_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_sightmap_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_sightmap_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_sightmap_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_sightmap_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_w_sightmap_v[] = {
 #include "assets/obj_w_sightmap_v.inc"
 };
+#endif
 
 Gfx obj_w_sightmapT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -29,3 +41,10 @@ Gfx obj_w_sightmapT_gfx_model[] = {
     gsSPNTriangles_5b(4, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_w_sightmap_c(void) {
+    pc_load_asset("assets/obj_w_sightmap/obj_sightmap_pal.bin", obj_sightmap_pal, 0x20, 0x3FA0E0, 0, 1);
+}
+#endif

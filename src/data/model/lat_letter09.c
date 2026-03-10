@@ -9,9 +9,13 @@ extern u16 lat_letter09_pal[];
 extern u8 lat_letter09_2[];
 extern u8 lat_letter09_3[];
 extern u8 lat_letter09_1[];
+#ifdef TARGET_PC
+Vtx lat_letter09_v[0x2E0 / sizeof(Vtx)];
+#else
 Vtx lat_letter09_v[] = {
 #include "assets/lat_letter09_v.inc"
 };
+#endif
 
 Gfx lat_letter09_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, lat_letter09_pal),

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_gomi03_v[];
+#ifdef TARGET_PC
+u16 int_kon_gomi03_gururi_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_gomi03_gururi_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_gomi03_gururi_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_gomi03_gururi_tex[0x100];
+#else
 u8 int_kon_gomi03_gururi_tex[] = {
 #include "assets/int_kon_gomi03_gururi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_gomi03_mawari_tex[0x80];
+#else
 u8 int_kon_gomi03_mawari_tex[] = {
 #include "assets/int_kon_gomi03_mawari_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_gomi03_totte_tex[0x80];
+#else
 u8 int_kon_gomi03_totte_tex[] = {
 #include "assets/int_kon_gomi03_totte_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_gomi03_ue_tex[0x200];
+#else
 u8 int_kon_gomi03_ue_tex[] = {
 #include "assets/int_kon_gomi03_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_gomi03_v[0x2F0 / sizeof(Vtx)];
+#else
 Vtx int_kon_gomi03_v[] = {
 #include "assets/int_kon_gomi03_v.inc"
 };
+#endif
 
 Gfx int_kon_gomi03_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -14,37 +14,69 @@ extern u8 grass_tex_dummy[];
 extern u8 bush_b_tex_dummy[];
 extern u8 river_tex_dummy[];
 extern u8 bush_pal_dummy[];
+#ifdef TARGET_PC
+static u16 rom_museum4_wall_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum4_wall_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_museum4/rom_museum4_wall_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_museum4_floor_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_museum4_floor_pal[] = {
 #include "assets/rom_museum4_floor_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_museum4_step_pal2[0x20];
+#else
 u8 rom_museum4_step_pal2[] = {
 #include "assets/rom_museum4_step_pal2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_museum4_wallB_tex[0x400];
+#else
 u8 rom_museum4_wallB_tex[] = {
 #include "assets/rom_museum4_wallB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_museum4_step_tex[0x800];
+#else
 u8 rom_museum4_step_tex[] = {
 #include "assets/rom_museum4_step_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum4_wallA_tex[0x200];
+#else
 static u8 rom_museum4_wallA_tex[] = {
 #include "assets/rom_museum4/rom_museum4_wallA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_museum4_floorA_tex[0x800];
+#else
 u8 rom_museum4_floorA_tex[] = {
 #include "assets/rom_museum4_floorA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_museum4_v[0x1510 / sizeof(Vtx)];
+#else
 Vtx rom_museum4_v[] = {
 #include "assets/rom_museum4_v.inc"
 };
+#endif
 
 Gfx rom_museum4_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -177,3 +209,11 @@ Gfx rom_museum4_model[] = {
     gsSPNTriangles_5b(1, 8, 9, 8, 3, 10, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_museum4_c(void) {
+    pc_load_asset("assets/rom_museum4/rom_museum4_wall_pal.bin", rom_museum4_wall_pal, 0x20, 0xBB3960, 0, 1);
+    pc_load_asset("assets/rom_museum4/rom_museum4_wallA_tex.bin", rom_museum4_wallA_tex, 0x200, 0xBB3980, 0, 0);
+}
+#endif

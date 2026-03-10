@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_shop_wall_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_shop_wall_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_wall_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_shop_wall_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop_wall_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_wall_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop_wall_v[0x240 / sizeof(Vtx)];
+#else
 Vtx obj_shop_wall_v[] = {
 #include "assets/obj_shop_wall_v.inc"
 };
+#endif
 
 Gfx obj_wallT_mat_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

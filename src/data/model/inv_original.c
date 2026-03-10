@@ -5,73 +5,141 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_ori_tw4_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_ori_tw4_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_ori_tw4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_original_cloth_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_original_cloth_tex_rgb_ci4_pal[] = {
 #include "assets/inv_original_cloth_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_ori_tw1_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_ori_tw1_tex_rgb_ci4_pal[] = {
 #include "assets/inv_ori_tw1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_ori_tw2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_ori_tw2_tex_rgb_ci4_pal[] = {
 #include "assets/inv_ori_tw2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_ori_tw3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_ori_tw3_tex_rgb_ci4_pal[] = {
 #include "assets/inv_ori_tw3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_ori_w1_tex[0x800];
+#else
 u8 inv_ori_w1_tex[] = {
 #include "assets/inv_ori_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_ori_w2_tex[0x400];
+#else
 u8 inv_ori_w2_tex[] = {
 #include "assets/inv_ori_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_ori_w3_tex[0x800];
+#else
 u8 inv_ori_w3_tex[] = {
 #include "assets/inv_ori_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_ori_w4_tex[0x100];
+#else
 u8 inv_ori_w4_tex[] = {
 #include "assets/inv_ori_w4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 sav_win_waku_tex[0x200];
+#else
 static u8 sav_win_waku_tex[] = {
 #include "assets/inv_original/sav_win_waku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_original_futa2_tex[0x200];
+#else
 static u8 inv_original_futa2_tex[] = {
 #include "assets/inv_original/inv_original_futa2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_ori_tw4_tex_rgb_ci4[0x80];
+#else
 u8 inv_ori_tw4_tex_rgb_ci4[] = {
 #include "assets/inv_ori_tw4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_original_cloth_tex_rgb_ci4[0x200];
+#else
 u8 inv_original_cloth_tex_rgb_ci4[] = {
 #include "assets/inv_original_cloth_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_ori_tw1_tex_rgb_ci4[0x400];
+#else
 u8 inv_ori_tw1_tex_rgb_ci4[] = {
 #include "assets/inv_ori_tw1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_ori_tw2_tex_rgb_ci4[0x200];
+#else
 u8 inv_ori_tw2_tex_rgb_ci4[] = {
 #include "assets/inv_ori_tw2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_ori_tw3_tex_rgb_ci4[0x400];
+#else
 u8 inv_ori_tw3_tex_rgb_ci4[] = {
 #include "assets/inv_ori_tw3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx inv_original_v[0xDE0 / sizeof(Vtx)];
+#else
 Vtx inv_original_v[] = {
 #include "assets/inv_original_v.inc"
 };
+#endif
 
 Gfx needlework_before_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -306,13 +374,21 @@ Gfx inv_original_ueT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 inv_original_aw5_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 inv_original_aw5_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_original_aw5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx inv_original2_v[0xDC0 / sizeof(Vtx)];
+#else
 Vtx inv_original2_v[] = {
 #include "assets/inv_original2_v.inc"
 };
+#endif
 
 Gfx inv_original2_w9_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, inv_ori_tw4_tex_rgb_ci4_pal),
@@ -521,3 +597,11 @@ Gfx inv_original2_ueT_model[] = {
     gsSPNTriangles(2, 0, 1, 2, 1, 3, 2, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_inv_original_c(void) {
+    pc_load_asset("assets/inv_original/sav_win_waku_tex.bin", sav_win_waku_tex, 0x200, 0x79D4E0, 0, 0);
+    pc_load_asset("assets/inv_original/inv_original_futa2_tex.bin", inv_original_futa2_tex, 0x200, 0x79D6E0, 0, 0);
+}
+#endif

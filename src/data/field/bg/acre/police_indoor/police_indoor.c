@@ -1,124 +1,244 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_koban_tel_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_koban_tel_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_tel_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_koban_win_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_koban_win_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_win_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_koban_us_pos_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_koban_us_pos_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_us_pos_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_koban_jim_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_koban_jim_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_jim_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_koban_kabe_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_koban_kabe_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_kabe_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_koban_roc_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_koban_roc_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_roc_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_tel[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_tel[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_tel.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_win[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_win[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_win.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_desk_front[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_desk_front[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_desk_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_desk_side[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_desk_side[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_desk_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_desk_top[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_desk_top[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_desk_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_yuka[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_yuka[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_yuka.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_us_pos1[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_us_pos1[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_us_pos1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_us_pos2[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_us_pos2[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_us_pos2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_kage1[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_kage1[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_kage1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_kage2[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_kage2[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_kage2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_ent[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_ent[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_ent.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_jim_front[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_jim_front[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_jim_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_jim_side[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_jim_side[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_jim_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_jim_top[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_jim_top[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_jim_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_kabe1[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_kabe1[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_kabe1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_telcode[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_telcode[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_telcode.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_book[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_book[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_book.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_roc_s[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_roc_s[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_roc_s.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_roc_t[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_roc_t[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_roc_t.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_kabe3[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_kabe3[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_kabe3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_isu[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_isu[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_isu.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_roc_i[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_roc_i[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_roc_i.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_koban_roc_f3[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_koban_roc_f3[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_koban_roc_f3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx police_indoor_v[0x1A90 / sizeof(Vtx)];
+#else
 static Vtx police_indoor_v[] = {
 #include "assets/field/bg/police_indoor_v.inc"
 };
+#endif
 
 extern Gfx police_indoor_modelT[] = {
     gsSPEndDisplayList(),
@@ -641,3 +761,39 @@ extern Gfx police_indoor_model[] = {
                       ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_police_indoor_police_indoor_c(void) {
+    pc_load_asset("assets/field/bg/rom_koban_tel_pal.bin", rom_koban_tel_pal, 0x20, 0xC16DE0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_koban_win_pal.bin", rom_koban_win_pal, 0x20, 0xC16E00, 0, 1);
+    pc_load_asset("assets/field/bg/rom_koban_us_pos_pal.bin", rom_koban_us_pos_pal, 0x20, 0xC16E20, 0, 1);
+    pc_load_asset("assets/field/bg/rom_koban_jim_pal.bin", rom_koban_jim_pal, 0x20, 0xC16E40, 0, 1);
+    pc_load_asset("assets/field/bg/rom_koban_kabe_pal.bin", rom_koban_kabe_pal, 0x20, 0xC16E60, 0, 1);
+    pc_load_asset("assets/field/bg/rom_koban_roc_pal.bin", rom_koban_roc_pal, 0x20, 0xC16E80, 0, 1);
+    pc_load_asset("assets/field/bg/rom_koban_tel.bin", rom_koban_tel, 0x200, 0xC16EA0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_win.bin", rom_koban_win, 0x200, 0xC170A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_desk_front.bin", rom_koban_desk_front, 0x100, 0xC172A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_desk_side.bin", rom_koban_desk_side, 0x80, 0xC173A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_desk_top.bin", rom_koban_desk_top, 0x100, 0xC17420, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_yuka.bin", rom_koban_yuka, 0x800, 0xC17520, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_us_pos1.bin", rom_koban_us_pos1, 0x300, 0xC17D20, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_us_pos2.bin", rom_koban_us_pos2, 0x300, 0xC18020, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_kage1.bin", rom_koban_kage1, 0x100, 0xC18320, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_kage2.bin", rom_koban_kage2, 0x80, 0xC18420, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_ent.bin", rom_koban_ent, 0x400, 0xC184A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_jim_front.bin", rom_koban_jim_front, 0x200, 0xC188A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_jim_side.bin", rom_koban_jim_side, 0x100, 0xC18AA0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_jim_top.bin", rom_koban_jim_top, 0x100, 0xC18BA0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_kabe1.bin", rom_koban_kabe1, 0x800, 0xC18CA0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_telcode.bin", rom_koban_telcode, 0x80, 0xC194A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_book.bin", rom_koban_book, 0x80, 0xC19520, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_roc_s.bin", rom_koban_roc_s, 0x100, 0xC195A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_roc_t.bin", rom_koban_roc_t, 0x80, 0xC196A0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_kabe3.bin", rom_koban_kabe3, 0x400, 0xC19720, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_isu.bin", rom_koban_isu, 0x80, 0xC19B20, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_roc_i.bin", rom_koban_roc_i, 0x100, 0xC19BA0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_koban_roc_f3.bin", rom_koban_roc_f3, 0x400, 0xC19CA0, 0, 0);
+    pc_load_asset("assets/field/bg/police_indoor_v.bin", police_indoor_v, 0x1A90, 0xC1A0A0, 0, 2);
+}
+#endif

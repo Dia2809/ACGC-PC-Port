@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_kisha_kemuri01_0[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_kisha_kemuri01_0[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_kisha_kemuri01_0.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_kisha_kemuri01_1[0x80];
+#else
 u8 ef_kisha_kemuri01_1[] = {
 #include "assets/ef_kisha_kemuri01_1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_kisha_kemuri01_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_kisha_kemuri01_00_v[] = {
 #include "assets/ef_kisha_kemuri01_00_v.inc"
 };
+#endif
 
 Gfx ef_kisha_kemuri01_modelT[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

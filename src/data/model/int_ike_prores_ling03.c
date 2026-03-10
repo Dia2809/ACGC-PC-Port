@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_prores_ling03_v[];
+#ifdef TARGET_PC
+u16 int_ike_prores_ling03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_prores_ling03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_prores_ling03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_lope2_tex[0x80];
+#else
 u8 int_ike_prores_ling03_lope2_tex[] = {
 #include "assets/int_ike_prores_ling03_lope2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_lope_tex[0x80];
+#else
 u8 int_ike_prores_ling03_lope_tex[] = {
 #include "assets/int_ike_prores_ling03_lope_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_mat2_tex[0x80];
+#else
 u8 int_ike_prores_ling03_mat2_tex[] = {
 #include "assets/int_ike_prores_ling03_mat2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_pole_tex[0x80];
+#else
 u8 int_ike_prores_ling03_pole_tex[] = {
 #include "assets/int_ike_prores_ling03_pole_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_floor_tex[0x200];
+#else
 u8 int_ike_prores_ling03_floor_tex[] = {
 #include "assets/int_ike_prores_ling03_floor_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_floorside_tex[0x80];
+#else
 u8 int_ike_prores_ling03_floorside_tex[] = {
 #include "assets/int_ike_prores_ling03_floorside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_pole2_tex[0x80];
+#else
 u8 int_ike_prores_ling03_pole2_tex[] = {
 #include "assets/int_ike_prores_ling03_pole2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_base_tex[0x80];
+#else
 u8 int_ike_prores_ling03_base_tex[] = {
 #include "assets/int_ike_prores_ling03_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_prores_ling03_pole3_tex[0x80];
+#else
 u8 int_ike_prores_ling03_pole3_tex[] = {
 #include "assets/int_ike_prores_ling03_pole3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_prores_ling03_v[0x4C0 / sizeof(Vtx)];
+#else
 Vtx int_ike_prores_ling03_v[] = {
 #include "assets/int_ike_prores_ling03_v.inc"
 };
+#endif
 
 Gfx int_ike_prores_ling03_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

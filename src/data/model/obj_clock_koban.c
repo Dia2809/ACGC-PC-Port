@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_clock_koban_v[];
+#ifdef TARGET_PC
+u16 obj_clock_koban_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_clock_koban_pal[] = {
 #include "assets/obj_clock_koban_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_koban_side_tex_txt[0x80];
+#else
 u8 obj_clock_koban_side_tex_txt[] = {
 #include "assets/obj_clock_koban_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_koban_moji_tex_txt[0x200];
+#else
 u8 obj_clock_koban_moji_tex_txt[] = {
 #include "assets/obj_clock_koban_moji_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_clock_koban_v[0x290 / sizeof(Vtx)];
+#else
 Vtx obj_clock_koban_v[] = {
 #include "assets/obj_clock_koban_v.inc"
 };
+#endif
 
 Gfx obj_clock_koban_body_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

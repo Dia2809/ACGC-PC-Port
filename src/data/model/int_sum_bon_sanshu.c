@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_bon_sanshu_v[];
+#ifdef TARGET_PC
+u16 int_sum_bon_sanshu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_bon_sanshu_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_bon_sanshu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_sanshu_tree_tex[0x200];
+#else
 u8 int_sum_bon_sanshu_tree_tex[] = {
 #include "assets/int_sum_bon_sanshu_tree_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_sanshu_treetop_tex[0x180];
+#else
 u8 int_sum_bon_sanshu_treetop_tex[] = {
 #include "assets/int_sum_bon_sanshu_treetop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_sanshu_eda_tex[0x100];
+#else
 u8 int_sum_bon_sanshu_eda_tex[] = {
 #include "assets/int_sum_bon_sanshu_eda_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_sanshu_eda2_tex[0x100];
+#else
 u8 int_sum_bon_sanshu_eda2_tex[] = {
 #include "assets/int_sum_bon_sanshu_eda2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_sanshu_stand_tex[0x100];
+#else
 u8 int_sum_bon_sanshu_stand_tex[] = {
 #include "assets/int_sum_bon_sanshu_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_sanshu_earth_tex[0x80];
+#else
 u8 int_sum_bon_sanshu_earth_tex[] = {
 #include "assets/int_sum_bon_sanshu_earth_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_sanshu_hachi_tex[0x100];
+#else
 u8 int_sum_bon_sanshu_hachi_tex[] = {
 #include "assets/int_sum_bon_sanshu_hachi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_bon_sanshu_v[0x5D0 / sizeof(Vtx)];
+#else
 Vtx int_sum_bon_sanshu_v[] = {
 #include "assets/int_sum_bon_sanshu_v.inc"
 };
+#endif
 
 Gfx int_sum_bon_sanshu_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

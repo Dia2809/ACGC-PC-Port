@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_ptera_head_v[];
+#ifdef TARGET_PC
+static u16 int_din_ptera_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_ptera_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_ptera_head/int_din_ptera_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_ptera_body_tex[0x180];
+#else
 u8 int_din_ptera_body_tex[] = {
 #include "assets/int_din_ptera_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_ptera_leg_tex[0x80];
+#else
 u8 int_din_ptera_leg_tex[] = {
 #include "assets/int_din_ptera_leg_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_ptera_shin_tex[0x100];
+#else
 u8 int_din_ptera_shin_tex[] = {
 #include "assets/int_din_ptera_shin_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_ptera_h_tex[0x200];
+#else
 u8 int_din_ptera_h_tex[] = {
 #include "assets/int_din_ptera_h_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_ptera_kubi_tex[0x80];
+#else
 u8 int_din_ptera_kubi_tex[] = {
 #include "assets/int_din_ptera_kubi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_ptera_baceB_tex[0x200];
+#else
 u8 int_din_ptera_baceB_tex[] = {
 #include "assets/int_din_ptera_baceB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_ptera_poleB_tex[0x80];
+#else
 u8 int_din_ptera_poleB_tex[] = {
 #include "assets/int_din_ptera_poleB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_ptera_head_v[0x470 / sizeof(Vtx)];
+#else
 Vtx int_din_ptera_head_v[] = {
 #include "assets/int_din_ptera_head_v.inc"
 };
+#endif
 
 Gfx int_din_ptera_head_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -97,3 +133,10 @@ Gfx int_din_ptera_headT_model[] = {
     gsSPNTriangles_5b(10, 12, 0, 3, 10, 0, 5, 12, 6, 9, 12, 10),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_ptera_head_c(void) {
+    pc_load_asset("assets/int_din_ptera_head/int_din_ptera_pal.bin", int_din_ptera_pal, 0x20, 0x9166A0, 0, 1);
+}
+#endif

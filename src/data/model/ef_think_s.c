@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_think_s[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_think_s[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_think_s.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_think_s_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_think_s_v[] = {
 #include "assets/ef_think_s_v.inc"
 };
+#endif
 
 Gfx ef_think_s_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx logo_us_sing_v[];
+#ifdef TARGET_PC
+static u16 logo_us_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 logo_us_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/logo_us_sing/logo_us_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 logo_us_g_1_tex_txt[0x800];
+#else
 u8 logo_us_g_1_tex_txt[] = {
 #include "assets/logo_us_g_1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 logo_us_g_2_tex_txt[0x400];
+#else
 u8 logo_us_g_2_tex_txt[] = {
 #include "assets/logo_us_g_2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 logo_us_n_tex_txt[0x800];
+#else
 static u8 logo_us_n_tex_txt[] = {
 #include "assets/logo_us_sing/logo_us_n_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 logo_us_i_tex_txt[0x600];
+#else
 static u8 logo_us_i_tex_txt[] = {
 #include "assets/logo_us_sing/logo_us_i_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 logo_us_s_tex_txt[0x600];
+#else
 static u8 logo_us_s_tex_txt[] = {
 #include "assets/logo_us_sing/logo_us_s_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx logo_us_sing_v[0x140 / sizeof(Vtx)];
+#else
 Vtx logo_us_sing_v[] = {
 #include "assets/logo_us_sing_v.inc"
 };
+#endif
 
 Gfx logo_us_zss_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, logo_us_pal),
@@ -95,3 +123,13 @@ cKF_Joint_R_c cKF_je_r_logo_us_sing_tbl[] = { { NULL, 4, cKF_JOINT_FLAG_DISP_OPA
                                               { logo_us_zss_model, 0, cKF_JOINT_FLAG_DISP_OPA, { 4500, 0, 0 } } };
 
 cKF_Skeleton_R_c cKF_bs_r_logo_us_sing = { ARRAY_COUNT(cKF_je_r_logo_us_sing_tbl), 5, cKF_je_r_logo_us_sing_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_logo_us_sing_c(void) {
+    pc_load_asset("assets/logo_us_sing/logo_us_pal.bin", logo_us_pal, 0x20, 0x8CEAA0, 0, 1);
+    pc_load_asset("assets/logo_us_sing/logo_us_n_tex_txt.bin", logo_us_n_tex_txt, 0x800, 0x8CF6C0, 0, 0);
+    pc_load_asset("assets/logo_us_sing/logo_us_i_tex_txt.bin", logo_us_i_tex_txt, 0x600, 0x8CFEC0, 0, 0);
+    pc_load_asset("assets/logo_us_sing/logo_us_s_tex_txt.bin", logo_us_s_tex_txt, 0x600, 0x8D04C0, 0, 0);
+}
+#endif

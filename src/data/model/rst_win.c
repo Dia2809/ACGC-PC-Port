@@ -5,85 +5,165 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 rst_win_kao2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 rst_win_kao2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rst_win_kao2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rst_win_bittkuri_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 rst_win_bittkuri_tex_rgb_ci4_pal[] = {
 #include "assets/rst_win_bittkuri_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rst_win_sw4_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 rst_win_sw4_tex_rgb_ci4_pal[] = {
 #include "assets/rst_win_sw4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rst_win_sw1_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 rst_win_sw1_tex_rgb_ci4_pal[] = {
 #include "assets/rst_win_sw1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rst_win_sw2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 rst_win_sw2_tex_rgb_ci4_pal[] = {
 #include "assets/rst_win_sw2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rst_win_sw3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 rst_win_sw3_tex_rgb_ci4_pal[] = {
 #include "assets/rst_win_sw3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_kagi2_tex[0x80];
+#else
 u8 rst_win_kagi2_tex[] = {
 #include "assets/rst_win_kagi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_seri_tex[0x400];
+#else
 u8 rst_win_seri_tex[] = {
 #include "assets/rst_win_seri_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 req_win_w1_tex[0x400];
+#else
 static u8 req_win_w1_tex[] = {
 #include "assets/rst_win/req_win_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 req_win_w2_tex[0x400];
+#else
 static u8 req_win_w2_tex[] = {
 #include "assets/rst_win/req_win_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 req_win_w3_tex[0x200];
+#else
 static u8 req_win_w3_tex[] = {
 #include "assets/rst_win/req_win_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_kao_tex[0x800];
+#else
 u8 rst_win_kao_tex[] = {
 #include "assets/rst_win_kao_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_kagi1_tex[0x80];
+#else
 u8 rst_win_kagi1_tex[] = {
 #include "assets/rst_win_kagi1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 req_win_w4_tex[0x80];
+#else
 static u8 req_win_w4_tex[] = {
 #include "assets/rst_win/req_win_w4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_bittkuri_tex_rgb_ci4[0x200];
+#else
 u8 rst_win_bittkuri_tex_rgb_ci4[] = {
 #include "assets/rst_win_bittkuri_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_sw4_tex_rgb_ci4[0x200];
+#else
 u8 rst_win_sw4_tex_rgb_ci4[] = {
 #include "assets/rst_win_sw4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_sw1_tex_rgb_ci4[0x400];
+#else
 u8 rst_win_sw1_tex_rgb_ci4[] = {
 #include "assets/rst_win_sw1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_sw2_tex_rgb_ci4[0x400];
+#else
 u8 rst_win_sw2_tex_rgb_ci4[] = {
 #include "assets/rst_win_sw2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rst_win_sw3_tex_rgb_ci4[0x200];
+#else
 u8 rst_win_sw3_tex_rgb_ci4[] = {
 #include "assets/rst_win_sw3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rst_win_v[0x680 / sizeof(Vtx)];
+#else
 Vtx rst_win_v[] = {
 #include "assets/rst_win_v.inc"
 };
+#endif
 
 Gfx rst_win_fuki_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
@@ -282,3 +362,13 @@ Gfx rst_win_model[] = {
     gsSPDisplayList(rst_win_kagiT_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rst_win_c(void) {
+    pc_load_asset("assets/rst_win/req_win_w1_tex.bin", req_win_w1_tex, 0x400, 0x750860, 0, 0);
+    pc_load_asset("assets/rst_win/req_win_w2_tex.bin", req_win_w2_tex, 0x400, 0x750C60, 0, 0);
+    pc_load_asset("assets/rst_win/req_win_w3_tex.bin", req_win_w3_tex, 0x200, 0x751060, 0, 0);
+    pc_load_asset("assets/rst_win/req_win_w4_tex.bin", req_win_w4_tex, 0x80, 0x751AE0, 0, 0);
+}
+#endif

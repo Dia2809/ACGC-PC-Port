@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iid_funediary_v[];
+#ifdef TARGET_PC
+u8 int_iid_funediary[0x20] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_iid_funediary[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iid_funediary.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_funediary_mae_tex[0x20];
+#else
 u8 int_iid_funediary_mae_tex[] = {
 #include "assets/int_iid_funediary_mae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_funediary_hyoushi_tex[0x200];
+#else
 u8 int_iid_funediary_hyoushi_tex[] = {
 #include "assets/int_iid_funediary_hyoushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_funediary_soko_tex[0x20];
+#else
 u8 int_iid_funediary_soko_tex[] = {
 #include "assets/int_iid_funediary_soko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_funediary_ue_tex[0x20];
+#else
 u8 int_iid_funediary_ue_tex[] = {
 #include "assets/int_iid_funediary_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_funediary_esaki_tex[0x20];
+#else
 u8 int_iid_funediary_esaki_tex[] = {
 #include "assets/int_iid_funediary_esaki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_funediary_ebody_tex[0x20];
+#else
 u8 int_iid_funediary_ebody_tex[] = {
 #include "assets/int_iid_funediary_ebody_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iid_funediary_v[0x380 / sizeof(Vtx)];
+#else
 Vtx int_iid_funediary_v[] = {
 #include "assets/int_iid_funediary_v.inc"
 };
+#endif
 
 Gfx int_iid_funediary_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

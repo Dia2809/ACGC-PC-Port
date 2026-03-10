@@ -7,21 +7,37 @@
 
 extern Vtx camera_v[];
 extern Vtx darrow_v[];
+#ifdef TARGET_PC
+u8 no_txt[0x100];
+#else
 u8 no_txt[] = {
 #include "assets/no_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 np_txt[0x100];
+#else
 u8 np_txt[] = {
 #include "assets/np_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 nt_txt[0x100];
+#else
 u8 nt_txt[] = {
 #include "assets/nt_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 nx_txt[0x100];
+#else
 u8 nx_txt[] = {
 #include "assets/nx_txt.inc"
 };
+#endif
 
 Gfx darrow_model[] = {
     gsSPVertex(darrow_v, 32, 0),
@@ -38,9 +54,13 @@ Gfx darrow_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx darrow_v[0x240 / sizeof(Vtx)];
+#else
 Vtx darrow_v[] = {
 #include "assets/darrow_v.inc"
 };
+#endif
 
 Gfx camera_model[] = {
     gsSPVertex(camera_v, 32, 0),
@@ -60,13 +80,21 @@ Gfx camera_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx camera_v[0x280 / sizeof(Vtx)];
+#else
 Vtx camera_v[] = {
 #include "assets/camera_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 v_debug_texture[0x40];
+#else
 u8 v_debug_texture[] = {
 #include "assets/v_debug_texture.inc"
 };
+#endif
 
 Gfx RCP_debug_texture_16x16_8[] = {
     gsSPVertex(v_debug_texture, 4, 0),

@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 pos_win_yajirushi_tex[0x400];
+#else
 u8 pos_win_yajirushi_tex[] = {
 #include "assets/pos_win_yajirushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx pos_yaji_v[0x40 / sizeof(Vtx)];
+#else
 Vtx pos_yaji_v[] = {
 #include "assets/pos_yaji_v.inc"
 };
+#endif
 
 Gfx pos_yaji_wakuT_model[] = {
     gsDPPipeSync(),

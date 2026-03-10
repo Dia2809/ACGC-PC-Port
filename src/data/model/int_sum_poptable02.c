@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_poptable02_v[];
+#ifdef TARGET_PC
+u16 int_sum_poptable02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_poptable02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_poptable02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_poptable02_top_tex[0x200];
+#else
 u8 int_sum_poptable02_top_tex[] = {
 #include "assets/int_sum_poptable02_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_poptable02_topback_tex[0x200];
+#else
 u8 int_sum_poptable02_topback_tex[] = {
 #include "assets/int_sum_poptable02_topback_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_poptable02_stand_tex[0x100];
+#else
 u8 int_sum_poptable02_stand_tex[] = {
 #include "assets/int_sum_poptable02_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_poptable02_standtop_tex[0x80];
+#else
 u8 int_sum_poptable02_standtop_tex[] = {
 #include "assets/int_sum_poptable02_standtop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_poptable02_standsita_tex[0x100];
+#else
 u8 int_sum_poptable02_standsita_tex[] = {
 #include "assets/int_sum_poptable02_standsita_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_poptable02_v[0x1A0 / sizeof(Vtx)];
+#else
 Vtx int_sum_poptable02_v[] = {
 #include "assets/int_sum_poptable02_v.inc"
 };
+#endif
 
 Gfx int_sum_poptable02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

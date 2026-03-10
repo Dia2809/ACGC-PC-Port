@@ -6,9 +6,13 @@
 #include "ef_effect_control.h"
 
 extern Vtx rom_shop3f_v[];
+#ifdef TARGET_PC
+Vtx rom_shop3f_v[0x240 / sizeof(Vtx)];
+#else
 Vtx rom_shop3f_v[] = {
 #include "assets/rom_shop3f_v.inc"
 };
+#endif
 
 Gfx rom_shop3f_modelT[] = {
     gsSPEndDisplayList(),

@@ -3,37 +3,69 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 boy_1_horn_tex_txt[0x80];
+#else
 u8 boy_1_horn_tex_txt[] = {
 #include "assets/boy_1_horn_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 boy_1_skin_tex_txt[0x80];
+#else
 u8 boy_1_skin_tex_txt[] = {
 #include "assets/boy_1_skin_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 boy_1_hole_tex_txt[0x80];
+#else
 u8 boy_1_hole_tex_txt[] = {
 #include "assets/boy_1_hole_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 boy_1_shoe_tex_txt[0x80];
+#else
 u8 boy_1_shoe_tex_txt[] = {
 #include "assets/boy_1_shoe_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 boy_1_bottom_tex_txt[0x80];
+#else
 u8 boy_1_bottom_tex_txt[] = {
 #include "assets/boy_1_bottom_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 boy_1_foot_tex_txt[0x80];
+#else
 u8 boy_1_foot_tex_txt[] = {
 #include "assets/boy_1_foot_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 boy_1_pants_tex_txt[0x80];
+#else
 u8 boy_1_pants_tex_txt[] = {
 #include "assets/boy_1_pants_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx boy_1_v[0x1980 / sizeof(Vtx)];
+#else
 Vtx boy_1_v[] = {
 #include "assets/boy_1_v.inc"
 };
+#endif
 
 Gfx head_boy_model[] = {
     gsSPMatrix(&anime_6_mdl[7], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),

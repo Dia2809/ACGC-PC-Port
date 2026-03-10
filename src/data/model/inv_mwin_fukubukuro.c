@@ -5,18 +5,34 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_mwin_fukubukuro2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_mwin_fukubukuro2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_mwin_fukubukuro2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_fukubukuro2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_fukubukuro2_tex_rgb_ci4_pal[] = {
 #include "assets/inv_mwin_fukubukuro2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_fukubukuro_tex_rgb_ci4[0x200];
+#else
 u8 inv_mwin_fukubukuro_tex_rgb_ci4[] = {
 #include "assets/inv_mwin_fukubukuro_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_fukubukuro2_tex_rgb_ci4[0x200];
+#else
 u8 inv_mwin_fukubukuro2_tex_rgb_ci4[] = {
 #include "assets/inv_mwin_fukubukuro2_tex_rgb_ci4.inc"
 };
+#endif

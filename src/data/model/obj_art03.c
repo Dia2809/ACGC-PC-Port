@@ -5,29 +5,53 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_art_sya_etc_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_art_sya_etc_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_art_sya_etc_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_art_sya_art_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_art_sya_art_pal[] = {
 #include "assets/obj_art_sya_art_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_art_sya_gaku_tex[0x80];
+#else
 u8 obj_art_sya_gaku_tex[] = {
 #include "assets/obj_art_sya_gaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_art_sya_art_tex[0x300];
+#else
 u8 obj_art_sya_art_tex[] = {
 #include "assets/obj_art_sya_art_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_art_sya_name_tex[0x80];
+#else
 u8 obj_art_sya_name_tex[] = {
 #include "assets/obj_art_sya_name_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_art03_v[0x1E0 / sizeof(Vtx)];
+#else
 Vtx obj_art03_v[] = {
 #include "assets/obj_art03_v.inc"
 };
+#endif
 
 Gfx obj_art03_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_gre_lanp01_v[];
+#ifdef TARGET_PC
+u16 int_sum_gre_lanp01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_gre_lanp01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_gre_lanp01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_lanp01_kasa_tex[0x100];
+#else
 u8 int_sum_gre_lanp01_kasa_tex[] = {
 #include "assets/int_sum_gre_lanp01_kasa_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_lanp01_stand_tex[0x100];
+#else
 u8 int_sum_gre_lanp01_stand_tex[] = {
 #include "assets/int_sum_gre_lanp01_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_lanp01_topshade_tex[0x80];
+#else
 u8 int_sum_gre_lanp01_topshade_tex[] = {
 #include "assets/int_sum_gre_lanp01_topshade_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_lanp01_front_tex[0x200];
+#else
 u8 int_sum_gre_lanp01_front_tex[] = {
 #include "assets/int_sum_gre_lanp01_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_lanp01_side_tex[0x100];
+#else
 u8 int_sum_gre_lanp01_side_tex[] = {
 #include "assets/int_sum_gre_lanp01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_lanp01_top_tex[0x80];
+#else
 u8 int_sum_gre_lanp01_top_tex[] = {
 #include "assets/int_sum_gre_lanp01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_lanp01_swich_tex[0x80];
+#else
 u8 int_sum_gre_lanp01_swich_tex[] = {
 #include "assets/int_sum_gre_lanp01_swich_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_lanp01_back_tex[0x100];
+#else
 u8 int_sum_gre_lanp01_back_tex[] = {
 #include "assets/int_sum_gre_lanp01_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_gre_lanp01_v[0x320 / sizeof(Vtx)];
+#else
 Vtx int_sum_gre_lanp01_v[] = {
 #include "assets/int_sum_gre_lanp01_v.inc"
 };
+#endif
 
 Gfx int_sum_gre_lanp01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

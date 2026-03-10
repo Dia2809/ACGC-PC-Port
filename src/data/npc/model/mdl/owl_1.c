@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx owl_1_v[0x1A90 / sizeof(Vtx)];
+#else
 static Vtx owl_1_v[] = {
 #include "assets/npc/mdl/owl_1_v.inc"
 };
+#endif
 
 static Gfx head_owl_model[] = {
     gsSPMatrix(anime_6_model+sizeof(Mtx)*8, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -768,3 +772,10 @@ static cKF_Joint_R_c cKF_je_r_owl_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_owl_1 = { 26, 15, cKF_je_r_owl_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_owl_1_c(void) {
+    pc_load_asset("assets/npc/mdl/owl_1_v.bin", owl_1_v, 0x1A90, 0x4AD1C0, 0, 2);
+}
+#endif

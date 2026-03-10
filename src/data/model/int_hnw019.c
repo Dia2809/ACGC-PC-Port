@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_hnw019_v[];
+#ifdef TARGET_PC
+u16 int_hnw019_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_hnw019_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_hnw019_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw019_arm_tex_txt[0x100];
+#else
 u8 int_hnw019_arm_tex_txt[] = {
 #include "assets/int_hnw019_arm_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw019_armtop_tex_txt[0x80];
+#else
 u8 int_hnw019_armtop_tex_txt[] = {
 #include "assets/int_hnw019_armtop_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw019_c_front_tex_txt[0x300];
+#else
 u8 int_hnw019_c_front_tex_txt[] = {
 #include "assets/int_hnw019_c_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw019_c_back_tex_txt[0x180];
+#else
 u8 int_hnw019_c_back_tex_txt[] = {
 #include "assets/int_hnw019_c_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw019_antena_tex_txt[0x80];
+#else
 u8 int_hnw019_antena_tex_txt[] = {
 #include "assets/int_hnw019_antena_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw019_b_back_tex_txt[0x80];
+#else
 u8 int_hnw019_b_back_tex_txt[] = {
 #include "assets/int_hnw019_b_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw019_b_front_tex_txt[0x100];
+#else
 u8 int_hnw019_b_front_tex_txt[] = {
 #include "assets/int_hnw019_b_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_hnw019_v[0x4A0 / sizeof(Vtx)];
+#else
 Vtx int_hnw019_v[] = {
 #include "assets/int_hnw019_v.inc"
 };
+#endif
 
 Gfx int_hnw019_chest_model[] = {
     gsSPMatrix(anime_6_mdl, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),

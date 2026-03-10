@@ -1,13 +1,21 @@
 #include "libforest/gbi_extensions.h"
 #include "PR/gbi.h"
 
+#ifdef TARGET_PC
+u8 act_ant_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_ant_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_ant_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_ant_v[0xB0 / sizeof(Vtx)];
+#else
 Vtx act_ant_v[] = {
 #include "assets/act_ant_v.inc"
 };
+#endif
 
 Gfx act_antT_model[] = {
     gsSPTexture(4000, 4000, 0, G_TX_RENDERTILE, G_ON),

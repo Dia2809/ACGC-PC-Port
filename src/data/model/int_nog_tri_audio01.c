@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 int_nog_tri_audio01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_tri_audio01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_tri_audio01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_nog_tri_audio01_tex[0x800];
+#else
 u8 obj_nog_tri_audio01_tex[] = {
 #include "assets/obj_nog_tri_audio01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_tri_audio01_v[0x140 / sizeof(Vtx)];
+#else
 Vtx int_nog_tri_audio01_v[] = {
 #include "assets/int_nog_tri_audio01_v.inc"
 };
+#endif
 
 Gfx int_nog_tri_audio01_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

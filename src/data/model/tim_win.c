@@ -5,197 +5,389 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 tim_win_newtokei_tex[0x20] ATTRIBUTE_ALIGN(32);
+#else
 u8 tim_win_newtokei_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tim_win_newtokei_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_win_nuno_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_win_nuno_tex_rgb_ci4_pal[] = {
 #include "assets/tim_win_nuno_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_win_sw1_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_win_sw1_tex_rgb_ci4_pal[] = {
 #include "assets/tim_win_sw1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_win_sw2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_win_sw2_tex_rgb_ci4_pal[] = {
 #include "assets/tim_win_sw2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_win_sw3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_win_sw3_tex_rgb_ci4_pal[] = {
 #include "assets/tim_win_sw3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_win_sw4_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_win_sw4_tex_rgb_ci4_pal[] = {
 #include "assets/tim_win_sw4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_win_sw5_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_win_sw5_tex_rgb_ci4_pal[] = {
 #include "assets/tim_win_sw5_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_win_sw6_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_win_sw6_tex_rgb_ci4_pal[] = {
 #include "assets/tim_win_sw6_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 tim_win_sw7_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 tim_win_sw7_tex_rgb_ci4_pal[] = {
 #include "assets/tim_win_sw7_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_tokei1_tex[0x800];
+#else
 u8 tim_win_tokei1_tex[] = {
 #include "assets/tim_win_tokei1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_fuki_tex[0x800];
+#else
 u8 tim_win_fuki_tex[] = {
 #include "assets/tim_win_fuki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_moji_tex[0x80];
+#else
 u8 tim_win_moji_tex[] = {
 #include "assets/tim_win_moji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_on_tex[0x80];
+#else
 u8 tim_win_on_tex[] = {
 #include "assets/tim_win_on_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 testmocomma[0x80];
+#else
 u8 testmocomma[] = {
 #include "assets/testmocomma.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_maru_tex[0x80];
+#else
 u8 tim_win_maru_tex[] = {
 #include "assets/tim_win_maru_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_w1_tex[0x400];
+#else
 u8 tim_win_w1_tex[] = {
 #include "assets/tim_win_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_w2_tex[0x400];
+#else
 u8 tim_win_w2_tex[] = {
 #include "assets/tim_win_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_w3_tex[0x200];
+#else
 u8 tim_win_w3_tex[] = {
 #include "assets/tim_win_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_w4_tex[0x400];
+#else
 u8 tim_win_w4_tex[] = {
 #include "assets/tim_win_w4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_w5_tex[0x400];
+#else
 u8 tim_win_w5_tex[] = {
 #include "assets/tim_win_w5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_april_tex_rgb_i4[0x200];
+#else
 u8 tim_win_april_tex_rgb_i4[] = {
 #include "assets/tim_win_april_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_august_tex_rgb_i4[0x200];
+#else
 u8 tim_win_august_tex_rgb_i4[] = {
 #include "assets/tim_win_august_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_december_tex_rgb_i4[0x200];
+#else
 u8 tim_win_december_tex_rgb_i4[] = {
 #include "assets/tim_win_december_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_february_tex_rgb_i4[0x200];
+#else
 u8 tim_win_february_tex_rgb_i4[] = {
 #include "assets/tim_win_february_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_january_tex_rgb_i4[0x200];
+#else
 u8 tim_win_january_tex_rgb_i4[] = {
 #include "assets/tim_win_january_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_july_tex_rgb_i4[0x200];
+#else
 u8 tim_win_july_tex_rgb_i4[] = {
 #include "assets/tim_win_july_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_june_tex_rgb_i4[0x200];
+#else
 u8 tim_win_june_tex_rgb_i4[] = {
 #include "assets/tim_win_june_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_march_tex_rgb_i4[0x200];
+#else
 u8 tim_win_march_tex_rgb_i4[] = {
 #include "assets/tim_win_march_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_may_tex_rgb_i4[0x200];
+#else
 u8 tim_win_may_tex_rgb_i4[] = {
 #include "assets/tim_win_may_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_november_tex_rgb_i4[0x200];
+#else
 u8 tim_win_november_tex_rgb_i4[] = {
 #include "assets/tim_win_november_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_october_tex_rgb_i4[0x200];
+#else
 u8 tim_win_october_tex_rgb_i4[] = {
 #include "assets/tim_win_october_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_september_tex_rgb_i4[0x200];
+#else
 u8 tim_win_september_tex_rgb_i4[] = {
 #include "assets/tim_win_september_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_fri_tex_rgb_i4[0x200];
+#else
 u8 tim_win_fri_tex_rgb_i4[] = {
 #include "assets/tim_win_fri_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_mon_tex_rgb_i4[0x200];
+#else
 u8 tim_win_mon_tex_rgb_i4[] = {
 #include "assets/tim_win_mon_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sat_tex_rgb_i4[0x200];
+#else
 u8 tim_win_sat_tex_rgb_i4[] = {
 #include "assets/tim_win_sat_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sun_tex_rgb_i4[0x200];
+#else
 u8 tim_win_sun_tex_rgb_i4[] = {
 #include "assets/tim_win_sun_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_thu_tex_rgb_i4[0x200];
+#else
 u8 tim_win_thu_tex_rgb_i4[] = {
 #include "assets/tim_win_thu_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_tue_tex_rgb_i4[0x200];
+#else
 u8 tim_win_tue_tex_rgb_i4[] = {
 #include "assets/tim_win_tue_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_wed_tex_rgb_i4[0x200];
+#else
 u8 tim_win_wed_tex_rgb_i4[] = {
 #include "assets/tim_win_wed_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_nuno_tex_rgb_ci4[0x200];
+#else
 u8 tim_win_nuno_tex_rgb_ci4[] = {
 #include "assets/tim_win_nuno_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sw1_tex_rgb_ci4[0x400];
+#else
 u8 tim_win_sw1_tex_rgb_ci4[] = {
 #include "assets/tim_win_sw1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sw2_tex_rgb_ci4[0x400];
+#else
 u8 tim_win_sw2_tex_rgb_ci4[] = {
 #include "assets/tim_win_sw2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sw3_tex_rgb_ci4[0x400];
+#else
 u8 tim_win_sw3_tex_rgb_ci4[] = {
 #include "assets/tim_win_sw3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sw4_tex_rgb_ci4[0x400];
+#else
 u8 tim_win_sw4_tex_rgb_ci4[] = {
 #include "assets/tim_win_sw4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sw5_tex_rgb_ci4[0x400];
+#else
 u8 tim_win_sw5_tex_rgb_ci4[] = {
 #include "assets/tim_win_sw5_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sw6_tex_rgb_ci4[0x400];
+#else
 u8 tim_win_sw6_tex_rgb_ci4[] = {
 #include "assets/tim_win_sw6_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tim_win_sw7_tex_rgb_ci4[0x400];
+#else
 u8 tim_win_sw7_tex_rgb_ci4[] = {
 #include "assets/tim_win_sw7_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tim_win_v[0x870 / sizeof(Vtx)];
+#else
 Vtx tim_win_v[] = {
 #include "assets/tim_win_v.inc"
 };
+#endif
 
 Gfx tim_win_ue_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),

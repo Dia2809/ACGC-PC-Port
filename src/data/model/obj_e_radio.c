@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_e_radio_t1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_radio_t1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_radio_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_radio_t2_tex[0x800];
+#else
 u8 obj_e_radio_t2_tex[] = {
 #include "assets/obj_e_radio_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_radio_v[0x280 / sizeof(Vtx)];
+#else
 Vtx obj_e_radio_v[] = {
 #include "assets/obj_e_radio_v.inc"
 };
+#endif
 
 Gfx obj_e_radio_t1_model[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 128, 32, obj_e_radio_t1_tex),

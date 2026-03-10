@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_goki01_0_int_i4[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_goki01_0_int_i4[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_goki01_0_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_goki01_1_int_i4[0x80];
+#else
 u8 ef_goki01_1_int_i4[] = {
 #include "assets/ef_goki01_1_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_goki01_2_int_i4[0x80];
+#else
 u8 ef_goki01_2_int_i4[] = {
 #include "assets/ef_goki01_2_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_goki01_3_int_i4[0x80];
+#else
 u8 ef_goki01_3_int_i4[] = {
 #include "assets/ef_goki01_3_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_goki01_01_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_goki01_01_v[] = {
 #include "assets/ef_goki01_01_v.inc"
 };
+#endif
 
 Gfx ef_goki01_01_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

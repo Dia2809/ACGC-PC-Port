@@ -5,9 +5,13 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+Vtx mCL_rom_myhome1_wall_v[0x100 / sizeof(Vtx)];
+#else
 Vtx mCL_rom_myhome1_wall_v[] = {
 #include "assets/mCL_rom_myhome1_wall_v.inc"
 };
+#endif
 
 Gfx mCL_rom_myhome1_wall_model[] = {
 gsDPPipeSync(),

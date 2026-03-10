@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_radio02_v[];
+#ifdef TARGET_PC
+u16 int_radio02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_radio02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_radio02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_radio02_front_tex[0x480];
+#else
 u8 int_sum_radio02_front_tex[] = {
 #include "assets/int_sum_radio02_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_radio02_side_tex[0x80];
+#else
 u8 int_sum_radio02_side_tex[] = {
 #include "assets/int_sum_radio02_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_radio02_hand_tex[0x100];
+#else
 u8 int_sum_radio02_hand_tex[] = {
 #include "assets/int_sum_radio02_hand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_radio02_sound_tex[0x80];
+#else
 u8 int_sum_radio02_sound_tex[] = {
 #include "assets/int_sum_radio02_sound_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_radio02_v[0x280 / sizeof(Vtx)];
+#else
 Vtx int_sum_radio02_v[] = {
 #include "assets/int_sum_radio02_v.inc"
 };
+#endif
 
 Gfx int_sum_radio02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

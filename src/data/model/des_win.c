@@ -5,69 +5,133 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 des_win_sen_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_sen_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_sen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_kirikae_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_kirikae_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_kirikae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_cwaku_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_cwaku_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_cwaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_aw1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_aw1_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_aw1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_aw2_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_aw2_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_aw2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_aw3_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_aw3_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_aw3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_aw4_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_aw4_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_aw4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_aw5_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_aw5_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_aw5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_aw6_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_aw6_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_aw6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_aw7_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_aw7_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_aw7_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_aw8_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_aw8_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_aw8_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_color_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_color_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_color_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_start_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_win_start_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win_start_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 kei_win_quit_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 kei_win_quit_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_win/kei_win_quit_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx des_win_v[0xD80 / sizeof(Vtx)];
+#else
 Vtx des_win_v[] = {
 #include "assets/des_win_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_win_before[0x20];
+#else
 u8 des_win_before[] = {
 #include "assets/des_win_before.inc"
 };
+#endif
 
 Gfx des_win_area1_model[] = {
 gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
@@ -284,3 +348,10 @@ gsSPDisplayList(des_win_kirikaeT_model),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_des_win_c(void) {
+    pc_load_asset("assets/des_win/kei_win_quit_tex.bin", kei_win_quit_tex, 0x200, 0x7A1660, 0, 0);
+}
+#endif

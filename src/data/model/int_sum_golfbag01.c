@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_golfbag01_v[];
+#ifdef TARGET_PC
+static u16 int_sum_golfbag_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_sum_golfbag_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_golfbag01/int_sum_golfbag_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag01_top_tex_txt[0x100];
+#else
 u8 int_sum_golfbag01_top_tex_txt[] = {
 #include "assets/int_sum_golfbag01_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag01_carry_tex_txt[0x180];
+#else
 u8 int_sum_golfbag01_carry_tex_txt[] = {
 #include "assets/int_sum_golfbag01_carry_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag01_body_tex_txt[0x400];
+#else
 u8 int_sum_golfbag01_body_tex_txt[] = {
 #include "assets/int_sum_golfbag01_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag01_clab2_tex_txt[0x80];
+#else
 u8 int_sum_golfbag01_clab2_tex_txt[] = {
 #include "assets/int_sum_golfbag01_clab2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag01_clab1_tex_txt[0x80];
+#else
 u8 int_sum_golfbag01_clab1_tex_txt[] = {
 #include "assets/int_sum_golfbag01_clab1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag01_clab3_tex_txt[0x80];
+#else
 u8 int_sum_golfbag01_clab3_tex_txt[] = {
 #include "assets/int_sum_golfbag01_clab3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_golfbag01_v[0x560 / sizeof(Vtx)];
+#else
 Vtx int_sum_golfbag01_v[] = {
 #include "assets/int_sum_golfbag01_v.inc"
 };
+#endif
 
 Gfx int_sum_golfbag01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -104,3 +136,10 @@ Gfx int_sum_golfbag01_on_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 3, 4, 5, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_golfbag01_c(void) {
+    pc_load_asset("assets/int_sum_golfbag01/int_sum_golfbag_pal.bin", int_sum_golfbag_pal, 0x20, 0xCC7C00, 0, 1);
+}
+#endif

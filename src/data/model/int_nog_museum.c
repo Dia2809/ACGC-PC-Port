@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_museum_v[];
+#ifdef TARGET_PC
+u16 int_nog_museum_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_museum_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_museum_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_museum_body_tex[0x400];
+#else
 u8 int_nog_museum_body_tex[] = {
 #include "assets/int_nog_museum_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_museum_gate_tex[0x100];
+#else
 u8 int_nog_museum_gate_tex[] = {
 #include "assets/int_nog_museum_gate_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_museum_grass_tex[0x80];
+#else
 u8 int_nog_museum_grass_tex[] = {
 #include "assets/int_nog_museum_grass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_museum_v[0x8E0 / sizeof(Vtx)];
+#else
 Vtx int_nog_museum_v[] = {
 #include "assets/int_nog_museum_v.inc"
 };
+#endif
 
 Gfx int_nog_museum_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

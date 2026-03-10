@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_toudai_v[];
+#ifdef TARGET_PC
+u16 int_tak_toudai_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_toudai_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_toudai_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_tak_toudai_evw_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_tak_toudai_evw_tex_pic_ci4_pal[] = {
 #include "assets/int_tak_toudai_evw_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_toudai_right_tex_txt[0x80];
+#else
 u8 int_tak_toudai_right_tex_txt[] = {
 #include "assets/int_tak_toudai_right_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_toudai_dai_tex_txt[0x40];
+#else
 u8 int_tak_toudai_dai_tex_txt[] = {
 #include "assets/int_tak_toudai_dai_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_toudai_grass_tex_txt[0x80];
+#else
 u8 int_tak_toudai_grass_tex_txt[] = {
 #include "assets/int_tak_toudai_grass_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_toudai_tesuri_tex_txt[0x40];
+#else
 u8 int_tak_toudai_tesuri_tex_txt[] = {
 #include "assets/int_tak_toudai_tesuri_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_toudai_body2_tex_txt[0x100];
+#else
 u8 int_tak_toudai_body2_tex_txt[] = {
 #include "assets/int_tak_toudai_body2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_toudai_body_tex_txt[0x80];
+#else
 u8 int_tak_toudai_body_tex_txt[] = {
 #include "assets/int_tak_toudai_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_toudai_evw_tex_txt[0x20];
+#else
 u8 int_tak_toudai_evw_tex_txt[] = {
 #include "assets/int_tak_toudai_evw_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_toudai_v[0x710 / sizeof(Vtx)];
+#else
 Vtx int_tak_toudai_v[] = {
 #include "assets/int_tak_toudai_v.inc"
 };
+#endif
 
 Gfx int_tak_toudai_right_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

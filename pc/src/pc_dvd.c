@@ -1,5 +1,6 @@
-/* pc_dvd.c - DVD filesystem replaced with file I/O from extracted assets */
+/* pc_dvd.c - DVD filesystem: reads from disc image (CISO/ISO/GCM) or extracted files */
 #include "pc_platform.h"
+#include "pc_disc.h"
 
 typedef struct {
     char gameName[4];
@@ -29,12 +30,14 @@ static struct {
 } dvd_entry_table[MAX_DVD_ENTRIES];
 static int dvd_entry_count = 0;
 
+/* File-based fallback path (only used when no disc image) */
 static char assets_base_path[512] = {0};
+static int assets_fallback_inited = 0;
 
-static void dvd_init_base_path(void) {
-    if (assets_base_path[0] != 0) return;
+static void dvd_init_fallback_path(void) {
+    if (assets_fallback_inited) return;
+    assets_fallback_inited = 1;
 
-    /* probe for extracted game files by checking for a known file */
     const char* candidates[] = {
         "assets/files",
         "assets",
@@ -59,8 +62,6 @@ static void dvd_init_base_path(void) {
 }
 
 s32 DVDConvertPathToEntrynum(const char* path) {
-    dvd_init_base_path();
-
     for (int i = 0; i < dvd_entry_count; i++) {
         if (dvd_entry_table[i].used && strcmp(dvd_entry_table[i].path, path) == 0) {
             return i;
@@ -81,6 +82,10 @@ s32 DVDConvertPathToEntrynum(const char* path) {
 }
 
 /* DVDFileInfo: 0x3C bytes. We store FILE* in the DVDCommandBlock area at offset 0x18. */
+/* For disc-image backed files, FILE* is set to sentinel DISC_SENTINEL,
+ * and the disc offset is stored in startAddr (0x30). */
+#define DISC_SENTINEL ((FILE*)(uintptr_t)0xDEADC0DE)
+
 static FILE** dvd_fi_fp(void* fileInfo) {
     return (FILE**)((u8*)fileInfo + 0x18);
 }
@@ -92,33 +97,51 @@ static u32* dvd_fi_startAddr(void* fileInfo) {
 }
 
 BOOL DVDFastOpen(s32 entrynum, void* fileInfo) {
-    dvd_init_base_path();
-
     if (entrynum < 0 || entrynum >= dvd_entry_count || !dvd_entry_table[entrynum].used) {
         return FALSE;
     }
 
-    char fullpath[768];
     const char* path = dvd_entry_table[entrynum].path;
-    if (path[0] == '/') {
-        snprintf(fullpath, sizeof(fullpath), "%s%s", assets_base_path, path);
-    } else {
-        snprintf(fullpath, sizeof(fullpath), "%s/%s", assets_base_path, path);
+
+    /* Try disc image first */
+    if (pc_disc_is_open()) {
+        u32 disc_off, disc_sz;
+        if (pc_disc_find_file(path, &disc_off, &disc_sz)) {
+            memset(fileInfo, 0, 0x3C);
+            *dvd_fi_fp(fileInfo) = DISC_SENTINEL;
+            *dvd_fi_startAddr(fileInfo) = disc_off;
+            *dvd_fi_length(fileInfo) = disc_sz;
+            return TRUE;
+        }
     }
 
-    FILE* fp = fopen(fullpath, "rb");
-    if (!fp) {
-        return FALSE;
+    /* Fall back to extracted files */
+    dvd_init_fallback_path();
+    {
+        char fullpath[768];
+        FILE* fp;
+        u32 len;
+
+        if (path[0] == '/') {
+            snprintf(fullpath, sizeof(fullpath), "%s%s", assets_base_path, path);
+        } else {
+            snprintf(fullpath, sizeof(fullpath), "%s/%s", assets_base_path, path);
+        }
+
+        fp = fopen(fullpath, "rb");
+        if (!fp) {
+            return FALSE;
+        }
+
+        fseek(fp, 0, SEEK_END);
+        len = (u32)ftell(fp);
+        fseek(fp, 0, SEEK_SET);
+
+        memset(fileInfo, 0, 0x3C);
+        *dvd_fi_fp(fileInfo) = fp;
+        *dvd_fi_startAddr(fileInfo) = 0;
+        *dvd_fi_length(fileInfo) = len;
     }
-
-    fseek(fp, 0, SEEK_END);
-    u32 len = (u32)ftell(fp);
-    fseek(fp, 0, SEEK_SET);
-
-    memset(fileInfo, 0, 0x3C);
-    *dvd_fi_fp(fileInfo) = fp;
-    *dvd_fi_startAddr(fileInfo) = 0;
-    *dvd_fi_length(fileInfo) = len;
 
     return TRUE;
 }
@@ -131,10 +154,10 @@ BOOL DVDOpen(const char* filename, void* fileInfo) {
 
 BOOL DVDClose(void* fileInfo) {
     FILE* fp = *dvd_fi_fp(fileInfo);
-    if (fp) {
+    if (fp && fp != DISC_SENTINEL) {
         fclose(fp);
-        *dvd_fi_fp(fileInfo) = NULL;
     }
+    *dvd_fi_fp(fileInfo) = NULL;
     return TRUE;
 }
 
@@ -142,13 +165,20 @@ s32 DVDReadPrio(void* fileInfo, void* buf, s32 length, s32 offset, s32 prio) {
     FILE* fp = *dvd_fi_fp(fileInfo);
     (void)prio;
 
+    if (fp == DISC_SENTINEL) {
+        /* disc image read */
+        u32 base = *dvd_fi_startAddr(fileInfo);
+        if (pc_disc_read(base + (u32)offset, buf, (u32)length))
+            return length;
+        return -1;
+    }
+
     if (!fp) {
         return -1;
     }
 
     fseek(fp, offset, SEEK_SET);
-    size_t nread = fread(buf, 1, length, fp);
-    return (s32)nread;
+    return (s32)fread(buf, 1, length, fp);
 }
 
 s32 DVDRead(void* fileInfo, void* buf, s32 length, s32 offset) {
@@ -175,7 +205,7 @@ void OSDVDFatalError(void) {
 }
 
 void DVDInit(void) {
-    dvd_init_base_path();
+    /* disc image init is done in pc_main.c via pc_disc_init() */
 }
 
 void DVDSetAutoFatalMessaging(BOOL enable) { (void)enable; }

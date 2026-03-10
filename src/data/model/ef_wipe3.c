@@ -7,9 +7,13 @@
 
 extern Vtx ef_wipe3_v[];
 extern u8 ef_wape_tex[];
+#ifdef TARGET_PC
+Vtx ef_wipe3_v[0x460 / sizeof(Vtx)];
+#else
 Vtx ef_wipe3_v[] = {
 #include "assets/ef_wipe3_v.inc"
 };
+#endif
 
 Gfx ef_wipe3_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

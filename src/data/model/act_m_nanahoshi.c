@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+static u16 act_m_nanahoshi_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 act_m_nanahoshi_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_nanahoshi/act_m_nanahoshi_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_nanahoshi[0x100];
+#else
 static u8 act_m_nanahoshi[] = {
 #include "assets/act_m_nanahoshi/act_m_nanahoshi.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx act_m_nanahoshi_v[0x1D0 / sizeof(Vtx)];
+#else
 static Vtx act_m_nanahoshi_v[] = {
 #include "assets/act_m_nanahoshi/act_m_nanahoshi_v.inc"
 };
+#endif
 
 Gfx act_m_nanahoshi1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -49,3 +61,12 @@ Gfx act_m_nanahoshi2T_model[] = {
     gsSPNTriangles_5b(14, 5, 12, 13, 9, 7, 9, 8, 7, 7, 5, 14),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_nanahoshi_c(void) {
+    pc_load_asset("assets/act_m_nanahoshi/act_m_nanahoshi_pal.bin", act_m_nanahoshi_pal, 0x20, 0xB52198, 0, 1);
+    pc_load_asset("assets/act_m_nanahoshi/act_m_nanahoshi.bin", act_m_nanahoshi, 0x100, 0xB521B8, 0, 0);
+    pc_load_asset("assets/act_m_nanahoshi/act_m_nanahoshi_v.bin", act_m_nanahoshi_v, 0x1D0, 0xB51FC8, 0, 2);
+}
+#endif

@@ -7,17 +7,29 @@
 
 extern Vtx ef_daruma01_02_v[];
 extern Vtx ef_daruma01_01_v[];
+#ifdef TARGET_PC
+u16 ef_daruma01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 ef_daruma01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_daruma01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_daruma01_00_tex[0x80];
+#else
 u8 ef_daruma01_00_tex[] = {
 #include "assets/ef_daruma01_00_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_daruma01_00_v[0x1D0 / sizeof(Vtx)];
+#else
 Vtx ef_daruma01_00_v[] = {
 #include "assets/ef_daruma01_00_v.inc"
 };
+#endif
 
 Gfx ef_daruma01_00_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -36,9 +48,13 @@ Gfx ef_daruma01_00_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx ef_daruma01_01_v[0x280 / sizeof(Vtx)];
+#else
 Vtx ef_daruma01_01_v[] = {
 #include "assets/ef_daruma01_01_v.inc"
 };
+#endif
 
 Gfx ef_daruma01_01_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -60,9 +76,13 @@ Gfx ef_daruma01_01_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx ef_daruma01_02_v[0x280 / sizeof(Vtx)];
+#else
 Vtx ef_daruma01_02_v[] = {
 #include "assets/ef_daruma01_02_v.inc"
 };
+#endif
 
 Gfx ef_daruma01_02_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

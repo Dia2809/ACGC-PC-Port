@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_item_omikuji[0x20] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_item_omikuji[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_item_omikuji.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_item_omikuji_tex[0x200];
+#else
 u8 obj_item_omikuji_tex[] = {
 #include "assets/obj_item_omikuji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_item_omikuji_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_item_omikuji_v[] = {
 #include "assets/obj_item_omikuji_v.inc"
 };
+#endif
 
 Gfx obj_item_omikuji_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

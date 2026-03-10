@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_e_count_t1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_count_t1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_count_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count_t2_tex_txt[0x800];
+#else
 u8 obj_e_count_t2_tex_txt[] = {
 #include "assets/obj_e_count_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count_t3_tex_txt[0x800];
+#else
 u8 obj_e_count_t3_tex_txt[] = {
 #include "assets/obj_e_count_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_count01_spot_tex_sgi_i4[0x80];
+#else
 u8 obj_e_count01_spot_tex_sgi_i4[] = {
 #include "assets/obj_e_count01_spot_tex_sgi_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_count01_v[0x3B0 / sizeof(Vtx)];
+#else
 Vtx obj_e_count01_v[] = {
 #include "assets/obj_e_count01_v.inc"
 };
+#endif
 
 Gfx obj_e_count_spot_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

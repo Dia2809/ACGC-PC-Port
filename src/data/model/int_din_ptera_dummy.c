@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 int_din_ptera_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_ptera_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_ptera_dummy/int_din_ptera_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_ptera_dummy_tex[0x200];
+#else
 u8 int_din_ptera_dummy_tex[] = {
 #include "assets/int_din_ptera_dummy_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_ptera_dummy_v[0x80 / sizeof(Vtx)];
+#else
 Vtx int_din_ptera_dummy_v[] = {
 #include "assets/int_din_ptera_dummy_v.inc"
 };
+#endif
 
 Gfx int_din_ptera_dummy_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -32,3 +44,10 @@ Gfx int_din_ptera_dummy_model[] = {
     gsSPNTriangles_5b(3, 7, 4, 4, 7, 6, 4, 6, 5, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_ptera_dummy_c(void) {
+    pc_load_asset("assets/int_din_ptera_dummy/int_din_ptera_pal.bin", int_din_ptera_pal, 0x20, 0x9166A0, 0, 1);
+}
+#endif

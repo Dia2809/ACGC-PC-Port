@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_sofe02_v[];
+#ifdef TARGET_PC
+u16 int_sum_sofe02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_sofe02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_sofe02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 int_sum_sofe01_pal[0x20 / sizeof(u16)];
+#else
 static u16 int_sum_sofe01_pal[] = {
 #include "assets/int_sum_sofe02/int_sum_sofe01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 int_sofe01_pal[0x20 / sizeof(u16)];
+#else
 static u16 int_sofe01_pal[] = {
 #include "assets/int_sum_sofe02/int_sofe01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_sofe02_back_txt[0x300];
+#else
 u8 int_sum_sofe02_back_txt[] = {
 #include "assets/int_sum_sofe02_back_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_sum_sofe01_facet_txt[0x180];
+#else
 static u8 int_sum_sofe01_facet_txt[] = {
 #include "assets/int_sum_sofe02/int_sum_sofe01_facet_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_sum_sofe01_side_txt[0x100];
+#else
 static u8 int_sum_sofe01_side_txt[] = {
 #include "assets/int_sum_sofe02/int_sum_sofe01_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_sum_sofe01_backside_txt[0x80];
+#else
 static u8 int_sum_sofe01_backside_txt[] = {
 #include "assets/int_sum_sofe02/int_sum_sofe01_backside_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_sofe02_front_txt[0x200];
+#else
 u8 int_sum_sofe02_front_txt[] = {
 #include "assets/int_sum_sofe02_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_sofe02_v[0x470 / sizeof(Vtx)];
+#else
 Vtx int_sum_sofe02_v[] = {
 #include "assets/int_sum_sofe02_v.inc"
 };
+#endif
 
 Gfx int_sum_sofe02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -84,3 +120,14 @@ Gfx int_sum_sofe02_on_model[] = {
     gsSPNTriangles_5b(1, 13, 14, 1, 14, 4, 14, 15, 4, 14, 16, 15),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_sofe02_c(void) {
+    pc_load_asset("assets/int_sum_sofe02/int_sum_sofe01_pal.bin", int_sum_sofe01_pal, 0x20, 0xD3ABC0, 0, 1);
+    pc_load_asset("assets/int_sum_sofe02/int_sofe01_pal.bin", int_sofe01_pal, 0x20, 0xD3ABE0, 0, 1);
+    pc_load_asset("assets/int_sum_sofe02/int_sum_sofe01_facet_txt.bin", int_sum_sofe01_facet_txt, 0x180, 0xD3AF00, 0, 0);
+    pc_load_asset("assets/int_sum_sofe02/int_sum_sofe01_side_txt.bin", int_sum_sofe01_side_txt, 0x100, 0xD3B080, 0, 0);
+    pc_load_asset("assets/int_sum_sofe02/int_sum_sofe01_backside_txt.bin", int_sum_sofe01_backside_txt, 0x80, 0xD3B180, 0, 0);
+}
+#endif

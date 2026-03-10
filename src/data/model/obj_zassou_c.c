@@ -4,9 +4,13 @@
 #include "c_keyframe.h"
 
 
+#ifdef TARGET_PC
+Vtx obj_zassou_c_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_zassou_c_v[] = { 
 #include "assets/obj_zassou_c_v.inc"
 };
+#endif
 
 Gfx obj_zassou_cT_gfx_model[] = { 
 gsSPVertex(obj_zassou_c_v, 4, 0),

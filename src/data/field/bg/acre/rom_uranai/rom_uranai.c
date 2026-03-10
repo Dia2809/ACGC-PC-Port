@@ -1,124 +1,244 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_uranai_floor_tex_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_uranai_floor_tex_pal[] = {
 #include "assets/field/bg/rom_uranai_floor_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_uranai_wall_tex_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_uranai_wall_tex_pal[] = {
 #include "assets/field/bg/rom_uranai_wall_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_uranai_table_tex_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_uranai_table_tex_pal[] = {
 #include "assets/field/bg/rom_uranai_table_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_uranai_tubo_tex_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_uranai_tubo_tex_pal[] = {
 #include "assets/field/bg/rom_uranai_tubo_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_uranai_stand_tex_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_uranai_stand_tex_pal[] = {
 #include "assets/field/bg/rom_uranai_stand_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_uranai_tex_nuno_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_uranai_tex_nuno_pal[] = {
 #include "assets/field/bg/rom_uranai_tex_nuno_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_uranai_tex_bace_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_uranai_tex_bace_pal[] = {
 #include "assets/field/bg/rom_uranai_tex_bace_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_uranai_card_tex_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_uranai_card_tex_pal[] = {
 #include "assets/field/bg/rom_uranai_card_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_floor_tex[0x800];
+#else
 static u8 rom_uranai_floor_tex[] = {
 #include "assets/field/bg/rom_uranai_floor_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_wall01_tex[0x600];
+#else
 static u8 rom_uranai_wall01_tex[] = {
 #include "assets/field/bg/rom_uranai_wall01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_wall02_tex[0x400];
+#else
 static u8 rom_uranai_wall02_tex[] = {
 #include "assets/field/bg/rom_uranai_wall02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_wall03_tex[0x400];
+#else
 static u8 rom_uranai_wall03_tex[] = {
 #include "assets/field/bg/rom_uranai_wall03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_table01_tex[0x80];
+#else
 static u8 rom_uranai_table01_tex[] = {
 #include "assets/field/bg/rom_uranai_table01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_table02_tex[0x80];
+#else
 static u8 rom_uranai_table02_tex[] = {
 #include "assets/field/bg/rom_uranai_table02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_tubo_tex[0x200];
+#else
 static u8 rom_uranai_tubo_tex[] = {
 #include "assets/field/bg/rom_uranai_tubo_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_shadow01_tex[0x100];
+#else
 static u8 rom_uranai_shadow01_tex[] = {
 #include "assets/field/bg/rom_uranai_shadow01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_vell_tex[0x400];
+#else
 static u8 rom_uranai_vell_tex[] = {
 #include "assets/field/bg/rom_uranai_vell_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_vell02_tex[0x400];
+#else
 static u8 rom_uranai_vell02_tex[] = {
 #include "assets/field/bg/rom_uranai_vell02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_stand01_tex[0x200];
+#else
 static u8 rom_uranai_stand01_tex[] = {
 #include "assets/field/bg/rom_uranai_stand01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_nuno01_tex[0x80];
+#else
 static u8 rom_uranai_nuno01_tex[] = {
 #include "assets/field/bg/rom_uranai_nuno01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_nuno02_tex[0x80];
+#else
 static u8 rom_uranai_nuno02_tex[] = {
 #include "assets/field/bg/rom_uranai_nuno02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_bace_tex[0x200];
+#else
 static u8 rom_uranai_bace_tex[] = {
 #include "assets/field/bg/rom_uranai_bace_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_card01_tex[0x200];
+#else
 static u8 rom_uranai_card01_tex[] = {
 #include "assets/field/bg/rom_uranai_card01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_shadow02_tex[0x100];
+#else
 static u8 rom_uranai_shadow02_tex[] = {
 #include "assets/field/bg/rom_uranai_shadow02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_card02_tex[0x480];
+#else
 static u8 rom_uranai_card02_tex[] = {
 #include "assets/field/bg/rom_uranai_card02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_cris02_tex[0x800];
+#else
 static u8 rom_uranai_cris02_tex[] = {
 #include "assets/field/bg/rom_uranai_cris02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_cris01_tex_rgb_ia8[0x400];
+#else
 static u8 rom_uranai_cris01_tex_rgb_ia8[] = {
 #include "assets/field/bg/rom_uranai_cris01_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_hi02_tex_rgb_i4[0x200];
+#else
 static u8 rom_uranai_hi02_tex_rgb_i4[] = {
 #include "assets/field/bg/rom_uranai_hi02_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_uranai_hi03_tex_rgb_i4[0x200];
+#else
 static u8 rom_uranai_hi03_tex_rgb_i4[] = {
 #include "assets/field/bg/rom_uranai_hi03_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx rom_uranai_v[0x14E0 / sizeof(Vtx)];
+#else
 static Vtx rom_uranai_v[] = {
 #include "assets/field/bg/rom_uranai_v.inc"
 };
+#endif
 
 extern Gfx rom_uranai_modelT[] = {
     gsSPTexture(65535, 65535, 0, 0, G_ON),
@@ -397,3 +517,39 @@ extern Gfx rom_uranai_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_rom_uranai_rom_uranai_c(void) {
+    pc_load_asset("assets/field/bg/rom_uranai_floor_tex_pal.bin", rom_uranai_floor_tex_pal, 0x20, 0xD9F460, 0, 1);
+    pc_load_asset("assets/field/bg/rom_uranai_wall_tex_pal.bin", rom_uranai_wall_tex_pal, 0x20, 0xD9F480, 0, 1);
+    pc_load_asset("assets/field/bg/rom_uranai_table_tex_pal.bin", rom_uranai_table_tex_pal, 0x20, 0xD9F4A0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_uranai_tubo_tex_pal.bin", rom_uranai_tubo_tex_pal, 0x20, 0xD9F4C0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_uranai_stand_tex_pal.bin", rom_uranai_stand_tex_pal, 0x20, 0xD9F4E0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_uranai_tex_nuno_pal.bin", rom_uranai_tex_nuno_pal, 0x20, 0xD9F500, 0, 1);
+    pc_load_asset("assets/field/bg/rom_uranai_tex_bace_pal.bin", rom_uranai_tex_bace_pal, 0x20, 0xD9F520, 0, 1);
+    pc_load_asset("assets/field/bg/rom_uranai_card_tex_pal.bin", rom_uranai_card_tex_pal, 0x20, 0xD9F540, 0, 1);
+    pc_load_asset("assets/field/bg/rom_uranai_floor_tex.bin", rom_uranai_floor_tex, 0x800, 0xD9F560, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_wall01_tex.bin", rom_uranai_wall01_tex, 0x600, 0xD9FD60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_wall02_tex.bin", rom_uranai_wall02_tex, 0x400, 0xDA0360, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_wall03_tex.bin", rom_uranai_wall03_tex, 0x400, 0xDA0760, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_table01_tex.bin", rom_uranai_table01_tex, 0x80, 0xDA0B60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_table02_tex.bin", rom_uranai_table02_tex, 0x80, 0xDA0BE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_tubo_tex.bin", rom_uranai_tubo_tex, 0x200, 0xDA0C60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_shadow01_tex.bin", rom_uranai_shadow01_tex, 0x100, 0xDA0E60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_vell_tex.bin", rom_uranai_vell_tex, 0x400, 0xDA0F60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_vell02_tex.bin", rom_uranai_vell02_tex, 0x400, 0xDA1360, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_stand01_tex.bin", rom_uranai_stand01_tex, 0x200, 0xDA1760, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_nuno01_tex.bin", rom_uranai_nuno01_tex, 0x80, 0xDA1960, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_nuno02_tex.bin", rom_uranai_nuno02_tex, 0x80, 0xDA19E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_bace_tex.bin", rom_uranai_bace_tex, 0x200, 0xDA1A60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_card01_tex.bin", rom_uranai_card01_tex, 0x200, 0xDA1C60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_shadow02_tex.bin", rom_uranai_shadow02_tex, 0x100, 0xDA1E60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_card02_tex.bin", rom_uranai_card02_tex, 0x480, 0xDA1F60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_cris02_tex.bin", rom_uranai_cris02_tex, 0x800, 0xDA23E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_cris01_tex_rgb_ia8.bin", rom_uranai_cris01_tex_rgb_ia8, 0x400, 0xDA2BE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_hi02_tex_rgb_i4.bin", rom_uranai_hi02_tex_rgb_i4, 0x200, 0xDA2FE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_hi03_tex_rgb_i4.bin", rom_uranai_hi03_tex_rgb_i4, 0x200, 0xDA31E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_uranai_v.bin", rom_uranai_v, 0x14E0, 0xDA33E0, 0, 2);
+}
+#endif

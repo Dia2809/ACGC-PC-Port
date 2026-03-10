@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_clbed02_v[];
+#ifdef TARGET_PC
+u16 int_sum_clbed02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_clbed02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_clbed02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clbed02_foot[0x100];
+#else
 u8 int_sum_clbed02_foot[] = {
 #include "assets/int_sum_clbed02_foot.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clbed02_head[0x100];
+#else
 u8 int_sum_clbed02_head[] = {
 #include "assets/int_sum_clbed02_head.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clbed02_mat[0x400];
+#else
 u8 int_sum_clbed02_mat[] = {
 #include "assets/int_sum_clbed02_mat.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clbed02_pillow[0x200];
+#else
 u8 int_sum_clbed02_pillow[] = {
 #include "assets/int_sum_clbed02_pillow.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_clbed02_v[0x300 / sizeof(Vtx)];
+#else
 Vtx int_sum_clbed02_v[] = {
 #include "assets/int_sum_clbed02_v.inc"
 };
+#endif
 
 Gfx int_sum_clbed02_onT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -12,9 +12,13 @@ extern u8 lat_letter28_7[];
 extern u8 lat_letter28_9[];
 extern u8 lat_letter28_1[];
 extern u8 lat_letter28_6[];
+#ifdef TARGET_PC
+Vtx lat_letter28_v[0x2B0 / sizeof(Vtx)];
+#else
 Vtx lat_letter28_v[] = {
 #include "assets/lat_letter28_v.inc"
 };
+#endif
 
 Gfx lat_letter28_win_model[] = {
     gsDPSetRenderMode(G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2),

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iku_mario_dokan_v[];
+#ifdef TARGET_PC
+u16 int_iku_mario_dokan_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iku_mario_dokan_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iku_mario_dokan_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_iku_mario_dokan_b_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_iku_mario_dokan_b_tex_pic_ci4_pal[] = {
 #include "assets/int_iku_mario_dokan_b_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_mario_dokan_a_tex_txt[0x200];
+#else
 u8 int_iku_mario_dokan_a_tex_txt[] = {
 #include "assets/int_iku_mario_dokan_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_mario_dokan_c_tex_txt[0x40];
+#else
 u8 int_iku_mario_dokan_c_tex_txt[] = {
 #include "assets/int_iku_mario_dokan_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_mario_dokan_b_tex_txt[0x100];
+#else
 u8 int_iku_mario_dokan_b_tex_txt[] = {
 #include "assets/int_iku_mario_dokan_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iku_mario_dokan_v[0x2F0 / sizeof(Vtx)];
+#else
 Vtx int_iku_mario_dokan_v[] = {
 #include "assets/int_iku_mario_dokan_v.inc"
 };
+#endif
 
 Gfx int_iku_mario_dokan_model_b_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -1,15 +1,27 @@
 
+#ifdef TARGET_PC
+static Vtx tol_sponge_1_v[0xA0 / sizeof(Vtx)];
+#else
 static Vtx tol_sponge_1_v[] = {
 #include "assets/tol_sponge_1_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 tol_sponge_1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_sponge_1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_sponge_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_sponge_1_main1_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 tol_sponge_1_main1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_sponge_1_main1_tex_txt.inc"
 };
+#endif
 
 // clang-format off
 static const Gfx tol_sponge_1_model[] = {
@@ -55,3 +67,12 @@ static const Gfx tol_sponge_1_model[] = {
     gsSPEndDisplayList(),
 };
 // clang-format on
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_game_m_player_tools_c_inc(void) {
+    pc_load_asset("assets/tol_sponge_1_v.bin", tol_sponge_1_v, 0xA0, 0x32E3C0, 0, 2);
+    pc_load_asset("assets/tol_sponge_1_pal.bin", tol_sponge_1_pal, 0x20, 0x32E460, 0, 1);
+    pc_load_asset("assets/tol_sponge_1_main1_tex_txt.bin", tol_sponge_1_main1_tex_txt, 0x80, 0x32E480, 0, 0);
+}
+#endif

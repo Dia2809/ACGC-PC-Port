@@ -24,37 +24,69 @@ cKF_Animation_R_c cKF_ba_r_int_hnw006 = {
     cKF_ckcb_r_int_hnw006_tbl, cKF_ds_int_hnw006_tbl, cKF_kn_int_hnw006_tbl, cKF_c_int_hnw006_tbl, -1, 129
 };
 
+#ifdef TARGET_PC
+u16 int_hnw006_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_hnw006_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_hnw006_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw006_c_front_tex_txt[0x300];
+#else
 u8 int_hnw006_c_front_tex_txt[] = {
 #include "assets/int_hnw006_c_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw006_c_back_tex_txt[0x180];
+#else
 u8 int_hnw006_c_back_tex_txt[] = {
 #include "assets/int_hnw006_c_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw006_arm_tex_txt[0x100];
+#else
 u8 int_hnw006_arm_tex_txt[] = {
 #include "assets/int_hnw006_arm_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw006_armtop_tex_txt[0x80];
+#else
 u8 int_hnw006_armtop_tex_txt[] = {
 #include "assets/int_hnw006_armtop_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw006_b_back_tex_txt[0x80];
+#else
 u8 int_hnw006_b_back_tex_txt[] = {
 #include "assets/int_hnw006_b_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw006_b_front_tex_txt[0x100];
+#else
 u8 int_hnw006_b_front_tex_txt[] = {
 #include "assets/int_hnw006_b_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_hnw006_v[0x470 / sizeof(Vtx)];
+#else
 Vtx int_hnw006_v[] = {
 #include "assets/int_hnw006_v.inc"
 };
+#endif
 
 Gfx int_hnw006_chest_model[] = {
     gsSPMatrix(anime_6_mdl, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),

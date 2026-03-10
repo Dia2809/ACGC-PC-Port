@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_jny_syon01_v[];
+#ifdef TARGET_PC
+u8 int_ike_jny_syon01_tex[0x20] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_ike_jny_syon01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_jny_syon01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_syonfoot2_tex_txt[0x100];
+#else
 u8 int_ike_jny_syonfoot2_tex_txt[] = {
 #include "assets/int_ike_jny_syonfoot2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_syonfoot1_tex_txt[0x100];
+#else
 u8 int_ike_jny_syonfoot1_tex_txt[] = {
 #include "assets/int_ike_jny_syonfoot1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_syonbody2_tex_txt[0x200];
+#else
 u8 int_ike_jny_syonbody2_tex_txt[] = {
 #include "assets/int_ike_jny_syonbody2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_syonhead_tex_txt[0x100];
+#else
 u8 int_ike_jny_syonhead_tex_txt[] = {
 #include "assets/int_ike_jny_syonhead_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_syonbody1_tex_txt[0x200];
+#else
 u8 int_ike_jny_syonbody1_tex_txt[] = {
 #include "assets/int_ike_jny_syonbody1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_syonface_tex_txt[0x100];
+#else
 u8 int_ike_jny_syonface_tex_txt[] = {
 #include "assets/int_ike_jny_syonface_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_syonwater1_pic_i4[0x200];
+#else
 u8 int_ike_jny_syonwater1_pic_i4[] = {
 #include "assets/int_ike_jny_syonwater1_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_syonwater2_pic_i4[0x200];
+#else
 u8 int_ike_jny_syonwater2_pic_i4[] = {
 #include "assets/int_ike_jny_syonwater2_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_jny_syon01_v[0x6C0 / sizeof(Vtx)];
+#else
 Vtx int_ike_jny_syon01_v[] = {
 #include "assets/int_ike_jny_syon01_v.inc"
 };
+#endif
 
 Gfx int_ike_jny_syon01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,81 +5,157 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 pwd_win_kagi2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 pwd_win_kagi2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/pwd_win_kagi2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pwd_win_nuno_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pwd_win_nuno_tex_rgb_ci4_pal[] = {
 #include "assets/pwd_win_nuno_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pwd_win_w4_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pwd_win_w4_tex_rgb_ci4_pal[] = {
 #include "assets/pwd_win_w4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pwd_win_w1_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pwd_win_w1_tex_rgb_ci4_pal[] = {
 #include "assets/pwd_win_w1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pwd_win_w2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pwd_win_w2_tex_rgb_ci4_pal[] = {
 #include "assets/pwd_win_w2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pwd_win_w3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pwd_win_w3_tex_rgb_ci4_pal[] = {
 #include "assets/pwd_win_w3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_moji_tex[0x80];
+#else
 u8 pwd_win_moji_tex[] = {
 #include "assets/pwd_win_moji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_fuki2_tex[0x800];
+#else
 static u8 fkm_win_fuki2_tex[] = {
 #include "assets/pwd_win/fkm_win_fuki2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_sw1_tex[0x400];
+#else
 u8 pwd_win_sw1_tex[] = {
 #include "assets/pwd_win_sw1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_sw2_tex[0x400];
+#else
 u8 pwd_win_sw2_tex[] = {
 #include "assets/pwd_win_sw2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_sw3_tex[0x200];
+#else
 u8 pwd_win_sw3_tex[] = {
 #include "assets/pwd_win_sw3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_sw4_tex[0x80];
+#else
 u8 pwd_win_sw4_tex[] = {
 #include "assets/pwd_win_sw4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_icon_tex[0x800];
+#else
 u8 pwd_win_icon_tex[] = {
 #include "assets/pwd_win_icon_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_nuno_tex_rgb_ci4[0x200];
+#else
 u8 pwd_win_nuno_tex_rgb_ci4[] = {
 #include "assets/pwd_win_nuno_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_w4_tex_rgb_ci4[0x80];
+#else
 u8 pwd_win_w4_tex_rgb_ci4[] = {
 #include "assets/pwd_win_w4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_w1_tex_rgb_ci4[0x400];
+#else
 u8 pwd_win_w1_tex_rgb_ci4[] = {
 #include "assets/pwd_win_w1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_w2_tex_rgb_ci4[0x400];
+#else
 u8 pwd_win_w2_tex_rgb_ci4[] = {
 #include "assets/pwd_win_w2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pwd_win_w3_tex_rgb_ci4[0x200];
+#else
 u8 pwd_win_w3_tex_rgb_ci4[] = {
 #include "assets/pwd_win_w3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx pwd_win_v[0xE80 / sizeof(Vtx)];
+#else
 Vtx pwd_win_v[] = {
 #include "assets/pwd_win_v.inc"
 };
+#endif
 
 Gfx pwd_win_w11_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, pwd_win_w4_tex_rgb_ci4_pal),
@@ -317,3 +393,10 @@ Gfx pwd_win_model[] = {
     gsSPDisplayList(pwd_win_sen2_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_pwd_win_c(void) {
+    pc_load_asset("assets/pwd_win/fkm_win_fuki2_tex.bin", fkm_win_fuki2_tex, 0x800, 0x7B5540, 0, 0);
+}
+#endif

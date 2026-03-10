@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_ratan_isu01_v[];
+#ifdef TARGET_PC
+u16 int_sum_ratan_isu01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_ratan_isu01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_ratan_isu01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_isu01_seat_tax[0x100];
+#else
 u8 int_sum_ratan_isu01_seat_tax[] = {
 #include "assets/int_sum_ratan_isu01_seat_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_isu01_back_tax[0x100];
+#else
 u8 int_sum_ratan_isu01_back_tax[] = {
 #include "assets/int_sum_ratan_isu01_back_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_isu01_board_tax[0x100];
+#else
 u8 int_sum_ratan_isu01_board_tax[] = {
 #include "assets/int_sum_ratan_isu01_board_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_isu01_side_tax[0x100];
+#else
 u8 int_sum_ratan_isu01_side_tax[] = {
 #include "assets/int_sum_ratan_isu01_side_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_isu01_outside_tax[0x100];
+#else
 u8 int_sum_ratan_isu01_outside_tax[] = {
 #include "assets/int_sum_ratan_isu01_outside_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_isu01_sidein_tax[0x100];
+#else
 u8 int_sum_ratan_isu01_sidein_tax[] = {
 #include "assets/int_sum_ratan_isu01_sidein_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_isu01_foot_tax[0x80];
+#else
 u8 int_sum_ratan_isu01_foot_tax[] = {
 #include "assets/int_sum_ratan_isu01_foot_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_ratan_isu01_v[0x460 / sizeof(Vtx)];
+#else
 Vtx int_sum_ratan_isu01_v[] = {
 #include "assets/int_sum_ratan_isu01_v.inc"
 };
+#endif
 
 Gfx int_sum_ratan_isu01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

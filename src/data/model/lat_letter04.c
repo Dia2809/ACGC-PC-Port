@@ -16,9 +16,13 @@ extern u8 lat_letter04_cloth4_tex[];
 extern u8 lat_letter04_cloth6_tex[];
 extern u8 lat_letter04_cloth9_tex[];
 extern u8 lat_letter04_cloth3_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter04_v[0x280 / sizeof(Vtx)];
+#else
 Vtx lat_letter04_v[] = {
 #include "assets/lat_letter04_v.inc"
 };
+#endif
 
 Gfx lat_letter04_win_model[] = {
     gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),

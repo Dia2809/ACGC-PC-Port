@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_stew_v[];
+#ifdef TARGET_PC
+u16 int_tak_stew_a1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_stew_a1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_stew_a1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_tak_stew_nabe_pal[0x20 / sizeof(u16)];
+#else
 u16 int_tak_stew_nabe_pal[] = {
 #include "assets/int_tak_stew_nabe_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_stew_a1_tex[0x200];
+#else
 u8 int_tak_stew_a1_tex[] = {
 #include "assets/int_tak_stew_a1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_stew_nabe_tex[0x80];
+#else
 u8 int_tak_stew_nabe_tex[] = {
 #include "assets/int_tak_stew_nabe_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_stew_etc_tex[0x80];
+#else
 u8 int_tak_stew_etc_tex[] = {
 #include "assets/int_tak_stew_etc_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_stew_a2_tex_rgb_ci4[0x200];
+#else
 u8 int_tak_stew_a2_tex_rgb_ci4[] = {
 #include "assets/int_tak_stew_a2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_stew_v[0x400 / sizeof(Vtx)];
+#else
 Vtx int_tak_stew_v[] = {
 #include "assets/int_tak_stew_v.inc"
 };
+#endif
 
 Gfx int_tak_stew_nabe_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

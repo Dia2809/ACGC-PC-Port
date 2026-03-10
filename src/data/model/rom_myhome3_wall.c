@@ -4,21 +4,37 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+static u16 rom_myhome_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_myhome_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_myhome3_wall/rom_myhome_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_myhome_window_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_myhome_window_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_myhome3_wall/rom_myhome_window_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_myhome_enter2_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_myhome_enter2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_myhome3_wall/rom_myhome_enter2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_myhome3_wall_v[0x4F0 / sizeof(Vtx)];
+#else
 Vtx rom_myhome3_wall_v[] = {
 #include "assets/rom_myhome3_wall_v.inc"
 };
+#endif
 
 Gfx rom_myhome3_wall_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -166,3 +182,12 @@ Gfx rom_myhome3_wall_new2_model[] = {
     gsSPNTriangles_5b(5, 7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_myhome3_wall_c(void) {
+    pc_load_asset("assets/rom_myhome3_wall/rom_myhome_pal.bin", rom_myhome_pal, 0x20, 0xBB86C0, 0, 1);
+    pc_load_asset("assets/rom_myhome3_wall/rom_myhome_window_tex.bin", rom_myhome_window_tex, 0x200, 0x59D7A0, 0, 0);
+    pc_load_asset("assets/rom_myhome3_wall/rom_myhome_enter2_tex.bin", rom_myhome_enter2_tex, 0x800, 0x59F5C0, 0, 0);
+}
+#endif

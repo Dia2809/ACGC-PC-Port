@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kan_win_gomi_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 kan_win_gomi_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kan_win_gomi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx kan_gomi_v[0x40 / sizeof(Vtx)];
+#else
 Vtx kan_gomi_v[] = {
 #include "assets/kan_gomi_v.inc"
 };
+#endif
 
 Gfx kan_win_gomiT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,21 +5,37 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_train1_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_train1_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_train1_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_train1_t1_tex_txt[0x800];
+#else
 u8 obj_train1_t1_tex_txt[] = {
 #include "assets/obj_train1_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_train1_t2_tex_txt[0x800];
+#else
 u8 obj_train1_t2_tex_txt[] = {
 #include "assets/obj_train1_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_train1_1_v[0x860 / sizeof(Vtx)];
+#else
 Vtx obj_train1_1_v[] = {
 #include "assets/obj_train1_1_v.inc"
 };
+#endif
 
 Gfx obj_train1_1_t3_model[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 64, 64, obj_train1_t2_tex_txt),
@@ -107,13 +123,21 @@ Gfx obj_train1_1_wheel1_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_train1_t3_tex_txt_tansui[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_train1_t3_tex_txt_tansui[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_train1_t3_tex_txt_tansui.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_train_2_v[0x310 / sizeof(Vtx)];
+#else
 Vtx obj_train_2_v[] = {
 #include "assets/obj_train_2_v.inc"
 };
+#endif
 
 Gfx obj_train1_2_t2_model[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 128, 32, obj_train1_t3_tex_txt_tansui),

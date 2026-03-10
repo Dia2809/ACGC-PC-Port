@@ -5,29 +5,53 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_summer_museum_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_summer_museum_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_summer_museum_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_museum_t2_tex[0x800];
+#else
 u8 obj_s_museum_t2_tex[] = {
 #include "assets/obj_s_museum_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_museum_t3_tex[0x800];
+#else
 u8 obj_s_museum_t3_tex[] = {
 #include "assets/obj_s_museum_t3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum_window_tex[0x80];
+#else
 u8 obj_museum_window_tex[] = {
 #include "assets/obj_museum_window_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_museum_t1_tex[0x800];
+#else
 u8 obj_s_museum_t1_tex[] = {
 #include "assets/obj_s_museum_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_museum_v[0x8D0 / sizeof(Vtx)];
+#else
 Vtx obj_s_museum_v[] = {
 #include "assets/obj_s_museum_v.inc"
 };
+#endif
 
 Gfx obj_s_museum_t2_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -116,29 +140,53 @@ Gfx obj_s_museum_windowT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 obj_winter_museum_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_winter_museum_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_winter_museum_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_museum_t2_tex[0x800];
+#else
 u8 obj_w_museum_t2_tex[] = {
 #include "assets/obj_w_museum_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_museum_t3_tex[0x800];
+#else
 u8 obj_w_museum_t3_tex[] = {
 #include "assets/obj_w_museum_t3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_museum_window_tex[0x80];
+#else
 u8 obj_w_museum_window_tex[] = {
 #include "assets/obj_w_museum_window_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_museum_t1_tex[0x800];
+#else
 u8 obj_w_museum_t1_tex[] = {
 #include "assets/obj_w_museum_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_museum_v[0x8D0 / sizeof(Vtx)];
+#else
 Vtx obj_w_museum_v[] = {
 #include "assets/obj_w_museum_v.inc"
 };
+#endif
 
 Gfx obj_w_museum_t2_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

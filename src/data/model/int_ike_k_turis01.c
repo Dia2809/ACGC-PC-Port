@@ -6,57 +6,109 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_k_turis01_v[];
+#ifdef TARGET_PC
+u16 int_ike_k_turis01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_k_turis01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_k_turis01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turisb6_tex_txt[0x100];
+#else
 u8 int_ike_k_turisb6_tex_txt[] = {
 #include "assets/int_ike_k_turisb6_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turisb7_tex_txt[0x80];
+#else
 u8 int_ike_k_turisb7_tex_txt[] = {
 #include "assets/int_ike_k_turisb7_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turisb1_tex_txt[0x400];
+#else
 u8 int_ike_k_turisb1_tex_txt[] = {
 #include "assets/int_ike_k_turisb1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turisb3_tex_txt[0x400];
+#else
 u8 int_ike_k_turisb3_tex_txt[] = {
 #include "assets/int_ike_k_turisb3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turisb2_tex_txt[0x80];
+#else
 u8 int_ike_k_turisb2_tex_txt[] = {
 #include "assets/int_ike_k_turisb2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turisb5_tex_txt[0x80];
+#else
 u8 int_ike_k_turisb5_tex_txt[] = {
 #include "assets/int_ike_k_turisb5_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turisb8_tex_txt[0x80];
+#else
 u8 int_ike_k_turisb8_tex_txt[] = {
 #include "assets/int_ike_k_turisb8_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turisb4_tex_txt[0x80];
+#else
 u8 int_ike_k_turisb4_tex_txt[] = {
 #include "assets/int_ike_k_turisb4_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turibass3_tex_txt[0x200];
+#else
 u8 int_ike_k_turibass3_tex_txt[] = {
 #include "assets/int_ike_k_turibass3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turibass2_tex_txt[0x80];
+#else
 u8 int_ike_k_turibass2_tex_txt[] = {
 #include "assets/int_ike_k_turibass2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_turibass1_tex_txt[0x300];
+#else
 u8 int_ike_k_turibass1_tex_txt[] = {
 #include "assets/int_ike_k_turibass1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_k_turis01_v[0x750 / sizeof(Vtx)];
+#else
 Vtx int_ike_k_turis01_v[] = {
 #include "assets/int_ike_k_turis01_v.inc"
 };
+#endif
 
 Gfx int_ike_k_turis01_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

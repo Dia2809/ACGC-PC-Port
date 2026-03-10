@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_beachtable_v[];
+#ifdef TARGET_PC
+u16 int_nog_beachtable_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_beachtable_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_beachtable_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_beachtable_fruit_tex[0x200];
+#else
 u8 int_nog_beachtable_fruit_tex[] = {
 #include "assets/int_nog_beachtable_fruit_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_beachtable_pole_tex[0x200];
+#else
 u8 int_nog_beachtable_pole_tex[] = {
 #include "assets/int_nog_beachtable_pole_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_beachtable_top_tex[0x400];
+#else
 u8 int_nog_beachtable_top_tex[] = {
 #include "assets/int_nog_beachtable_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_beachtable_bubble_tex_rgb_ci4[0x80];
+#else
 u8 int_nog_beachtable_bubble_tex_rgb_ci4[] = {
 #include "assets/int_nog_beachtable_bubble_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_beachtable_juice_tex[0x100];
+#else
 u8 int_nog_beachtable_juice_tex[] = {
 #include "assets/int_nog_beachtable_juice_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_beachtable_v[0xC30 / sizeof(Vtx)];
+#else
 Vtx int_nog_beachtable_v[] = {
 #include "assets/int_nog_beachtable_v.inc"
 };
+#endif
 
 Gfx int_nog_beachtable_bodyT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

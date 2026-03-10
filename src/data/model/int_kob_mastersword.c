@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kob_mastersword_v[];
+#ifdef TARGET_PC
+u16 int_kob_mastersword_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kob_mastersword_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kob_mastersword_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_kob_mastersword_kan_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_kob_mastersword_kan_tex_rgb_ci4_pal[] = {
 #include "assets/int_kob_mastersword_kan_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_mastersword_tuka_tex[0x180];
+#else
 u8 int_kob_mastersword_tuka_tex[] = {
 #include "assets/int_kob_mastersword_tuka_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_mastersword_tuba_tex[0x100];
+#else
 u8 int_kob_mastersword_tuba_tex[] = {
 #include "assets/int_kob_mastersword_tuba_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_mastersword_ishi1_tex[0x80];
+#else
 u8 int_kob_mastersword_ishi1_tex[] = {
 #include "assets/int_kob_mastersword_ishi1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_mastersword_ishi2_tex[0x80];
+#else
 u8 int_kob_mastersword_ishi2_tex[] = {
 #include "assets/int_kob_mastersword_ishi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_mastersword_ishi3_tex[0x80];
+#else
 u8 int_kob_mastersword_ishi3_tex[] = {
 #include "assets/int_kob_mastersword_ishi3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_mastersword_kan_tex[0x400];
+#else
 u8 int_kob_mastersword_kan_tex[] = {
 #include "assets/int_kob_mastersword_kan_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kob_mastersword_v[0x4C0 / sizeof(Vtx)];
+#else
 Vtx int_kob_mastersword_v[] = {
 #include "assets/int_kob_mastersword_v.inc"
 };
+#endif
 
 Gfx int_kob_mastersword_env_model[] = {
     gsSPTexture(4000, 4000, 0, G_TX_RENDERTILE, G_ON),

@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_kirigirisu_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_kirigirisu_v[0x130 / sizeof(Vtx)];
+#else
 static Vtx act_m_kirigirisu_v[] = {
 #include "assets/act_m_kirigirisu2/act_m_kirigirisu_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_kirigirisu_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_kirigirisu_pal[] = {
 #include "assets/act_m_kirigirisu2/act_m_kirigirisu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_kirigirisu[0x200];
+#else
 static u8 act_m_kirigirisu[] = {
 #include "assets/act_m_kirigirisu2/act_m_kirigirisu.inc"
 };
+#endif
 
 Gfx act_m_mu_kirigirisu1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -81,3 +93,12 @@ Gfx act_m_mu_kirigirisu2_2T_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_kirigirisu2_c(void) {
+    pc_load_asset("assets/act_m_kirigirisu2/act_m_kirigirisu_v.bin", act_m_kirigirisu_v, 0x130, 0xB4EA08, 0, 2);
+    pc_load_asset("assets/act_m_kirigirisu2/act_m_kirigirisu_pal.bin", act_m_kirigirisu_pal, 0x20, 0xB4EB38, 0, 1);
+    pc_load_asset("assets/act_m_kirigirisu2/act_m_kirigirisu.bin", act_m_kirigirisu, 0x200, 0xB4EB58, 0, 0);
+}
+#endif

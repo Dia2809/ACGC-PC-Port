@@ -9,9 +9,13 @@ extern u8 lat_letter62_hn_tex[];
 extern u16 lat_letter62_pal[];
 extern u8 lat_letter62_xk_tex[];
 extern u8 lat_letter62_ch_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter62_v[0x320 / sizeof(Vtx)];
+#else
 Vtx lat_letter62_v[] = {
 #include "assets/lat_letter62_v.inc"
 };
+#endif
 
 Gfx lat_letter62_model[] = {
     gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),

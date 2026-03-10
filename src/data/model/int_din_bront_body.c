@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_bront_body_v[];
+#ifdef TARGET_PC
+static u16 int_din_bront_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_bront_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_bront_body/int_din_bront_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_bront_body_tex[0x300];
+#else
 u8 int_din_bront_body_tex[] = {
 #include "assets/int_din_bront_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_bront_leg_tex[0x80];
+#else
 u8 int_din_bront_leg_tex[] = {
 #include "assets/int_din_bront_leg_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_bront_shin_tex[0x100];
+#else
 u8 int_din_bront_shin_tex[] = {
 #include "assets/int_din_bront_shin_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_bront_thigh_tex[0x100];
+#else
 u8 int_din_bront_thigh_tex[] = {
 #include "assets/int_din_bront_thigh_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_bront_baceB_tex[0x200];
+#else
 u8 int_din_bront_baceB_tex[] = {
 #include "assets/int_din_bront_baceB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_bront_body_v[0x470 / sizeof(Vtx)];
+#else
 Vtx int_din_bront_body_v[] = {
 #include "assets/int_din_bront_body_v.inc"
 };
+#endif
 
 Gfx int_din_bront_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -83,3 +111,10 @@ Gfx int_din_bront_bodyT_model[] = {
     gsSPNTriangles_5b(17, 24, 18, 21, 24, 22, 27, 25, 28, 27, 28, 26),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_bront_body_c(void) {
+    pc_load_asset("assets/int_din_bront_body/int_din_bront_pal.bin", int_din_bront_pal, 0x20, 0x90F460, 0, 1);
+}
+#endif

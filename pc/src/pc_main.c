@@ -3,6 +3,8 @@
 #include "pc_gx_internal.h"
 #include "pc_texture_pack.h"
 #include "pc_settings.h"
+#include "pc_assets.h"
+#include "pc_disc.h"
 
 /* prefer discrete GPU on laptops */
 #ifdef _WIN32
@@ -307,10 +309,13 @@ int main(int argc, char* argv[]) {
     SDL_SetMainReady();
     pc_settings_load();
     pc_platform_init();
+    pc_disc_init();
+    pc_assets_init();
 
     ac_entry();                         /* sets HotStartEntry = &entry */
     boot_main(argc, (const char**)argv); /* full init → HotStartEntry → game loop */
 
+    pc_disc_shutdown();
     pc_platform_shutdown();
     return 0;
 }

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_hos_turkey_sofa_v[];
+#ifdef TARGET_PC
+u16 int_hos_turkey_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_hos_turkey_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_hos_turkey_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_turkey_sofa_se_txt[0x200];
+#else
 u8 int_hos_turkey_sofa_se_txt[] = {
 #include "assets/int_hos_turkey_sofa_se_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_turkey_sofa_asi_txt[0x80];
+#else
 u8 int_hos_turkey_sofa_asi_txt[] = {
 #include "assets/int_hos_turkey_sofa_asi_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_turkey_sofa_cov_txt[0x200];
+#else
 u8 int_hos_turkey_sofa_cov_txt[] = {
 #include "assets/int_hos_turkey_sofa_cov_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_turkey_sofa_yoko_txt[0x200];
+#else
 u8 int_hos_turkey_sofa_yoko_txt[] = {
 #include "assets/int_hos_turkey_sofa_yoko_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_hos_turkey_sofa_v[0x590 / sizeof(Vtx)];
+#else
 Vtx int_hos_turkey_sofa_v[] = {
 #include "assets/int_hos_turkey_sofa_v.inc"
 };
+#endif
 
 Gfx int_hos_turkey_sofa_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

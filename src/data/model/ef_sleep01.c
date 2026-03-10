@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_sleep_z[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_sleep_z[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_sleep_z.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_sleep01_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_sleep01_v[] = {
 #include "assets/ef_sleep01_v.inc"
 };
+#endif
 
 Gfx ef_sleep01_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

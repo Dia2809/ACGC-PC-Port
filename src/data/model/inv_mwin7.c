@@ -5,30 +5,58 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_mwin_aki_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_mwin_aki_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_mwin_aki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_fukubukuro_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_fukubukuro_pal[] = {
 #include "assets/inv_mwin_fukubukuro_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_kutu_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_kutu_pal[] = {
 #include "assets/inv_mwin_kutu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_akikan_tex[0x200];
+#else
 u8 inv_mwin_akikan_tex[] = {
 #include "assets/inv_mwin_akikan_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_fukubukuro_tex[0x200];
+#else
 u8 inv_mwin_fukubukuro_tex[] = {
 #include "assets/inv_mwin_fukubukuro_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_taiya_tex[0x200];
+#else
 u8 inv_mwin_taiya_tex[] = {
 #include "assets/inv_mwin_taiya_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_kutu_tex[0x200];
+#else
 u8 inv_mwin_kutu_tex[] = {
 #include "assets/inv_mwin_kutu_tex.inc"
 };
+#endif

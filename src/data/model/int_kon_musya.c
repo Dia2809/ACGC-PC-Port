@@ -6,57 +6,109 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_musya_v[];
+#ifdef TARGET_PC
+u16 int_kon_musya_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_musya_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_musya_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_a_tex[0x100];
+#else
 u8 int_kon_musya_a_tex[] = {
 #include "assets/int_kon_musya_a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_b_tex[0x100];
+#else
 u8 int_kon_musya_b_tex[] = {
 #include "assets/int_kon_musya_b_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_c_tex[0x80];
+#else
 u8 int_kon_musya_c_tex[] = {
 #include "assets/int_kon_musya_c_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_d_tex[0x80];
+#else
 u8 int_kon_musya_d_tex[] = {
 #include "assets/int_kon_musya_d_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_e_tex[0x80];
+#else
 u8 int_kon_musya_e_tex[] = {
 #include "assets/int_kon_musya_e_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_f_tex[0x100];
+#else
 u8 int_kon_musya_f_tex[] = {
 #include "assets/int_kon_musya_f_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_g_tex[0x80];
+#else
 u8 int_kon_musya_g_tex[] = {
 #include "assets/int_kon_musya_g_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_h_tex[0x80];
+#else
 u8 int_kon_musya_h_tex[] = {
 #include "assets/int_kon_musya_h_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_i_tex[0x100];
+#else
 u8 int_kon_musya_i_tex[] = {
 #include "assets/int_kon_musya_i_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_j_tex[0x80];
+#else
 u8 int_kon_musya_j_tex[] = {
 #include "assets/int_kon_musya_j_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_musya_k_tex[0x100];
+#else
 u8 int_kon_musya_k_tex[] = {
 #include "assets/int_kon_musya_k_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_musya_v[0x520 / sizeof(Vtx)];
+#else
 Vtx int_kon_musya_v[] = {
 #include "assets/int_kon_musya_v.inc"
 };
+#endif
 
 Gfx int_kon_musya_hako_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

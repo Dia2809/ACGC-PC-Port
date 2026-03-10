@@ -5,61 +5,117 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t10_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_boat_t10_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_boat_t10_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t11_tex_txt[0x80];
+#else
 u8 obj_s_boat_t11_tex_txt[] = {
 #include "assets/obj_s_boat_t11_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t9_tex_txt[0xC0];
+#else
 u8 obj_s_boat_t9_tex_txt[] = {
 #include "assets/obj_s_boat_t9_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t6_tex_txt[0x100];
+#else
 u8 obj_s_boat_t6_tex_txt[] = {
 #include "assets/obj_s_boat_t6_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t7_tex_txt[0x80];
+#else
 u8 obj_s_boat_t7_tex_txt[] = {
 #include "assets/obj_s_boat_t7_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t1_tex_txt[0x400];
+#else
 u8 obj_s_boat_t1_tex_txt[] = {
 #include "assets/obj_s_boat_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t3_tex_txt[0x400];
+#else
 u8 obj_s_boat_t3_tex_txt[] = {
 #include "assets/obj_s_boat_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t2_tex_txt[0x80];
+#else
 u8 obj_s_boat_t2_tex_txt[] = {
 #include "assets/obj_s_boat_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t5_tex_txt[0x80];
+#else
 u8 obj_s_boat_t5_tex_txt[] = {
 #include "assets/obj_s_boat_t5_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t8_tex_txt[0x80];
+#else
 u8 obj_s_boat_t8_tex_txt[] = {
 #include "assets/obj_s_boat_t8_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_t4_tex_txt[0x80];
+#else
 u8 obj_s_boat_t4_tex_txt[] = {
 #include "assets/obj_s_boat_t4_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_water1_pic_i4[0x200];
+#else
 u8 obj_s_boat_water1_pic_i4[] = {
 #include "assets/obj_s_boat_water1_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_boat_water2_pic_i4[0x200];
+#else
 u8 obj_s_boat_water2_pic_i4[] = {
 #include "assets/obj_s_boat_water2_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_boat_v[0x9C0 / sizeof(Vtx)];
+#else
 Vtx obj_e_boat_v[] = {
 #include "assets/obj_e_boat_v.inc"
 };
+#endif
 
 Gfx obj_e_boat_boat1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

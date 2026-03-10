@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 tol_sao_1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_sao_1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_uki_12/tol_sao_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_sao_1_uki1_tex_txt[0x100];
+#else
 static u8 tol_sao_1_uki1_tex_txt[] = {
 #include "assets/tol_uki_12/tol_sao_1_uki1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx tol_uki_1_v[0x180 / sizeof(Vtx)];
+#else
 static Vtx tol_uki_1_v[] = {
 #include "assets/tol_uki_12/tol_uki_1_v.inc"
 };
+#endif
 
 Gfx tol_uki1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -36,3 +48,12 @@ Gfx tol_uki1_model[] = {
     gsSPNTriangles_5b(22, 18, 19, 18, 22, 23, 18, 23, 20, 20, 23, 21),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_tol_uki_12_c(void) {
+    pc_load_asset("assets/tol_uki_12/tol_sao_1_pal.bin", tol_sao_1_pal, 0x20, 0x8DED60, 0, 1);
+    pc_load_asset("assets/tol_uki_12/tol_sao_1_uki1_tex_txt.bin", tol_sao_1_uki1_tex_txt, 0x100, 0x8DED80, 0, 0);
+    pc_load_asset("assets/tol_uki_12/tol_uki_1_v.bin", tol_uki_1_v, 0x180, 0x8DEE80, 0, 2);
+}
+#endif

@@ -16,9 +16,13 @@ extern u8 lat_letter26_test1_tex[];
 extern u8 lat_letter26_test9_tex[];
 extern u8 lat_letter26_test2_tex[];
 extern u8 lat_letter26_test5_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter26_v[0x6C0 / sizeof(Vtx)];
+#else
 Vtx lat_letter26_v[] = {
 #include "assets/lat_letter26_v.inc"
 };
+#endif
 
 Gfx lat_letter26_win_model[] = {
     gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),

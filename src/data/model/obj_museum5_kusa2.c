@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_museum5_kusa2_v[];
+#ifdef TARGET_PC
+u16 obj_museum5_kusa2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_museum5_kusa2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_museum5_kusa2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_kusa2_tex_txt[0x100];
+#else
 u8 obj_museum5_kusa2_tex_txt[] = {
 #include "assets/obj_museum5_kusa2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_museum5_kusa2_v[0x1D0 / sizeof(Vtx)];
+#else
 Vtx obj_museum5_kusa2_v[] = {
 #include "assets/obj_museum5_kusa2_v.inc"
 };
+#endif
 
 Gfx obj_museum5_kusa2_1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

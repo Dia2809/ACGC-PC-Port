@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 inv_win_mark_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 inv_win_mark_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_win_mark_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx inv_mark_v[0x40 / sizeof(Vtx)];
+#else
 Vtx inv_mark_v[] = {
 #include "assets/inv_mark_v.inc"
 };
+#endif
 
 Gfx inv_mark_model[] = {
     gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, TEXEL0, PRIMITIVE, ENVIRONMENT, TEXEL0,

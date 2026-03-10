@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+u16 act_m_house_goki_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 act_m_house_goki_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_house_goki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_m_house_goki[0x200];
+#else
 u8 act_m_house_goki[] = {
 #include "assets/act_m_house_goki.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_m_house_goki_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx act_m_house_goki_v[] = {
 #include "assets/act_m_house_goki_v.inc"
 };
+#endif
 
 Gfx act_m_house_goki1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

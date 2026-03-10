@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_ugui_v[];
+#ifdef TARGET_PC
+static u16 int_sum_ugui_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_sum_ugui_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_ugui/int_sum_ugui_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_ugui_glass_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_ugui_glass_pic_ci4_pal[] = {
 #include "assets/int_sum_ugui_glass_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ugui_body_txt[0x300];
+#else
 u8 int_sum_ugui_body_txt[] = {
 #include "assets/int_sum_ugui_body_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ugui_side_txt[0x200];
+#else
 u8 int_sum_ugui_side_txt[] = {
 #include "assets/int_sum_ugui_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ugui_base_txt[0x80];
+#else
 u8 int_sum_ugui_base_txt[] = {
 #include "assets/int_sum_ugui_base_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ugui_top_txt[0x100];
+#else
 u8 int_sum_ugui_top_txt[] = {
 #include "assets/int_sum_ugui_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ugui_glass_txt[0x100];
+#else
 u8 int_sum_ugui_glass_txt[] = {
 #include "assets/int_sum_ugui_glass_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_ugui_v[0x2D0 / sizeof(Vtx)];
+#else
 Vtx int_sum_ugui_v[] = {
 #include "assets/int_sum_ugui_v.inc"
 };
+#endif
 
 Gfx int_sum_ugui_sakana_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -132,3 +164,10 @@ cKF_Joint_R_c cKF_je_r_int_sum_ugui_tbl[] = {
 };
 
 cKF_Skeleton_R_c cKF_bs_r_int_sum_ugui = { ARRAY_COUNT(cKF_je_r_int_sum_ugui_tbl), 4, cKF_je_r_int_sum_ugui_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_ugui_c(void) {
+    pc_load_asset("assets/int_sum_ugui/int_sum_ugui_pal.bin", int_sum_ugui_pal, 0x20, 0xD53A80, 0, 1);
+}
+#endif

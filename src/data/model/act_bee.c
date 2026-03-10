@@ -3,13 +3,21 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 act_bee_tex_txt[0x200];
+#else
 u8 act_bee_tex_txt[] = {
 #include "assets/act_bee_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_bee_v[0x3A0 / sizeof(Vtx)];
+#else
 Vtx act_bee_v[] = {
 #include "assets/act_bee_v.inc"
 };
+#endif
 
 Gfx act_bee_C_model[] = {
     gsSPTexture(4000, 4000, 0, G_TX_RENDERTILE, G_ON),

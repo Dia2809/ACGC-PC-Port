@@ -1,112 +1,220 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_yami_wall_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_wall_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_wall_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_floor_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_floor_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_floor_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_box_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_box_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_box_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_mono01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_mono01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_mono01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_mono02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_mono02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_mono02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_mono03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_mono03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_mono03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_qup_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_qup_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_qup_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_hyou_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_hyou_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_hyou_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_step_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_step_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_step_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_hugu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_hugu_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_hugu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_yami_tama_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_yami_tama_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_tama_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_wall_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_wall_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_wall_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_floor_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_floor_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_floor_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_poll_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_poll_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_poll_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_box01_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_box01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_box01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_box02_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_box02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_box02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_mono01_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_mono01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_mono01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_mono02_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_mono02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_mono02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_mono03_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_mono03_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_mono03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_qup_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_qup_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_qup_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_hyou_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_hyou_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_hyou_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_hyou02_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_hyou02_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_hyou02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_step_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_step_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_step_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_hugu_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_hugu_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_hugu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_tama_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_tama_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_tama_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_yami_shadow01_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_yami_shadow01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_yami_shadow01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx grd_yamishop_v[0x10D0 / sizeof(Vtx)];
+#else
 static Vtx grd_yamishop_v[] = {
 #include "assets/field/bg/grd_yamishop_v.inc"
 };
+#endif
 
 extern Gfx grd_yamishop_modelT[] = {
     gsSPEndDisplayList(),
@@ -474,3 +582,36 @@ extern Gfx grd_yamishop_model[] = {
                       ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_grd_yamishop_grd_yamishop_c(void) {
+    pc_load_asset("assets/field/bg/rom_yami_wall_pal.bin", rom_yami_wall_pal, 0x20, 0x8EA080, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_floor_pal.bin", rom_yami_floor_pal, 0x20, 0x8EA0A0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_box_pal.bin", rom_yami_box_pal, 0x20, 0x8EA0C0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_mono01_pal.bin", rom_yami_mono01_pal, 0x20, 0x8EA0E0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_mono02_pal.bin", rom_yami_mono02_pal, 0x20, 0x8EA100, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_mono03_pal.bin", rom_yami_mono03_pal, 0x20, 0x8EA120, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_qup_pal.bin", rom_yami_qup_pal, 0x20, 0x8EA140, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_hyou_pal.bin", rom_yami_hyou_pal, 0x20, 0x8EA160, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_step_tex_pal.bin", rom_yami_step_tex_pal, 0x20, 0x8EA180, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_hugu_pal.bin", rom_yami_hugu_pal, 0x20, 0x8EA1A0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_tama_pal.bin", rom_yami_tama_pal, 0x20, 0x8EA1C0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_yami_wall_tex.bin", rom_yami_wall_tex, 0x300, 0x8EA1E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_floor_tex.bin", rom_yami_floor_tex, 0x800, 0x8EA4E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_poll_tex.bin", rom_yami_poll_tex, 0x80, 0x8EACE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_box01_tex.bin", rom_yami_box01_tex, 0x100, 0x8EAD60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_box02_tex.bin", rom_yami_box02_tex, 0x80, 0x8EAE60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_mono01_tex.bin", rom_yami_mono01_tex, 0x200, 0x8EAEE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_mono02_tex.bin", rom_yami_mono02_tex, 0x200, 0x8EB0E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_mono03_tex.bin", rom_yami_mono03_tex, 0x200, 0x8EB2E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_qup_tex.bin", rom_yami_qup_tex, 0x300, 0x8EB4E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_hyou_tex.bin", rom_yami_hyou_tex, 0x100, 0x8EB7E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_hyou02_tex.bin", rom_yami_hyou02_tex, 0x100, 0x8EB8E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_step_tex.bin", rom_yami_step_tex, 0x400, 0x8EB9E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_hugu_tex.bin", rom_yami_hugu_tex, 0x300, 0x8EBDE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_tama_tex.bin", rom_yami_tama_tex, 0x300, 0x8EC0E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_yami_shadow01_tex.bin", rom_yami_shadow01_tex, 0x100, 0x8EC3E0, 0, 0);
+    pc_load_asset("assets/field/bg/grd_yamishop_v.bin", grd_yamishop_v, 0x10D0, 0x8EC4E0, 0, 2);
+}
+#endif

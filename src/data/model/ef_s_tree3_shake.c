@@ -6,9 +6,13 @@
 #include "ef_effect_control.h"
 
 extern u8 ef_s_tree_leaf_modeset[];
+#ifdef TARGET_PC
+Vtx ef_s_tree3_shake_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_s_tree3_shake_v[] = {
 #include "assets/ef_s_tree3_shake_v.inc"
 };
+#endif
 
 Gfx ef_s_tree3_shake_leaf_model[] = {
     gsSPDisplayList(ef_s_tree_leaf_modeset),

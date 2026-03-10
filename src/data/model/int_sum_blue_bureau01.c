@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_blue_bureau01_v[];
+#ifdef TARGET_PC
+u16 int_sum_blue_bureau01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_blue_bureau01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_blue_bureau01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_bureau01_hiki_tex_txt[0x300];
+#else
 u8 int_sum_blue_bureau01_hiki_tex_txt[] = {
 #include "assets/int_sum_blue_bureau01_hiki_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_bureau01_top_tex_txt[0x80];
+#else
 u8 int_sum_blue_bureau01_top_tex_txt[] = {
 #include "assets/int_sum_blue_bureau01_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_bureau01_topin_tex_txt[0x80];
+#else
 u8 int_sum_blue_bureau01_topin_tex_txt[] = {
 #include "assets/int_sum_blue_bureau01_topin_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_bureau01_side_tex_txt[0x200];
+#else
 u8 int_sum_blue_bureau01_side_tex_txt[] = {
 #include "assets/int_sum_blue_bureau01_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_bureau01_front_tex_txt[0x200];
+#else
 u8 int_sum_blue_bureau01_front_tex_txt[] = {
 #include "assets/int_sum_blue_bureau01_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_blue_bureau01_v[0x330 / sizeof(Vtx)];
+#else
 Vtx int_sum_blue_bureau01_v[] = {
 #include "assets/int_sum_blue_bureau01_v.inc"
 };
+#endif
 
 Gfx sum_blue_bureau01_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

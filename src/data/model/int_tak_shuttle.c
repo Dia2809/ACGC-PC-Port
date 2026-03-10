@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_shuttle_v[];
+#ifdef TARGET_PC
+u16 int_tak_shuttle_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_shuttle_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_shuttle_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_shuttle_back[0x80];
+#else
 u8 int_tak_shuttle_back[] = {
 #include "assets/int_tak_shuttle_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_shuttle_eg[0x80];
+#else
 u8 int_tak_shuttle_eg[] = {
 #include "assets/int_tak_shuttle_eg.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_shuttle_fin[0x80];
+#else
 u8 int_tak_shuttle_fin[] = {
 #include "assets/int_tak_shuttle_fin.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_shuttle_wing[0x200];
+#else
 u8 int_tak_shuttle_wing[] = {
 #include "assets/int_tak_shuttle_wing.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_shuttle_face1[0x80];
+#else
 u8 int_tak_shuttle_face1[] = {
 #include "assets/int_tak_shuttle_face1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_shuttle_face2[0x80];
+#else
 u8 int_tak_shuttle_face2[] = {
 #include "assets/int_tak_shuttle_face2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_shuttle_face4[0x80];
+#else
 u8 int_tak_shuttle_face4[] = {
 #include "assets/int_tak_shuttle_face4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_shuttle_body3[0x300];
+#else
 u8 int_tak_shuttle_body3[] = {
 #include "assets/int_tak_shuttle_body3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_shuttle_v[0x430 / sizeof(Vtx)];
+#else
 Vtx int_tak_shuttle_v[] = {
 #include "assets/int_tak_shuttle_v.inc"
 };
+#endif
 
 Gfx int_tak_shuttle_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

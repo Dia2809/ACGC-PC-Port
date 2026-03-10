@@ -5,189 +5,373 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kai_sousa_icons_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_icons_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_icons_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_lwaku_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_lwaku_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_lwaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_letters_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_letters_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_letters_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_rcontroller_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_rcontroller_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_rcontroller_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_lcontroller_a_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_lcontroller_a_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_lcontroller_a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_punct_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_punct_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_punct_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_lcontroller_b_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_lcontroller_b_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_lcontroller_b_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_lcontroller_c_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_lcontroller_c_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_lcontroller_c_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_lcontroller_d_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_lcontroller_d_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_lcontroller_d_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_mojiban_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_mojiban_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_mojiban_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_mojiban2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_mojiban2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_mojiban2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_kirikae_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_kirikae_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_kirikae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_3D_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_3D_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_3D_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_ok_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_ok_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_ok_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_backspace_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_backspace_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_backspace_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_cursor_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_cursor_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_cursor_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 kai_sousa_button3_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 kai_sousa_button3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa/kai_sousa_button3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_shita_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_shita_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_shita_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_space_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 kai_sousa_space_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kai_sousa_space_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_caps_tex_rgb_i4[0x180];
+#else
 u8 kai_sousa_caps_tex_rgb_i4[] = {
 #include "assets/kai_sousa_caps_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_small_tex_rgb_i4[0x180];
+#else
 u8 kai_sousa_small_tex_rgb_i4[] = {
 #include "assets/kai_sousa_small_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_rbutton2_tex_rgb_ia8[0x800];
+#else
 u8 kai_sousa_rbutton2_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_rbutton2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_rbutton_tex_rgb_ia8[0x800];
+#else
 u8 kai_sousa_rbutton_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_rbutton_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_3Dst2_tex_rgb_ia8[0x1000];
+#else
 u8 kai_sousa_3Dst2_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_3Dst2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_3Dst3_tex_rgb_ia8[0x1000];
+#else
 u8 kai_sousa_3Dst3_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_3Dst3_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_3Dst4_tex_rgb_ia8[0x1000];
+#else
 u8 kai_sousa_3Dst4_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_3Dst4_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_3Dst5_tex_rgb_ia8[0x1000];
+#else
 u8 kai_sousa_3Dst5_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_3Dst5_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_3Dst6_tex_rgb_ia8[0x1000];
+#else
 u8 kai_sousa_3Dst6_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_3Dst6_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_3Dst_tex_rgb_ia8[0x1000];
+#else
 u8 kai_sousa_3Dst_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_3Dst_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_button1a_tex_rgb_ia8[0x800];
+#else
 u8 kai_sousa_button1a_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_button1a_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_button1b_tex_rgb_ia8[0x800];
+#else
 u8 kai_sousa_button1b_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_button1b_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_button2a_tex_rgb_ia8[0x200];
+#else
 u8 kai_sousa_button2a_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_button2a_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_button2b_tex_rgb_ia8[0x200];
+#else
 u8 kai_sousa_button2b_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_button2b_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_controllpad1_tex_rgb_ia8[0x400];
+#else
 u8 kai_sousa_controllpad1_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_controllpad1_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_controllpad2_tex_rgb_ia8[0x400];
+#else
 u8 kai_sousa_controllpad2_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_controllpad2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_controllpad3_tex_rgb_ia8[0x400];
+#else
 u8 kai_sousa_controllpad3_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_controllpad3_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_controllpad4_tex_rgb_ia8[0x400];
+#else
 u8 kai_sousa_controllpad4_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_controllpad4_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_controllpad5_tex_rgb_ia8[0x400];
+#else
 u8 kai_sousa_controllpad5_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_controllpad5_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_lbutton2_tex_rgb_ia8[0x800];
+#else
 u8 kai_sousa_lbutton2_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_lbutton2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_lbutton_tex_rgb_ia8[0x800];
+#else
 u8 kai_sousa_lbutton_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_lbutton_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_xbutton2_tex_rgb_ia8[0x200];
+#else
 u8 kai_sousa_xbutton2_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_xbutton2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_xbutton_tex_rgb_ia8[0x200];
+#else
 u8 kai_sousa_xbutton_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_xbutton_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_ybutton2_tex_rgb_ia8[0x200];
+#else
 u8 kai_sousa_ybutton2_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_ybutton2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_ybutton_tex_rgb_ia8[0x200];
+#else
 u8 kai_sousa_ybutton_tex_rgb_ia8[] = {
 #include "assets/kai_sousa_ybutton_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kai_sousa_lwaku_tex_rgb_i4[0x200];
+#else
 u8 kai_sousa_lwaku_tex_rgb_i4[] = {
 #include "assets/kai_sousa_lwaku_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx kai_sousa_v[0x830 / sizeof(Vtx)];
+#else
 Vtx kai_sousa_v[] = {
 #include "assets/kai_sousa_v.inc"
 };
+#endif
 
 Gfx kai_sousa_mode[] = {
     gsDPPipeSync(),
@@ -502,3 +686,10 @@ Gfx kai_sousa_spaceT_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 1, 3, 2, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_kai_sousa_c(void) {
+    pc_load_asset("assets/kai_sousa/kai_sousa_button3_tex.bin", kai_sousa_button3_tex, 0x100, 0x7B14C0, 0, 0);
+}
+#endif

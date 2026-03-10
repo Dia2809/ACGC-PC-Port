@@ -6,57 +6,109 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_comp01_v[];
+#ifdef TARGET_PC
+u16 int_sum_comp01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_comp01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_comp01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_front_tex[0x100];
+#else
 u8 int_sum_comp01_front_tex[] = {
 #include "assets/int_sum_comp01_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_side_tex[0x100];
+#else
 u8 int_sum_comp01_side_tex[] = {
 #include "assets/int_sum_comp01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_backtop_tex[0x40];
+#else
 u8 int_sum_comp01_backtop_tex[] = {
 #include "assets/int_sum_comp01_backtop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_fronttop_tex[0x40];
+#else
 u8 int_sum_comp01_fronttop_tex[] = {
 #include "assets/int_sum_comp01_fronttop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_mainfront[0x100];
+#else
 u8 int_sum_comp01_mainfront[] = {
 #include "assets/int_sum_comp01_mainfront.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_key_tex[0x100];
+#else
 u8 int_sum_comp01_key_tex[] = {
 #include "assets/int_sum_comp01_key_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_deskfront_tex[0x80];
+#else
 u8 int_sum_comp01_deskfront_tex[] = {
 #include "assets/int_sum_comp01_deskfront_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_deskside_tex[0x100];
+#else
 u8 int_sum_comp01_deskside_tex[] = {
 #include "assets/int_sum_comp01_deskside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_desktop_tex[0x80];
+#else
 u8 int_sum_comp01_desktop_tex[] = {
 #include "assets/int_sum_comp01_desktop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_mainback[0x80];
+#else
 u8 int_sum_comp01_mainback[] = {
 #include "assets/int_sum_comp01_mainback.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_comp01_back_tex[0x80];
+#else
 u8 int_sum_comp01_back_tex[] = {
 #include "assets/int_sum_comp01_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_comp01_v[0x5B0 / sizeof(Vtx)];
+#else
 Vtx int_sum_comp01_v[] = {
 #include "assets/int_sum_comp01_v.inc"
 };
+#endif
 
 Gfx int_sum_comp01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

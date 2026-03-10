@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 rom_museum5_wall_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum5_wall_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_museum5_wall/rom_museum5_wall_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum5_wallA_tex[0x800];
+#else
 static u8 rom_museum5_wallA_tex[] = {
 #include "assets/rom_museum5_wall/rom_museum5_wallA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_museum5_wall_v[0x70 / sizeof(Vtx)];
+#else
 Vtx rom_museum5_wall_v[] = {
 #include "assets/rom_museum5_wall_v.inc"
 };
+#endif
 
 Gfx rom_museum5_wall_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -30,3 +42,11 @@ Gfx rom_museum5_wall_model[] = {
     gsSPNTriangles_5b(2, 6, 5, 2, 1, 6, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_museum5_wall_c(void) {
+    pc_load_asset("assets/rom_museum5_wall/rom_museum5_wall_pal.bin", rom_museum5_wall_pal, 0x20, 0xBACAE0, 0, 1);
+    pc_load_asset("assets/rom_museum5_wall/rom_museum5_wallA_tex.bin", rom_museum5_wallA_tex, 0x800, 0xBACB00, 0, 0);
+}
+#endif

@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 mus_win_mark_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 mus_win_mark_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/mus_win_mark_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx mus_mark_v[0x40 / sizeof(Vtx)];
+#else
 Vtx mus_mark_v[] = {
 #include "assets/mus_mark_v.inc"
 };
+#endif
 
 Gfx mus_mark_before[] = {
     gsDPPipeSync(),

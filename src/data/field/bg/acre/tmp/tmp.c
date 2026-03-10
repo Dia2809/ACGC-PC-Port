@@ -2,9 +2,13 @@
 
 extern u8 grass_tex_dummy[];
 
+#ifdef TARGET_PC
+static Vtx tmp_v[0x1C0 / sizeof(Vtx)];
+#else
 static Vtx tmp_v[] = {
 #include "assets/field/bg/tmp_v.inc"
 };
+#endif
 
 extern Gfx tmp_modelT[] = {
     gsSPEndDisplayList(),
@@ -35,3 +39,10 @@ extern Gfx tmp_model[] = {
     gsSP2Triangles(26, 8, 5, 0, 26, 5, 27, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_tmp_tmp_c(void) {
+    pc_load_asset("assets/field/bg/tmp_v.bin", tmp_v, 0x1C0, 0x8F9178, 0, 2);
+}
+#endif

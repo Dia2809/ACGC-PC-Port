@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_ratan_bed01_v[];
+#ifdef TARGET_PC
+u16 int_sum_ratan_bed01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_ratan_bed01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_ratan_bed01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_bed01_top_tax[0x180];
+#else
 u8 int_sum_ratan_bed01_top_tax[] = {
 #include "assets/int_sum_ratan_bed01_top_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_bed01_head_tax[0x100];
+#else
 u8 int_sum_ratan_bed01_head_tax[] = {
 #include "assets/int_sum_ratan_bed01_head_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_bed01_side_tax[0x200];
+#else
 u8 int_sum_ratan_bed01_side_tax[] = {
 #include "assets/int_sum_ratan_bed01_side_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_bed01_foot_tax[0x80];
+#else
 u8 int_sum_ratan_bed01_foot_tax[] = {
 #include "assets/int_sum_ratan_bed01_foot_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_bed01_pillow_tax[0x100];
+#else
 u8 int_sum_ratan_bed01_pillow_tax[] = {
 #include "assets/int_sum_ratan_bed01_pillow_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_ratan_bed01_v[0x400 / sizeof(Vtx)];
+#else
 Vtx int_sum_ratan_bed01_v[] = {
 #include "assets/int_sum_ratan_bed01_v.inc"
 };
+#endif
 
 Gfx int_sum_ratan_bed01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

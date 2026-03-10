@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yaz_wagon_v[];
+#ifdef TARGET_PC
+u16 int_yaz_wagon_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_yaz_wagon_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yaz_wagon_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_wagon_wood_tex_txt[0x200];
+#else
 u8 int_yaz_wagon_wood_tex_txt[] = {
 #include "assets/int_yaz_wagon_wood_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_wagon_jiku_tex_txt[0x20];
+#else
 u8 int_yaz_wagon_jiku_tex_txt[] = {
 #include "assets/int_yaz_wagon_jiku_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_wagon_horo2_tex_txt[0x120];
+#else
 u8 int_yaz_wagon_horo2_tex_txt[] = {
 #include "assets/int_yaz_wagon_horo2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_wagon_horo_tex_txt[0x300];
+#else
 u8 int_yaz_wagon_horo_tex_txt[] = {
 #include "assets/int_yaz_wagon_horo_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_wagon_wheel_tex_txt[0x200];
+#else
 u8 int_yaz_wagon_wheel_tex_txt[] = {
 #include "assets/int_yaz_wagon_wheel_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yaz_wagon_v[0x5D0 / sizeof(Vtx)];
+#else
 Vtx int_yaz_wagon_v[] = {
 #include "assets/int_yaz_wagon_v.inc"
 };
+#endif
 
 Gfx int_wagon_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

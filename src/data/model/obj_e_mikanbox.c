@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_e_mikanbox_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_e_mikanbox_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_mikanbox_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx obj_e_mikanbox_v[0x1C0 / sizeof(Vtx)];
+#else
 static Vtx obj_e_mikanbox_v[] = {
 #include "assets/obj_e_mikanbox/obj_e_mikanbox_v.inc"
 };
+#endif
 
 Gfx obj_e_mikanbox_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, anime_1_txt),
@@ -26,9 +34,13 @@ Gfx obj_e_mikanbox_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 copyright_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 copyright_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/copyright_tex.inc"
 };
+#endif
 
 Gfx obj_e_mikanbox_copyrightT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -41,21 +53,37 @@ Gfx obj_e_mikanbox_copyrightT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 end_notice2_tex[0x800];
+#else
 u8 end_notice2_tex[] = {
 #include "assets/end_notice2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 end_notice1_tex[0x800];
+#else
 u8 end_notice1_tex[] = {
 #include "assets/end_notice1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 end_notice3_tex[0x800];
+#else
 u8 end_notice3_tex[] = {
 #include "assets/end_notice3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx end_notice_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx end_notice_v[] = {
 #include "assets/end_notice_v.inc"
 };
+#endif
 
 Gfx obj_e_mikanbox_copyrightT_model2[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -74,3 +102,10 @@ Gfx obj_e_mikanbox_copyrightT_model2[] = {
     gsSPNTrianglesInit_5b(2, 8, 9, 10, 8, 10, 11, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_e_mikanbox_c(void) {
+    pc_load_asset("assets/obj_e_mikanbox/obj_e_mikanbox_v.bin", obj_e_mikanbox_v, 0x1C0, 0x818B40, 0, 2);
+}
+#endif

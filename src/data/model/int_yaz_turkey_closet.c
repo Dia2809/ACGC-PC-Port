@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yaz_turkey_closet_v[];
+#ifdef TARGET_PC
+u16 int_yaz_turkey_closet_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_yaz_turkey_closet_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yaz_turkey_closet_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_closet_door_tex_txt[0x100];
+#else
 u8 int_yaz_turkey_closet_door_tex_txt[] = {
 #include "assets/int_yaz_turkey_closet_door_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_closet_knob_tex_txt[0x80];
+#else
 u8 int_yaz_turkey_closet_knob_tex_txt[] = {
 #include "assets/int_yaz_turkey_closet_knob_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_closet_back_tex_txt[0x100];
+#else
 u8 int_yaz_turkey_closet_back_tex_txt[] = {
 #include "assets/int_yaz_turkey_closet_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_closet_side2_tex_txt[0x100];
+#else
 u8 int_yaz_turkey_closet_side2_tex_txt[] = {
 #include "assets/int_yaz_turkey_closet_side2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_closet_asi_tex_txt[0x40];
+#else
 u8 int_yaz_turkey_closet_asi_tex_txt[] = {
 #include "assets/int_yaz_turkey_closet_asi_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_turkey_closet_frnt_tex_txt[0x400];
+#else
 u8 int_yaz_turkey_closet_frnt_tex_txt[] = {
 #include "assets/int_yaz_turkey_closet_frnt_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yaz_turkey_closet_v[0x4E0 / sizeof(Vtx)];
+#else
 Vtx int_yaz_turkey_closet_v[] = {
 #include "assets/int_yaz_turkey_closet_v.inc"
 };
+#endif
 
 Gfx int_yaz_turkey_closet_doorL_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

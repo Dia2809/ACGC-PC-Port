@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_clchest01_v[];
+#ifdef TARGET_PC
+u16 int_sum_clchest01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_clchest01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_clchest01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_clchest01_glass_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_clchest01_glass_pic_ci4_pal[] = {
 #include "assets/int_sum_clchest01_glass_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_hiki_txt[0x80];
+#else
 u8 int_sum_clchest01_hiki_txt[] = {
 #include "assets/int_sum_clchest01_hiki_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_mirback_txt[0x80];
+#else
 u8 int_sum_clchest01_mirback_txt[] = {
 #include "assets/int_sum_clchest01_mirback_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_front_txt[0x200];
+#else
 u8 int_sum_clchest01_front_txt[] = {
 #include "assets/int_sum_clchest01_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_top_txt[0x80];
+#else
 u8 int_sum_clchest01_top_txt[] = {
 #include "assets/int_sum_clchest01_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_side_txt[0x100];
+#else
 u8 int_sum_clchest01_side_txt[] = {
 #include "assets/int_sum_clchest01_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_stand_txt[0x100];
+#else
 u8 int_sum_clchest01_stand_txt[] = {
 #include "assets/int_sum_clchest01_stand_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_mirside_txt[0x40];
+#else
 u8 int_sum_clchest01_mirside_txt[] = {
 #include "assets/int_sum_clchest01_mirside_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_mir_txt[0x80];
+#else
 u8 int_sum_clchest01_mir_txt[] = {
 #include "assets/int_sum_clchest01_mir_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_clchest01_glass_txt[0x100];
+#else
 u8 int_sum_clchest01_glass_txt[] = {
 #include "assets/int_sum_clchest01_glass_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_clchest01_v[0x4E0 / sizeof(Vtx)];
+#else
 Vtx int_sum_clchest01_v[] = {
 #include "assets/int_sum_clchest01_v.inc"
 };
+#endif
 
 Gfx int_sum_clcht1_door_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

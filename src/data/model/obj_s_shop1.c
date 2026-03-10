@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_shop1_front_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_shop1_front_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_shop1_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop1_roof_txt[0x800];
+#else
 u8 obj_s_shop1_roof_txt[] = {
 #include "assets/obj_s_shop1_roof_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop1_side_txt[0x800];
+#else
 u8 obj_s_shop1_side_txt[] = {
 #include "assets/obj_s_shop1_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop1_window_txt[0x80];
+#else
 u8 obj_s_shop1_window_txt[] = {
 #include "assets/obj_s_shop1_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_shop1_v[0x320 / sizeof(Vtx)];
+#else
 Vtx obj_s_shop1_v[] = {
 #include "assets/obj_s_shop1_v.inc"
 };
+#endif
 
 Gfx obj_s_shop1_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -121,25 +141,45 @@ cKF_Animation_R_c cKF_ba_r_obj_s_shop1 = {
     cKF_ckcb_r_obj_s_shop1_tbl, cKF_ds_obj_s_shop1_tbl, cKF_kn_obj_s_shop1_tbl, cKF_c_obj_s_shop1_tbl, -1, 16
 };
 
+#ifdef TARGET_PC
+u8 obj_w_shop1_front_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_shop1_front_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_shop1_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop1_roof_txt[0x800];
+#else
 u8 obj_w_shop1_roof_txt[] = {
 #include "assets/obj_w_shop1_roof_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop1_side_txt[0x800];
+#else
 u8 obj_w_shop1_side_txt[] = {
 #include "assets/obj_w_shop1_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop1_window_txt[0x80];
+#else
 u8 obj_w_shop1_window_txt[] = {
 #include "assets/obj_w_shop1_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_shop1_v[0x320 / sizeof(Vtx)];
+#else
 Vtx obj_w_shop1_v[] = {
 #include "assets/obj_w_shop1_v.inc"
 };
+#endif
 
 Gfx obj_w_shop1_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -237,25 +277,45 @@ cKF_Animation_R_c cKF_ba_r_obj_w_shop1 = {
     cKF_ckcb_r_obj_w_shop1_tbl, cKF_ds_obj_w_shop1_tbl, cKF_kn_obj_w_shop1_tbl, cKF_c_obj_w_shop1_tbl, -1, 16
 };
 
+#ifdef TARGET_PC
+u8 obj_s_shop2_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_shop2_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_shop2_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop2_window_tex_txt[0x80];
+#else
 u8 obj_s_shop2_window_tex_txt[] = {
 #include "assets/obj_s_shop2_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop2_t1_tex_txt[0x800];
+#else
 u8 obj_s_shop2_t1_tex_txt[] = {
 #include "assets/obj_s_shop2_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop2_t2_tex_txt[0x800];
+#else
 u8 obj_s_shop2_t2_tex_txt[] = {
 #include "assets/obj_s_shop2_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_shop2_v[0x600 / sizeof(Vtx)];
+#else
 Vtx obj_s_shop2_v[] = {
 #include "assets/obj_s_shop2_v.inc"
 };
+#endif
 
 Gfx obj_s_shop2_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -374,25 +434,45 @@ cKF_Animation_R_c cKF_ba_r_obj_s_shop2 = {
     cKF_ckcb_r_obj_s_shop2_tbl, cKF_ds_obj_s_shop2_tbl, cKF_kn_obj_s_shop2_tbl, cKF_c_obj_s_shop2_tbl, -1, 16
 };
 
+#ifdef TARGET_PC
+u8 obj_w_shop2_t3_tex_txt[0x800];
+#else
 u8 obj_w_shop2_t3_tex_txt[] = {
 #include "assets/obj_w_shop2_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop2_window_tex_txt[0x80];
+#else
 u8 obj_w_shop2_window_tex_txt[] = {
 #include "assets/obj_w_shop2_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop2_t1_tex_txt[0x800];
+#else
 u8 obj_w_shop2_t1_tex_txt[] = {
 #include "assets/obj_w_shop2_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop2_t2_tex_txt[0x800];
+#else
 u8 obj_w_shop2_t2_tex_txt[] = {
 #include "assets/obj_w_shop2_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_shop2_v[0x600 / sizeof(Vtx)];
+#else
 Vtx obj_w_shop2_v[] = {
 #include "assets/obj_w_shop2_v.inc"
 };
+#endif
 
 Gfx obj_w_shop2_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -511,25 +591,45 @@ cKF_Animation_R_c cKF_ba_r_obj_w_shop2 = {
     cKF_ckcb_r_obj_w_shop2_tbl, cKF_ds_obj_w_shop2_tbl, cKF_kn_obj_w_shop2_tbl, cKF_c_obj_w_shop2_tbl, -1, 16
 };
 
+#ifdef TARGET_PC
+u8 obj_s_shop3_t1_tex_txt[0x800];
+#else
 u8 obj_s_shop3_t1_tex_txt[] = {
 #include "assets/obj_s_shop3_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop3_t2_tex_txt[0x800];
+#else
 u8 obj_s_shop3_t2_tex_txt[] = {
 #include "assets/obj_s_shop3_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop3_window_tex_txt[0x80];
+#else
 u8 obj_s_shop3_window_tex_txt[] = {
 #include "assets/obj_s_shop3_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop3_t3_tex_txt[0x800];
+#else
 u8 obj_s_shop3_t3_tex_txt[] = {
 #include "assets/obj_s_shop3_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_shop3_v[0x740 / sizeof(Vtx)];
+#else
 Vtx obj_s_shop3_v[] = {
 #include "assets/obj_s_shop3_v.inc"
 };
+#endif
 
 Gfx obj_s_shop3_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -639,25 +739,45 @@ cKF_Animation_R_c cKF_ba_r_obj_s_shop3 = {
     cKF_ckcb_r_obj_s_shop3_tbl, cKF_ds_obj_s_shop3_tbl, cKF_kn_obj_s_shop3_tbl, cKF_c_obj_s_shop3_tbl, -1, 16
 };
 
+#ifdef TARGET_PC
+u8 obj_w_shop3_t1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_shop3_t1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_shop3_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop3_t2_tex_txt[0x800];
+#else
 u8 obj_w_shop3_t2_tex_txt[] = {
 #include "assets/obj_w_shop3_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop3_window_tex_txt[0x80];
+#else
 u8 obj_w_shop3_window_tex_txt[] = {
 #include "assets/obj_w_shop3_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop3_t3_tex_txt[0x800];
+#else
 u8 obj_w_shop3_t3_tex_txt[] = {
 #include "assets/obj_w_shop3_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_shop3_v[0x740 / sizeof(Vtx)];
+#else
 Vtx obj_w_shop3_v[] = {
 #include "assets/obj_w_shop3_v.inc"
 };
+#endif
 
 Gfx obj_w_shop3_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -767,33 +887,61 @@ cKF_Animation_R_c cKF_ba_r_obj_w_shop3 = {
     cKF_ckcb_r_obj_w_shop3_tbl, cKF_ds_obj_w_shop3_tbl, cKF_kn_obj_w_shop3_tbl, cKF_c_obj_w_shop3_tbl, -1, 16
 };
 
+#ifdef TARGET_PC
+u16 obj_s_shop4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_shop4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_shop4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop4_t2_tex_txt[0x800];
+#else
 u8 obj_s_shop4_t2_tex_txt[] = {
 #include "assets/obj_s_shop4_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop4_t1_tex_txt[0x800];
+#else
 u8 obj_s_shop4_t1_tex_txt[] = {
 #include "assets/obj_s_shop4_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop4_t3_tex_txt[0x800];
+#else
 u8 obj_s_shop4_t3_tex_txt[] = {
 #include "assets/obj_s_shop4_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_shop4_window_tex_txt[0x80];
+#else
 u8 obj_s_shop4_window_tex_txt[] = {
 #include "assets/obj_s_shop4_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_shop4_grass_tex_pic_i4[0x80];
+#else
 u8 obj_shop4_grass_tex_pic_i4[] = {
 #include "assets/obj_shop4_grass_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_shop4_v[0x920 / sizeof(Vtx)];
+#else
 Vtx obj_s_shop4_v[] = {
 #include "assets/obj_s_shop4_v.inc"
 };
+#endif
 
 Gfx obj_s_shop4_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -934,29 +1082,53 @@ cKF_Animation_R_c cKF_ba_r_obj_s_shop4 = {
     cKF_ckcb_r_obj_s_shop4_tbl, cKF_ds_obj_s_shop4_tbl, cKF_kn_obj_s_shop4_tbl, cKF_c_obj_s_shop4_tbl, -1, 16
 };
 
+#ifdef TARGET_PC
+u16 obj_w_shop4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_w_shop4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_shop4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop4_t2_tex_txt[0x800];
+#else
 u8 obj_w_shop4_t2_tex_txt[] = {
 #include "assets/obj_w_shop4_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop4_t1_tex_txt[0x800];
+#else
 u8 obj_w_shop4_t1_tex_txt[] = {
 #include "assets/obj_w_shop4_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop4_t3_tex_txt[0x800];
+#else
 u8 obj_w_shop4_t3_tex_txt[] = {
 #include "assets/obj_w_shop4_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_shop4_window_tex_txt[0x80];
+#else
 u8 obj_w_shop4_window_tex_txt[] = {
 #include "assets/obj_w_shop4_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_shop4_v[0x920 / sizeof(Vtx)];
+#else
 Vtx obj_w_shop4_v[] = {
 #include "assets/obj_w_shop4_v.inc"
 };
+#endif
 
 Gfx obj_w_shop4_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

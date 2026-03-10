@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_tekkin_v[];
+#ifdef TARGET_PC
+u16 int_tak_tekkin_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_tekkin_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_tekkin_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_tekkin_top_tex[0x100];
+#else
 u8 int_tak_tekkin_top_tex[] = {
 #include "assets/int_tak_tekkin_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_tekkin_side_tex[0x100];
+#else
 u8 int_tak_tekkin_side_tex[] = {
 #include "assets/int_tak_tekkin_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_tekkin_futi_tex[0x100];
+#else
 u8 int_tak_tekkin_futi_tex[] = {
 #include "assets/int_tak_tekkin_futi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_tekkin_front_tex[0x80];
+#else
 u8 int_tak_tekkin_front_tex[] = {
 #include "assets/int_tak_tekkin_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_tekkin_v[0x480 / sizeof(Vtx)];
+#else
 Vtx int_tak_tekkin_v[] = {
 #include "assets/int_tak_tekkin_v.inc"
 };
+#endif
 
 Gfx int_tak_tekkin_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

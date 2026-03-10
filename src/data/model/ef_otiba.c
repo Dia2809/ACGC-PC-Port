@@ -4,13 +4,21 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+u16 obj_otiba01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_otiba01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_otiba01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_otiba_0_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_otiba_0_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_otiba_0_tex.inc"
 };
+#endif
 
 Gfx ef_otiba01_setmode[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -24,9 +32,13 @@ Gfx ef_otiba01_setmode[] = {
     // #include "assets/ef_otiba01_setmode.inc"
 };
 
+#ifdef TARGET_PC
+Vtx ef_otiba01_00_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_otiba01_00_v[] = {
 #include "assets/ef_otiba01_00_v.inc"
 };
+#endif
 
 Gfx ef_otiba01_00_modelT[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 16, 16, ef_otiba_0_tex),
@@ -37,13 +49,21 @@ Gfx ef_otiba01_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_otiba_1_tex[0x80];
+#else
 u8 ef_otiba_1_tex[] = {
 #include "assets/ef_otiba_1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_otiba01_01_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_otiba01_01_v[] = {
 #include "assets/ef_otiba01_01_v.inc"
 };
+#endif
 
 Gfx ef_otiba01_01_modelT[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 16, 16, ef_otiba_1_tex),
@@ -54,13 +74,21 @@ Gfx ef_otiba01_01_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_otiba_2_tex[0x80];
+#else
 u8 ef_otiba_2_tex[] = {
 #include "assets/ef_otiba_2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_otiba01_02_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_otiba01_02_v[] = {
 #include "assets/ef_otiba01_02_v.inc"
 };
+#endif
 
 Gfx ef_otiba01_02_modelT[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 16, 16, ef_otiba_2_tex),

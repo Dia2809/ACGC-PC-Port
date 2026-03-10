@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_log_chair01_v[];
+#ifdef TARGET_PC
+u16 int_sum_log_chair01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_log_chair01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_log_chair01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chair01_head_tex[0x400];
+#else
 u8 int_sum_log_chair01_head_tex[] = {
 #include "assets/int_sum_log_chair01_head_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chair01_cusion_tex[0x80];
+#else
 u8 int_sum_log_chair01_cusion_tex[] = {
 #include "assets/int_sum_log_chair01_cusion_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chair01_seat_tex[0x200];
+#else
 u8 int_sum_log_chair01_seat_tex[] = {
 #include "assets/int_sum_log_chair01_seat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chair01_stand_tex[0x100];
+#else
 u8 int_sum_log_chair01_stand_tex[] = {
 #include "assets/int_sum_log_chair01_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_log_chair01_cusion2_tex[0x80];
+#else
 u8 int_sum_log_chair01_cusion2_tex[] = {
 #include "assets/int_sum_log_chair01_cusion2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_log_chair01_v[0x410 / sizeof(Vtx)];
+#else
 Vtx int_sum_log_chair01_v[] = {
 #include "assets/int_sum_log_chair01_v.inc"
 };
+#endif
 
 Gfx int_sum_log_chair01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

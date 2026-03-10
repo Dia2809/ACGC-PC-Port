@@ -5,125 +5,245 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_mwin_w1_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_mwin_w1_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_mwin_w1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_w2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_w2_tex_rgb_ci4_pal[] = {
 #include "assets/inv_mwin_w2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_w3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_w3_tex_rgb_ci4_pal[] = {
 #include "assets/inv_mwin_w3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_w4_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_w4_tex_rgb_ci4_pal[] = {
 #include "assets/inv_mwin_w4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_mwin_w6_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_mwin_w6_tex_rgb_ci4_pal[] = {
 #include "assets/inv_mwin_w6_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_nwaku_tex[0x400];
+#else
 static u8 inv_mwin_nwaku_tex[] = {
 #include "assets/inv_mwin/inv_mwin_nwaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_aw6_tex[0x400];
+#else
 u8 inv_mwin_aw6_tex[] = {
 #include "assets/inv_mwin_aw6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_shirushi4_tex[0x200];
+#else
 u8 inv_mwin_shirushi4_tex[] = {
 #include "assets/inv_mwin_shirushi4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_sen_tex[0x80];
+#else
 u8 inv_mwin_sen_tex[] = {
 #include "assets/inv_mwin_sen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_sen2_tex[0x80];
+#else
 u8 inv_mwin_sen2_tex[] = {
 #include "assets/inv_mwin_sen2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_suujiwaku1_tex[0x200];
+#else
 u8 inv_mwin_suujiwaku1_tex[] = {
 #include "assets/inv_mwin_suujiwaku1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_original_shirushi_tex[0x200];
+#else
 u8 inv_original_shirushi_tex[] = {
 #include "assets/inv_original_shirushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_suujiwaku2_tex[0x200];
+#else
 u8 inv_mwin_suujiwaku2_tex[] = {
 #include "assets/inv_mwin_suujiwaku2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_original_shirushi3_tex[0x800];
+#else
 u8 inv_original_shirushi3_tex[] = {
 #include "assets/inv_original_shirushi3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_3Dma_tex[0x800];
+#else
 static u8 inv_mwin_3Dma_tex[] = {
 #include "assets/inv_mwin/inv_mwin_3Dma_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 originl[0x200];
+#else
 u8 originl[] = {
 #include "assets/originl.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 original2[0x400];
+#else
 u8 original2[] = {
 #include "assets/original2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_aw3_tex[0x400];
+#else
 u8 inv_mwin_aw3_tex[] = {
 #include "assets/inv_mwin_aw3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_aw4_tex[0x200];
+#else
 u8 inv_mwin_aw4_tex[] = {
 #include "assets/inv_mwin_aw4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_aw5_tex[0x80];
+#else
 static u8 inv_mwin_aw5_tex[] = {
 #include "assets/inv_mwin/inv_mwin_aw5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_items_tex[0x200];
+#else
 u8 inv_mwin_items_tex[] = {
 #include "assets/inv_mwin_items_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_letters_tex[0x200];
+#else
 u8 inv_mwin_letters_tex[] = {
 #include "assets/inv_mwin_letters_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_bells_tex[0x200];
+#else
 u8 inv_mwin_bells_tex[] = {
 #include "assets/inv_mwin_bells_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_w5_tex_rgb_ci4[0x80];
+#else
 u8 inv_mwin_w5_tex_rgb_ci4[] = {
 #include "assets/inv_mwin_w5_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_w1_tex_rgb_ci4[0x200];
+#else
 u8 inv_mwin_w1_tex_rgb_ci4[] = {
 #include "assets/inv_mwin_w1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_w2_tex_rgb_ci4[0x400];
+#else
 u8 inv_mwin_w2_tex_rgb_ci4[] = {
 #include "assets/inv_mwin_w2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_w3_tex_rgb_ci4[0x400];
+#else
 u8 inv_mwin_w3_tex_rgb_ci4[] = {
 #include "assets/inv_mwin_w3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_w4_tex_rgb_ci4[0x200];
+#else
 u8 inv_mwin_w4_tex_rgb_ci4[] = {
 #include "assets/inv_mwin_w4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_w6_tex_rgb_ci4[0x400];
+#else
 u8 inv_mwin_w6_tex_rgb_ci4[] = {
 #include "assets/inv_mwin_w6_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx inv_mwin_v[0x1280 / sizeof(Vtx)];
+#else
 Vtx inv_mwin_v[] = {
 #include "assets/inv_mwin_v.inc"
 };
+#endif
 
 Gfx inv_mwin_w13_model[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 16, 16, inv_mwin_w5_tex_rgb_ci4),
@@ -641,3 +761,12 @@ Gfx inv_mwin_item_frame_mode[] = {
     gsDPSetPrimColor(0, 255, 255, 255, 255, 255),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_inv_mwin_c(void) {
+    pc_load_asset("assets/inv_mwin/inv_mwin_nwaku_tex.bin", inv_mwin_nwaku_tex, 0x400, 0x7982E0, 0, 0);
+    pc_load_asset("assets/inv_mwin/inv_mwin_3Dma_tex.bin", inv_mwin_3Dma_tex, 0x800, 0x717820, 0, 0);
+    pc_load_asset("assets/inv_mwin/inv_mwin_aw5_tex.bin", inv_mwin_aw5_tex, 0x80, 0x71EDC0, 0, 0);
+}
+#endif

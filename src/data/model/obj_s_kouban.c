@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_kouban_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_kouban_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_kouban_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_kouban_t1_tex_txt[0x800];
+#else
 u8 obj_s_kouban_t1_tex_txt[] = {
 #include "assets/obj_s_kouban_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_kouban_window_tex_txt[0x80];
+#else
 u8 obj_s_kouban_window_tex_txt[] = {
 #include "assets/obj_s_kouban_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_kouban_t2_tex_txt[0x800];
+#else
 u8 obj_s_kouban_t2_tex_txt[] = {
 #include "assets/obj_s_kouban_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_kouban_v[0x470 / sizeof(Vtx)];
+#else
 Vtx obj_s_kouban_v[] = {
 #include "assets/obj_s_kouban_v.inc"
 };
+#endif
 
 Gfx obj_s_kouban_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -104,25 +124,45 @@ Gfx obj_s_kouban_model[] = {
     gsSPDisplayList(obj_s_kouban_light_model), gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_w_kouban_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_kouban_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_kouban_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_kouban_t1_tex_txt[0x800];
+#else
 u8 obj_w_kouban_t1_tex_txt[] = {
 #include "assets/obj_w_kouban_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_kouban_window_tex_txt[0x80];
+#else
 u8 obj_w_kouban_window_tex_txt[] = {
 #include "assets/obj_w_kouban_window_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_kouban_t2_tex_txt[0x800];
+#else
 u8 obj_w_kouban_t2_tex_txt[] = {
 #include "assets/obj_w_kouban_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_kouban_v[0x470 / sizeof(Vtx)];
+#else
 Vtx obj_w_kouban_v[] = {
 #include "assets/obj_w_kouban_v.inc"
 };
+#endif
 
 Gfx obj_w_kouban_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

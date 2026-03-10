@@ -5,21 +5,37 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 lat_letter01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 lat_letter01_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/dia_win3/lat_letter01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_letter01_04_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 lat_letter01_04_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/dia_win3/lat_letter01_04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_tegami_fusen_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 lat_tegami_fusen_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/dia_win3/lat_tegami_fusen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx dia_win3_v[0x130 / sizeof(Vtx)];
+#else
 Vtx dia_win3_v[] = {
 #include "assets/dia_win3_v.inc"
 };
+#endif
 
 Gfx dia_win3_wT_model[] = {
 gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
@@ -44,3 +60,12 @@ gsSPNTrianglesInit_5b(2, 0, 1, 2, 0, 3, 1, 0, 0, 0),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_dia_win3_c(void) {
+    pc_load_asset("assets/dia_win3/lat_letter01_pal.bin", lat_letter01_pal, 0x20, 0x763C00, 0, 1);
+    pc_load_asset("assets/dia_win3/lat_letter01_04_tex.bin", lat_letter01_04_tex, 0x80, 0x7649C0, 0, 0);
+    pc_load_asset("assets/dia_win3/lat_tegami_fusen_tex.bin", lat_tegami_fusen_tex, 0x80, 0x764A40, 0, 0);
+}
+#endif

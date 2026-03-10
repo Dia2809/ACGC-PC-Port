@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_museum5_awa1[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_museum5_awa1[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_museum5_awa1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_museum5_awa1_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_museum5_awa1_v[] = {
 #include "assets/ef_museum5_awa1_v.inc"
 };
+#endif
 
 Gfx ef_museum5_awa1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

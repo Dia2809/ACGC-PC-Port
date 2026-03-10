@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_matumushi_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_matumushi_v[0xA0 / sizeof(Vtx)];
+#else
 static Vtx act_m_matumushi_v[] = {
 #include "assets/act_m_matumushi/act_m_matumushi_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_matumushi_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_matumushi_pal[] = {
 #include "assets/act_m_matumushi/act_m_matumushi_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_matumushi[0x180];
+#else
 static u8 act_m_matumushi[] = {
 #include "assets/act_m_matumushi/act_m_matumushi.inc"
 };
+#endif
 
 Gfx act_m_mu_matumushi1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -78,3 +90,12 @@ Gfx act_m_mu_matumushi2_2T_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_matumushi_c(void) {
+    pc_load_asset("assets/act_m_matumushi/act_m_matumushi_v.bin", act_m_matumushi_v, 0xA0, 0xB4FBC0, 0, 2);
+    pc_load_asset("assets/act_m_matumushi/act_m_matumushi_pal.bin", act_m_matumushi_pal, 0x20, 0xB4FC60, 0, 1);
+    pc_load_asset("assets/act_m_matumushi/act_m_matumushi.bin", act_m_matumushi, 0x180, 0xB4FC80, 0, 0);
+}
+#endif

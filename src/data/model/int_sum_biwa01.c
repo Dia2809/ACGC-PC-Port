@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_biwa01_v[];
+#ifdef TARGET_PC
+u16 int_sum_biwa01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_biwa01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_biwa01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_front_tex[0x200];
+#else
 u8 int_sum_biwa01_front_tex[] = {
 #include "assets/int_sum_biwa01_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_nec_tex[0x100];
+#else
 u8 int_sum_biwa01_nec_tex[] = {
 #include "assets/int_sum_biwa01_nec_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_back_tex[0x80];
+#else
 u8 int_sum_biwa01_back_tex[] = {
 #include "assets/int_sum_biwa01_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_necback_tex[0x80];
+#else
 u8 int_sum_biwa01_necback_tex[] = {
 #include "assets/int_sum_biwa01_necback_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_head_tex[0x80];
+#else
 u8 int_sum_biwa01_head_tex[] = {
 #include "assets/int_sum_biwa01_head_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_headtop_tex[0x80];
+#else
 u8 int_sum_biwa01_headtop_tex[] = {
 #include "assets/int_sum_biwa01_headtop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_headfront_tex[0x40];
+#else
 u8 int_sum_biwa01_headfront_tex[] = {
 #include "assets/int_sum_biwa01_headfront_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_stand_tex[0x100];
+#else
 u8 int_sum_biwa01_stand_tex[] = {
 #include "assets/int_sum_biwa01_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_biwa01_standhand_tex[0x80];
+#else
 u8 int_sum_biwa01_standhand_tex[] = {
 #include "assets/int_sum_biwa01_standhand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_biwa01_v[0x410 / sizeof(Vtx)];
+#else
 Vtx int_sum_biwa01_v[] = {
 #include "assets/int_sum_biwa01_v.inc"
 };
+#endif
 
 Gfx int_sum_biwa01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

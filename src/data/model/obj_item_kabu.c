@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 obj_item_kabu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_item_kabu_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_item_kabu/obj_item_kabu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_item_kabu_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 obj_item_kabu_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_item_kabu/obj_item_kabu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx obj_item_kabu_v[0x40 / sizeof(Vtx)];
+#else
 static Vtx obj_item_kabu_v[] = {
 #include "assets/obj_item_kabu/obj_item_kabu_v.inc"
 };
+#endif
 
 Gfx item_kabu_modelT[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -31,3 +43,12 @@ gsSPNTrianglesInit_5b(2, 0, 1, 2, 0, 2, 3, 0, 0, 0),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_item_kabu_c(void) {
+    pc_load_asset("assets/obj_item_kabu/obj_item_kabu_pal.bin", obj_item_kabu_pal, 0x20, 0xB6FD80, 0, 1);
+    pc_load_asset("assets/obj_item_kabu/obj_item_kabu_tex.bin", obj_item_kabu_tex, 0x200, 0xB6FDA0, 0, 0);
+    pc_load_asset("assets/obj_item_kabu/obj_item_kabu_v.bin", obj_item_kabu_v, 0x40, 0xB6FFA0, 0, 2);
+}
+#endif

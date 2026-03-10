@@ -3,13 +3,21 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 obj_w_tree_leaf_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_tree_leaf_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_tree_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_tree3_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_w_tree3_v[] = {
 #include "assets/obj_w_tree3_v.inc"
 };
+#endif
 
 Gfx obj_w_tree3_leafT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

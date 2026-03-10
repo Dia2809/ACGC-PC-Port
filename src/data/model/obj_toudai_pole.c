@@ -4,41 +4,77 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+u16 obj_toudai_pole_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_toudai_pole_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_toudai_pole_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_toudai_poleA_tex_pic_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_toudai_poleA_tex_pic_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_toudai_poleA_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_toudai_poleE_tex_txt[0x20];
+#else
 u8 obj_toudai_poleE_tex_txt[] = {
 #include "assets/obj_toudai_poleE_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_toudai_pole_kage_txt[0x100];
+#else
 u8 obj_toudai_pole_kage_txt[] = {
 #include "assets/obj_toudai_pole_kage_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_toudai_poleB_tex_txt[0x40];
+#else
 u8 obj_toudai_poleB_tex_txt[] = {
 #include "assets/obj_toudai_poleB_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_toudai_poleC_tex_txt[0x200];
+#else
 u8 obj_toudai_poleC_tex_txt[] = {
 #include "assets/obj_toudai_poleC_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_toudai_poleD_tex_txt[0x40];
+#else
 u8 obj_toudai_poleD_tex_txt[] = {
 #include "assets/obj_toudai_poleD_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_toudai_poleA_tex_txt[0x40];
+#else
 u8 obj_toudai_poleA_tex_txt[] = {
 #include "assets/obj_toudai_poleA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_toudai_pole_v[0x1630 / sizeof(Vtx)];
+#else
 Vtx obj_toudai_pole_v[] = {
 #include "assets/obj_toudai_pole_v.inc"
 };
+#endif
 
 Gfx obj_toudai_pole_kage_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

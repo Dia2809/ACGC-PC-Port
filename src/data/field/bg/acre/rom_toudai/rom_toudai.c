@@ -1,64 +1,124 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_toudai_yuka_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_toudai_yuka_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_yuka_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_toudai_kabe_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_toudai_kabe_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_kabe_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_toudai_step_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_toudai_step_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_step_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_toudai_meka_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_toudai_meka_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_meka_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_toudai_ukiwa_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_toudai_ukiwa_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_ukiwa_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_yuka_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_yuka_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_yuka_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_kabeA_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_kabeA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_kabeA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_kabeB_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_kabeB_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_kabeB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_step_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_step_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_step_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_mekaA_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_mekaA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_mekaA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_ukiwa_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_ukiwa_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_ukiwa_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_kage1_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_kage1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_kage1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_mekaC_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_mekaC_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_mekaC_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_toudai_kage2_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_toudai_kage2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_toudai_kage2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx rom_toudai_v[0x670 / sizeof(Vtx)];
+#else
 static Vtx rom_toudai_v[] = {
 #include "assets/field/bg/rom_toudai_v.inc"
 };
+#endif
 
 extern Gfx rom_toudai_modelT[] = {
     gsSPEndDisplayList(),
@@ -210,3 +270,24 @@ extern Gfx rom_toudai_model[] = {
                           ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_rom_toudai_rom_toudai_c(void) {
+    pc_load_asset("assets/field/bg/rom_toudai_yuka_pal.bin", rom_toudai_yuka_pal, 0x20, 0xB98360, 0, 1);
+    pc_load_asset("assets/field/bg/rom_toudai_kabe_pal.bin", rom_toudai_kabe_pal, 0x20, 0xB98380, 0, 1);
+    pc_load_asset("assets/field/bg/rom_toudai_step_pal.bin", rom_toudai_step_pal, 0x20, 0xB983A0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_toudai_meka_pal.bin", rom_toudai_meka_pal, 0x20, 0xB983C0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_toudai_ukiwa_pal.bin", rom_toudai_ukiwa_pal, 0x20, 0xB983E0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_toudai_yuka_tex.bin", rom_toudai_yuka_tex, 0x800, 0xB98400, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_kabeA_tex.bin", rom_toudai_kabeA_tex, 0x800, 0xB98C00, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_kabeB_tex.bin", rom_toudai_kabeB_tex, 0x800, 0xB99400, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_step_tex.bin", rom_toudai_step_tex, 0x400, 0xB99C00, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_mekaA_tex.bin", rom_toudai_mekaA_tex, 0x100, 0xB9A000, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_ukiwa_tex.bin", rom_toudai_ukiwa_tex, 0x200, 0xB9A100, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_kage1_tex.bin", rom_toudai_kage1_tex, 0x80, 0xB9A300, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_mekaC_tex.bin", rom_toudai_mekaC_tex, 0x200, 0xB9A380, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_kage2_tex.bin", rom_toudai_kage2_tex, 0x80, 0xB9A580, 0, 0);
+    pc_load_asset("assets/field/bg/rom_toudai_v.bin", rom_toudai_v, 0x670, 0xB9A600, 0, 2);
+}
+#endif

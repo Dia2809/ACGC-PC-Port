@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_liccatable_v[];
+#ifdef TARGET_PC
+u16 int_sum_liccatable_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_liccatable_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_liccatable_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccatable_top_txt[0x200];
+#else
 u8 int_sum_liccatable_top_txt[] = {
 #include "assets/int_sum_liccatable_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccatable_leg_txt[0x300];
+#else
 u8 int_sum_liccatable_leg_txt[] = {
 #include "assets/int_sum_liccatable_leg_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccatable_side_txt[0x80];
+#else
 u8 int_sum_liccatable_side_txt[] = {
 #include "assets/int_sum_liccatable_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_liccatable_v[0x210 / sizeof(Vtx)];
+#else
 Vtx int_sum_liccatable_v[] = {
 #include "assets/int_sum_liccatable_v.inc"
 };
+#endif
 
 Gfx int_sum_liccatable_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

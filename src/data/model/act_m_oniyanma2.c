@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_oniyanma_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_oniyanma_v[0x120 / sizeof(Vtx)];
+#else
 static Vtx act_m_oniyanma_v[] = {
 #include "assets/act_m_oniyanma2/act_m_oniyanma_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_oniyanma_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_oniyanma_pal[] = {
 #include "assets/act_m_oniyanma2/act_m_oniyanma_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_oniyanma[0x180];
+#else
 static u8 act_m_oniyanma[] = {
 #include "assets/act_m_oniyanma2/act_m_oniyanma.inc"
 };
+#endif
 
 Gfx act_m_mu_oniyanma1_1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -110,3 +122,12 @@ Gfx act_m_mu_oniyanma2_2T_model[] = {
     gsSP2Triangles(3, 4, 5, 0, 3, 5, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_oniyanma2_c(void) {
+    pc_load_asset("assets/act_m_oniyanma2/act_m_oniyanma_v.bin", act_m_oniyanma_v, 0x120, 0xB54870, 0, 2);
+    pc_load_asset("assets/act_m_oniyanma2/act_m_oniyanma_pal.bin", act_m_oniyanma_pal, 0x20, 0xB54990, 0, 1);
+    pc_load_asset("assets/act_m_oniyanma2/act_m_oniyanma.bin", act_m_oniyanma, 0x180, 0xB549B0, 0, 0);
+}
+#endif

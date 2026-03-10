@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_myhome4_v[];
+#ifdef TARGET_PC
+u8 int_nog_myhome4_body_tex[0x600] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_nog_myhome4_body_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_myhome4_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_myhome4_chimney_tex[0x80];
+#else
 u8 int_nog_myhome4_chimney_tex[] = {
 #include "assets/int_nog_myhome4_chimney_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_myhome4_grass_tex[0x80];
+#else
 u8 int_nog_myhome4_grass_tex[] = {
 #include "assets/int_nog_myhome4_grass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_myhome4_v[0x630 / sizeof(Vtx)];
+#else
 Vtx int_nog_myhome4_v[] = {
 #include "assets/int_nog_myhome4_v.inc"
 };
+#endif
 
 Gfx int_nog_myhome4_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

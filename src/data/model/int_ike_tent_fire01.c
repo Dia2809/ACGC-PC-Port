@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_tent_fire01_v[];
+#ifdef TARGET_PC
+static u16 int_sum_ayu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_sum_ayu_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_tent_fire01/int_sum_ayu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_ike_tent_fire01_pal[0x20 / sizeof(u16)];
+#else
 u16 int_ike_tent_fire01_pal[] = {
 #include "assets/int_ike_tent_fire01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 int_ike_kama_danro01_pal[0x20 / sizeof(u16)];
+#else
 static u16 int_ike_kama_danro01_pal[] = {
 #include "assets/int_ike_tent_fire01/int_ike_kama_danro01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_mus_ayu_body_txt[0x300];
+#else
 static u8 act_mus_ayu_body_txt[] = {
 #include "assets/int_ike_tent_fire01/act_mus_ayu_body_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire01_pole1_tex_txt[0x80];
+#else
 u8 int_ike_tent_fire01_pole1_tex_txt[] = {
 #include "assets/int_ike_tent_fire01_pole1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire01_tree2_tex_txt[0x80];
+#else
 u8 int_ike_tent_fire01_tree2_tex_txt[] = {
 #include "assets/int_ike_tent_fire01_tree2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire01_tree1_tex_txt[0x80];
+#else
 u8 int_ike_tent_fire01_tree1_tex_txt[] = {
 #include "assets/int_ike_tent_fire01_tree1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_ike_kama_danrotree1_tex_txt[0x80];
+#else
 static u8 int_ike_kama_danrotree1_tex_txt[] = {
 #include "assets/int_ike_tent_fire01/int_ike_kama_danrotree1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire01_fire_pic_i4[0x200];
+#else
 u8 int_ike_tent_fire01_fire_pic_i4[] = {
 #include "assets/int_ike_tent_fire01_fire_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_tent_fire01_fire2_pic_i4[0x400];
+#else
 u8 int_ike_tent_fire01_fire2_pic_i4[] = {
 #include "assets/int_ike_tent_fire01_fire2_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_tent_fire01_v[0x7E0 / sizeof(Vtx)];
+#else
 Vtx int_ike_tent_fire01_v[] = {
 #include "assets/int_ike_tent_fire01_v.inc"
 };
+#endif
 
 Gfx int_ike_tent_firetree_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -197,3 +241,13 @@ cKF_Joint_R_c cKF_je_r_int_ike_tent_fire01_tbl[] = {
 
 cKF_Skeleton_R_c cKF_bs_r_int_ike_tent_fire01 = { ARRAY_COUNT(cKF_je_r_int_ike_tent_fire01_tbl), 2,
                                                   cKF_je_r_int_ike_tent_fire01_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_ike_tent_fire01_c(void) {
+    pc_load_asset("assets/int_ike_tent_fire01/int_sum_ayu_pal.bin", int_sum_ayu_pal, 0x20, 0xC75D20, 0, 1);
+    pc_load_asset("assets/int_ike_tent_fire01/int_ike_kama_danro01_pal.bin", int_ike_kama_danro01_pal, 0x20, 0xB270E0, 0, 1);
+    pc_load_asset("assets/int_ike_tent_fire01/act_mus_ayu_body_txt.bin", act_mus_ayu_body_txt, 0x300, 0xB27100, 0, 0);
+    pc_load_asset("assets/int_ike_tent_fire01/int_ike_kama_danrotree1_tex_txt.bin", int_ike_kama_danrotree1_tex_txt, 0x80, 0xB27580, 0, 0);
+}
+#endif

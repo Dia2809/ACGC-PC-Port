@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iid_newdiary_v[];
+#ifdef TARGET_PC
+u8 int_iid_newdiary[0x20] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_iid_newdiary[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iid_newdiary.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_olddiary[0x20];
+#else
 u8 int_iid_olddiary[] = {
 #include "assets/int_iid_olddiary.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_newdiary_mae_tex[0x80];
+#else
 u8 int_iid_newdiary_mae_tex[] = {
 #include "assets/int_iid_newdiary_mae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_newdiary_hyoushi_tex[0x200];
+#else
 u8 int_iid_newdiary_hyoushi_tex[] = {
 #include "assets/int_iid_newdiary_hyoushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_newdiary_soko_tex[0x20];
+#else
 u8 int_iid_newdiary_soko_tex[] = {
 #include "assets/int_iid_newdiary_soko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_newdiary_ue_tex[0x20];
+#else
 u8 int_iid_newdiary_ue_tex[] = {
 #include "assets/int_iid_newdiary_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_newdiary_esaki_tex[0x20];
+#else
 u8 int_iid_newdiary_esaki_tex[] = {
 #include "assets/int_iid_newdiary_esaki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_newdiary_ebody_tex[0x20];
+#else
 u8 int_iid_newdiary_ebody_tex[] = {
 #include "assets/int_iid_newdiary_ebody_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iid_newdiary_v[0x380 / sizeof(Vtx)];
+#else
 Vtx int_iid_newdiary_v[] = {
 #include "assets/int_iid_newdiary_v.inc"
 };
+#endif
 
 Gfx int_iid_newediary_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

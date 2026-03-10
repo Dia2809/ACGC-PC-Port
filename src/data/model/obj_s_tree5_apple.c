@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_s_tree5_apple_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_s_tree5_apple_v[] = {
 #include "assets/obj_s_tree5_apple_v.inc"
 };
+#endif
 
 Gfx obj_s_tree5_apple_appleT_gfx_model[] = {
     gsSPVertex(obj_s_tree5_apple_v, 12, 0),

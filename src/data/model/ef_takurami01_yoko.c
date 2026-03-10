@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern u8 ef_takurami01_1[];
+#ifdef TARGET_PC
+u8 ef_takurami01_0us[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_takurami01_0us[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_takurami01_0us.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_takurami01_yoko_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_takurami01_yoko_v[] = {
 #include "assets/ef_takurami01_yoko_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_takurami01_yoko_v2[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_takurami01_yoko_v2[] = {
 #include "assets/ef_takurami01_yoko_v2.inc"
 };
+#endif
 
 Gfx ef_takurami01_yoko_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -46,9 +58,13 @@ Gfx ef_takurami01_yoko_modelT2[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx ef_takurami01_kira_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_takurami01_kira_v[] = {
 #include "assets/ef_takurami01_kira_v.inc"
 };
+#endif
 
 Gfx ef_takurami01_kira_modelT[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -74,9 +90,13 @@ Gfx ef_takurami01_kira_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_takurami01_1[0x100];
+#else
 u8 ef_takurami01_1[] = {
 #include "assets/ef_takurami01_1.inc"
 };
+#endif
 
 Gfx ef_takurami01_normal_render_mode[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_ZB_CLD_SURF2),

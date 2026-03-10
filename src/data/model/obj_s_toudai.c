@@ -5,49 +5,93 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_s_toudai_glass_tex_pic_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_toudai_glass_tex_pic_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_toudai_glass_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_light_tex_txt[0x100];
+#else
 u8 obj_s_toudai_light_tex_txt[] = {
 #include "assets/obj_s_toudai_light_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_arm_tex_txt[0x80];
+#else
 u8 obj_s_toudai_arm_tex_txt[] = {
 #include "assets/obj_s_toudai_arm_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_dai_tex_txt[0x200];
+#else
 u8 obj_s_toudai_dai_tex_txt[] = {
 #include "assets/obj_s_toudai_dai_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_dou_tex_txt[0x400];
+#else
 u8 obj_s_toudai_dou_tex_txt[] = {
 #include "assets/obj_s_toudai_dou_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_plate_tex_txt[0x80];
+#else
 u8 obj_s_toudai_plate_tex_txt[] = {
 #include "assets/obj_s_toudai_plate_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_side_tex_txt[0x80];
+#else
 u8 obj_s_toudai_side_tex_txt[] = {
 #include "assets/obj_s_toudai_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_tesuri_tex_txt[0x80];
+#else
 u8 obj_s_toudai_tesuri_tex_txt[] = {
 #include "assets/obj_s_toudai_tesuri_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_yane_tex_txt[0x80];
+#else
 u8 obj_s_toudai_yane_tex_txt[] = {
 #include "assets/obj_s_toudai_yane_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_toudai_glass_tex_pic_ci4[0x80];
+#else
 u8 obj_s_toudai_glass_tex_pic_ci4[] = {
 #include "assets/obj_s_toudai_glass_tex_pic_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_toudai_v[0x990 / sizeof(Vtx)];
+#else
 Vtx obj_s_toudai_v[] = {
 #include "assets/obj_s_toudai_v.inc"
 };
+#endif
 
 Gfx obj_s_toudai_mirror_model[] = {
     gsSPTexture(1000, 1000, 0, G_TX_RENDERTILE, G_ON),
@@ -195,49 +239,93 @@ cKF_Animation_R_c cKF_ba_r_obj_s_toudai = {
     cKF_ckcb_r_obj_s_toudai_tbl, cKF_ds_obj_s_toudai_tbl, cKF_kn_obj_s_toudai_tbl, cKF_c_obj_s_toudai_tbl, -1, 100
 };
 
+#ifdef TARGET_PC
+u16 obj_w_toudai_glass_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_w_toudai_glass_tex_pic_ci4_pal[] = {
 #include "assets/obj_w_toudai_glass_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_light_tex_txt[0x100];
+#else
 u8 obj_w_toudai_light_tex_txt[] = {
 #include "assets/obj_w_toudai_light_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_arm_tex_txt[0x80];
+#else
 u8 obj_w_toudai_arm_tex_txt[] = {
 #include "assets/obj_w_toudai_arm_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_dai_tex_txt[0x200];
+#else
 u8 obj_w_toudai_dai_tex_txt[] = {
 #include "assets/obj_w_toudai_dai_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_dou_tex_txt[0x400];
+#else
 u8 obj_w_toudai_dou_tex_txt[] = {
 #include "assets/obj_w_toudai_dou_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_plate_tex_txt[0x80];
+#else
 u8 obj_w_toudai_plate_tex_txt[] = {
 #include "assets/obj_w_toudai_plate_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_side_tex_txt[0x80];
+#else
 u8 obj_w_toudai_side_tex_txt[] = {
 #include "assets/obj_w_toudai_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_tesuri_tex_txt[0x80];
+#else
 u8 obj_w_toudai_tesuri_tex_txt[] = {
 #include "assets/obj_w_toudai_tesuri_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_yane_tex_txt[0x80];
+#else
 u8 obj_w_toudai_yane_tex_txt[] = {
 #include "assets/obj_w_toudai_yane_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_toudai_glass_tex_pic_ci4[0x80];
+#else
 u8 obj_w_toudai_glass_tex_pic_ci4[] = {
 #include "assets/obj_w_toudai_glass_tex_pic_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_toudai_v[0x950 / sizeof(Vtx)];
+#else
 Vtx obj_w_toudai_v[] = {
 #include "assets/obj_w_toudai_v.inc"
 };
+#endif
 
 Gfx obj_w_toudai_mirror_model[] = {
     gsSPTexture(1000, 1000, 0, G_TX_RENDERTILE, G_ON),

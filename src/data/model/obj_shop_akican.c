@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 obj_shop_akican_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_shop_akican_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_akican/obj_shop_akican_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_shop_akican_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop_akican_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_akican_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop_akican_v[0x330 / sizeof(Vtx)];
+#else
 Vtx obj_shop_akican_v[] = {
 #include "assets/obj_shop_akican_v.inc"
 };
+#endif
 
 Gfx obj_g2T_mat_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -44,3 +56,10 @@ gsSPNTriangles_5b(11, 13, 14, 15, 16, 17, 15, 17, 18, 0, 0, 0),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_shop_akican_c(void) {
+    pc_load_asset("assets/obj_shop_akican/obj_shop_akican_pal.bin", obj_shop_akican_pal, 0x20, 0x678240, 0, 1);
+}
+#endif

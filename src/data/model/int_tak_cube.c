@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_cube_v[];
+#ifdef TARGET_PC
+u8 int_tak_cube_body_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_tak_cube_body_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_cube_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_cube_glass_tex[0x80];
+#else
 u8 int_tak_cube_glass_tex[] = {
 #include "assets/int_tak_cube_glass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_cube_evw_tex_rgb_i4[0x80];
+#else
 u8 int_tak_cube_evw_tex_rgb_i4[] = {
 #include "assets/int_tak_cube_evw_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_cube_v[0x8A0 / sizeof(Vtx)];
+#else
 Vtx int_tak_cube_v[] = {
 #include "assets/int_tak_cube_v.inc"
 };
+#endif
 
 Gfx int_tak_cube_body_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

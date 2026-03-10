@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_shop1_shadow[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop1_shadow[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_shop1_shadow.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop1_shadow_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_shop1_shadow_v[] = {
 #include "assets/obj_shop1_shadow_v.inc"
 };
+#endif
 
 Gfx obj_shop1_shadowT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -27,13 +35,21 @@ Gfx obj_shop1_shadowT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_shop2_shadow[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop2_shadow[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_shop2_shadow.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop2_shadow_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_shop2_shadow_v[] = {
 #include "assets/obj_shop2_shadow_v.inc"
 };
+#endif
 
 Gfx obj_shop2_shadowT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -49,13 +65,21 @@ Gfx obj_shop2_shadowT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_shop3_shadow[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop3_shadow[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_shop3_shadow.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop3_shadow_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_shop3_shadow_v[] = {
 #include "assets/obj_shop3_shadow_v.inc"
 };
+#endif
 
 Gfx obj_shop3_shadowT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -71,13 +95,21 @@ Gfx obj_shop3_shadowT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_shop4_shadow_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop4_shadow_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_shop4_shadow_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop4_shadow_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_shop4_shadow_v[] = {
 #include "assets/obj_shop4_shadow_v.inc"
 };
+#endif
 
 Gfx obj_shop4_shadowT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

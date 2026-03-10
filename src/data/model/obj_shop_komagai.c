@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_shop_komagai_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_shop_komagai_pal[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_komagai_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_shop_komagai_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_shop_komagai_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/obj_shop_komagai_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_shop_komagai_v[0x70 / sizeof(Vtx)];
+#else
 Vtx obj_shop_komagai_v[] = {
 #include "assets/obj_shop_komagai_v.inc"
 };
+#endif
 
 Gfx obj_komagaiT_mat_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

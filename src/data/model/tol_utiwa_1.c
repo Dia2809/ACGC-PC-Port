@@ -5,21 +5,37 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 tol_utiwa1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_utiwa1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_utiwa1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_utiwa_1_main2_tex_txt[0x200];
+#else
 u8 tol_utiwa_1_main2_tex_txt[] = {
 #include "assets/tol_utiwa_1_main2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_utiwa_1_main1_tex_txt[0x200];
+#else
 u8 tol_utiwa_1_main1_tex_txt[] = {
 #include "assets/tol_utiwa_1_main1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_utiwa_1_v[0x80 / sizeof(Vtx)];
+#else
 Vtx tol_utiwa_1_v[] = {
 #include "assets/tol_utiwa_1_v.inc"
 };
+#endif
 
 Gfx main_utiwa1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

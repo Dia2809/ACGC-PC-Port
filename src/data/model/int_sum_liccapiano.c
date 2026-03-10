@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_liccapiano_v[];
+#ifdef TARGET_PC
+u16 int_sum_liccapiano_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_liccapiano_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_liccapiano_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccapiano_top_txt[0x300];
+#else
 u8 int_sum_liccapiano_top_txt[] = {
 #include "assets/int_sum_liccapiano_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccapiano_side_txt[0x100];
+#else
 u8 int_sum_liccapiano_side_txt[] = {
 #include "assets/int_sum_liccapiano_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccapiano_lid_txt[0x200];
+#else
 u8 int_sum_liccapiano_lid_txt[] = {
 #include "assets/int_sum_liccapiano_lid_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccapiano_stand_txt[0x80];
+#else
 u8 int_sum_liccapiano_stand_txt[] = {
 #include "assets/int_sum_liccapiano_stand_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccapiano_pedal_txt[0x40];
+#else
 u8 int_sum_liccapiano_pedal_txt[] = {
 #include "assets/int_sum_liccapiano_pedal_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccapiano_pin_txt[0x40];
+#else
 u8 int_sum_liccapiano_pin_txt[] = {
 #include "assets/int_sum_liccapiano_pin_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccapiano_key_txt[0x100];
+#else
 u8 int_sum_liccapiano_key_txt[] = {
 #include "assets/int_sum_liccapiano_key_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_liccapiano_v[0x490 / sizeof(Vtx)];
+#else
 Vtx int_sum_liccapiano_v[] = {
 #include "assets/int_sum_liccapiano_v.inc"
 };
+#endif
 
 Gfx int_sum_liccapiano_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

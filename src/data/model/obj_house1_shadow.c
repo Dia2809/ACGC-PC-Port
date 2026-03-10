@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_house1_shadow[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_house1_shadow[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_house1_shadow.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_house1_shadow_v[0x140 / sizeof(Vtx)];
+#else
 Vtx obj_house1_shadow_v[] = {
 #include "assets/obj_house1_shadow_v.inc"
 };
+#endif
 
 Gfx obj_house1_shadow_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -29,13 +37,21 @@ Gfx obj_house1_shadow_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_s_house2_shadow_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_house2_shadow_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_house2_shadow_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_house2_shadow_v[0x1C0 / sizeof(Vtx)];
+#else
 Vtx obj_s_house2_shadow_v[] = {
 #include "assets/obj_s_house2_shadow_v.inc"
 };
+#endif
 
 Gfx obj_s_house2_shadow_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -55,13 +71,21 @@ Gfx obj_s_house2_shadow_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_s_house3_shadow_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_house3_shadow_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_house3_shadow_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_house3_shadow_v[0x180 / sizeof(Vtx)];
+#else
 Vtx obj_s_house3_shadow_v[] = {
 #include "assets/obj_s_house3_shadow_v.inc"
 };
+#endif
 
 Gfx obj_s_house3_shadow_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -80,13 +104,21 @@ Gfx obj_s_house3_shadow_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_s_house4_shadow_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_house4_shadow_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_house4_shadow_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_house4_shadow_v[0x1C0 / sizeof(Vtx)];
+#else
 Vtx obj_s_house4_shadow_v[] = {
 #include "assets/obj_s_house4_shadow_v.inc"
 };
+#endif
 
 Gfx obj_s_house4_shadow_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -106,13 +138,21 @@ Gfx obj_s_house4_shadow_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_s_house5_shadow_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_house5_shadow_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_house5_shadow_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_house5_shadow_v[0x1C0 / sizeof(Vtx)];
+#else
 Vtx obj_s_house5_shadow_v[] = {
 #include "assets/obj_s_house5_shadow_v.inc"
 };
+#endif
 
 Gfx obj_s_house5_shadow_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -4,13 +4,21 @@
 #include "c_keyframe.h"
 
 
+#ifdef TARGET_PC
+u8 obj_s_cedar_baby_tex[0x180] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_cedar_baby_tex[] ATTRIBUTE_ALIGN(32)= { 
 #include "assets/obj_s_cedar_baby_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_cedar1_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_s_cedar1_v[] = { 
 #include "assets/obj_s_cedar1_v.inc"
 };
+#endif
 
 Gfx obj_s_cedar1T_mat_model[] = { 
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

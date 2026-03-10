@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_hal_lanp01_v[];
+#ifdef TARGET_PC
+u16 int_sum_hal_lanp01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_hal_lanp01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_hal_lanp01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_lanp01_kasa_tex[0x100];
+#else
 u8 int_sum_hal_lanp01_kasa_tex[] = {
 #include "assets/int_sum_hal_lanp01_kasa_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_lanp01_kuki_tex[0x80];
+#else
 u8 int_sum_hal_lanp01_kuki_tex[] = {
 #include "assets/int_sum_hal_lanp01_kuki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_lanp01_light_tex[0x80];
+#else
 u8 int_sum_hal_lanp01_light_tex[] = {
 #include "assets/int_sum_hal_lanp01_light_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_lanp01_stand_tex[0x100];
+#else
 u8 int_sum_hal_lanp01_stand_tex[] = {
 #include "assets/int_sum_hal_lanp01_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_lanp01_top_tex[0x100];
+#else
 u8 int_sum_hal_lanp01_top_tex[] = {
 #include "assets/int_sum_hal_lanp01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_lanp01_hiku_tex[0x80];
+#else
 u8 int_sum_hal_lanp01_hiku_tex[] = {
 #include "assets/int_sum_hal_lanp01_hiku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_lanp01_face_tex[0x100];
+#else
 u8 int_sum_hal_lanp01_face_tex[] = {
 #include "assets/int_sum_hal_lanp01_face_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_hal_lanp01_v[0x2C0 / sizeof(Vtx)];
+#else
 Vtx int_sum_hal_lanp01_v[] = {
 #include "assets/int_sum_hal_lanp01_v.inc"
 };
+#endif
 
 Gfx int_sum_hal_lanp01_off_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

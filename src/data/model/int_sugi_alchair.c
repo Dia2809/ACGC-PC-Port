@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sugi_alchair_v[];
+#ifdef TARGET_PC
+u16 int_sugi_alchair_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sugi_alchair_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sugi_alchair_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sugi_alchair_all_tex_txt[0x800];
+#else
 u8 int_sugi_alchair_all_tex_txt[] = {
 #include "assets/int_sugi_alchair_all_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sugi_alchair_v[0x340 / sizeof(Vtx)];
+#else
 Vtx int_sugi_alchair_v[] = {
 #include "assets/int_sugi_alchair_v.inc"
 };
+#endif
 
 Gfx sugi_aluminum_c_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

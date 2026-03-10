@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_classicchest02_v[];
+#ifdef TARGET_PC
+u16 int_sum_classicchest02_pal01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_classicchest02_pal01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_classicchest02_pal01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_back[0x180];
+#else
 u8 int_sum_classicchest02_back[] = {
 #include "assets/int_sum_classicchest02_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_side[0x180];
+#else
 u8 int_sum_classicchest02_side[] = {
 #include "assets/int_sum_classicchest02_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_top[0x200];
+#else
 u8 int_sum_classicchest02_top[] = {
 #include "assets/int_sum_classicchest02_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_front[0x100];
+#else
 u8 int_sum_classicchest02_front[] = {
 #include "assets/int_sum_classicchest02_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_tablefront[0x40];
+#else
 u8 int_sum_classicchest02_tablefront[] = {
 #include "assets/int_sum_classicchest02_tablefront.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_tableside[0x40];
+#else
 u8 int_sum_classicchest02_tableside[] = {
 #include "assets/int_sum_classicchest02_tableside.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_uptop[0x80];
+#else
 u8 int_sum_classicchest02_uptop[] = {
 #include "assets/int_sum_classicchest02_uptop.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_ink[0x80];
+#else
 u8 int_sum_classicchest02_ink[] = {
 #include "assets/int_sum_classicchest02_ink.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_pensaki[0x40];
+#else
 u8 int_sum_classicchest02_pensaki[] = {
 #include "assets/int_sum_classicchest02_pensaki.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchest02_pen[0x40];
+#else
 u8 int_sum_classicchest02_pen[] = {
 #include "assets/int_sum_classicchest02_pen.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_classicchest02_v[0x320 / sizeof(Vtx)];
+#else
 Vtx int_sum_classicchest02_v[] = {
 #include "assets/int_sum_classicchest02_v.inc"
 };
+#endif
 
 Gfx int_sum_classicchest02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

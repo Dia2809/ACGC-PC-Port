@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_tri_chest03_v[];
+#ifdef TARGET_PC
+u16 int_nog_tri_chest03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_tri_chest03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_tri_chest03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_nog_tri_chest03_tex_txt[0x800];
+#else
 u8 obj_nog_tri_chest03_tex_txt[] = {
 #include "assets/obj_nog_tri_chest03_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_tri_chest03_v[0x390 / sizeof(Vtx)];
+#else
 Vtx int_nog_tri_chest03_v[] = {
 #include "assets/int_nog_tri_chest03_v.inc"
 };
+#endif
 
 Gfx int_nog_tri_chest03_door_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

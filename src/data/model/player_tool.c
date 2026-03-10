@@ -3,25 +3,45 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u16 tol_axe_1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_axe_1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_axe_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_tuka1_tex_txt[0x200];
+#else
 u8 tol_axe_1_tuka1_tex_txt[] = {
 #include "assets/tol_axe_1_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_edge2_tex_txt[0x100];
+#else
 u8 tol_axe_1_edge2_tex_txt[] = {
 #include "assets/tol_axe_1_edge2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_edge1_tex_txt[0x100];
+#else
 u8 tol_axe_1_edge1_tex_txt[] = {
 #include "assets/tol_axe_1_edge1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_axe_1_v[0x220 / sizeof(Vtx)];
+#else
 Vtx tol_axe_1_v[] = {
 #include "assets/tol_axe_1_v.inc"
 };
+#endif
 
 Gfx tol_axe_1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -53,25 +73,45 @@ Gfx tol_axe_1_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 tol_axe_1_b_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_axe_1_b_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_axe_1_b_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_b_tuka1_tex_txt[0x200];
+#else
 u8 tol_axe_1_b_tuka1_tex_txt[] = {
 #include "assets/tol_axe_1_b_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_b_edge2_tex_txt[0x100];
+#else
 u8 tol_axe_1_b_edge2_tex_txt[] = {
 #include "assets/tol_axe_1_b_edge2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_b_edge1_tex_txt[0x100];
+#else
 u8 tol_axe_1_b_edge1_tex_txt[] = {
 #include "assets/tol_axe_1_b_edge1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_axe_1_b_v[0x220 / sizeof(Vtx)];
+#else
 Vtx tol_axe_1_b_v[] = {
 #include "assets/tol_axe_1_b_v.inc"
 };
+#endif
 
 Gfx tol_axe_1_b_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -103,25 +143,45 @@ Gfx tol_axe_1_b_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 tol_axe_1_c_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_axe_1_c_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_axe_1_c_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_c_tuka1_tex_txt[0x200];
+#else
 u8 tol_axe_1_c_tuka1_tex_txt[] = {
 #include "assets/tol_axe_1_c_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_c_edge2_tex_txt[0x100];
+#else
 u8 tol_axe_1_c_edge2_tex_txt[] = {
 #include "assets/tol_axe_1_c_edge2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_1_c_edge1_tex_txt[0x200];
+#else
 u8 tol_axe_1_c_edge1_tex_txt[] = {
 #include "assets/tol_axe_1_c_edge1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_axe_1_c_v[0x220 / sizeof(Vtx)];
+#else
 Vtx tol_axe_1_c_v[] = {
 #include "assets/tol_axe_1_c_v.inc"
 };
+#endif
 
 Gfx tol_axe_1_c_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -152,25 +212,45 @@ Gfx tol_axe_1_c_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 tol_axe_2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_axe_2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_axe_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_2_tuka1_tex_txt[0x200];
+#else
 u8 tol_axe_2_tuka1_tex_txt[] = {
 #include "assets/tol_axe_2_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_2_edge2_tex_txt[0x100];
+#else
 u8 tol_axe_2_edge2_tex_txt[] = {
 #include "assets/tol_axe_2_edge2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_axe_2_edge1_tex_txt[0x100];
+#else
 u8 tol_axe_2_edge1_tex_txt[] = {
 #include "assets/tol_axe_2_edge1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_axe_2_v[0x220 / sizeof(Vtx)];
+#else
 Vtx tol_axe_2_v[] = {
 #include "assets/tol_axe_2_v.inc"
 };
+#endif
 
 Gfx tol_axe_2_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -202,25 +282,45 @@ Gfx tol_axe_2_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 act_m_net1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 act_m_net1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_net1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_net_1_tuka1_tex_txt[0x200];
+#else
 u8 tol_net_1_tuka1_tex_txt[] = {
 #include "assets/tol_net_1_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_net_1_main1_tex_txt[0x300];
+#else
 u8 tol_net_1_main1_tex_txt[] = {
 #include "assets/tol_net_1_main1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_net_1_hole1_tex_txt[0x100];
+#else
 u8 tol_net_1_hole1_tex_txt[] = {
 #include "assets/tol_net_1_hole1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_net_1_v[0x4F0 / sizeof(Vtx)];
+#else
 Vtx tol_net_1_v[] = {
 #include "assets/tol_net_1_v.inc"
 };
+#endif
 
 Gfx main_net_model[] = {
     gsSPMatrix(anime_6_mdl, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -306,25 +406,45 @@ cKF_Joint_R_c cKF_je_r_tol_net_1_tbl[] = {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_net_1 = { ARRAY_COUNT(cKF_je_r_tol_net_1_tbl), 3, cKF_je_r_tol_net_1_tbl };
 
+#ifdef TARGET_PC
+u16 tol_net_2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_net_2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_net_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_net_2_main1_tex_txt[0x300];
+#else
 u8 tol_net_2_main1_tex_txt[] = {
 #include "assets/tol_net_2_main1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_net_2_tuka1_tex_txt[0x200];
+#else
 u8 tol_net_2_tuka1_tex_txt[] = {
 #include "assets/tol_net_2_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_net_2_hole1_tex_txt[0x100];
+#else
 u8 tol_net_2_hole1_tex_txt[] = {
 #include "assets/tol_net_2_hole1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_net_2_v[0x500 / sizeof(Vtx)];
+#else
 Vtx tol_net_2_v[] = {
 #include "assets/tol_net_2_v.inc"
 };
+#endif
 
 Gfx main_netB_model[] = {
     gsSPMatrix(anime_6_mdl, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -557,17 +677,29 @@ cKF_Animation_R_c cKF_ba_r_tol_net_1_yatta_m1 = { cKF_ckcb_r_tol_net_1_yatta_m1_
                                                   -1,
                                                   53 };
 
+#ifdef TARGET_PC
+static u16 tol_sao_1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_sao_1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_sao_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_sao_1_main1_tex_txt[0x200];
+#else
 u8 tol_sao_1_main1_tex_txt[] = {
 #include "assets/tol_sao_1_main1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_sao_1_v[0x3A0 / sizeof(Vtx)];
+#else
 Vtx tol_sao_1_v[] = {
 #include "assets/tol_sao_1_v.inc"
 };
+#endif
 
 Gfx main1_sao_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -654,17 +786,29 @@ cKF_Joint_R_c cKF_je_r_tol_sao_1_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA, {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_sao_1 = { ARRAY_COUNT(cKF_je_r_tol_sao_1_tbl), 4, cKF_je_r_tol_sao_1_tbl };
 
+#ifdef TARGET_PC
+static u16 tol_sao_2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_sao_2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_sao_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_sao_2_main1_tex_txt[0x200];
+#else
 u8 tol_sao_2_main1_tex_txt[] = {
 #include "assets/tol_sao_2_main1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_sao_2_v[0x3A0 / sizeof(Vtx)];
+#else
 Vtx tol_sao_2_v[] = {
 #include "assets/tol_sao_2_v.inc"
 };
+#endif
 
 Gfx main1_saoB_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -878,33 +1022,61 @@ cKF_Animation_R_c cKF_ba_r_tol_sao_1_not_sao_swing1 = { cKF_ckcb_r_tol_sao_1_not
                                                         -1,
                                                         34 };
 
+#ifdef TARGET_PC
+u16 act_m_scoop_1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 act_m_scoop_1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_scoop_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_1_main1_tex_txt[0x100];
+#else
 u8 tol_scoop_1_main1_tex_txt[] = {
 #include "assets/tol_scoop_1_main1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_1_tuka1_tex_txt[0x200];
+#else
 u8 tol_scoop_1_tuka1_tex_txt[] = {
 #include "assets/tol_scoop_1_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_1_tuka2_tex_txt[0x80];
+#else
 u8 tol_scoop_1_tuka2_tex_txt[] = {
 #include "assets/tol_scoop_1_tuka2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_1_tuka3_tex_txt[0x80];
+#else
 u8 tol_scoop_1_tuka3_tex_txt[] = {
 #include "assets/tol_scoop_1_tuka3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_1_main2_tex_txt[0x100];
+#else
 u8 tol_scoop_1_main2_tex_txt[] = {
 #include "assets/tol_scoop_1_main2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_scoop_1_v[0x330 / sizeof(Vtx)];
+#else
 Vtx tol_scoop_1_v[] = {
 #include "assets/tol_scoop_1_v.inc"
 };
+#endif
 
 Gfx tol_scoop_1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -952,33 +1124,61 @@ Gfx tol_scoop_1_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 tol_scoop_2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_scoop_2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_scoop_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_2_main1_tex_txt[0x100];
+#else
 u8 tol_scoop_2_main1_tex_txt[] = {
 #include "assets/tol_scoop_2_main1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_2_tuka1_tex_txt[0x200];
+#else
 u8 tol_scoop_2_tuka1_tex_txt[] = {
 #include "assets/tol_scoop_2_tuka1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_2_tuka2_tex_txt[0x80];
+#else
 u8 tol_scoop_2_tuka2_tex_txt[] = {
 #include "assets/tol_scoop_2_tuka2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_2_tuka3_tex_txt[0x80];
+#else
 u8 tol_scoop_2_tuka3_tex_txt[] = {
 #include "assets/tol_scoop_2_tuka3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_scoop_2_main2_tex_txt[0x100];
+#else
 u8 tol_scoop_2_main2_tex_txt[] = {
 #include "assets/tol_scoop_2_main2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_scoop_2_v[0x330 / sizeof(Vtx)];
+#else
 Vtx tol_scoop_2_v[] = {
 #include "assets/tol_scoop_2_v.inc"
 };
+#endif
 
 Gfx tol_scoop_2_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1026,17 +1226,29 @@ Gfx tol_scoop_2_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u8 tol_balloon1_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 tol_balloon1_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_balloon1_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_balloonA_head_tex_rgb_ia8[0x400];
+#else
 u8 tol_balloonA_head_tex_rgb_ia8[] = {
 #include "assets/tol_balloonA_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_balloon1_v[0x460 / sizeof(Vtx)];
+#else
 Vtx tol_balloon1_v[] = {
 #include "assets/tol_balloon1_v.inc"
 };
+#endif
 
 Gfx tol_balloonA_a_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1130,17 +1342,29 @@ cKF_Joint_R_c cKF_je_r_tol_balloon1_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA
 
 cKF_Skeleton_R_c cKF_bs_r_tol_balloon1 = { ARRAY_COUNT(cKF_je_r_tol_balloon1_tbl), 4, cKF_je_r_tol_balloon1_tbl };
 
+#ifdef TARGET_PC
+u8 tol_balloonB_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 tol_balloonB_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_balloonB_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_balloonB_head_tex_rgb_ia8[0x400];
+#else
 u8 tol_balloonB_head_tex_rgb_ia8[] = {
 #include "assets/tol_balloonB_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_balloon2_v[0x460 / sizeof(Vtx)];
+#else
 Vtx tol_balloon2_v[] = {
 #include "assets/tol_balloon2_v.inc"
 };
+#endif
 
 Gfx tol_balloonB_a_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1234,17 +1458,29 @@ cKF_Joint_R_c cKF_je_r_tol_balloon2_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA
 
 cKF_Skeleton_R_c cKF_bs_r_tol_balloon2 = { ARRAY_COUNT(cKF_je_r_tol_balloon2_tbl), 4, cKF_je_r_tol_balloon2_tbl };
 
+#ifdef TARGET_PC
+u8 tol_balloonC_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 tol_balloonC_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_balloonC_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_balloonC_head_tex_rgb_ia8[0x400];
+#else
 u8 tol_balloonC_head_tex_rgb_ia8[] = {
 #include "assets/tol_balloonC_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_balloon3_v[0x460 / sizeof(Vtx)];
+#else
 Vtx tol_balloon3_v[] = {
 #include "assets/tol_balloon3_v.inc"
 };
+#endif
 
 Gfx tol_balloonC_a_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1340,17 +1576,29 @@ cKF_Joint_R_c cKF_je_r_tol_balloon3_tbl[] = {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_balloon3 = { ARRAY_COUNT(cKF_je_r_tol_balloon3_tbl), 4, cKF_je_r_tol_balloon3_tbl };
 
+#ifdef TARGET_PC
+u8 tol_balloonD_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 tol_balloonD_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_balloonD_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_balloonD_head_tex_rgb_ia8[0x400];
+#else
 u8 tol_balloonD_head_tex_rgb_ia8[] = {
 #include "assets/tol_balloonD_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_balloon4_v[0x460 / sizeof(Vtx)];
+#else
 Vtx tol_balloon4_v[] = {
 #include "assets/tol_balloon4_v.inc"
 };
+#endif
 
 Gfx tol_balloonD_a_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1444,17 +1692,29 @@ cKF_Joint_R_c cKF_je_r_tol_balloon4_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA
 
 cKF_Skeleton_R_c cKF_bs_r_tol_balloon4 = { ARRAY_COUNT(cKF_je_r_tol_balloon4_tbl), 4, cKF_je_r_tol_balloon4_tbl };
 
+#ifdef TARGET_PC
+u8 tol_balloonE_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 tol_balloonE_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_balloonE_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_balloonE_head_tex_rgb_ia8[0x400];
+#else
 u8 tol_balloonE_head_tex_rgb_ia8[] = {
 #include "assets/tol_balloonE_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_balloon5_v[0x460 / sizeof(Vtx)];
+#else
 Vtx tol_balloon5_v[] = {
 #include "assets/tol_balloon5_v.inc"
 };
+#endif
 
 Gfx tol_balloonE_a_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1548,17 +1808,29 @@ cKF_Joint_R_c cKF_je_r_tol_balloon5_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA
 
 cKF_Skeleton_R_c cKF_bs_r_tol_balloon5 = { ARRAY_COUNT(cKF_je_r_tol_balloon5_tbl), 4, cKF_je_r_tol_balloon5_tbl };
 
+#ifdef TARGET_PC
+u8 tol_balloonF_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 tol_balloonF_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_balloonF_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_balloonF5_head_tex_rgb_ia8[0x400];
+#else
 u8 tol_balloonF5_head_tex_rgb_ia8[] = {
 #include "assets/tol_balloonF5_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_balloon6_v[0xC60 / sizeof(Vtx)];
+#else
 Vtx tol_balloon6_v[] = {
 #include "assets/tol_balloon6_v.inc"
 };
+#endif
 
 Gfx tol_balloonF_a_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1677,17 +1949,29 @@ cKF_Joint_R_c cKF_je_r_tol_balloon6_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA
 
 cKF_Skeleton_R_c cKF_bs_r_tol_balloon6 = { ARRAY_COUNT(cKF_je_r_tol_balloon6_tbl), 4, cKF_je_r_tol_balloon6_tbl };
 
+#ifdef TARGET_PC
+u8 tol_balloonG_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 tol_balloonG_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_balloonG_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_balloonG5_head_tex_rgb_ia8[0x400];
+#else
 u8 tol_balloonG5_head_tex_rgb_ia8[] = {
 #include "assets/tol_balloonG5_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_balloon7_v[0xC60 / sizeof(Vtx)];
+#else
 Vtx tol_balloon7_v[] = {
 #include "assets/tol_balloon7_v.inc"
 };
+#endif
 
 Gfx tol_balloonG_a_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1806,17 +2090,29 @@ cKF_Joint_R_c cKF_je_r_tol_balloon7_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA
 
 cKF_Skeleton_R_c cKF_bs_r_tol_balloon7 = { ARRAY_COUNT(cKF_je_r_tol_balloon7_tbl), 4, cKF_je_r_tol_balloon7_tbl };
 
+#ifdef TARGET_PC
+u8 tol_balloonH_wire_tex_txt[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 tol_balloonH_wire_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_balloonH_wire_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_balloonH5_head_tex_rgb_ia8[0x400];
+#else
 u8 tol_balloonH5_head_tex_rgb_ia8[] = {
 #include "assets/tol_balloonH5_head_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_balloon8_v[0xC60 / sizeof(Vtx)];
+#else
 Vtx tol_balloon8_v[] = {
 #include "assets/tol_balloon8_v.inc"
 };
+#endif
 
 Gfx tol_balloonH_a_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2011,25 +2307,45 @@ cKF_Animation_R_c cKF_ba_r_tol_balloon1_gyaza1 = { cKF_ckcb_r_tol_balloon1_gyaza
                                                    -1,
                                                    27 };
 
+#ifdef TARGET_PC
+static u16 tol_kaza_1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_kaza_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_1_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_1_a_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_1_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_1_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_1_c_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_1_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_1_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_1_b_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_1_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_kaza1_v[0x300 / sizeof(Vtx)];
+#else
 Vtx tol_kaza1_v[] = {
 #include "assets/tol_kaza1_v.inc"
 };
+#endif
 
 Gfx tol_kaza1_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2077,25 +2393,45 @@ cKF_Joint_R_c cKF_je_r_tol_kaza1_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA, {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_kaza1 = { ARRAY_COUNT(cKF_je_r_tol_kaza1_tbl), 2, cKF_je_r_tol_kaza1_tbl };
 
+#ifdef TARGET_PC
+static u16 tol_kaza_2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_kaza_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_2_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_2_a_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_2_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_2_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_2_c_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_2_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_2_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_2_b_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_2_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_kaza2_v[0x300 / sizeof(Vtx)];
+#else
 Vtx tol_kaza2_v[] = {
 #include "assets/tol_kaza2_v.inc"
 };
+#endif
 
 Gfx tol_kaza2_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2143,25 +2479,45 @@ cKF_Joint_R_c cKF_je_r_tol_kaza2_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA, {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_kaza2 = { ARRAY_COUNT(cKF_je_r_tol_kaza2_tbl), 2, cKF_je_r_tol_kaza2_tbl };
 
+#ifdef TARGET_PC
+static u16 tol_kaza_3_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_3_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_kaza_3_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_3_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_3_a_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_3_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_3_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_3_c_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_3_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_3_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_3_b_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_3_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_kaza3_v[0x300 / sizeof(Vtx)];
+#else
 Vtx tol_kaza3_v[] = {
 #include "assets/tol_kaza3_v.inc"
 };
+#endif
 
 Gfx tol_kaza3_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2209,25 +2565,45 @@ cKF_Joint_R_c cKF_je_r_tol_kaza3_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA, {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_kaza3 = { ARRAY_COUNT(cKF_je_r_tol_kaza3_tbl), 2, cKF_je_r_tol_kaza3_tbl };
 
+#ifdef TARGET_PC
+static u16 tol_kaza_4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_kaza_4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_4_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_4_a_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_4_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_4_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_4_c_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_4_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_4_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_4_b_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_4_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_kaza4_v[0x300 / sizeof(Vtx)];
+#else
 Vtx tol_kaza4_v[] = {
 #include "assets/tol_kaza4_v.inc"
 };
+#endif
 
 Gfx tol_kaza4_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2275,25 +2651,45 @@ cKF_Joint_R_c cKF_je_r_tol_kaza4_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA, {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_kaza4 = { ARRAY_COUNT(cKF_je_r_tol_kaza4_tbl), 2, cKF_je_r_tol_kaza4_tbl };
 
+#ifdef TARGET_PC
+static u16 tol_kaza_5_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_5_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_kaza_5_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_5_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_5_a_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_5_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_5_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_5_c_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_5_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_5_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_5_b_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_5_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_kaza5_v[0x300 / sizeof(Vtx)];
+#else
 Vtx tol_kaza5_v[] = {
 #include "assets/tol_kaza5_v.inc"
 };
+#endif
 
 Gfx tol_kaza5_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2341,25 +2737,45 @@ cKF_Joint_R_c cKF_je_r_tol_kaza5_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA, {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_kaza5 = { ARRAY_COUNT(cKF_je_r_tol_kaza5_tbl), 2, cKF_je_r_tol_kaza5_tbl };
 
+#ifdef TARGET_PC
+static u16 tol_kaza_6_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_6_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_kaza_6_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_6_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_6_a_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_6_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_6_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_6_c_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_6_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_6_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_6_b_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_6_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_kaza6_v[0x300 / sizeof(Vtx)];
+#else
 Vtx tol_kaza6_v[] = {
 #include "assets/tol_kaza6_v.inc"
 };
+#endif
 
 Gfx tol_kaza6_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2407,29 +2823,53 @@ cKF_Joint_R_c cKF_je_r_tol_kaza6_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA, {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_kaza6 = { ARRAY_COUNT(cKF_je_r_tol_kaza6_tbl), 2, cKF_je_r_tol_kaza6_tbl };
 
+#ifdef TARGET_PC
+static u16 tol_kaza_7_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_7_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_kaza_7_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_7_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_7_a_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_7_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_7_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_7_c_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_7_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_7_d_tex_txt[0x80];
+#else
 static u8 tol_kaza_7_d_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_7_d_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_7_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_7_b_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_7_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_kaza7_v[0x980 / sizeof(Vtx)];
+#else
 Vtx tol_kaza7_v[] = {
 #include "assets/tol_kaza7_v.inc"
 };
+#endif
 
 Gfx tol_kaza7_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2517,33 +2957,61 @@ cKF_Joint_R_c cKF_je_r_tol_kaza7_tbl[] = { { NULL, 1, cKF_JOINT_FLAG_DISP_OPA, {
 
 cKF_Skeleton_R_c cKF_bs_r_tol_kaza7 = { ARRAY_COUNT(cKF_je_r_tol_kaza7_tbl), 2, cKF_je_r_tol_kaza7_tbl };
 
+#ifdef TARGET_PC
+static u16 tol_kaza_8_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_kaza_8_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_kaza_8_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_8_d_tex_txt[0x80];
+#else
 static u8 tol_kaza_8_d_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_8_d_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_8_a_tex_txt[0x200];
+#else
 static u8 tol_kaza_8_a_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_8_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_8_c_tex_txt[0x200];
+#else
 static u8 tol_kaza_8_c_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_8_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_8_e_tex_txt[0x80];
+#else
 static u8 tol_kaza_8_e_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_8_e_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_kaza_8_b_tex_txt[0x100];
+#else
 static u8 tol_kaza_8_b_tex_txt[] = {
 #include "assets/player_tool/tol_kaza_8_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_kaza8_v[0x780 / sizeof(Vtx)];
+#else
 Vtx tol_kaza8_v[] = {
 #include "assets/tol_kaza8_v.inc"
 };
+#endif
 
 Gfx tol_kaza8_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2645,17 +3113,29 @@ cKF_Animation_R_c cKF_ba_r_tol_kaza1_wait = { cKF_ckcb_r_tol_kaza1_wait_tbl,
                                               -1,
                                               361 };
 
+#ifdef TARGET_PC
+static u16 tol_fan1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_fan1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan1_tex_txt[0x400];
+#else
 static u8 tol_fan1_tex_txt[] = {
 #include "assets/player_tool/tol_fan1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_fan1_v[0x80 / sizeof(Vtx)];
+#else
 Vtx tol_fan1_v[] = {
 #include "assets/tol_fan1_v.inc"
 };
+#endif
 
 Gfx tol_fan1_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2672,17 +3152,29 @@ Gfx tol_fan1_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u16 tol_fan2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_fan2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan2_tex_txt[0x400];
+#else
 static u8 tol_fan2_tex_txt[] = {
 #include "assets/player_tool/tol_fan2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_fan2_v[0x80 / sizeof(Vtx)];
+#else
 Vtx tol_fan2_v[] = {
 #include "assets/tol_fan2_v.inc"
 };
+#endif
 
 Gfx tol_fan2_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2699,17 +3191,29 @@ Gfx tol_fan2_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u16 tol_fan3_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan3_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_fan3_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan3_tex_txt[0x400];
+#else
 static u8 tol_fan3_tex_txt[] = {
 #include "assets/player_tool/tol_fan3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_fan3_v[0x80 / sizeof(Vtx)];
+#else
 Vtx tol_fan3_v[] = {
 #include "assets/tol_fan3_v.inc"
 };
+#endif
 
 Gfx tol_fan3_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2726,17 +3230,29 @@ Gfx tol_fan3_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u16 tol_fan4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_fan4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan4_tex_txt[0x400];
+#else
 static u8 tol_fan4_tex_txt[] = {
 #include "assets/player_tool/tol_fan4_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_fan4_v[0x80 / sizeof(Vtx)];
+#else
 Vtx tol_fan4_v[] = {
 #include "assets/tol_fan4_v.inc"
 };
+#endif
 
 Gfx tol_fan4_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2753,17 +3269,29 @@ Gfx tol_fan4_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u16 tol_fan5_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan5_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_fan5_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan5_tex_txt[0x400];
+#else
 static u8 tol_fan5_tex_txt[] = {
 #include "assets/player_tool/tol_fan5_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_fan5_v[0x80 / sizeof(Vtx)];
+#else
 Vtx tol_fan5_v[] = {
 #include "assets/tol_fan5_v.inc"
 };
+#endif
 
 Gfx tol_fan5_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2780,17 +3308,29 @@ Gfx tol_fan5_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u16 tol_fan6_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan6_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_fan6_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan6_tex_txt[0x400];
+#else
 static u8 tol_fan6_tex_txt[] = {
 #include "assets/player_tool/tol_fan6_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_fan6_v[0x280 / sizeof(Vtx)];
+#else
 Vtx tol_fan6_v[] = {
 #include "assets/tol_fan6_v.inc"
 };
+#endif
 
 Gfx tol_fan6_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2812,17 +3352,29 @@ Gfx tol_fan6_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u16 tol_fan7_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan7_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_fan7_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan7_tex_txt[0x400];
+#else
 static u8 tol_fan7_tex_txt[] = {
 #include "assets/player_tool/tol_fan7_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_fan7_v[0x80 / sizeof(Vtx)];
+#else
 Vtx tol_fan7_v[] = {
 #include "assets/tol_fan7_v.inc"
 };
+#endif
 
 Gfx tol_fan7_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2839,17 +3391,29 @@ Gfx tol_fan7_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u16 tol_fan8_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_fan8_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/player_tool/tol_fan8_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_fan8_tex_txt[0x400];
+#else
 static u8 tol_fan8_tex_txt[] = {
 #include "assets/player_tool/tol_fan8_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_fan8_v[0x80 / sizeof(Vtx)];
+#else
 Vtx tol_fan8_v[] = {
 #include "assets/tol_fan8_v.inc"
 };
+#endif
 
 Gfx tol_fan8_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -2865,3 +3429,63 @@ Gfx tol_fan8_model[] = {
     gsSPNTrianglesInit_5b(2, 4, 5, 6, 4, 6, 7, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_player_tool_c(void) {
+    pc_load_asset("assets/player_tool/tol_sao_1_pal.bin", tol_sao_1_pal, 0x20, 0x8DED60, 0, 1);
+    pc_load_asset("assets/player_tool/tol_sao_2_pal.bin", tol_sao_2_pal, 0x20, 0x8DF0A0, 0, 1);
+    pc_load_asset("assets/player_tool/tol_balloon1_wire_tex_txt.bin", tol_balloon1_wire_tex_txt, 0x80, 0xBCBD80, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_1_pal.bin", tol_kaza_1_pal, 0x20, 0x66CFE0, 0, 1);
+    pc_load_asset("assets/player_tool/tol_kaza_1_a_tex_txt.bin", tol_kaza_1_a_tex_txt, 0x200, 0x66D100, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_1_c_tex_txt.bin", tol_kaza_1_c_tex_txt, 0x200, 0x66D300, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_1_b_tex_txt.bin", tol_kaza_1_b_tex_txt, 0x100, 0x66D000, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_2_pal.bin", tol_kaza_2_pal, 0x20, 0x66D960, 0, 1);
+    pc_load_asset("assets/player_tool/tol_kaza_2_a_tex_txt.bin", tol_kaza_2_a_tex_txt, 0x200, 0x66D980, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_2_c_tex_txt.bin", tol_kaza_2_c_tex_txt, 0x200, 0x66DB80, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_2_b_tex_txt.bin", tol_kaza_2_b_tex_txt, 0x100, 0x66DD80, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_3_pal.bin", tol_kaza_3_pal, 0x20, 0x66E2E0, 0, 1);
+    pc_load_asset("assets/player_tool/tol_kaza_3_a_tex_txt.bin", tol_kaza_3_a_tex_txt, 0x200, 0x66E300, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_3_c_tex_txt.bin", tol_kaza_3_c_tex_txt, 0x200, 0x66E500, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_3_b_tex_txt.bin", tol_kaza_3_b_tex_txt, 0x100, 0x66E700, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_4_pal.bin", tol_kaza_4_pal, 0x20, 0x66EC60, 0, 1);
+    pc_load_asset("assets/player_tool/tol_kaza_4_a_tex_txt.bin", tol_kaza_4_a_tex_txt, 0x200, 0x66EC80, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_4_c_tex_txt.bin", tol_kaza_4_c_tex_txt, 0x200, 0x66EE80, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_4_b_tex_txt.bin", tol_kaza_4_b_tex_txt, 0x100, 0x66F080, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_5_pal.bin", tol_kaza_5_pal, 0x20, 0x66F5E0, 0, 1);
+    pc_load_asset("assets/player_tool/tol_kaza_5_a_tex_txt.bin", tol_kaza_5_a_tex_txt, 0x200, 0x66F600, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_5_c_tex_txt.bin", tol_kaza_5_c_tex_txt, 0x200, 0x66F800, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_5_b_tex_txt.bin", tol_kaza_5_b_tex_txt, 0x100, 0x66FA00, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_6_pal.bin", tol_kaza_6_pal, 0x20, 0x66FF60, 0, 1);
+    pc_load_asset("assets/player_tool/tol_kaza_6_a_tex_txt.bin", tol_kaza_6_a_tex_txt, 0x200, 0x66FF80, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_6_c_tex_txt.bin", tol_kaza_6_c_tex_txt, 0x200, 0x670180, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_6_b_tex_txt.bin", tol_kaza_6_b_tex_txt, 0x100, 0x670380, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_7_pal.bin", tol_kaza_7_pal, 0x20, 0x6708E0, 0, 1);
+    pc_load_asset("assets/player_tool/tol_kaza_7_a_tex_txt.bin", tol_kaza_7_a_tex_txt, 0x200, 0x670900, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_7_c_tex_txt.bin", tol_kaza_7_c_tex_txt, 0x200, 0x670B00, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_7_d_tex_txt.bin", tol_kaza_7_d_tex_txt, 0x80, 0x670D00, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_7_b_tex_txt.bin", tol_kaza_7_b_tex_txt, 0x100, 0x670D80, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_8_pal.bin", tol_kaza_8_pal, 0x20, 0x671A40, 0, 1);
+    pc_load_asset("assets/player_tool/tol_kaza_8_d_tex_txt.bin", tol_kaza_8_d_tex_txt, 0x80, 0x671A60, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_8_a_tex_txt.bin", tol_kaza_8_a_tex_txt, 0x200, 0x671AE0, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_8_c_tex_txt.bin", tol_kaza_8_c_tex_txt, 0x200, 0x671CE0, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_8_e_tex_txt.bin", tol_kaza_8_e_tex_txt, 0x80, 0x671EE0, 0, 0);
+    pc_load_asset("assets/player_tool/tol_kaza_8_b_tex_txt.bin", tol_kaza_8_b_tex_txt, 0x100, 0x671F60, 0, 0);
+    pc_load_asset("assets/player_tool/tol_fan1_pal.bin", tol_fan1_pal, 0x20, 0x678D60, 0, 1);
+    pc_load_asset("assets/player_tool/tol_fan1_tex_txt.bin", tol_fan1_tex_txt, 0x400, 0x678D80, 0, 0);
+    pc_load_asset("assets/player_tool/tol_fan2_pal.bin", tol_fan2_pal, 0x20, 0x679280, 0, 1);
+    pc_load_asset("assets/player_tool/tol_fan2_tex_txt.bin", tol_fan2_tex_txt, 0x400, 0x6792A0, 0, 0);
+    pc_load_asset("assets/player_tool/tol_fan3_pal.bin", tol_fan3_pal, 0x20, 0x6797A0, 0, 1);
+    pc_load_asset("assets/player_tool/tol_fan3_tex_txt.bin", tol_fan3_tex_txt, 0x400, 0x6797C0, 0, 0);
+    pc_load_asset("assets/player_tool/tol_fan4_pal.bin", tol_fan4_pal, 0x20, 0x679CC0, 0, 1);
+    pc_load_asset("assets/player_tool/tol_fan4_tex_txt.bin", tol_fan4_tex_txt, 0x400, 0x679CE0, 0, 0);
+    pc_load_asset("assets/player_tool/tol_fan5_pal.bin", tol_fan5_pal, 0x20, 0x67A1E0, 0, 1);
+    pc_load_asset("assets/player_tool/tol_fan5_tex_txt.bin", tol_fan5_tex_txt, 0x400, 0x67A200, 0, 0);
+    pc_load_asset("assets/player_tool/tol_fan6_pal.bin", tol_fan6_pal, 0x20, 0x67A700, 0, 1);
+    pc_load_asset("assets/player_tool/tol_fan6_tex_txt.bin", tol_fan6_tex_txt, 0x400, 0x67A720, 0, 0);
+    pc_load_asset("assets/player_tool/tol_fan7_pal.bin", tol_fan7_pal, 0x20, 0x67AC20, 0, 1);
+    pc_load_asset("assets/player_tool/tol_fan7_tex_txt.bin", tol_fan7_tex_txt, 0x400, 0x67AC40, 0, 0);
+    pc_load_asset("assets/player_tool/tol_fan8_pal.bin", tol_fan8_pal, 0x20, 0x67B140, 0, 1);
+    pc_load_asset("assets/player_tool/tol_fan8_tex_txt.bin", tol_fan8_tex_txt, 0x400, 0x67B160, 0, 0);
+}
+#endif

@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_s_stump5_v[0x70 / sizeof(Vtx)];
+#else
 Vtx obj_s_stump5_v[] = {
 #include "assets/obj_s_stump5_v.inc"
 };
+#endif
 
 extern u8 obj_s_tree_stump_tex[];
 

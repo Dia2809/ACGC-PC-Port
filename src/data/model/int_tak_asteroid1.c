@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_asteroid1_v[];
+#ifdef TARGET_PC
+u16 int_tak_asteroid1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_asteroid1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_asteroid1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_asteroid1_body_tex_txt[0x800];
+#else
 u8 int_tak_asteroid1_body_tex_txt[] = {
 #include "assets/int_tak_asteroid1_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_asteroid1_v[0x670 / sizeof(Vtx)];
+#else
 Vtx int_tak_asteroid1_v[] = {
 #include "assets/int_tak_asteroid1_v.inc"
 };
+#endif
 
 Gfx int_tak_asteroid1_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

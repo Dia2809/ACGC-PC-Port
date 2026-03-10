@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yos_kflag_v[];
+#ifdef TARGET_PC
+u8 int_yos_kflag_pat[0x20] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_yos_kflag_pat[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yos_kflag_pat.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yos_kflag_pole_tex_txt[0x80];
+#else
 u8 int_yos_kflag_pole_tex_txt[] = {
 #include "assets/int_yos_kflag_pole_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yos_kflag_flag_tex_txt[0x180];
+#else
 u8 int_yos_kflag_flag_tex_txt[] = {
 #include "assets/int_yos_kflag_flag_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yos_kflag_v[0x450 / sizeof(Vtx)];
+#else
 Vtx int_yos_kflag_v[] = {
 #include "assets/int_yos_kflag_v.inc"
 };
+#endif
 
 Gfx int_yos_kflag_obj_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

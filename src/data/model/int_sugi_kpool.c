@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sugi_kpool_v[];
+#ifdef TARGET_PC
+u16 int_sugi_kpool_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sugi_kpool_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sugi_kpool_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sugi_kpool_all_tex_txt[0x800];
+#else
 u8 int_sugi_kpool_all_tex_txt[] = {
 #include "assets/int_sugi_kpool_all_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sugi_kpool_water_tex_4i4_pic_i4[0x80];
+#else
 u8 int_sugi_kpool_water_tex_4i4_pic_i4[] = {
 #include "assets/int_sugi_kpool_water_tex_4i4_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sugi_kpool_v[0x720 / sizeof(Vtx)];
+#else
 Vtx int_sugi_kpool_v[] = {
 #include "assets/int_sugi_kpool_v.inc"
 };
+#endif
 
 Gfx sugi_kpool_w_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

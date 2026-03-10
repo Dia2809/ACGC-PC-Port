@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+static u16 int_nog_suzuki_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_nog_suzuki_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f38_suzuki/int_nog_suzuki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_f38_suzuki_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 u8 act_f38_suzuki_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_f38_suzuki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_f38_suzuki_a_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f38_suzuki_a_v[] = {
 #include "assets/act_f38_suzuki_a_v.inc"
 };
+#endif
 
 Gfx act_f38_suzuki_aT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -31,9 +43,13 @@ Gfx act_f38_suzuki_aT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f38_suzuki_b_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f38_suzuki_b_v[] = {
 #include "assets/act_f38_suzuki_b_v.inc"
 };
+#endif
 
 Gfx act_f38_suzuki_bT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -51,9 +67,13 @@ Gfx act_f38_suzuki_bT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx act_f38_suzuki_c_v[0x90 / sizeof(Vtx)];
+#else
 Vtx act_f38_suzuki_c_v[] = {
 #include "assets/act_f38_suzuki_c_v.inc"
 };
+#endif
 
 Gfx act_f38_suzuki_cT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -70,3 +90,10 @@ Gfx act_f38_suzuki_cT_model[] = {
     gsSPNTriangles_5b(0, 2, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_f38_suzuki_c(void) {
+    pc_load_asset("assets/act_f38_suzuki/int_nog_suzuki_pal.bin", int_nog_suzuki_pal, 0x20, 0xBF8B20, 0, 1);
+}
+#endif

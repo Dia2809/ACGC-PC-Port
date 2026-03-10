@@ -6,9 +6,13 @@
 #include "ef_effect_control.h"
 
 extern u8 elf_layA0_txt[];
+#ifdef TARGET_PC
+Vtx point_light_v[0x40 / sizeof(Vtx)];
+#else
 Vtx point_light_v[] = {
 #include "assets/point_light_v.inc"
 };
+#endif
 
 Gfx point_light_init_model[] = {
     gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_16b, 1, elf_layA0_txt),
@@ -30,6 +34,10 @@ Gfx point_light_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 elf_layA0_txt[0x800];
+#else
 u8 elf_layA0_txt[] = {
 #include "assets/elf_layA0_txt.inc"
 };
+#endif

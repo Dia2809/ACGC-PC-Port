@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_fruittable02_v[];
+#ifdef TARGET_PC
+u16 int_sum_fruittable02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_fruittable02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_fruittable02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_fruittable02_side_tex_txt[0x300];
+#else
 u8 int_sum_fruittable02_side_tex_txt[] = {
 #include "assets/int_sum_fruittable02_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_fruittable02_top_tex_txt[0x200];
+#else
 u8 int_sum_fruittable02_top_tex_txt[] = {
 #include "assets/int_sum_fruittable02_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_fruittable02_douwnside_tex_txt[0x100];
+#else
 u8 int_sum_fruittable02_douwnside_tex_txt[] = {
 #include "assets/int_sum_fruittable02_douwnside_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_fruittable02_douwntop_tex_txt[0x80];
+#else
 u8 int_sum_fruittable02_douwntop_tex_txt[] = {
 #include "assets/int_sum_fruittable02_douwntop_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_fruittable02_v[0x290 / sizeof(Vtx)];
+#else
 Vtx int_sum_fruittable02_v[] = {
 #include "assets/int_sum_fruittable02_v.inc"
 };
+#endif
 
 Gfx int_sum_fruittable02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

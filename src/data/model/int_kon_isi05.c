@@ -5,21 +5,37 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 int_kon_isi01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_kon_isi01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_isi05/int_kon_isi01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_isi05_a_tex[0x400];
+#else
 u8 int_kon_isi05_a_tex[] = {
 #include "assets/int_kon_isi05_a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_isi05_c_tex[0x400];
+#else
 u8 int_kon_isi05_c_tex[] = {
 #include "assets/int_kon_isi05_c_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_isi05_v[0x170 / sizeof(Vtx)];
+#else
 Vtx int_kon_isi05_v[] = {
 #include "assets/int_kon_isi05_v.inc"
 };
+#endif
 
 Gfx int_kon_isi05_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -42,3 +58,10 @@ Gfx int_kon_isi05_on_model[] = {
     gsSPNTriangles_5b(10, 21, 22, 10, 22, 11, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_kon_isi05_c(void) {
+    pc_load_asset("assets/int_kon_isi05/int_kon_isi01_pal.bin", int_kon_isi01_pal, 0x20, 0xB85060, 0, 1);
+}
+#endif

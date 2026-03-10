@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_koorogi_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_koorogi_v[0xA0 / sizeof(Vtx)];
+#else
 static Vtx act_m_koorogi_v[] = {
 #include "assets/act_m_koorogi2/act_m_koorogi_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_koorogi_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_koorogi_pal[] = {
 #include "assets/act_m_koorogi2/act_m_koorogi_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_koorogi[0x180];
+#else
 static u8 act_m_koorogi[] = {
 #include "assets/act_m_koorogi2/act_m_koorogi.inc"
 };
+#endif
 
 Gfx act_m_mu_koorogi1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -78,3 +90,12 @@ Gfx act_m_mu_koorogi2_2T_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_koorogi2_c(void) {
+    pc_load_asset("assets/act_m_koorogi2/act_m_koorogi_v.bin", act_m_koorogi_v, 0xA0, 0xB4EEF8, 0, 2);
+    pc_load_asset("assets/act_m_koorogi2/act_m_koorogi_pal.bin", act_m_koorogi_pal, 0x20, 0xB4EF98, 0, 1);
+    pc_load_asset("assets/act_m_koorogi2/act_m_koorogi.bin", act_m_koorogi, 0x180, 0xB4EFB8, 0, 0);
+}
+#endif

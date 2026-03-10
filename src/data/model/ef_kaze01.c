@@ -9,21 +9,37 @@ EVW_ANIME_SCROLL ef_kaze01_evw_anime_2[] ATTRIBUTE_ALIGN(32) = { { 0, 0, 16, 16 
 
 EVW_ANIME_DATA ef_kaze01_evw_anime[] = { { -1, EVW_ANIME_TYPE_SCROLL2, ef_kaze01_evw_anime_2 } };
 
+#ifdef TARGET_PC
+u8 ef_kaze01_0_int_i4[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_kaze01_0_int_i4[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_kaze01_0_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_kaze01_1_int_i4[0x80];
+#else
 u8 ef_kaze01_1_int_i4[] = {
 #include "assets/ef_kaze01_1_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_kaze01_v[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_kaze01_v[] = {
 #include "assets/ef_kaze01_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_kaze01_v2[0x50 / sizeof(Vtx)];
+#else
 Vtx ef_kaze01_v2[] = {
 #include "assets/ef_kaze01_v2.inc"
 };
+#endif
 
 Gfx ef_kaze01_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -61,13 +77,21 @@ Gfx ef_kaze01_modelT2[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_kaze01_2[0x100];
+#else
 u8 ef_kaze01_2[] = {
 #include "assets/ef_kaze01_2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_kaze01_happa_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_kaze01_happa_v[] = {
 #include "assets/ef_kaze01_happa_v.inc"
 };
+#endif
 
 Gfx ef_kaze01_happa_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

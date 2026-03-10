@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+static u16 act_m_tonosama_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 act_m_tonosama_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_tonosama/act_m_tonosama_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_tonosama[0x200];
+#else
 static u8 act_m_tonosama[] = {
 #include "assets/act_m_tonosama/act_m_tonosama.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx act_m_tonosama_v[0x120 / sizeof(Vtx)];
+#else
 static Vtx act_m_tonosama_v[] = {
 #include "assets/act_m_tonosama/act_m_tonosama_v.inc"
 };
+#endif
 
 Gfx act_m_tonosama1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -46,3 +58,12 @@ Gfx act_m_tonosama2_2T_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 0, 2, 3, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_tonosama_c(void) {
+    pc_load_asset("assets/act_m_tonosama/act_m_tonosama_pal.bin", act_m_tonosama_pal, 0x20, 0xB56620, 0, 1);
+    pc_load_asset("assets/act_m_tonosama/act_m_tonosama.bin", act_m_tonosama, 0x200, 0xB56640, 0, 0);
+    pc_load_asset("assets/act_m_tonosama/act_m_tonosama_v.bin", act_m_tonosama_v, 0x120, 0xB56500, 0, 2);
+}
+#endif

@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_fan_v[];
+#ifdef TARGET_PC
+u16 int_nog_fan_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_fan_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_fan_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_fan_net_tex_txt[0x200];
+#else
 u8 int_nog_fan_net_tex_txt[] = {
 #include "assets/int_nog_fan_net_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_fan_motor_tex_txt[0x100];
+#else
 u8 int_nog_fan_motor_tex_txt[] = {
 #include "assets/int_nog_fan_motor_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_fan_hole_tex_txt[0x80];
+#else
 u8 int_nog_fan_hole_tex_txt[] = {
 #include "assets/int_nog_fan_hole_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_fan_fan1_TA_tex_txt[0x100];
+#else
 u8 int_nog_fan_fan1_TA_tex_txt[] = {
 #include "assets/int_nog_fan_fan1_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_fan_fan2_TA_tex_txt[0x100];
+#else
 u8 int_nog_fan_fan2_TA_tex_txt[] = {
 #include "assets/int_nog_fan_fan2_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_fan_fan3_TA_tex_txt[0x100];
+#else
 u8 int_nog_fan_fan3_TA_tex_txt[] = {
 #include "assets/int_nog_fan_fan3_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_fan_bace_tex_txt[0x200];
+#else
 u8 int_nog_fan_bace_tex_txt[] = {
 #include "assets/int_nog_fan_bace_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_fan_pole_tex_txt[0x80];
+#else
 u8 int_nog_fan_pole_tex_txt[] = {
 #include "assets/int_nog_fan_pole_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_fan_v[0x2E0 / sizeof(Vtx)];
+#else
 Vtx int_nog_fan_v[] = {
 #include "assets/int_nog_fan_v.inc"
 };
+#endif
 
 Gfx head_int_nog_fan_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

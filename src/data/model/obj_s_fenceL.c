@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u16 obj_fence_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_fence_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_fence_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_fence_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_fence_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_fence_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_fenceL_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_s_fenceL_v[] = {
 #include "assets/obj_s_fenceL_v.inc"
 };
+#endif
 
 Gfx obj_s_fenceLT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

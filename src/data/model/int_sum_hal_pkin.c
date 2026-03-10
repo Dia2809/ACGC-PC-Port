@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_hal_pkin_v[];
+#ifdef TARGET_PC
+u16 int_sum_hal_pkin_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_hal_pkin_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_hal_pkin_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_pkin_front_tex[0x300];
+#else
 u8 int_sum_hal_pkin_front_tex[] = {
 #include "assets/int_sum_hal_pkin_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_pkin_back_tex[0x300];
+#else
 u8 int_sum_hal_pkin_back_tex[] = {
 #include "assets/int_sum_hal_pkin_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_pkin_kuki_tex[0x80];
+#else
 u8 int_sum_hal_pkin_kuki_tex[] = {
 #include "assets/int_sum_hal_pkin_kuki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_pkin_kukitop_tex[0x80];
+#else
 u8 int_sum_hal_pkin_kukitop_tex[] = {
 #include "assets/int_sum_hal_pkin_kukitop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_hal_pkin_v[0x2D0 / sizeof(Vtx)];
+#else
 Vtx int_sum_hal_pkin_v[] = {
 #include "assets/int_sum_hal_pkin_v.inc"
 };
+#endif
 
 Gfx int_sum_hal_pkin_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

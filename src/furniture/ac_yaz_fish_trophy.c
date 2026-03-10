@@ -1,6 +1,10 @@
+#ifdef TARGET_PC
+u16 int_yaz_fish_trophy_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 extern u16 int_yaz_fish_trophy_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/int_yaz_fish_trophy_pal.inc"
 };
+#endif
 extern Gfx int_yaz_fish_trophy_cup_model[];
 extern Gfx int_yaz_fish_trophy_base_model[];
 

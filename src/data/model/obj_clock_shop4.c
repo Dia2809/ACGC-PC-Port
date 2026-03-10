@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_clock_shop4_v[];
+#ifdef TARGET_PC
+u16 obj_clock_shop4_2_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_clock_shop4_2_pal[] = {
 #include "assets/obj_clock_shop4_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_shop4_2_t4_tex_txt[0x200];
+#else
 u8 obj_clock_shop4_2_t4_tex_txt[] = {
 #include "assets/obj_clock_shop4_2_t4_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_shop4_2_t3_tex_txt[0x180];
+#else
 u8 obj_clock_shop4_2_t3_tex_txt[] = {
 #include "assets/obj_clock_shop4_2_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_shop4_2_t2_tex_txt[0x300];
+#else
 u8 obj_clock_shop4_2_t2_tex_txt[] = {
 #include "assets/obj_clock_shop4_2_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_shop4_2_t1_tex_txt[0x480];
+#else
 u8 obj_clock_shop4_2_t1_tex_txt[] = {
 #include "assets/obj_clock_shop4_2_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_clock_shop4_v[0x100 / sizeof(Vtx)];
+#else
 Vtx obj_clock_shop4_v[] = {
 #include "assets/obj_clock_shop4_v.inc"
 };
+#endif
 
 Gfx obj_clock_shop4_front_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

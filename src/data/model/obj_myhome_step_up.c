@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 rom_myhome_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_myhome_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome_step_up/rom_myhome_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_myhome_step_tex[0x800];
+#else
 u8 rom_myhome_step_tex[] = {
 #include "assets/rom_myhome_step_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome_step_up_v[0x140 / sizeof(Vtx)];
+#else
 Vtx obj_myhome_step_up_v[] = {
 #include "assets/obj_myhome_step_up_v.inc"
 };
+#endif
 
 Gfx obj_myhome_step_up_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -33,3 +45,10 @@ Gfx obj_myhome_step_up_model[] = {
     gsSPNTriangles_5b(18, 15, 14, 5, 4, 19, 5, 19, 18, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_myhome_step_up_c(void) {
+    pc_load_asset("assets/obj_myhome_step_up/rom_myhome_pal.bin", rom_myhome_pal, 0x20, 0xBB86C0, 0, 1);
+}
+#endif

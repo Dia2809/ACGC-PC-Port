@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_shoukaki_v[];
+#ifdef TARGET_PC
+u16 int_sum_shoukaki_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_shoukaki_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_shoukaki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_shoukaki_front_tex_txt[0x200];
+#else
 u8 int_sum_shoukaki_front_tex_txt[] = {
 #include "assets/int_sum_shoukaki_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_shoukaki_cupside_tex_txt[0x80];
+#else
 u8 int_sum_shoukaki_cupside_tex_txt[] = {
 #include "assets/int_sum_shoukaki_cupside_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_shoukaki_tube_tex_txt[0x100];
+#else
 u8 int_sum_shoukaki_tube_tex_txt[] = {
 #include "assets/int_sum_shoukaki_tube_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_shoukaki_grip_tex_txt[0x80];
+#else
 u8 int_sum_shoukaki_grip_tex_txt[] = {
 #include "assets/int_sum_shoukaki_grip_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_shoukaki_pull_tex_txt[0x80];
+#else
 u8 int_sum_shoukaki_pull_tex_txt[] = {
 #include "assets/int_sum_shoukaki_pull_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_shoukaki_griptop_tex_txt[0x80];
+#else
 u8 int_sum_shoukaki_griptop_tex_txt[] = {
 #include "assets/int_sum_shoukaki_griptop_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_shoukaki_gripdown_tex_txt[0x80];
+#else
 u8 int_sum_shoukaki_gripdown_tex_txt[] = {
 #include "assets/int_sum_shoukaki_gripdown_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_shoukaki_v[0x420 / sizeof(Vtx)];
+#else
 Vtx int_sum_shoukaki_v[] = {
 #include "assets/int_sum_shoukaki_v.inc"
 };
+#endif
 
 Gfx int_sum_shoukaki_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

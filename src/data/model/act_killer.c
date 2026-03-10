@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 act_killer_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 act_killer_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_killer_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_killer_tex_txt[0x200];
+#else
 u8 act_killer_tex_txt[] = {
 #include "assets/act_killer_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_killer_v[0x190 / sizeof(Vtx)];
+#else
 Vtx act_killer_v[] = {
 #include "assets/act_killer_v.inc"
 };
+#endif
 
 Gfx act_killer_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_namazu_v[];
+#ifdef TARGET_PC
+static u16 int_sum_namazu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_sum_namazu_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_namazu/int_sum_namazu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_namazu_glass_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_namazu_glass_pic_ci4_pal[] = {
 #include "assets/int_sum_namazu_glass_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_namazu_body_txt[0x300];
+#else
 u8 int_sum_namazu_body_txt[] = {
 #include "assets/int_sum_namazu_body_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_namazu_side_txt[0x200];
+#else
 u8 int_sum_namazu_side_txt[] = {
 #include "assets/int_sum_namazu_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_namazu_base_txt[0x80];
+#else
 u8 int_sum_namazu_base_txt[] = {
 #include "assets/int_sum_namazu_base_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_namazu_etc_txt[0x80];
+#else
 u8 int_sum_namazu_etc_txt[] = {
 #include "assets/int_sum_namazu_etc_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_namazu_top_txt[0x100];
+#else
 u8 int_sum_namazu_top_txt[] = {
 #include "assets/int_sum_namazu_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_namazu_glass_txt[0x100];
+#else
 u8 int_sum_namazu_glass_txt[] = {
 #include "assets/int_sum_namazu_glass_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_namazu_v[0x310 / sizeof(Vtx)];
+#else
 Vtx int_sum_namazu_v[] = {
 #include "assets/int_sum_namazu_v.inc"
 };
+#endif
 
 Gfx int_sum_namazu_sakana_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -143,3 +179,10 @@ cKF_Joint_R_c cKF_je_r_int_sum_namazu_tbl[] = {
 };
 
 cKF_Skeleton_R_c cKF_bs_r_int_sum_namazu = { ARRAY_COUNT(cKF_je_r_int_sum_namazu_tbl), 4, cKF_je_r_int_sum_namazu_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_namazu_c(void) {
+    pc_load_asset("assets/int_sum_namazu/int_sum_namazu_pal.bin", int_sum_namazu_pal, 0x20, 0xD0B6E0, 0, 1);
+}
+#endif

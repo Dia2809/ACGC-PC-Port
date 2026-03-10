@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_tukue_v[];
+#ifdef TARGET_PC
+u16 int_kon_tukue_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_tukue_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_tukue_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_kon_tukue_glass_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_kon_tukue_glass_tex_rgb_ci4_pal[] = {
 #include "assets/int_kon_tukue_glass_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tukue_ue_tex[0x100];
+#else
 u8 int_kon_tukue_ue_tex[] = {
 #include "assets/int_kon_tukue_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tukue_ue2_tex[0x100];
+#else
 u8 int_kon_tukue_ue2_tex[] = {
 #include "assets/int_kon_tukue_ue2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tukue_tate_tex[0x100];
+#else
 u8 int_kon_tukue_tate_tex[] = {
 #include "assets/int_kon_tukue_tate_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tukue_yoko_tex[0x80];
+#else
 u8 int_kon_tukue_yoko_tex[] = {
 #include "assets/int_kon_tukue_yoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tukue_glass2_tex[0x100];
+#else
 u8 int_kon_tukue_glass2_tex[] = {
 #include "assets/int_kon_tukue_glass2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tukue_glass_tex[0x200];
+#else
 u8 int_kon_tukue_glass_tex[] = {
 #include "assets/int_kon_tukue_glass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_tukue_v[0x200 / sizeof(Vtx)];
+#else
 Vtx int_kon_tukue_v[] = {
 #include "assets/int_kon_tukue_v.inc"
 };
+#endif
 
 Gfx int_kon_tukue_onT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -7,9 +7,13 @@
 
 extern Vtx ef_w_palm5_shake_v[];
 extern u8 ef_w_palm_leaf_modeset[];
+#ifdef TARGET_PC
+Vtx ef_w_palm5_shake_v[0x300 / sizeof(Vtx)];
+#else
 Vtx ef_w_palm5_shake_v[] = {
 #include "assets/ef_w_palm5_shake_v.inc"
 };
+#endif
 
 Gfx ef_w_palm5_shake_model[] = {
     gsSPDisplayList(ef_w_palm_leaf_modeset),

@@ -10,9 +10,13 @@ extern Vtx ef_x_tree5_cutR_v[];
 extern u8 ef_w_tree_light_modeset[];
 extern u8 ef_w_tree_leaf_modeset[];
 extern u8 ef_w_tree_trunk_modeset[];
+#ifdef TARGET_PC
+Vtx ef_x_tree5_cutR_v[0x210 / sizeof(Vtx)];
+#else
 Vtx ef_x_tree5_cutR_v[] = {
 #include "assets/ef_x_tree5_cutR_v.inc"
 };
+#endif
 
 Gfx obj_x_tree5_cutR_light_model[] = {
     gsSPDisplayList(ef_w_tree_light_modeset), gsSPVertex(&ef_x_tree5_cutR_v[15], 12, 0),

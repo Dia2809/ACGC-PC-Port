@@ -4,9 +4,13 @@ extern u8 wave3_tex_dummy[];
 extern u8 wave1_tex_dummy[];
 extern u8 beach2_tex_dummy2[];
 
+#ifdef TARGET_PC
+static Vtx grd_s_o_r1_3_v[0x3B0 / sizeof(Vtx)];
+#else
 static Vtx grd_s_o_r1_3_v[] = {
 #include "assets/field/bg/grd_s_o_r1_3_v.inc"
 };
+#endif
 
 extern Gfx grd_s_o_r1_3_model[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -143,3 +147,10 @@ extern Gfx grd_s_o_r1_3_modelT[] = {
     ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_grd_s_o_r1_3_grd_s_o_r1_3_c(void) {
+    pc_load_asset("assets/field/bg/grd_s_o_r1_3_v.bin", grd_s_o_r1_3_v, 0x3B0, 0xA168C0, 0, 2);
+}
+#endif

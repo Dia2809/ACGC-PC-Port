@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_tubo3_v[];
+#ifdef TARGET_PC
+u16 int_kon_tubo3_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_tubo3_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_tubo3_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tubo3_yoko_tex[0x200];
+#else
 u8 int_kon_tubo3_yoko_tex[] = {
 #include "assets/int_kon_tubo3_yoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tubo3_huti_tex[0x40];
+#else
 u8 int_kon_tubo3_huti_tex[] = {
 #include "assets/int_kon_tubo3_huti_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tubo3_yoko2_tex[0x400];
+#else
 u8 int_kon_tubo3_yoko2_tex[] = {
 #include "assets/int_kon_tubo3_yoko2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_tubo3_naka_tex[0x80];
+#else
 u8 int_kon_tubo3_naka_tex[] = {
 #include "assets/int_kon_tubo3_naka_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_tubo3_v[0x420 / sizeof(Vtx)];
+#else
 Vtx int_kon_tubo3_v[] = {
 #include "assets/int_kon_tubo3_v.inc"
 };
+#endif
 
 Gfx int_kon_tubo3_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

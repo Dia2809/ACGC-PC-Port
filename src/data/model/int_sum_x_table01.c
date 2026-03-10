@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_x_table01_v[];
+#ifdef TARGET_PC
+u16 int_sum_x_table01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_x_table01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_x_table01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_table01_top[0x400];
+#else
 u8 int_sum_x_table01_top[] = {
 #include "assets/int_sum_x_table01_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_table01_stand[0x80];
+#else
 u8 int_sum_x_table01_stand[] = {
 #include "assets/int_sum_x_table01_stand.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_table01_leg[0x300];
+#else
 u8 int_sum_x_table01_leg[] = {
 #include "assets/int_sum_x_table01_leg.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_x_table01_v[0x380 / sizeof(Vtx)];
+#else
 Vtx int_sum_x_table01_v[] = {
 #include "assets/int_sum_x_table01_v.inc"
 };
+#endif
 
 Gfx int_sum_x_table01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iid_diary_v[];
+#ifdef TARGET_PC
+static u8 int_iid_diary[0x20] ATTRIBUTE_ALIGN(32);
+#else
 static u8 int_iid_diary[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iid_diary/int_iid_diary.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_diary_mae_tex[0x20];
+#else
 u8 int_iid_diary_mae_tex[] = {
 #include "assets/int_iid_diary_mae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_diary_hyoushi_tex[0x200];
+#else
 u8 int_iid_diary_hyoushi_tex[] = {
 #include "assets/int_iid_diary_hyoushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_diary_soko_tex[0x20];
+#else
 u8 int_iid_diary_soko_tex[] = {
 #include "assets/int_iid_diary_soko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_diary_ue_tex[0x20];
+#else
 u8 int_iid_diary_ue_tex[] = {
 #include "assets/int_iid_diary_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_iid_diary_esaki_tex[0x20];
+#else
 static u8 int_iid_diary_esaki_tex[] = {
 #include "assets/int_iid_diary/int_iid_diary_esaki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_diary_ebody_tex[0x20];
+#else
 u8 int_iid_diary_ebody_tex[] = {
 #include "assets/int_iid_diary_ebody_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iid_diary_v[0x380 / sizeof(Vtx)];
+#else
 Vtx int_iid_diary_v[] = {
 #include "assets/int_iid_diary_v.inc"
 };
+#endif
 
 Gfx int_iid_diary_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -75,3 +107,11 @@ Gfx int_iid_diary_model[] = {
     gsSPNTrianglesInit_5b(2, 25, 26, 27, 25, 27, 28, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_iid_diary_c(void) {
+    pc_load_asset("assets/int_iid_diary/int_iid_diary.bin", int_iid_diary, 0x20, 0xAF2280, 0, 0);
+    pc_load_asset("assets/int_iid_diary/int_iid_diary_esaki_tex.bin", int_iid_diary_esaki_tex, 0x20, 0xAF2500, 0, 0);
+}
+#endif

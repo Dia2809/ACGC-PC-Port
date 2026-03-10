@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_station2_v[];
+#ifdef TARGET_PC
+u8 int_nog_station2_bese_tex_txt[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_nog_station2_bese_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_station2_bese_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_station2_grass_tex_txt[0x80];
+#else
 u8 int_nog_station2_grass_tex_txt[] = {
 #include "assets/int_nog_station2_grass_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_station2_side_tex_txt[0x300];
+#else
 u8 int_nog_station2_side_tex_txt[] = {
 #include "assets/int_nog_station2_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_station2_front_tex_txt[0x400];
+#else
 u8 int_nog_station2_front_tex_txt[] = {
 #include "assets/int_nog_station2_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_station2_v[0x1090 / sizeof(Vtx)];
+#else
 Vtx int_nog_station2_v[] = {
 #include "assets/int_nog_station2_v.inc"
 };
+#endif
 
 Gfx int_nog_station2_long_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

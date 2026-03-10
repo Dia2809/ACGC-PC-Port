@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 lat_tegami_sw3_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 lat_tegami_sw3_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/lat_tegami_sw3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx lat_sentaku2_v[0xB0 / sizeof(Vtx)];
+#else
 Vtx lat_sentaku2_v[] = {
 #include "assets/lat_sentaku2_v.inc"
 };
+#endif
 
 Gfx lat_sentaku2_c_model[] = {
 gsDPPipeSync(),

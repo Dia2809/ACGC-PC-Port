@@ -1,24 +1,44 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 grd_1_earth_pal[0x20 / sizeof(u16)];
+#else
 static u16 grd_1_earth_pal[] = {
 #include "assets/field/bg/grd_1_earth_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 grd_s_river_tex[0x400];
+#else
 static u8 grd_s_river_tex[] = {
 #include "assets/field/bg/grd_s_river_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 grd_water1_tex[0x200];
+#else
 static u8 grd_water1_tex[] = {
 #include "assets/field/bg/grd_water1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 grd_s_grass_tex[0x200];
+#else
 static u8 grd_s_grass_tex[] = {
 #include "assets/field/bg/grd_s_grass_tex2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx tmpr2_v[0x360 / sizeof(Vtx)];
+#else
 static Vtx tmpr2_v[] = {
 #include "assets/field/bg/tmpr2_v.inc"
 };
+#endif
 
 static Gfx tmpr2_grp_grd_s_r1_1_river[] = {
     gsSPTexture(65535, 65535, 0, 0, G_ON),
@@ -98,3 +118,14 @@ extern Gfx tmpr2_model[] = {
     gsSPDisplayList(tmpr2_grp_grd_s_r1_1_river),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_tmpr2_tmpr2_c(void) {
+    pc_load_asset("assets/field/bg/grd_1_earth_pal.bin", grd_1_earth_pal, 0x20, 0x8FCCB8, 0, 1);
+    pc_load_asset("assets/field/bg/grd_s_river_tex.bin", grd_s_river_tex, 0x400, 0x8FCCD8, 0, 0);
+    pc_load_asset("assets/field/bg/grd_water1_tex.bin", grd_water1_tex, 0x200, 0x8FD0D8, 0, 0);
+    pc_load_asset("assets/field/bg/grd_s_grass_tex2.bin", grd_s_grass_tex, 0x200, 0x8FD2D8, 0, 0);
+    pc_load_asset("assets/field/bg/tmpr2_v.bin", tmpr2_v, 0x360, 0x8FD4D8, 0, 2);
+}
+#endif

@@ -5,89 +5,173 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 fkm_win_house_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 fkm_win_house_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/fkm_win_house_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 fkm_win_ie_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 fkm_win_ie_tex_rgb_ci4_pal[] = {
 #include "assets/fkm_win_ie_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 fkm_win_sw1_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 fkm_win_sw1_tex_rgb_ci4_pal[] = {
 #include "assets/fkm_win_sw1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 fkm_win_sw2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 fkm_win_sw2_tex_rgb_ci4_pal[] = {
 #include "assets/fkm_win_sw2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 fkm_win_sw3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 fkm_win_sw3_tex_rgb_ci4_pal[] = {
 #include "assets/fkm_win_sw3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 fri_win_owe_tex[0x300];
+#else
 u8 fri_win_owe_tex[] = {
 #include "assets/fri_win_owe_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_fuki2_tex[0x800];
+#else
 static u8 fkm_win_fuki2_tex[] = {
 #include "assets/fkm_win/fkm_win_fuki2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 fri_win_payment_tex[0x200];
+#else
 u8 fri_win_payment_tex[] = {
 #include "assets/fri_win_payment_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fri_win_cash_tex[0x200];
+#else
 static u8 fri_win_cash_tex[] = {
 #include "assets/fkm_win/fri_win_cash_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fri_win_bell_tex[0x100];
+#else
 static u8 fri_win_bell_tex[] = {
 #include "assets/fkm_win/fri_win_bell_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 fkm_win_house_tex[0x800];
+#else
 u8 fkm_win_house_tex[] = {
 #include "assets/fkm_win_house_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 fkm_win_sen_tex[0x80];
+#else
 u8 fkm_win_sen_tex[] = {
 #include "assets/fkm_win_sen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_w4_tex[0x80];
+#else
 static u8 fkm_win_w4_tex[] = {
 #include "assets/fkm_win/fkm_win_w4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_w3_tex[0x200];
+#else
 static u8 fkm_win_w3_tex[] = {
 #include "assets/fkm_win/fkm_win_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_w2_tex[0x200];
+#else
 static u8 fkm_win_w2_tex[] = {
 #include "assets/fkm_win/fkm_win_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_w1_tex[0x400];
+#else
 static u8 fkm_win_w1_tex[] = {
 #include "assets/fkm_win/fkm_win_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 fkm_win_ie_tex_rgb_ci4[0x200];
+#else
 u8 fkm_win_ie_tex_rgb_ci4[] = {
 #include "assets/fkm_win_ie_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 fkm_win_sw1_tex_rgb_ci4[0x400];
+#else
 u8 fkm_win_sw1_tex_rgb_ci4[] = {
 #include "assets/fkm_win_sw1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 fkm_win_sw2_tex_rgb_ci4[0x400];
+#else
 u8 fkm_win_sw2_tex_rgb_ci4[] = {
 #include "assets/fkm_win_sw2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 fkm_win_sw3_tex_rgb_ci4[0x400];
+#else
 u8 fkm_win_sw3_tex_rgb_ci4[] = {
 #include "assets/fkm_win_sw3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx fkm_win_v[0x740 / sizeof(Vtx)];
+#else
 Vtx fkm_win_v[] = {
 #include "assets/fkm_win_v.inc"
 };
+#endif
 
 Gfx fkm_win_moji_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
@@ -279,3 +363,16 @@ Gfx fkm_win_model[] = {
     gsSPDisplayList(fkm_win_moji_model),  gsSPDisplayList(fkm_win_iconT_model),
     gsSPDisplayList(fkm_win_senT_model),  gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_fkm_win_c(void) {
+    pc_load_asset("assets/fkm_win/fkm_win_fuki2_tex.bin", fkm_win_fuki2_tex, 0x800, 0x7B5540, 0, 0);
+    pc_load_asset("assets/fkm_win/fri_win_cash_tex.bin", fri_win_cash_tex, 0x200, 0x7B5F40, 0, 0);
+    pc_load_asset("assets/fkm_win/fri_win_bell_tex.bin", fri_win_bell_tex, 0x100, 0xB73BE0, 0, 0);
+    pc_load_asset("assets/fkm_win/fkm_win_w4_tex.bin", fkm_win_w4_tex, 0x80, 0x7B6AC0, 0, 0);
+    pc_load_asset("assets/fkm_win/fkm_win_w3_tex.bin", fkm_win_w3_tex, 0x200, 0x7B6B40, 0, 0);
+    pc_load_asset("assets/fkm_win/fkm_win_w2_tex.bin", fkm_win_w2_tex, 0x200, 0x7B6D40, 0, 0);
+    pc_load_asset("assets/fkm_win/fkm_win_w1_tex.bin", fkm_win_w1_tex, 0x400, 0x7B6F40, 0, 0);
+}
+#endif

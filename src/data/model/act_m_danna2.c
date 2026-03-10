@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 /* extern Vtx act_m_danna_v[]; */
+#ifdef TARGET_PC
+static Vtx act_m_danna_v[0xC0 / sizeof(Vtx)];
+#else
 static Vtx act_m_danna_v[] = {
 #include "assets/act_m_danna2/act_m_danna_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 act_m_danna_pal[0x20 / sizeof(u16)];
+#else
 static u16 act_m_danna_pal[] = {
 #include "assets/act_m_danna2/act_m_danna_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_danna[0x200];
+#else
 static u8 act_m_danna[] = {
 #include "assets/act_m_danna2/act_m_danna.inc"
 };
+#endif
 
 Gfx act_m_mu_danna1T_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -79,3 +91,12 @@ Gfx act_m_mu_danna2T_model[] = {
     gsSP2Triangles(4, 0, 3, 0, 4, 3, 5, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_danna2_c(void) {
+    pc_load_asset("assets/act_m_danna2/act_m_danna_v.bin", act_m_danna_v, 0xC0, 0xB4A240, 0, 2);
+    pc_load_asset("assets/act_m_danna2/act_m_danna_pal.bin", act_m_danna_pal, 0x20, 0xB4A300, 0, 1);
+    pc_load_asset("assets/act_m_danna2/act_m_danna.bin", act_m_danna, 0x200, 0xB4A320, 0, 0);
+}
+#endif

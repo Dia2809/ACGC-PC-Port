@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_w_cstump3_v[0x70 / sizeof(Vtx)];
+#else
 Vtx obj_w_cstump3_v[] = {
 #include "assets/obj_w_cstump3_v.inc"
 };
+#endif
 
 extern u8 obj_w_cedar_young_tex[];
 

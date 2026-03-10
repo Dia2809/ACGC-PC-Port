@@ -6,61 +6,117 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_misin01_v[];
+#ifdef TARGET_PC
+u16 int_sum_misin01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_misin01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_misin01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_sidefoot_tex[0x100];
+#else
 u8 int_sum_misin01_sidefoot_tex[] = {
 #include "assets/int_sum_misin01_sidefoot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_desktop_tex[0x80];
+#else
 u8 int_sum_misin01_desktop_tex[] = {
 #include "assets/int_sum_misin01_desktop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_deskfront_tex[0x100];
+#else
 u8 int_sum_misin01_deskfront_tex[] = {
 #include "assets/int_sum_misin01_deskfront_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_deskback_tex[0x100];
+#else
 u8 int_sum_misin01_deskback_tex[] = {
 #include "assets/int_sum_misin01_deskback_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_deskside_tex[0x40];
+#else
 u8 int_sum_misin01_deskside_tex[] = {
 #include "assets/int_sum_misin01_deskside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_misiside_tex[0x100];
+#else
 u8 int_sum_misin01_misiside_tex[] = {
 #include "assets/int_sum_misin01_misiside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_pedal_tex[0x80];
+#else
 u8 int_sum_misin01_pedal_tex[] = {
 #include "assets/int_sum_misin01_pedal_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_kaiten_tex[0x80];
+#else
 u8 int_sum_misin01_kaiten_tex[] = {
 #include "assets/int_sum_misin01_kaiten_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_harigane_tex[0x80];
+#else
 u8 int_sum_misin01_harigane_tex[] = {
 #include "assets/int_sum_misin01_harigane_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_misibase_tex[0x40];
+#else
 u8 int_sum_misin01_misibase_tex[] = {
 #include "assets/int_sum_misin01_misibase_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_top_tex[0x100];
+#else
 u8 int_sum_misin01_top_tex[] = {
 #include "assets/int_sum_misin01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_misin01_temaki_tex[0x80];
+#else
 u8 int_sum_misin01_temaki_tex[] = {
 #include "assets/int_sum_misin01_temaki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_misin01_v[0x560 / sizeof(Vtx)];
+#else
 Vtx int_sum_misin01_v[] = {
 #include "assets/int_sum_misin01_v.inc"
 };
+#endif
 
 Gfx int_sum_misin01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

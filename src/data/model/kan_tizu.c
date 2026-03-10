@@ -5,9 +5,13 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+Vtx kan_tizu_v[0x40 / sizeof(Vtx)];
+#else
 Vtx kan_tizu_v[] = {
 #include "assets/kan_tizu_v.inc"
 };
+#endif
 
 Gfx kan_tizu_mode[] = {
     gsSPLoadGeometryMode(G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH | G_DECAL_LEQUAL),

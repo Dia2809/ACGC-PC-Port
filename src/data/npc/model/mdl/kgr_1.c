@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx kgr_1_v[0x1AF0 / sizeof(Vtx)];
+#else
 static Vtx kgr_1_v[] = {
 #include "assets/npc/mdl/kgr_1_v.inc"
 };
+#endif
 
 static Gfx head_kgr_model[] = {
     gsSPMatrix(anime_6_model+sizeof(Mtx)*8, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -750,3 +754,10 @@ static cKF_Joint_R_c cKF_je_r_kgr_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_kgr_1 = { 26, 15, cKF_je_r_kgr_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_kgr_1_c(void) {
+    pc_load_asset("assets/npc/mdl/kgr_1_v.bin", kgr_1_v, 0x1AF0, 0x55BB80, 0, 2);
+}
+#endif

@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 obj_item_tane_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_item_tane_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_item_tane2/obj_item_tane_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_item_tane_tex[0x80];
+#else
 static u8 obj_item_tane_tex[] = {
 #include "assets/obj_item_tane2/obj_item_tane_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx obj_item_tane_v[0x40 / sizeof(Vtx)];
+#else
 static Vtx obj_item_tane_v[] = {
 #include "assets/obj_item_tane2/obj_item_tane_v.inc"
 };
+#endif
 
 Gfx seed_DL_mode[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -34,3 +46,12 @@ Gfx seed_DL_vtx[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 0, 2, 3, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_item_tane2_c(void) {
+    pc_load_asset("assets/obj_item_tane2/obj_item_tane_pal.bin", obj_item_tane_pal, 0x20, 0xB72400, 0, 1);
+    pc_load_asset("assets/obj_item_tane2/obj_item_tane_tex.bin", obj_item_tane_tex, 0x80, 0xB72420, 0, 0);
+    pc_load_asset("assets/obj_item_tane2/obj_item_tane_v.bin", obj_item_tane_v, 0x40, 0xB724A0, 0, 2);
+}
+#endif

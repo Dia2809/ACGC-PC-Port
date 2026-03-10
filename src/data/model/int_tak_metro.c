@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_metro_v[];
+#ifdef TARGET_PC
+u16 int_tak_metro_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_metro_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_metro_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_metro_hari_tex_txt[0x80];
+#else
 u8 int_tak_metro_hari_tex_txt[] = {
 #include "assets/int_tak_metro_hari_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_metro_neji_tex_txt[0x80];
+#else
 u8 int_tak_metro_neji_tex_txt[] = {
 #include "assets/int_tak_metro_neji_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_metro_side_tex_txt[0x180];
+#else
 u8 int_tak_metro_side_tex_txt[] = {
 #include "assets/int_tak_metro_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_metro_front2_tex_txt[0x80];
+#else
 u8 int_tak_metro_front2_tex_txt[] = {
 #include "assets/int_tak_metro_front2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_metro_front_tex_txt[0x100];
+#else
 u8 int_tak_metro_front_tex_txt[] = {
 #include "assets/int_tak_metro_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_metro_v[0x3D0 / sizeof(Vtx)];
+#else
 Vtx int_tak_metro_v[] = {
 #include "assets/int_tak_metro_v.inc"
 };
+#endif
 
 Gfx int_tak_metro_hari_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

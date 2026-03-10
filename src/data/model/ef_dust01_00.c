@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_dust01_0[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_dust01_0[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_dust01_0.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_dust01_1[0x80];
+#else
 u8 ef_dust01_1[] = {
 #include "assets/ef_dust01_1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_dust01_2[0x80];
+#else
 u8 ef_dust01_2[] = {
 #include "assets/ef_dust01_2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_dust01_3[0x80];
+#else
 u8 ef_dust01_3[] = {
 #include "assets/ef_dust01_3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_dust01_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_dust01_00_v[] = {
 #include "assets/ef_dust01_00_v.inc"
 };
+#endif
 
 Gfx ef_dust01_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

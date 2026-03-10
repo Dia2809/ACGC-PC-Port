@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx pgb_1_v[0x1990 / sizeof(Vtx)];
+#else
 static Vtx pgb_1_v[] = {
 #include "assets/npc/mdl/pgb_1_v.inc"
 };
+#endif
 
 static Gfx head_pgb_model[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -762,3 +766,10 @@ static cKF_Joint_R_c cKF_je_r_pgb_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_pgb_1 = { 26, 15, cKF_je_r_pgb_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_pgb_1_c(void) {
+    pc_load_asset("assets/npc/mdl/pgb_1_v.bin", pgb_1_v, 0x1990, 0x631E40, 0, 2);
+}
+#endif

@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_museum1_shine_2_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_museum1_shine_2_pal[] = {
 #include "assets/obj_museum1_shine_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum1_shine_2_tex[0x400];
+#else
 u8 obj_museum1_shine_2_tex[] = {
 #include "assets/obj_museum1_shine_2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum1_shine_1_tex[0x800];
+#else
 u8 obj_museum1_shine_1_tex[] = {
 #include "assets/obj_museum1_shine_1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum1_shine_3__tex_rgb_i4[0x80];
+#else
 u8 obj_museum1_shine_3__tex_rgb_i4[] = {
 #include "assets/obj_museum1_shine_3__tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_museum1_shine_v[0x140 / sizeof(Vtx)];
+#else
 Vtx obj_museum1_shine_v[] = {
 #include "assets/obj_museum1_shine_v.inc"
 };
+#endif
 
 Gfx obj_museum1_shine_modelT[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

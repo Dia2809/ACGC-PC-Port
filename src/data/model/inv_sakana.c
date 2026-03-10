@@ -5,121 +5,237 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 inv_mushi_w5_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 inv_mushi_w5_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_sakana/inv_mushi_w5_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 inv_sakana_nuno_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 inv_sakana_nuno_tex_rgb_ci4_pal[] = {
 #include "assets/inv_sakana_nuno_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 inv_mushi_w1_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 static u16 inv_mushi_w1_tex_rgb_ci4_pal[] = {
 #include "assets/inv_sakana/inv_mushi_w1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 inv_mushi_w2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 static u16 inv_mushi_w2_tex_rgb_ci4_pal[] = {
 #include "assets/inv_sakana/inv_mushi_w2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 inv_mushi_w3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 static u16 inv_mushi_w3_tex_rgb_ci4_pal[] = {
 #include "assets/inv_sakana/inv_mushi_w3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 inv_mushi_w4_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 static u16 inv_mushi_w4_tex_rgb_ci4_pal[] = {
 #include "assets/inv_sakana/inv_mushi_w4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 inv_mushi_w6_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 static u16 inv_mushi_w6_tex_rgb_ci4_pal[] = {
 #include "assets/inv_sakana/inv_mushi_w6_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 inv_mushi_w7_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 static u16 inv_mushi_w7_tex_rgb_ci4_pal[] = {
 #include "assets/inv_sakana/inv_mushi_w7_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_nwaku_tex[0x400];
+#else
 static u8 inv_mwin_nwaku_tex[] = {
 #include "assets/inv_sakana/inv_mwin_nwaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_shirushi2_tex[0x200];
+#else
 u8 inv_mwin_shirushi2_tex[] = {
 #include "assets/inv_mwin_shirushi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_shirushi_tex[0x400];
+#else
 static u8 inv_mwin_shirushi_tex[] = {
 #include "assets/inv_sakana/inv_mwin_shirushi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_aw1_tex[0x200];
+#else
 static u8 inv_mushi_aw1_tex[] = {
 #include "assets/inv_sakana/inv_mushi_aw1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_aw2_tex[0x400];
+#else
 static u8 inv_mushi_aw2_tex[] = {
 #include "assets/inv_sakana/inv_mushi_aw2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_aw3_tex[0x400];
+#else
 static u8 inv_mushi_aw3_tex[] = {
 #include "assets/inv_sakana/inv_mushi_aw3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_aw4_tex[0x200];
+#else
 static u8 inv_mushi_aw4_tex[] = {
 #include "assets/inv_sakana/inv_mushi_aw4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_sakana_waku1_tex[0x800];
+#else
 u8 inv_sakana_waku1_tex[] = {
 #include "assets/inv_sakana_waku1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_aw7_tex[0x400];
+#else
 static u8 inv_mushi_aw7_tex[] = {
 #include "assets/inv_sakana/inv_mushi_aw7_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_sakana_moji_tex[0x200];
+#else
 u8 inv_sakana_moji_tex[] = {
 #include "assets/inv_sakana_moji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_sakana_waku2_tex[0x800];
+#else
 u8 inv_sakana_waku2_tex[] = {
 #include "assets/inv_sakana_waku2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mwin_aw5_tex[0x80];
+#else
 static u8 inv_mwin_aw5_tex[] = {
 #include "assets/inv_sakana/inv_mwin_aw5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_w5_tex_rgb_ci4[0x80];
+#else
 static u8 inv_mushi_w5_tex_rgb_ci4[] = {
 #include "assets/inv_sakana/inv_mushi_w5_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_sakana_nuno_tex_rgb_ci4[0x200];
+#else
 u8 inv_sakana_nuno_tex_rgb_ci4[] = {
 #include "assets/inv_sakana_nuno_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_w1_tex_rgb_ci4[0x200];
+#else
 static u8 inv_mushi_w1_tex_rgb_ci4[] = {
 #include "assets/inv_sakana/inv_mushi_w1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_w2_tex_rgb_ci4[0x400];
+#else
 static u8 inv_mushi_w2_tex_rgb_ci4[] = {
 #include "assets/inv_sakana/inv_mushi_w2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_w3_tex_rgb_ci4[0x400];
+#else
 static u8 inv_mushi_w3_tex_rgb_ci4[] = {
 #include "assets/inv_sakana/inv_mushi_w3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_w4_tex_rgb_ci4[0x200];
+#else
 static u8 inv_mushi_w4_tex_rgb_ci4[] = {
 #include "assets/inv_sakana/inv_mushi_w4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_w6_tex_rgb_ci4[0x400];
+#else
 static u8 inv_mushi_w6_tex_rgb_ci4[] = {
 #include "assets/inv_sakana/inv_mushi_w6_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_mushi_w7_tex_rgb_ci4[0x400];
+#else
 static u8 inv_mushi_w7_tex_rgb_ci4[] = {
 #include "assets/inv_sakana/inv_mushi_w7_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx inv_sakana_v[0x940 / sizeof(Vtx)];
+#else
 Vtx inv_sakana_v[] = {
 #include "assets/inv_sakana_v.inc"
 };
+#endif
 
 Gfx inv_sakana_w14_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, inv_mushi_w5_tex_rgb_ci4_pal),
@@ -384,3 +500,31 @@ Gfx inv_sakana_part_model[] = {
     gsSPDisplayList(inv_sakana_shirushiT_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_inv_sakana_c(void) {
+    pc_load_asset("assets/inv_sakana/inv_mushi_w5_tex_rgb_ci4_pal.bin", inv_mushi_w5_tex_rgb_ci4_pal, 0x20, 0x71C0C0, 0, 1);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w1_tex_rgb_ci4_pal.bin", inv_mushi_w1_tex_rgb_ci4_pal, 0x20, 0x71C100, 0, 1);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w2_tex_rgb_ci4_pal.bin", inv_mushi_w2_tex_rgb_ci4_pal, 0x20, 0x71C120, 0, 1);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w3_tex_rgb_ci4_pal.bin", inv_mushi_w3_tex_rgb_ci4_pal, 0x20, 0x71C140, 0, 1);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w4_tex_rgb_ci4_pal.bin", inv_mushi_w4_tex_rgb_ci4_pal, 0x20, 0x71C160, 0, 1);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w6_tex_rgb_ci4_pal.bin", inv_mushi_w6_tex_rgb_ci4_pal, 0x20, 0x71C180, 0, 1);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w7_tex_rgb_ci4_pal.bin", inv_mushi_w7_tex_rgb_ci4_pal, 0x20, 0x71C1A0, 0, 1);
+    pc_load_asset("assets/inv_sakana/inv_mwin_nwaku_tex.bin", inv_mwin_nwaku_tex, 0x400, 0x7982E0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mwin_shirushi_tex.bin", inv_mwin_shirushi_tex, 0x400, 0x71C7C0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_aw1_tex.bin", inv_mushi_aw1_tex, 0x200, 0x71CBC0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_aw2_tex.bin", inv_mushi_aw2_tex, 0x400, 0x71CDC0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_aw3_tex.bin", inv_mushi_aw3_tex, 0x400, 0x71D1C0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_aw4_tex.bin", inv_mushi_aw4_tex, 0x200, 0x71D5C0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_aw7_tex.bin", inv_mushi_aw7_tex, 0x400, 0x71DFC0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mwin_aw5_tex.bin", inv_mwin_aw5_tex, 0x80, 0x71EDC0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w5_tex_rgb_ci4.bin", inv_mushi_w5_tex_rgb_ci4, 0x80, 0x71EE40, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w1_tex_rgb_ci4.bin", inv_mushi_w1_tex_rgb_ci4, 0x200, 0x71F0C0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w2_tex_rgb_ci4.bin", inv_mushi_w2_tex_rgb_ci4, 0x400, 0x71F2C0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w3_tex_rgb_ci4.bin", inv_mushi_w3_tex_rgb_ci4, 0x400, 0x71F6C0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w4_tex_rgb_ci4.bin", inv_mushi_w4_tex_rgb_ci4, 0x200, 0x71FAC0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w6_tex_rgb_ci4.bin", inv_mushi_w6_tex_rgb_ci4, 0x400, 0x71FCC0, 0, 0);
+    pc_load_asset("assets/inv_sakana/inv_mushi_w7_tex_rgb_ci4.bin", inv_mushi_w7_tex_rgb_ci4, 0x400, 0x7200C0, 0, 0);
+}
+#endif

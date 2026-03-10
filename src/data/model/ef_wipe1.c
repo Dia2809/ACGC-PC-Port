@@ -6,13 +6,21 @@
 #include "ef_effect_control.h"
 
 extern Vtx ef_wipe1_v[];
+#ifdef TARGET_PC
+u8 ef_wape_tex[0x40] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_wape_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_wape_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_wipe1_v[0x440 / sizeof(Vtx)];
+#else
 Vtx ef_wipe1_v[] = {
 #include "assets/ef_wipe1_v.inc"
 };
+#endif
 
 Gfx ef_wipe1_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

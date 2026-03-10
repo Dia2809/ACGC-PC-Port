@@ -1,38 +1,74 @@
+#ifdef TARGET_PC
+static u16 aLOT_obj_01_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 aLOT_obj_01_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/aLOT_obj_01_lotus_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_02_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_02_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/obj_02_lotus_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_03_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_03_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/obj_03_lotus_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_04_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_04_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/obj_04_lotus_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_05_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_05_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/obj_05_lotus_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_06_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_06_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/obj_06_lotus_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_07_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_07_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/obj_07_lotus_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_08_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_08_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/obj_08_lotus_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_09_lotus_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_09_lotus_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/obj_09_lotus_pal.inc"
 };
+#endif
 
 static int aLOT_actor_draw_before(GAME* game, cKF_SkeletonInfo_R_c* keyframe, int joint_idx, Gfx** joint_shape, u8* joint_flags, void* arg, s_xyz* joint_rot, xyz_t* joint_pos) {
     static int on_off_tbl[12] = {
@@ -120,3 +156,18 @@ static void aLOT_actor_draw(ACTOR* actor, GAME* game) {
         }
     }
 }
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_actor_ac_lotus_draw_c_inc(void) {
+    pc_load_asset("assets/aLOT_obj_01_lotus_pal.bin", aLOT_obj_01_lotus_pal, 0x20, 0x355820, 0, 1);
+    pc_load_asset("assets/obj_02_lotus_pal.bin", obj_02_lotus_pal, 0x20, 0x355840, 0, 1);
+    pc_load_asset("assets/obj_03_lotus_pal.bin", obj_03_lotus_pal, 0x20, 0x355860, 0, 1);
+    pc_load_asset("assets/obj_04_lotus_pal.bin", obj_04_lotus_pal, 0x20, 0x355880, 0, 1);
+    pc_load_asset("assets/obj_05_lotus_pal.bin", obj_05_lotus_pal, 0x20, 0x3558A0, 0, 1);
+    pc_load_asset("assets/obj_06_lotus_pal.bin", obj_06_lotus_pal, 0x20, 0x3558C0, 0, 1);
+    pc_load_asset("assets/obj_07_lotus_pal.bin", obj_07_lotus_pal, 0x20, 0x3558E0, 0, 1);
+    pc_load_asset("assets/obj_08_lotus_pal.bin", obj_08_lotus_pal, 0x20, 0x355900, 0, 1);
+    pc_load_asset("assets/obj_09_lotus_pal.bin", obj_09_lotus_pal, 0x20, 0x355920, 0, 1);
+}
+#endif

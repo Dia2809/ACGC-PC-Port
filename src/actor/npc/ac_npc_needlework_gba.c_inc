@@ -9,13 +9,21 @@
 #endif
 
 #ifndef __INTELLISENSE__
+#ifdef TARGET_PC
+static u8 aNNW_client_prg[0xACC0];
+#else
 static u8 aNNW_client_prg[] = {
 #include "assets/aNNW_client_prg.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 aNNW_client_ldr[0x8D20];
+#else
 static u8 aNNW_client_ldr[] = {
 #include "assets/aNNW_client_ldr.inc"
 };
+#endif
 #else
 extern u8 aNNW_client_prg[];
 extern u8 aNNW_client_ldr[];
@@ -223,3 +231,11 @@ static int aNNW_RecvData_card_e(u8* gba_connected_p) {
         return aNNW_GBA_STATE_NOT_CONNECTED;
     }
 }
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_actor_npc_ac_npc_needlework_gba_c_inc(void) {
+    pc_load_asset("assets/aNNW_client_prg.bin", aNNW_client_prg, 0xACC0, 0x33A490, 0, 0);
+    pc_load_asset("assets/aNNW_client_ldr.bin", aNNW_client_ldr, 0x8D20, 0x345150, 0, 0);
+}
+#endif

@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx mka_1_v[0x1480 / sizeof(Vtx)];
+#else
 static Vtx mka_1_v[] = {
 #include "assets/npc/mdl/mka_1_v.inc"
 };
+#endif
 
 static Gfx head_mka_model[] = {
     gsSPMatrix(anime_6_model+sizeof(Mtx)*7, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -585,3 +589,10 @@ static cKF_Joint_R_c cKF_je_r_mka_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_mka_1 = { 26, 13, cKF_je_r_mka_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_mka_1_c(void) {
+    pc_load_asset("assets/npc/mdl/mka_1_v.bin", mka_1_v, 0x1480, 0x583C40, 0, 2);
+}
+#endif

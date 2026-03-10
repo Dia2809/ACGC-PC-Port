@@ -7,13 +7,21 @@
 
 extern u8 earth_pal_dummy[];
 extern u8 beach_pal_dummy2[];
+#ifdef TARGET_PC
+u8 ef_anahori01_00_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_anahori01_00_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_anahori01_00_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_anahori01_00_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx ef_anahori01_00_v[] = {
 #include "assets/ef_anahori01_00_v.inc"
 };
+#endif
 
 Gfx ef_anahori01_00_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -32,13 +40,21 @@ Gfx ef_anahori01_00_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_anahori01_01_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_anahori01_01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_anahori01_01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_anahori01_01_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx ef_anahori01_01_v[] = {
 #include "assets/ef_anahori01_01_v.inc"
 };
+#endif
 
 Gfx ef_anahori01_01_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -57,9 +73,13 @@ Gfx ef_anahori01_01_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+Vtx ef_anahori01_02_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx ef_anahori01_02_v[] = {
 #include "assets/ef_anahori01_02_v.inc"
 };
+#endif
 
 Gfx ef_anahori01_02_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -78,29 +98,53 @@ Gfx ef_anahori01_02_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 obj_hole_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_hole_pal[] = {
 #include "assets/obj_hole_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_anahori02_01_tex[0x80];
+#else
 u8 ef_anahori02_01_tex[] = {
 #include "assets/ef_anahori02_01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_anahori02_02_tex[0x80];
+#else
 u8 ef_anahori02_02_tex[] = {
 #include "assets/ef_anahori02_02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_anahori02_03_tex[0x80];
+#else
 u8 ef_anahori02_03_tex[] = {
 #include "assets/ef_anahori02_03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_anahori02_04_tex[0x80];
+#else
 u8 ef_anahori02_04_tex[] = {
 #include "assets/ef_anahori02_04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_anahori02_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_anahori02_00_v[] = {
 #include "assets/ef_anahori02_00_v.inc"
 };
+#endif
 
 Gfx ef_anahori02_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -116,29 +160,53 @@ Gfx ef_anahori02_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 ef_anahori03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 ef_anahori03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_anahori03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_anahori03_03_tex[0x80];
+#else
 u8 ef_anahori03_03_tex[] = {
 #include "assets/ef_anahori03_03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_anahori03_01_tex[0x80];
+#else
 u8 ef_anahori03_01_tex[] = {
 #include "assets/ef_anahori03_01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_anahori03_02_tex[0x80];
+#else
 u8 ef_anahori03_02_tex[] = {
 #include "assets/ef_anahori03_02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_anahori03_04_tex[0x80];
+#else
 u8 ef_anahori03_04_tex[] = {
 #include "assets/ef_anahori03_04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_anahori03_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_anahori03_00_v[] = {
 #include "assets/ef_anahori03_00_v.inc"
 };
+#endif
 
 Gfx ef_anahori03_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -154,29 +222,53 @@ Gfx ef_anahori03_00_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 ef_mogura01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 ef_mogura01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_mogura01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_mogura01_03_tex[0x80];
+#else
 u8 ef_mogura01_03_tex[] = {
 #include "assets/ef_mogura01_03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_mogura01_01_tex[0x80];
+#else
 u8 ef_mogura01_01_tex[] = {
 #include "assets/ef_mogura01_01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_mogura01_02_tex[0x80];
+#else
 u8 ef_mogura01_02_tex[] = {
 #include "assets/ef_mogura01_02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_mogura01_04_tex[0x80];
+#else
 u8 ef_mogura01_04_tex[] = {
 #include "assets/ef_mogura01_04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_mogura01_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_mogura01_00_v[] = {
 #include "assets/ef_mogura01_00_v.inc"
 };
+#endif
 
 Gfx ef_mogura01_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

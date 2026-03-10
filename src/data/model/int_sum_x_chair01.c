@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_x_chair01_v[];
+#ifdef TARGET_PC
+u16 int_sum_x_chair01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_x_chair01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_x_chair01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chair01_seat[0x100];
+#else
 u8 int_sum_x_chair01_seat[] = {
 #include "assets/int_sum_x_chair01_seat.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chair01_side[0x100];
+#else
 u8 int_sum_x_chair01_side[] = {
 #include "assets/int_sum_x_chair01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chair01_leg[0x100];
+#else
 u8 int_sum_x_chair01_leg[] = {
 #include "assets/int_sum_x_chair01_leg.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chair01_head[0x80];
+#else
 u8 int_sum_x_chair01_head[] = {
 #include "assets/int_sum_x_chair01_head.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chair01_base[0x180];
+#else
 u8 int_sum_x_chair01_base[] = {
 #include "assets/int_sum_x_chair01_base.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chair01_back[0x300];
+#else
 u8 int_sum_x_chair01_back[] = {
 #include "assets/int_sum_x_chair01_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_x_chair01_v[0x410 / sizeof(Vtx)];
+#else
 Vtx int_sum_x_chair01_v[] = {
 #include "assets/int_sum_x_chair01_v.inc"
 };
+#endif
 
 Gfx int_sum_x_chair01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

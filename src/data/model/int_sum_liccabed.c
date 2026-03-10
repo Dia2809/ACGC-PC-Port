@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_liccabed_v[];
+#ifdef TARGET_PC
+u16 int_sum_liccabed_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_liccabed_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_liccabed_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccabed_mat_tex[0x300];
+#else
 u8 int_sum_liccabed_mat_tex[] = {
 #include "assets/int_sum_liccabed_mat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccabed_head_tex[0x200];
+#else
 u8 int_sum_liccabed_head_tex[] = {
 #include "assets/int_sum_liccabed_head_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccabed_foot_tex[0x80];
+#else
 u8 int_sum_liccabed_foot_tex[] = {
 #include "assets/int_sum_liccabed_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccabed_pillow_tex[0x100];
+#else
 u8 int_sum_liccabed_pillow_tex[] = {
 #include "assets/int_sum_liccabed_pillow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_liccabed_v[0x400 / sizeof(Vtx)];
+#else
 Vtx int_sum_liccabed_v[] = {
 #include "assets/int_sum_liccabed_v.inc"
 };
+#endif
 
 Gfx int_sum_liccabed_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

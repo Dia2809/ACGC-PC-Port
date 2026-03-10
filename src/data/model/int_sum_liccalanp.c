@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_liccalanp_v[];
+#ifdef TARGET_PC
+u16 int_sum_liccalanp_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_liccalanp_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_liccalanp_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccalanp_shade_tex[0x100];
+#else
 u8 int_sum_liccalanp_shade_tex[] = {
 #include "assets/int_sum_liccalanp_shade_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccalanp_stand_tex[0x180];
+#else
 u8 int_sum_liccalanp_stand_tex[] = {
 #include "assets/int_sum_liccalanp_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccalanp_hiki_tex[0x80];
+#else
 u8 int_sum_liccalanp_hiki_tex[] = {
 #include "assets/int_sum_liccalanp_hiki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_liccalanp_base_tex[0x100];
+#else
 u8 int_sum_liccalanp_base_tex[] = {
 #include "assets/int_sum_liccalanp_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_liccalanp_v[0x3D0 / sizeof(Vtx)];
+#else
 Vtx int_sum_liccalanp_v[] = {
 #include "assets/int_sum_liccalanp_v.inc"
 };
+#endif
 
 Gfx int_sum_liccalanp_onT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

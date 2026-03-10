@@ -5,29 +5,53 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 sen_win_wa1_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 sen_win_wa1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sen_win_wa1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sen_win_wa2_tex[0x1000];
+#else
 u8 sen_win_wa2_tex[] = {
 #include "assets/sen_win_wa2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sen_win_waku1_tex[0x1000];
+#else
 u8 sen_win_waku1_tex[] = {
 #include "assets/sen_win_waku1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 sen_win_yaji2_tex[0x100];
+#else
 static u8 sen_win_yaji2_tex[] = {
 #include "assets/sen_win/sen_win_yaji2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 sen_item2_yaji_tex[0x80];
+#else
 static u8 sen_item2_yaji_tex[] = {
 #include "assets/sen_win/sen_item2_yaji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx sen_win_v[0x220 / sizeof(Vtx)];
+#else
 Vtx sen_win_v[] = {
 #include "assets/sen_win_v.inc"
 };
+#endif
 
 Gfx sen_win_cursor_model[] = {
     gsDPPipeSync(),
@@ -89,3 +113,11 @@ Gfx sen_win_yajirushi2T_model[] = {
     gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_sen_win_c(void) {
+    pc_load_asset("assets/sen_win/sen_win_yaji2_tex.bin", sen_win_yaji2_tex, 0x100, 0x7BE160, 0, 0);
+    pc_load_asset("assets/sen_win/sen_item2_yaji_tex.bin", sen_item2_yaji_tex, 0x80, 0x7BE260, 0, 0);
+}
+#endif

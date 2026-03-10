@@ -5,33 +5,61 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 cal_win_pick_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_pick_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_pick_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_win_view_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 u8 cal_win_view_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_win_view_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_sousa_2b1_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 lat_sousa_2b1_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_hyouji2/lat_sousa_2b1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 lat_sousa_b1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 lat_sousa_b1_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/lat_sousa_b1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_tegami_b3_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 lat_tegami_b3_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/cal_hyouji2/lat_tegami_b3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cal_hyouji2_2b1_tex_rgb_i4[0x200];
+#else
 u8 cal_hyouji2_2b1_tex_rgb_i4[] = {
 #include "assets/cal_hyouji2_2b1_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx cal_hyouji2_v[0x1C0 / sizeof(Vtx)];
+#else
 Vtx cal_hyouji2_v[] = {
 #include "assets/cal_hyouji2_v.inc"
 };
+#endif
 
 Gfx cal_hyouji2_bt_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -100,3 +128,11 @@ gsSPNTrianglesInit_5b(2, 0, 1, 2, 1, 3, 2, 0, 0, 0),
 gsSPEndDisplayList(),
 };
 
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_cal_hyouji2_c(void) {
+    pc_load_asset("assets/cal_hyouji2/lat_sousa_2b1_tex.bin", lat_sousa_2b1_tex, 0x200, 0x6ACF00, 0, 0);
+    pc_load_asset("assets/cal_hyouji2/lat_tegami_b3_tex.bin", lat_tegami_b3_tex, 0x800, 0x7A94E0, 0, 0);
+}
+#endif

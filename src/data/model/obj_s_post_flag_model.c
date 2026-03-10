@@ -4,45 +4,85 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+u16 obj_s_post_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_post_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_post_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_post_flag1_tex_txt[0x100];
+#else
 u8 obj_s_post_flag1_tex_txt[] = {
 #include "assets/obj_s_post_flag1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_post_flag2_TA_tex_txt[0x100];
+#else
 u8 obj_s_post_flag2_TA_tex_txt[] = {
 #include "assets/obj_s_post_flag2_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_post_flag3_TA_tex_txt[0x100];
+#else
 u8 obj_s_post_flag3_TA_tex_txt[] = {
 #include "assets/obj_s_post_flag3_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_post_front1_tex_txt[0x100];
+#else
 u8 obj_s_post_front1_tex_txt[] = {
 #include "assets/obj_s_post_front1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_post_front2_tex_txt[0x100];
+#else
 u8 obj_s_post_front2_tex_txt[] = {
 #include "assets/obj_s_post_front2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_post_side1_tex_txt[0x200];
+#else
 u8 obj_s_post_side1_tex_txt[] = {
 #include "assets/obj_s_post_side1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_post_leg1_tex_txt[0x80];
+#else
 u8 obj_s_post_leg1_tex_txt[] = {
 #include "assets/obj_s_post_leg1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_post_inside1_tex_txt[0x80];
+#else
 u8 obj_s_post_inside1_tex_txt[] = {
 #include "assets/obj_s_post_inside1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_post_v[0x350 / sizeof(Vtx)];
+#else
 Vtx obj_s_post_v[] = {
 #include "assets/obj_s_post_v.inc"
 };
+#endif
 
 Gfx obj_s_post_main_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

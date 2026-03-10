@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_golfbag02_v[];
+#ifdef TARGET_PC
+u16 int_sum_golfbag02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_golfbag02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_golfbag02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 int_sum_golfbag_pal[0x20 / sizeof(u16)];
+#else
 static u16 int_sum_golfbag_pal[] = {
 #include "assets/int_sum_golfbag02/int_sum_golfbag_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag02_top_tex_txt[0x100];
+#else
 u8 int_sum_golfbag02_top_tex_txt[] = {
 #include "assets/int_sum_golfbag02_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag02_carry_tex_txt[0x180];
+#else
 u8 int_sum_golfbag02_carry_tex_txt[] = {
 #include "assets/int_sum_golfbag02_carry_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag02_body_tex_txt[0x400];
+#else
 u8 int_sum_golfbag02_body_tex_txt[] = {
 #include "assets/int_sum_golfbag02_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag02_clab2_tex_txt[0x80];
+#else
 u8 int_sum_golfbag02_clab2_tex_txt[] = {
 #include "assets/int_sum_golfbag02_clab2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag02_clab1_tex_txt[0x80];
+#else
 u8 int_sum_golfbag02_clab1_tex_txt[] = {
 #include "assets/int_sum_golfbag02_clab1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_golfbag02_clab3_tex_txt[0x80];
+#else
 u8 int_sum_golfbag02_clab3_tex_txt[] = {
 #include "assets/int_sum_golfbag02_clab3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_golfbag02_v[0x560 / sizeof(Vtx)];
+#else
 Vtx int_sum_golfbag02_v[] = {
 #include "assets/int_sum_golfbag02_v.inc"
 };
+#endif
 
 Gfx int_sum_golfbag02_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -109,3 +145,10 @@ Gfx int_sum_golfbag02_on_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 3, 4, 5, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_golfbag02_c(void) {
+    pc_load_asset("assets/int_sum_golfbag02/int_sum_golfbag_pal.bin", int_sum_golfbag_pal, 0x20, 0xCC7C00, 0, 1);
+}
+#endif

@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u16 obj_gara_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_gara_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_gara_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_gara_tex_txt[0x800];
+#else
 u8 obj_gara_tex_txt[] = {
 #include "assets/obj_gara_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_gara_v[0x420 / sizeof(Vtx)];
+#else
 Vtx obj_gara_v[] = {
 #include "assets/obj_gara_v.inc"
 };
+#endif
 
 Gfx obj_gara_base_model[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),
@@ -111,29 +123,53 @@ cKF_Animation_R_c cKF_ba_r_obj_gara = {
     cKF_ckcb_r_obj_gara_tbl, cKF_ds_obj_gara_tbl, cKF_kn_obj_gara_tbl, cKF_c_obj_gara_tbl, -1, 48
 };
 
+#ifdef TARGET_PC
+u16 act_fukuball_pal[0x20 / sizeof(u16)];
+#else
 u16 act_fukuball_pal[] = {
 #include "assets/act_fukuball_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_fukutama1_tex[0x80];
+#else
 u8 act_fukutama1_tex[] = {
 #include "assets/act_fukutama1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_fukutama2_tex[0x80];
+#else
 u8 act_fukutama2_tex[] = {
 #include "assets/act_fukutama2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_fukutama3_tex[0x80];
+#else
 u8 act_fukutama3_tex[] = {
 #include "assets/act_fukutama3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_fukutama4_tex[0x80];
+#else
 u8 act_fukutama4_tex[] = {
 #include "assets/act_fukutama4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_fukutama_v[0x50 / sizeof(Vtx)];
+#else
 Vtx act_fukutama_v[] = {
 #include "assets/act_fukutama_v.inc"
 };
+#endif
 
 Gfx act_fukutama_modelT[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

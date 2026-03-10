@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_buildsite_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_buildsite_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_buildsite_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_buildsite_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_s_buildsite_v[] = {
 #include "assets/obj_s_buildsite_v.inc"
 };
+#endif
 
 Gfx reserve_DL_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, anime_1_txt),
@@ -25,17 +33,29 @@ Gfx reserve_DL_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 obj_s_attention_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_attention_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_attention_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_attention_tex[0x400];
+#else
 u8 obj_s_attention_tex[] = {
 #include "assets/obj_s_attention_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_attention_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_s_attention_v[] = {
 #include "assets/obj_s_attention_v.inc"
 };
+#endif
 
 Gfx obj_s_attentionT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -52,13 +72,21 @@ Gfx obj_s_attentionT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_w_buildsite_tex[0x400];
+#else
 u8 obj_w_buildsite_tex[] = {
 #include "assets/obj_w_buildsite_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_buildsite_v[0xC0 / sizeof(Vtx)];
+#else
 Vtx obj_w_buildsite_v[] = {
 #include "assets/obj_w_buildsite_v.inc"
 };
+#endif
 
 Gfx reserve_winter_DL_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, anime_1_txt),
@@ -72,17 +100,29 @@ Gfx reserve_winter_DL_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u16 obj_w_attention_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_w_attention_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_attention_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_attention_tex[0x400];
+#else
 u8 obj_w_attention_tex[] = {
 #include "assets/obj_w_attention_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_attention_v[0x80 / sizeof(Vtx)];
+#else
 Vtx obj_w_attention_v[] = {
 #include "assets/obj_w_attention_v.inc"
 };
+#endif
 
 Gfx obj_w_attentionT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

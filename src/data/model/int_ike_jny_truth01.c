@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_jny_truth01_v[];
+#ifdef TARGET_PC
+u16 int_ike_jny_truth01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_jny_truth01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_jny_truth01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_truthbases_tex_txt[0x100];
+#else
 u8 int_ike_jny_truthbases_tex_txt[] = {
 #include "assets/int_ike_jny_truthbases_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_truthbaset_tex_txt[0x40];
+#else
 u8 int_ike_jny_truthbaset_tex_txt[] = {
 #include "assets/int_ike_jny_truthbaset_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_truthface3_tex_txt[0x200];
+#else
 u8 int_ike_jny_truthface3_tex_txt[] = {
 #include "assets/int_ike_jny_truthface3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_truthface2_tex_txt[0x80];
+#else
 u8 int_ike_jny_truthface2_tex_txt[] = {
 #include "assets/int_ike_jny_truthface2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_truthface1_TA_tex_txt[0x200];
+#else
 u8 int_ike_jny_truthface1_TA_tex_txt[] = {
 #include "assets/int_ike_jny_truthface1_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_jny_truthface2_TA_tex_txt[0x200];
+#else
 u8 int_ike_jny_truthface2_TA_tex_txt[] = {
 #include "assets/int_ike_jny_truthface2_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_jny_truth01_v[0x4A0 / sizeof(Vtx)];
+#else
 Vtx int_ike_jny_truth01_v[] = {
 #include "assets/int_ike_jny_truth01_v.inc"
 };
+#endif
 
 Gfx int_ike_jny_truth01_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 int_kob_tobibako_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kob_tobibako_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kob_tobibako_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_tobibako_zengo_tex[0x300];
+#else
 u8 int_kob_tobibako_zengo_tex[] = {
 #include "assets/int_kob_tobibako_zengo_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_tobibako_sayu_tex[0x300];
+#else
 u8 int_kob_tobibako_sayu_tex[] = {
 #include "assets/int_kob_tobibako_sayu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_tobibako_ue_tex[0x100];
+#else
 u8 int_kob_tobibako_ue_tex[] = {
 #include "assets/int_kob_tobibako_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kob_tobibako_v[0x1E0 / sizeof(Vtx)];
+#else
 Vtx int_kob_tobibako_v[] = {
 #include "assets/int_kob_tobibako_v.inc"
 };
+#endif
 
 Gfx int_kob_tobibako_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

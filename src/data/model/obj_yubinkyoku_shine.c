@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 rom_yubinkyoku_mado_tex[0x80];
+#else
 u8 rom_yubinkyoku_mado_tex[] = {
 #include "assets/rom_yubinkyoku_mado_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_yubinkyoku_waku_tex[0x200];
+#else
 u8 rom_yubinkyoku_waku_tex[] = {
 #include "assets/rom_yubinkyoku_waku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_yubinkyoku_shine_v[0xF0 / sizeof(Vtx)];
+#else
 Vtx obj_yubinkyoku_shine_v[] = {
 #include "assets/obj_yubinkyoku_shine_v.inc"
 };
+#endif
 
 Gfx obj_yubinkyoku_shine_modelT[] = {
     gsSPTexture(65535, 65535, 0, G_TX_RENDERTILE, G_ON),

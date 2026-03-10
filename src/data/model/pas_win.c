@@ -5,85 +5,165 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 pas_win_nimotu_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 pas_win_nimotu_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/pas_win_nimotu_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pas_win_nuno_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pas_win_nuno_tex_rgb_ci4_pal[] = {
 #include "assets/pas_win_nuno_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pas_win_ta1_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pas_win_ta1_tex_rgb_ci4_pal[] = {
 #include "assets/pas_win_ta1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pas_win_ta2_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pas_win_ta2_tex_rgb_ci4_pal[] = {
 #include "assets/pas_win_ta2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 pas_win_ta3_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 pas_win_ta3_tex_rgb_ci4_pal[] = {
 #include "assets/pas_win_ta3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_name_tex[0x200];
+#else
 u8 pas_win_name_tex[] = {
 #include "assets/pas_win_name_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_town_tex[0x200];
+#else
 u8 pas_win_town_tex[] = {
 #include "assets/pas_win_town_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_fuki2_tex[0x800];
+#else
 static u8 fkm_win_fuki2_tex[] = {
 #include "assets/pas_win/fkm_win_fuki2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_wa_tex[0x80];
+#else
 u8 pas_win_wa_tex[] = {
 #include "assets/pas_win_wa_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_test_tex[0x80];
+#else
 u8 pas_win_test_tex[] = {
 #include "assets/pas_win_test_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_icon_tex[0x800];
+#else
 u8 pas_win_icon_tex[] = {
 #include "assets/pas_win_icon_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_w4_tex[0x80];
+#else
 static u8 fkm_win_w4_tex[] = {
 #include "assets/pas_win/fkm_win_w4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_w3_tex[0x200];
+#else
 static u8 fkm_win_w3_tex[] = {
 #include "assets/pas_win/fkm_win_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_w2_tex[0x200];
+#else
 static u8 fkm_win_w2_tex[] = {
 #include "assets/pas_win/fkm_win_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 fkm_win_w1_tex[0x400];
+#else
 static u8 fkm_win_w1_tex[] = {
 #include "assets/pas_win/fkm_win_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_nuno_tex_rgb_ci4[0x200];
+#else
 u8 pas_win_nuno_tex_rgb_ci4[] = {
 #include "assets/pas_win_nuno_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_ta1_tex_rgb_ci4[0x400];
+#else
 u8 pas_win_ta1_tex_rgb_ci4[] = {
 #include "assets/pas_win_ta1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_ta2_tex_rgb_ci4[0x400];
+#else
 u8 pas_win_ta2_tex_rgb_ci4[] = {
 #include "assets/pas_win_ta2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 pas_win_ta3_tex_rgb_ci4[0x400];
+#else
 u8 pas_win_ta3_tex_rgb_ci4[] = {
 #include "assets/pas_win_ta3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx pas_win_v[0x940 / sizeof(Vtx)];
+#else
 Vtx pas_win_v[] = {
 #include "assets/pas_win_v.inc"
 };
+#endif
 
 Gfx pas_win_fuki_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0),
@@ -313,3 +393,14 @@ Gfx pas_win_model[] = {
     gsSPDisplayList(pas_win_iconT_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_pas_win_c(void) {
+    pc_load_asset("assets/pas_win/fkm_win_fuki2_tex.bin", fkm_win_fuki2_tex, 0x800, 0x7B5540, 0, 0);
+    pc_load_asset("assets/pas_win/fkm_win_w4_tex.bin", fkm_win_w4_tex, 0x80, 0x7B6AC0, 0, 0);
+    pc_load_asset("assets/pas_win/fkm_win_w3_tex.bin", fkm_win_w3_tex, 0x200, 0x7B6B40, 0, 0);
+    pc_load_asset("assets/pas_win/fkm_win_w2_tex.bin", fkm_win_w2_tex, 0x200, 0x7B6D40, 0, 0);
+    pc_load_asset("assets/pas_win/fkm_win_w1_tex.bin", fkm_win_w1_tex, 0x400, 0x7B6F40, 0, 0);
+}
+#endif

@@ -4,13 +4,21 @@
 #include "c_keyframe.h"
 
 
+#ifdef TARGET_PC
+u8 obj_notice_shadow_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_notice_shadow_tex[] ATTRIBUTE_ALIGN(32)= { 
 #include "assets/obj_notice_shadow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_notice_shadow_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_notice_shadow_v[] = { 
 #include "assets/obj_notice_shadow_v.inc"
 };
+#endif
 
 Gfx obj_notice_shadowT_mat_model[] = { 
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

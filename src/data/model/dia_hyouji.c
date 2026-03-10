@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx dia_hyouji_v[];
+#ifdef TARGET_PC
+u8 dir_win_diary_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 u8 dir_win_diary_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dir_win_diary_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 kei_win_quit_tex[0x200];
+#else
 static u8 kei_win_quit_tex[] = {
 #include "assets/dia_hyouji/kei_win_quit_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_tegami_b2_tex[0x800];
+#else
 static u8 lat_tegami_b2_tex[] = {
 #include "assets/dia_hyouji/lat_tegami_b2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 lat_sousa_2b1_tex_rgb_i4[0x200];
+#else
 u8 lat_sousa_2b1_tex_rgb_i4[] = {
 #include "assets/lat_sousa_2b1_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_tegami_b3_tex[0x800];
+#else
 static u8 lat_tegami_b3_tex[] = {
 #include "assets/dia_hyouji/lat_tegami_b3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 kei_win_2b1_tex_rgb_i4[0x200];
+#else
 static u8 kei_win_2b1_tex_rgb_i4[] = {
 #include "assets/dia_hyouji/kei_win_2b1_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx dia_hyouji_v[0x100 / sizeof(Vtx)];
+#else
 Vtx dia_hyouji_v[] = {
 #include "assets/dia_hyouji_v.inc"
 };
+#endif
 
 Gfx kei_win_b2_model_1_data_4075A0[] = {
     gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
@@ -97,3 +125,13 @@ Gfx dia_init_mode[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_dia_hyouji_c(void) {
+    pc_load_asset("assets/dia_hyouji/kei_win_quit_tex.bin", kei_win_quit_tex, 0x200, 0x7A1660, 0, 0);
+    pc_load_asset("assets/dia_hyouji/lat_tegami_b2_tex.bin", lat_tegami_b2_tex, 0x800, 0x7A8CE0, 0, 0);
+    pc_load_asset("assets/dia_hyouji/lat_tegami_b3_tex.bin", lat_tegami_b3_tex, 0x800, 0x7A94E0, 0, 0);
+    pc_load_asset("assets/dia_hyouji/kei_win_2b1_tex_rgb_i4.bin", kei_win_2b1_tex_rgb_i4, 0x200, 0x7A9CE0, 0, 0);
+}
+#endif

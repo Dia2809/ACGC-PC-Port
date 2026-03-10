@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_item_tool_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_item_tool_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_item_tool_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_item_tool_tex[0x200];
+#else
 u8 obj_item_tool_tex[] = {
 #include "assets/obj_item_tool_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_item_tool_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_item_tool_v[] = {
 #include "assets/obj_item_tool_v.inc"
 };
+#endif
 
 Gfx obj_toolT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

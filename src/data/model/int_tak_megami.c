@@ -6,57 +6,109 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_megami_v[];
+#ifdef TARGET_PC
+u16 int_tak_magami_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_magami_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_magami_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_fire_tex[0x20];
+#else
 u8 int_tak_megami_fire_tex[] = {
 #include "assets/int_tak_megami_fire_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_ita_tex[0x80];
+#else
 u8 int_tak_megami_ita_tex[] = {
 #include "assets/int_tak_megami_ita_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_totte_tex[0x40];
+#else
 u8 int_tak_megami_totte_tex[] = {
 #include "assets/int_tak_megami_totte_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_face_tex[0x80];
+#else
 u8 int_tak_megami_face_tex[] = {
 #include "assets/int_tak_megami_face_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_body_tex[0x400];
+#else
 u8 int_tak_megami_body_tex[] = {
 #include "assets/int_tak_megami_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_suso_tex[0x80];
+#else
 u8 int_tak_megami_suso_tex[] = {
 #include "assets/int_tak_megami_suso_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_hand_tex[0x80];
+#else
 u8 int_tak_megami_hand_tex[] = {
 #include "assets/int_tak_megami_hand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_sode_tex[0x80];
+#else
 u8 int_tak_megami_sode_tex[] = {
 #include "assets/int_tak_megami_sode_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_asi_tex[0x80];
+#else
 u8 int_tak_megami_asi_tex[] = {
 #include "assets/int_tak_megami_asi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_dai_tex[0x40];
+#else
 u8 int_tak_megami_dai_tex[] = {
 #include "assets/int_tak_megami_dai_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_megami_top_tex[0x20];
+#else
 u8 int_tak_megami_top_tex[] = {
 #include "assets/int_tak_megami_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_megami_v[0xB50 / sizeof(Vtx)];
+#else
 Vtx int_tak_megami_v[] = {
 #include "assets/int_tak_megami_v.inc"
 };
+#endif
 
 Gfx int_tak_megami_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

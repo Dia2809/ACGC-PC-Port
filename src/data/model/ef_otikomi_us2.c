@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 ef_otikomi_us1_int_i4[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_otikomi_us1_int_i4[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_otikomi_us1_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ef_otikomi_us2_int_i4[0x80];
+#else
 u8 ef_otikomi_us2_int_i4[] = {
 #include "assets/ef_otikomi_us2_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_otikomi_us2_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_otikomi_us2_v[] = {
 #include "assets/ef_otikomi_us2_v.inc"
 };
+#endif
 
 Gfx ef_otikomi_us2_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

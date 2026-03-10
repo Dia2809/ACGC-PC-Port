@@ -5,77 +5,149 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kei_win_latest_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 u8 kei_win_latest_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kei_win_latest_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_entry_tex[0x400];
+#else
 u8 kei_win_entry_tex[] = {
 #include "assets/kei_win_entry_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 kei_win_quit_tex[0x200];
+#else
 static u8 kei_win_quit_tex[] = {
 #include "assets/kei_hyouji/kei_win_quit_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_writen_tex[0x400];
+#else
 u8 kei_win_writen_tex[] = {
 #include "assets/kei_win_writen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_yaji2_tex[0x400];
+#else
 u8 kei_win_yaji2_tex[] = {
 #include "assets/kei_win_yaji2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 std_tex[0x800];
+#else
 static u8 std_tex[] = {
 #include "assets/kei_hyouji/std_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yaji[0x80];
+#else
 static u8 yaji[] = {
 #include "assets/kei_hyouji/yaji.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 ct_tex[0x400];
+#else
 static u8 ct_tex[] = {
 #include "assets/kei_hyouji/ct_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_st1_tex_rgb_ia8[0x1000];
+#else
 u8 kei_win_st1_tex_rgb_ia8[] = {
 #include "assets/kei_win_st1_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_st2_tex_rgb_ia8[0x1000];
+#else
 u8 kei_win_st2_tex_rgb_ia8[] = {
 #include "assets/kei_win_st2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_st3_tex_rgb_ia8[0x1000];
+#else
 u8 kei_win_st3_tex_rgb_ia8[] = {
 #include "assets/kei_win_st3_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_st4_tex_rgb_ia8[0x1000];
+#else
 u8 kei_win_st4_tex_rgb_ia8[] = {
 #include "assets/kei_win_st4_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_st5_tex_rgb_ia8[0x1000];
+#else
 u8 kei_win_st5_tex_rgb_ia8[] = {
 #include "assets/kei_win_st5_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kei_win_st6_tex_rgb_ia8[0x1000];
+#else
 u8 kei_win_st6_tex_rgb_ia8[] = {
 #include "assets/kei_win_st6_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_tegami_b2_tex[0x800];
+#else
 static u8 lat_tegami_b2_tex[] = {
 #include "assets/kei_hyouji/lat_tegami_b2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 lat_tegami_b3_tex[0x800];
+#else
 static u8 lat_tegami_b3_tex[] = {
 #include "assets/kei_hyouji/lat_tegami_b3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 kei_win_2b1_tex_rgb_i4[0x200];
+#else
 static u8 kei_win_2b1_tex_rgb_i4[] = {
 #include "assets/kei_hyouji/kei_win_2b1_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx kei_hyouji_v[0x340 / sizeof(Vtx)];
+#else
 Vtx kei_hyouji_v[] = {
 #include "assets/kei_hyouji_v.inc"
 };
+#endif
 
 Gfx kei_win_bt_model[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, lat_tegami_b2_tex),
@@ -217,3 +289,16 @@ Gfx kei_hyouji_model[] = {
     gsSPDisplayList(kei_win_amojiT_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_kei_hyouji_c(void) {
+    pc_load_asset("assets/kei_hyouji/kei_win_quit_tex.bin", kei_win_quit_tex, 0x200, 0x7A1660, 0, 0);
+    pc_load_asset("assets/kei_hyouji/std_tex.bin", std_tex, 0x800, 0x7A2060, 0, 0);
+    pc_load_asset("assets/kei_hyouji/yaji.bin", yaji, 0x80, 0xB5C980, 0, 0);
+    pc_load_asset("assets/kei_hyouji/ct_tex.bin", ct_tex, 0x400, 0xB5BD80, 0, 0);
+    pc_load_asset("assets/kei_hyouji/lat_tegami_b2_tex.bin", lat_tegami_b2_tex, 0x800, 0x7A8CE0, 0, 0);
+    pc_load_asset("assets/kei_hyouji/lat_tegami_b3_tex.bin", lat_tegami_b3_tex, 0x800, 0x7A94E0, 0, 0);
+    pc_load_asset("assets/kei_hyouji/kei_win_2b1_tex_rgb_i4.bin", kei_win_2b1_tex_rgb_i4, 0x200, 0x7A9CE0, 0, 0);
+}
+#endif

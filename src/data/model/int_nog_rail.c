@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 int_nog_rail_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_rail_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_rail_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_rail_tex[0x80];
+#else
 u8 int_nog_rail_tex[] = {
 #include "assets/int_nog_rail_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_rail_v[0x100 / sizeof(Vtx)];
+#else
 Vtx int_nog_rail_v[] = {
 #include "assets/int_nog_rail_v.inc"
 };
+#endif
 
 Gfx int_nog_rail_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sugi_barbecue_v[];
+#ifdef TARGET_PC
+u16 int_sugi_barbecue_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sugi_barbecue_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sugi_barbecue_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sugi_barbecue2_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sugi_barbecue2_pal[] = {
 #include "assets/int_sugi_barbecue2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sugi_barbecue_all_tex_txt[0x800];
+#else
 u8 int_sugi_barbecue_all_tex_txt[] = {
 #include "assets/int_sugi_barbecue_all_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sugi_barbecue2_bar_tex_txt[0x200];
+#else
 u8 int_sugi_barbecue2_bar_tex_txt[] = {
 #include "assets/int_sugi_barbecue2_bar_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sugi_barbecue_v[0x8A0 / sizeof(Vtx)];
+#else
 Vtx int_sugi_barbecue_v[] = {
 #include "assets/int_sugi_barbecue_v.inc"
 };
+#endif
 
 Gfx sugi_barbecue_b_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

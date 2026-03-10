@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 int_sum_ratan_screen_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_ratan_screen_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_ratan_screen_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_screen_front_tex[0x200];
+#else
 u8 int_sum_ratan_screen_front_tex[] = {
 #include "assets/int_sum_ratan_screen_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_ratan_screen_v[0xE0 / sizeof(Vtx)];
+#else
 Vtx int_sum_ratan_screen_v[] = {
 #include "assets/int_sum_ratan_screen_v.inc"
 };
+#endif
 
 Gfx int_sum_ratan_screen_onT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

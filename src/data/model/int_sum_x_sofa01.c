@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_x_sofa01_v[];
+#ifdef TARGET_PC
+u16 int_sum_x_sofa01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_x_sofa01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_x_sofa01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_sofa01_head[0x80];
+#else
 u8 int_sum_x_sofa01_head[] = {
 #include "assets/int_sum_x_sofa01_head.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_sofa01_seat[0x300];
+#else
 u8 int_sum_x_sofa01_seat[] = {
 #include "assets/int_sum_x_sofa01_seat.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_sofa01_leg[0x80];
+#else
 u8 int_sum_x_sofa01_leg[] = {
 #include "assets/int_sum_x_sofa01_leg.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_sofa01_back[0x200];
+#else
 u8 int_sum_x_sofa01_back[] = {
 #include "assets/int_sum_x_sofa01_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_sofa01_arm[0x100];
+#else
 u8 int_sum_x_sofa01_arm[] = {
 #include "assets/int_sum_x_sofa01_arm.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_sofa01_side[0x100];
+#else
 u8 int_sum_x_sofa01_side[] = {
 #include "assets/int_sum_x_sofa01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_x_sofa01_v[0x4A0 / sizeof(Vtx)];
+#else
 Vtx int_sum_x_sofa01_v[] = {
 #include "assets/int_sum_x_sofa01_v.inc"
 };
+#endif
 
 Gfx int_sum_x_sofa01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

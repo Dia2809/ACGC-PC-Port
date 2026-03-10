@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u16 obj_x_honeycomb_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_x_honeycomb_pal[] = {
 #include "assets/obj_x_honeycomb_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_x_honeycomb_tex[0x200];
+#else
 u8 obj_x_honeycomb_tex[] = {
 #include "assets/obj_x_honeycomb_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_x_honeycomb_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_x_honeycomb_v[] = {
 #include "assets/obj_x_honeycomb_v.inc"
 };
+#endif
 
 Gfx obj_x_honeycombT_mat_model[] = {
     gsDPPipeSync(),

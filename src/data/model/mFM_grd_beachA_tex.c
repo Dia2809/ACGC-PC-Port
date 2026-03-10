@@ -5,6 +5,10 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 mFM_grd_beachA_tex[0x400];
+#else
 u8 mFM_grd_beachA_tex[] = {
 #include "assets/mFM_grd_beachA_tex.inc"
 };
+#endif

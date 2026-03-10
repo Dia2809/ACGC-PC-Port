@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_s_tree5_v[0x160 / sizeof(Vtx)] ATTRIBUTE_ALIGN(32);
+#else
 Vtx obj_s_tree5_v[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_tree5_v.inc"
 };
+#endif
 
 extern u8 obj_s_tree3_leaf_tex[], obj_s_tree4_trunk_tex[];
 

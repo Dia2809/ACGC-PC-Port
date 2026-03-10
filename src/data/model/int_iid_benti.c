@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iid_benti_v[];
+#ifdef TARGET_PC
+u16 int_iid_benchi_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iid_benchi_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iid_benchi_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_iid_benchi_se2_tex_pal[0x20 / sizeof(u16)];
+#else
 u16 int_iid_benchi_se2_tex_pal[] = {
 #include "assets/int_iid_benchi_se2_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_iid_benchi_se3_tex_pal[0x20 / sizeof(u16)];
+#else
 u16 int_iid_benchi_se3_tex_pal[] = {
 #include "assets/int_iid_benchi_se3_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_benchi_se1_tex[0x200];
+#else
 u8 int_iid_benchi_se1_tex[] = {
 #include "assets/int_iid_benchi_se1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_benchi_se2_tex[0x200];
+#else
 u8 int_iid_benchi_se2_tex[] = {
 #include "assets/int_iid_benchi_se2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_benchi_se3_tex[0x200];
+#else
 u8 int_iid_benchi_se3_tex[] = {
 #include "assets/int_iid_benchi_se3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_benchi_ue_tex[0x20];
+#else
 u8 int_iid_benchi_ue_tex[] = {
 #include "assets/int_iid_benchi_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_benchi_koshi_tex[0x40];
+#else
 u8 int_iid_benchi_koshi_tex[] = {
 #include "assets/int_iid_benchi_koshi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_benchi_koshi2_tex[0x40];
+#else
 u8 int_iid_benchi_koshi2_tex[] = {
 #include "assets/int_iid_benchi_koshi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_benchi_shita_tex[0x20];
+#else
 u8 int_iid_benchi_shita_tex[] = {
 #include "assets/int_iid_benchi_shita_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iid_benchi_ashi_tex[0x40];
+#else
 u8 int_iid_benchi_ashi_tex[] = {
 #include "assets/int_iid_benchi_ashi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iid_benti_v[0x900 / sizeof(Vtx)];
+#else
 Vtx int_iid_benti_v[] = {
 #include "assets/int_iid_benti_v.inc"
 };
+#endif
 
 Gfx int_iid_benti_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

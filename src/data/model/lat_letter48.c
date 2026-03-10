@@ -11,9 +11,13 @@ extern u8 lat_letter48_hn2_tex[];
 extern u8 lat_letter48_hn3_tex[];
 extern u16 lat_letter48_pal[];
 extern u8 lat_letter48_si_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter48_v[0x280 / sizeof(Vtx)];
+#else
 Vtx lat_letter48_v[] = {
 #include "assets/lat_letter48_v.inc"
 };
+#endif
 
 Gfx lat_letter48_model[] = {
     gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),

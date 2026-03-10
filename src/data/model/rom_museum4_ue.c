@@ -5,69 +5,133 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 rom_museum4_step_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 rom_museum4_step_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_museum4_step_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_s_stone_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_s_stone_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_stone_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_01_zassou_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_01_zassou_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_01_zassou_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_c_01_flower_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_c_01_flower_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_c_01_flower_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_b_01_flower_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_b_01_flower_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_b_01_flower_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_a_01_flower_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_a_01_flower_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_a_01_flower_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_tree_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_tree_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_tree_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tree_leaf_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_tree_leaf_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_tree_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_tree_trunk_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_tree_trunk_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_tree_trunk_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_c_01_flower_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_c_01_flower_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_c_01_flower_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_b_01_flower_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_b_01_flower_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_b_01_flower_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_a_01_flower_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_a_01_flower_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_a_01_flower_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_zassou_01_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_zassou_01_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_zassou_01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_stone_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_stone_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_stone_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_museum4_plate_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 rom_museum4_plate_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_museum4_plate_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_museum4_ue_v[0x1650 / sizeof(Vtx)];
+#else
 Vtx rom_museum4_ue_v[] = {
 #include "assets/rom_museum4_ue_v.inc"
 };
+#endif
 
 extern u16 bush_pal_dummy[];
 extern u8 bush_a_tex_dummy[];

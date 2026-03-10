@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx rom_train_out_v[];
+#ifdef TARGET_PC
+u16 rom_train_4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 rom_train_4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_train_4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_train_3_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_train_3_pal[] = {
 #include "assets/rom_train_out/rom_train_3_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_train_bgtree_tex[0x800];
+#else
 u8 rom_train_bgtree_tex[] = {
 #include "assets/rom_train_bgtree_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_train_bgsky_tex[0x80];
+#else
 u8 rom_train_bgsky_tex[] = {
 #include "assets/rom_train_bgsky_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_train_tunnel_tex[0x400];
+#else
 u8 rom_train_tunnel_tex[] = {
 #include "assets/rom_train_tunnel_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_train_bgcloud_tex_rgb_i4[0x800];
+#else
 u8 rom_train_bgcloud_tex_rgb_i4[] = {
 #include "assets/rom_train_bgcloud_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_train_glass_tex_rgb_i4[0x80];
+#else
 u8 rom_train_glass_tex_rgb_i4[] = {
 #include "assets/rom_train_glass_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_train_shine_tex_rgb_i4[0x100];
+#else
 u8 rom_train_shine_tex_rgb_i4[] = {
 #include "assets/rom_train_shine_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_train_out_v[0x300 / sizeof(Vtx)];
+#else
 Vtx rom_train_out_v[] = {
 #include "assets/rom_train_out_v.inc"
 };
+#endif
 
 Gfx rom_train_out_bgcloud_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -121,3 +157,10 @@ Gfx rom_train_out_bgsky_model[] = {
     gsSPNTriangles_5b(4, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_train_out_c(void) {
+    pc_load_asset("assets/rom_train_out/rom_train_3_pal.bin", rom_train_3_pal, 0x20, 0xD96BC0, 0, 1);
+}
+#endif

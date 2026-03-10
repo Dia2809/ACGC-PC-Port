@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx tol_umb_07_v[];
+#ifdef TARGET_PC
+static u16 tol_umb07_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 tol_umb07_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_umb_07/tol_umb07_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_umb07_kasa2_tex_txt[0x100];
+#else
 static u8 tol_umb07_kasa2_tex_txt[] = {
 #include "assets/tol_umb_07/tol_umb07_kasa2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_umb07_kasa1_tex_txt[0x400];
+#else
 static u8 tol_umb07_kasa1_tex_txt[] = {
 #include "assets/tol_umb_07/tol_umb07_kasa1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 tol_umb07_tuka_tex_txt[0x200];
+#else
 static u8 tol_umb07_tuka_tex_txt[] = {
 #include "assets/tol_umb_07/tol_umb07_tuka_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_umb_07_v[0x260 / sizeof(Vtx)];
+#else
 Vtx tol_umb_07_v[] = {
 #include "assets/tol_umb_07_v.inc"
 };
+#endif
 
 Gfx kasa_umb07_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -64,3 +84,13 @@ Gfx e_umb07_model[] = {
     gsSPNTriangles_5b(14, 11, 8, 16, 17, 18, 7, 18, 6, 18, 7, 16),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_tol_umb_07_c(void) {
+    pc_load_asset("assets/tol_umb_07/tol_umb07_pal.bin", tol_umb07_pal, 0x20, 0x8AB8C0, 0, 1);
+    pc_load_asset("assets/tol_umb_07/tol_umb07_kasa2_tex_txt.bin", tol_umb07_kasa2_tex_txt, 0x100, 0x8AB8E0, 0, 0);
+    pc_load_asset("assets/tol_umb_07/tol_umb07_kasa1_tex_txt.bin", tol_umb07_kasa1_tex_txt, 0x400, 0x8AB9E0, 0, 0);
+    pc_load_asset("assets/tol_umb_07/tol_umb07_tuka_tex_txt.bin", tol_umb07_tuka_tex_txt, 0x200, 0x8ABDE0, 0, 0);
+}
+#endif

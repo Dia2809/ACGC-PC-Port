@@ -1,9 +1,17 @@
+#ifdef TARGET_PC
+u16 int_nog_yubin_on_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 extern u16 int_nog_yubin_on_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/int_nog_yubin_on_pal.inc"
 };
+#endif
+#ifdef TARGET_PC
+u16 int_nog_yubin_off_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 extern u16 int_nog_yubin_off_pal[] ATTRIBUTE_ALIGN(32) = {
     #include "assets/int_nog_yubin_off_pal.inc"
 };
+#endif
 
 
 static void fNYB_ct(FTR_ACTOR* ftr_actor, u8* data) {

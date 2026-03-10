@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_uranai_v[];
+#ifdef TARGET_PC
+u16 int_nog_uranai_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_uranai_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_uranai_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_uranai_body_tex[0x400];
+#else
 u8 int_nog_uranai_body_tex[] = {
 #include "assets/int_nog_uranai_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_uranai_roof_tex[0x200];
+#else
 u8 int_nog_uranai_roof_tex[] = {
 #include "assets/int_nog_uranai_roof_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_uranai_grass_tex[0x80];
+#else
 u8 int_nog_uranai_grass_tex[] = {
 #include "assets/int_nog_uranai_grass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_uranai_v[0x250 / sizeof(Vtx)];
+#else
 Vtx int_nog_uranai_v[] = {
 #include "assets/int_nog_uranai_v.inc"
 };
+#endif
 
 Gfx int_nog_uranai_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

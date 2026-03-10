@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_clock_tailor_v[];
+#ifdef TARGET_PC
+u8 obj_clock_tailor_1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_clock_tailor_1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_clock_tailor_1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_clock_tailor_2_tex_txt[0x200];
+#else
 u8 obj_clock_tailor_2_tex_txt[] = {
 #include "assets/obj_clock_tailor_2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_clock_tailor_v[0x3E0 / sizeof(Vtx)];
+#else
 Vtx obj_clock_tailor_v[] = {
 #include "assets/obj_clock_tailor_v.inc"
 };
+#endif
 
 Gfx obj_clock_tailor_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

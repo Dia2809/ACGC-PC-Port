@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_oldclk01_v[];
+#ifdef TARGET_PC
+u16 int_sum_classicclock01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_classicclock01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_classicclock01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_oldclk01_glass_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_oldclk01_glass_pic_ci4_pal[] = {
 #include "assets/int_sum_oldclk01_glass_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_hand_txt[0x80];
+#else
 u8 int_sum_oldclk01_hand_txt[] = {
 #include "assets/int_sum_oldclk01_hand_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_frko_txt[0x80];
+#else
 u8 int_sum_oldclk01_frko_txt[] = {
 #include "assets/int_sum_oldclk01_frko_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_back_txt[0x180];
+#else
 u8 int_sum_oldclk01_back_txt[] = {
 #include "assets/int_sum_oldclk01_back_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_front2_txt[0x80];
+#else
 u8 int_sum_oldclk01_front2_txt[] = {
 #include "assets/int_sum_oldclk01_front2_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_side_txt[0x100];
+#else
 u8 int_sum_oldclk01_side_txt[] = {
 #include "assets/int_sum_oldclk01_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_front_txt[0x180];
+#else
 u8 int_sum_oldclk01_front_txt[] = {
 #include "assets/int_sum_oldclk01_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_roof_txt[0x40];
+#else
 u8 int_sum_oldclk01_roof_txt[] = {
 #include "assets/int_sum_oldclk01_roof_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_top_txt[0x40];
+#else
 u8 int_sum_oldclk01_top_txt[] = {
 #include "assets/int_sum_oldclk01_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_oldclk01_glass_txt[0x80];
+#else
 u8 int_sum_oldclk01_glass_txt[] = {
 #include "assets/int_sum_oldclk01_glass_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_oldclk01_v[0x460 / sizeof(Vtx)];
+#else
 Vtx int_sum_oldclk01_v[] = {
 #include "assets/int_sum_oldclk01_v.inc"
 };
+#endif
 
 Gfx int_sum_oldclk01_long_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

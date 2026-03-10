@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx crw_biscus4_v[];
+#ifdef TARGET_PC
+u16 crw_biscus4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 crw_biscus4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/crw_biscus4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 crw_biscus42_tex_txt[0x100];
+#else
 u8 crw_biscus42_tex_txt[] = {
 #include "assets/crw_biscus42_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 crw_biscus44_tex_txt[0x80];
+#else
 u8 crw_biscus44_tex_txt[] = {
 #include "assets/crw_biscus44_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 crw_biscus43_tex_txt[0x80];
+#else
 u8 crw_biscus43_tex_txt[] = {
 #include "assets/crw_biscus43_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 crw_biscus41_tex_txt[0x200];
+#else
 u8 crw_biscus41_tex_txt[] = {
 #include "assets/crw_biscus41_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx crw_biscus4_v[0x390 / sizeof(Vtx)];
+#else
 Vtx crw_biscus4_v[] = {
 #include "assets/crw_biscus4_v.inc"
 };
+#endif
 
 Gfx crw_biscus4_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

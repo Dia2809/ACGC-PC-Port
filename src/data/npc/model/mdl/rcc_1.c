@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx rcc_1_v[0x15B0 / sizeof(Vtx)];
+#else
 static Vtx rcc_1_v[] = {
 #include "assets/npc/mdl/rcc_1_v.inc"
 };
+#endif
 
 static Gfx head_rcc_model[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -689,3 +693,10 @@ static cKF_Joint_R_c cKF_je_r_rcc_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_rcc_1 = { 26, 14, cKF_je_r_rcc_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_rcc_1_c(void) {
+    pc_load_asset("assets/npc/mdl/rcc_1_v.bin", rcc_1_v, 0x15B0, 0x49E468, 0, 2);
+}
+#endif

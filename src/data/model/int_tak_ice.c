@@ -6,57 +6,109 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_ice_v[];
+#ifdef TARGET_PC
+u16 int_tak_ice_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_ice_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_ice_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_bou2_tex_txt[0x40];
+#else
 u8 int_tak_ice_bou2_tex_txt[] = {
 #include "assets/int_tak_ice_bou2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_wa1_tex_txt[0x80];
+#else
 u8 int_tak_ice_wa1_tex_txt[] = {
 #include "assets/int_tak_ice_wa1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_bou_tex_txt[0x20];
+#else
 u8 int_tak_ice_bou_tex_txt[] = {
 #include "assets/int_tak_ice_bou_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_block_tex_txt[0x80];
+#else
 u8 int_tak_ice_block_tex_txt[] = {
 #include "assets/int_tak_ice_block_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_top_tex_txt[0x40];
+#else
 u8 int_tak_ice_top_tex_txt[] = {
 #include "assets/int_tak_ice_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_body_tex_txt[0x200];
+#else
 u8 int_tak_ice_body_tex_txt[] = {
 #include "assets/int_tak_ice_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_dai_tex_txt[0x20];
+#else
 u8 int_tak_ice_dai_tex_txt[] = {
 #include "assets/int_tak_ice_dai_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_sara_tex_txt[0x80];
+#else
 u8 int_tak_ice_sara_tex_txt[] = {
 #include "assets/int_tak_ice_sara_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_cup_tex_txt[0x20];
+#else
 u8 int_tak_ice_cup_tex_txt[] = {
 #include "assets/int_tak_ice_cup_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_wa2_tex_txt[0x40];
+#else
 u8 int_tak_ice_wa2_tex_txt[] = {
 #include "assets/int_tak_ice_wa2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ice_yuki_tex_pic_i4[0x100];
+#else
 u8 int_tak_ice_yuki_tex_pic_i4[] = {
 #include "assets/int_tak_ice_yuki_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_ice_v[0x800 / sizeof(Vtx)];
+#else
 Vtx int_tak_ice_v[] = {
 #include "assets/int_tak_ice_v.inc"
 };
+#endif
 
 Gfx int_tak_ice_rot_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

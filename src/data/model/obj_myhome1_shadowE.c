@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_myhome1_shadowE[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_myhome1_shadowE[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome1_shadowE.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome1_shadowE_v[0x120 / sizeof(Vtx)];
+#else
 Vtx obj_myhome1_shadowE_v[] = {
 #include "assets/obj_myhome1_shadowE_v.inc"
 };
+#endif
 
 Gfx obj_myhome1_shadowET_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -30,13 +38,21 @@ Gfx obj_myhome1_shadowET_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_myhome1_shadowW[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_myhome1_shadowW[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome1_shadowW.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome1_shadowW_v[0x120 / sizeof(Vtx)];
+#else
 Vtx obj_myhome1_shadowW_v[] = {
 #include "assets/obj_myhome1_shadowW_v.inc"
 };
+#endif
 
 Gfx obj_myhome1_shadowWT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -55,13 +71,21 @@ Gfx obj_myhome1_shadowWT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_myhome2_shadowE[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_myhome2_shadowE[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome2_shadowE.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome2_shadowE_v[0x120 / sizeof(Vtx)];
+#else
 Vtx obj_myhome2_shadowE_v[] = {
 #include "assets/obj_myhome2_shadowE_v.inc"
 };
+#endif
 
 Gfx obj_myhome2_shadowET_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -80,13 +104,21 @@ Gfx obj_myhome2_shadowET_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_myhome2_shadowW[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_myhome2_shadowW[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome2_shadowW.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome2_shadowW_v[0x120 / sizeof(Vtx)];
+#else
 Vtx obj_myhome2_shadowW_v[] = {
 #include "assets/obj_myhome2_shadowW_v.inc"
 };
+#endif
 
 Gfx obj_myhome2_shadowWT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -105,13 +137,21 @@ Gfx obj_myhome2_shadowWT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_myhome3_shadowE[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_myhome3_shadowE[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome3_shadowE.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome3_shadowE_v[0x120 / sizeof(Vtx)];
+#else
 Vtx obj_myhome3_shadowE_v[] = {
 #include "assets/obj_myhome3_shadowE_v.inc"
 };
+#endif
 
 Gfx obj_myhome3_shadowET_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -130,13 +170,21 @@ Gfx obj_myhome3_shadowET_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_myhome3_shadowW[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_myhome3_shadowW[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome3_shadowW.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome3_shadowW_v[0x120 / sizeof(Vtx)];
+#else
 Vtx obj_myhome3_shadowW_v[] = {
 #include "assets/obj_myhome3_shadowW_v.inc"
 };
+#endif
 
 Gfx obj_myhome3_shadowWT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -155,13 +203,21 @@ Gfx obj_myhome3_shadowWT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_myhome4_shadowE[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_myhome4_shadowE[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome4_shadowE.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome4_shadowE_v[0x120 / sizeof(Vtx)];
+#else
 Vtx obj_myhome4_shadowE_v[] = {
 #include "assets/obj_myhome4_shadowE_v.inc"
 };
+#endif
 
 Gfx obj_myhome4_shadowET_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -180,13 +236,21 @@ Gfx obj_myhome4_shadowET_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 obj_myhome4_shadowW[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_myhome4_shadowW[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome4_shadowW.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_myhome4_shadowW_v[0x120 / sizeof(Vtx)];
+#else
 Vtx obj_myhome4_shadowW_v[] = {
 #include "assets/obj_myhome4_shadowW_v.inc"
 };
+#endif
 
 Gfx obj_myhome4_shadowWT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -1,5 +1,8 @@
 #include "m_field_make.h"
 
+#ifdef TARGET_PC
+u16 mFM_earth_pal[12][16];
+#else
 extern u16 mFM_earth_pal[mFM_FIELD_PAL_NUM][16] = {
   {
     #include "assets/mFM_earth_pal_0.inc"
@@ -38,3 +41,11 @@ extern u16 mFM_earth_pal[mFM_FIELD_PAL_NUM][16] = {
     #include "assets/mFM_earth_pal_11.inc"
   }
 };
+#endif
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_earth_pal_c(void) {
+    pc_load_asset("assets/mFM_earth_pal.bin", mFM_earth_pal, 0x180, 0x91FF40, 0, 1);
+}
+#endif

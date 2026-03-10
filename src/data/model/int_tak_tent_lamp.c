@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_tent_lamp_v[];
+#ifdef TARGET_PC
+u16 int_tak_tent_lamp_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_tent_lamp_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_tent_lamp_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_tent_lamp_tex[0x200];
+#else
 u8 int_tak_tent_lamp_tex[] = {
 #include "assets/int_tak_tent_lamp_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_tent_lamp_v[0x460 / sizeof(Vtx)];
+#else
 Vtx int_tak_tent_lamp_v[] = {
 #include "assets/int_tak_tent_lamp_v.inc"
 };
+#endif
 
 Gfx obj_tent_lamp_offT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ari_reizou01_v[];
+#ifdef TARGET_PC
+u16 int_ari_reizou01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ari_reizou01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ari_reizou01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ari_reizou01_00_tex[0x180];
+#else
 u8 int_ari_reizou01_00_tex[] = {
 #include "assets/int_ari_reizou01_00_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ari_reizou01_01_tex[0x300];
+#else
 u8 int_ari_reizou01_01_tex[] = {
 #include "assets/int_ari_reizou01_01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ari_reizou01_02_tex[0x180];
+#else
 u8 int_ari_reizou01_02_tex[] = {
 #include "assets/int_ari_reizou01_02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ari_reizou01_03_tex[0x180];
+#else
 u8 int_ari_reizou01_03_tex[] = {
 #include "assets/int_ari_reizou01_03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ari_reizou01_04_tex[0x80];
+#else
 u8 int_ari_reizou01_04_tex[] = {
 #include "assets/int_ari_reizou01_04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ari_reizou01_v[0x200 / sizeof(Vtx)];
+#else
 Vtx int_ari_reizou01_v[] = {
 #include "assets/int_ari_reizou01_v.inc"
 };
+#endif
 
 Gfx int_ari_reizou01_01_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

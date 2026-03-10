@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_hal_table01_v[];
+#ifdef TARGET_PC
+u16 int_sum_hal_table01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_hal_table01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_hal_table01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_table01_top_tex[0x200];
+#else
 u8 int_sum_hal_table01_top_tex[] = {
 #include "assets/int_sum_hal_table01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_table01_side_tex[0x100];
+#else
 u8 int_sum_hal_table01_side_tex[] = {
 #include "assets/int_sum_hal_table01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_table01_base_tex[0x80];
+#else
 u8 int_sum_hal_table01_base_tex[] = {
 #include "assets/int_sum_hal_table01_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_table01_stand_tex[0x400];
+#else
 u8 int_sum_hal_table01_stand_tex[] = {
 #include "assets/int_sum_hal_table01_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_table01_standside_tex[0x80];
+#else
 u8 int_sum_hal_table01_standside_tex[] = {
 #include "assets/int_sum_hal_table01_standside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_hal_table01_v[0x440 / sizeof(Vtx)];
+#else
 Vtx int_sum_hal_table01_v[] = {
 #include "assets/int_sum_hal_table01_v.inc"
 };
+#endif
 
 Gfx int_sum_hal_table01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

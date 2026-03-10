@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_ufo_v[];
+#ifdef TARGET_PC
+u16 int_tak_ufo_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_ufo_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_ufo_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ufo_yane_tex_txt[0x80];
+#else
 u8 int_tak_ufo_yane_tex_txt[] = {
 #include "assets/int_tak_ufo_yane_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ufo_body_tex_txt[0x100];
+#else
 u8 int_tak_ufo_body_tex_txt[] = {
 #include "assets/int_tak_ufo_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ufo_mado_tex_txt[0x80];
+#else
 u8 int_tak_ufo_mado_tex_txt[] = {
 #include "assets/int_tak_ufo_mado_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ufo_asi_tex_txt[0x80];
+#else
 u8 int_tak_ufo_asi_tex_txt[] = {
 #include "assets/int_tak_ufo_asi_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_ufo_hikari_tex_txt[0x80];
+#else
 u8 int_tak_ufo_hikari_tex_txt[] = {
 #include "assets/int_tak_ufo_hikari_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_ufo_v[0x5B0 / sizeof(Vtx)];
+#else
 Vtx int_tak_ufo_v[] = {
 #include "assets/int_tak_ufo_v.inc"
 };
+#endif
 
 Gfx int_tak_ufo_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

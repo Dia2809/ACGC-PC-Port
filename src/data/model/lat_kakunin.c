@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 lat_tegami_waku_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 lat_tegami_waku_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/lat_tegami_waku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx lat_kakunin_v[0x70 / sizeof(Vtx)];
+#else
 Vtx lat_kakunin_v[] = {
 #include "assets/lat_kakunin_v.inc"
 };
+#endif
 
 Gfx lat_kakunin_DL_mode[] = {
     gsDPPipeSync(),

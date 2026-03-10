@@ -5,22 +5,42 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_mwin_binsen1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_mwin_binsen1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_mwin_binsen1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_binsen1_tex[0x200];
+#else
 u8 inv_mwin_binsen1_tex[] = {
 #include "assets/inv_mwin_binsen1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_binsen2_tex[0x200];
+#else
 u8 inv_mwin_binsen2_tex[] = {
 #include "assets/inv_mwin_binsen2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_binsen3_tex[0x200];
+#else
 u8 inv_mwin_binsen3_tex[] = {
 #include "assets/inv_mwin_binsen3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_binsen4_tex[0x200];
+#else
 u8 inv_mwin_binsen4_tex[] = {
 #include "assets/inv_mwin_binsen4_tex.inc"
 };
+#endif

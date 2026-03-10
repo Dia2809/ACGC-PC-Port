@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_bront_tail_v[];
+#ifdef TARGET_PC
+static u16 int_din_bront_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_bront_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_bront_tail/int_din_bront_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_bront_kb2C_tex[0x80];
+#else
 u8 int_din_bront_kb2C_tex[] = {
 #include "assets/int_din_bront_kb2C_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_bront_baceC_tex[0x200];
+#else
 u8 int_din_bront_baceC_tex[] = {
 #include "assets/int_din_bront_baceC_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_bront_poleC_tex[0x80];
+#else
 u8 int_din_bront_poleC_tex[] = {
 #include "assets/int_din_bront_poleC_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_bront_tail_v[0x350 / sizeof(Vtx)];
+#else
 Vtx int_din_bront_tail_v[] = {
 #include "assets/int_din_bront_tail_v.inc"
 };
+#endif
 
 Gfx int_din_bront_tail_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -66,3 +86,10 @@ Gfx int_din_bront_tailT_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 0, 2, 3, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_bront_tail_c(void) {
+    pc_load_asset("assets/int_din_bront_tail/int_din_bront_pal.bin", int_din_bront_pal, 0x20, 0x90F460, 0, 1);
+}
+#endif

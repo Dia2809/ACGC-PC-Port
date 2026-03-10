@@ -8,9 +8,13 @@
 extern u8 lat_letter20_1[];
 extern u8 lat_letter20_sen[];
 extern u16 lat_letter20_pal[];
+#ifdef TARGET_PC
+Vtx lat_letter20_v[0x80 / sizeof(Vtx)];
+#else
 Vtx lat_letter20_v[] = {
 #include "assets/lat_letter20_v.inc"
 };
+#endif
 
 Gfx lat_letter20_model[] = {
     gsDPSetRenderMode(G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2),

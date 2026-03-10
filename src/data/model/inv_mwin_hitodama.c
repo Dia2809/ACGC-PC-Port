@@ -5,26 +5,50 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 inv_mwin_hitodama_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 inv_mwin_hitodama_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_mwin_hitodama_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_hitodama1_tex[0x200];
+#else
 u8 inv_mwin_hitodama1_tex[] = {
 #include "assets/inv_mwin_hitodama1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_hitodama2_tex[0x200];
+#else
 u8 inv_mwin_hitodama2_tex[] = {
 #include "assets/inv_mwin_hitodama2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_hitodama3_tex[0x200];
+#else
 u8 inv_mwin_hitodama3_tex[] = {
 #include "assets/inv_mwin_hitodama3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_hitodama4_tex[0x200];
+#else
 u8 inv_mwin_hitodama4_tex[] = {
 #include "assets/inv_mwin_hitodama4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_mwin_hitodama5_tex[0x200];
+#else
 u8 inv_mwin_hitodama5_tex[] = {
 #include "assets/inv_mwin_hitodama5_tex.inc"
 };
+#endif

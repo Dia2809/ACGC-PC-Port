@@ -3,13 +3,21 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 obj_w_tree_dead_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_tree_dead_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_tree_dead_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_tree1_dead_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_w_tree1_dead_v[] = {
 #include "assets/obj_w_tree1_dead_v.inc"
 };
+#endif
 
 Gfx obj_w_tree1_deadT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

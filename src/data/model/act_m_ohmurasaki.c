@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+static u16 act_m_ohmurasaki_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 act_m_ohmurasaki_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/act_m_ohmurasaki/act_m_ohmurasaki_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 act_m_ohmurasaki[0x200];
+#else
 static u8 act_m_ohmurasaki[] = {
 #include "assets/act_m_ohmurasaki/act_m_ohmurasaki.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx act_m_ohmurasaki_v[0xC0 / sizeof(Vtx)];
+#else
 static Vtx act_m_ohmurasaki_v[] = {
 #include "assets/act_m_ohmurasaki/act_m_ohmurasaki_v.inc"
 };
+#endif
 
 Gfx act_m_ohmurasaki1T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -45,3 +57,12 @@ Gfx act_m_ohmurasaki2T_model[] = {
     gsSPNTriangles_5b(4, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_act_m_ohmurasaki_c(void) {
+    pc_load_asset("assets/act_m_ohmurasaki/act_m_ohmurasaki_pal.bin", act_m_ohmurasaki_pal, 0x20, 0xB53510, 0, 1);
+    pc_load_asset("assets/act_m_ohmurasaki/act_m_ohmurasaki.bin", act_m_ohmurasaki, 0x200, 0xB53530, 0, 0);
+    pc_load_asset("assets/act_m_ohmurasaki/act_m_ohmurasaki_v.bin", act_m_ohmurasaki_v, 0xC0, 0xB53450, 0, 2);
+}
+#endif

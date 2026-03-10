@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_tri_clock01_v[];
+#ifdef TARGET_PC
+u16 int_nog_tri_clock01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_tri_clock01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_tri_clock01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_nog_tri_clock01_tex_txt[0x800];
+#else
 u8 obj_nog_tri_clock01_tex_txt[] = {
 #include "assets/obj_nog_tri_clock01_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_tri_clock01_v[0x520 / sizeof(Vtx)];
+#else
 Vtx int_nog_tri_clock01_v[] = {
 #include "assets/int_nog_tri_clock01_v.inc"
 };
+#endif
 
 Gfx int_nog_tri_clock01_long_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

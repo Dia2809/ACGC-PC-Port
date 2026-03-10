@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_uwa_cup01_v[];
+#ifdef TARGET_PC
+u16 int_sum_uwa_cup01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_uwa_cup01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_uwa_cup01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_cup01_side[0x100];
+#else
 u8 int_sum_uwa_cup01_side[] = {
 #include "assets/int_sum_uwa_cup01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_cup01_tote[0x100];
+#else
 u8 int_sum_uwa_cup01_tote[] = {
 #include "assets/int_sum_uwa_cup01_tote.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_cup01_kuchi[0x80];
+#else
 u8 int_sum_uwa_cup01_kuchi[] = {
 #include "assets/int_sum_uwa_cup01_kuchi.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_cup01_cup[0x80];
+#else
 u8 int_sum_uwa_cup01_cup[] = {
 #include "assets/int_sum_uwa_cup01_cup.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_cup01_top[0x80];
+#else
 u8 int_sum_uwa_cup01_top[] = {
 #include "assets/int_sum_uwa_cup01_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_cup01_cuptote[0x80];
+#else
 u8 int_sum_uwa_cup01_cuptote[] = {
 #include "assets/int_sum_uwa_cup01_cuptote.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_cup01_base[0x100];
+#else
 u8 int_sum_uwa_cup01_base[] = {
 #include "assets/int_sum_uwa_cup01_base.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_uwa_cup01_v[0x450 / sizeof(Vtx)];
+#else
 Vtx int_sum_uwa_cup01_v[] = {
 #include "assets/int_sum_uwa_cup01_v.inc"
 };
+#endif
 
 Gfx int_sum_uwa_cup01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

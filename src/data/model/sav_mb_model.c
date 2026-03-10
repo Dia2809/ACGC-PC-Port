@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 sav_nuki_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_nuki_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_nuki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx sav_v[0x40 / sizeof(Vtx)];
+#else
 Vtx sav_v[] = {
 #include "assets/sav_v.inc"
 };
+#endif
 
 Gfx sav_mb_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

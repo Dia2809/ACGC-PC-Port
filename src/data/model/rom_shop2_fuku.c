@@ -6,105 +6,205 @@
 #include "ef_effect_control.h"
 
 extern Vtx rom_shop2_fuku_v[];
+#ifdef TARGET_PC
+static u16 rom_conveni_ent_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_conveni_ent_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_shop2_fuku/rom_conveni_ent_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_conveni_cooler_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_conveni_cooler_pal[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_cooler_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop_kouhaku_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop_kouhaku_pal[] = {
 #include "assets/rom_shop2_fuku/rom_shop_kouhaku_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_conveni_tana_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_conveni_tana_pal[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_tana_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_conveni_floor_E_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_conveni_floor_E_pal[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_floor_E_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_conveni_leji_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_conveni_leji_pal[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_leji_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_conveni_mirror_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_conveni_mirror_rgb_ci4_pal[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_mirror_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_ent[0x200];
+#else
 static u8 rom_conveni_ent[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_ent.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_maruwaku[0x200];
+#else
 static u8 rom_conveni_maruwaku[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_maruwaku.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop_kouhaku_tex[0x800];
+#else
 static u8 rom_shop_kouhaku_tex[] = {
 #include "assets/rom_shop2_fuku/rom_shop_kouhaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_counter[0x200];
+#else
 static u8 rom_conveni_counter[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_counter.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_bou[0x80];
+#else
 static u8 rom_conveni_bou[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_bou.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_tana_bf2[0x80];
+#else
 static u8 rom_conveni_tana_bf2[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_tana_bf2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_floor_E[0x200];
+#else
 static u8 rom_conveni_floor_E[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_floor_E.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_tana_f[0x80];
+#else
 static u8 rom_conveni_tana_f[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_tana_f.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_convevi_kage1[0x100];
+#else
 static u8 rom_convevi_kage1[] = {
 #include "assets/rom_shop2_fuku/rom_convevi_kage1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_leji_e[0x80];
+#else
 static u8 rom_conveni_leji_e[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_leji_e.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_leji_k[0x80];
+#else
 static u8 rom_conveni_leji_k[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_leji_k.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_leji_s[0x80];
+#else
 static u8 rom_conveni_leji_s[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_leji_s.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_leji_t[0x80];
+#else
 static u8 rom_conveni_leji_t[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_leji_t.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_wall_C[0x400];
+#else
 static u8 rom_conveni_wall_C[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_wall_C.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_door[0x300];
+#else
 static u8 rom_conveni_door[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_door.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_tana_bf[0x80];
+#else
 static u8 rom_conveni_tana_bf[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_tana_bf.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_conveni_mirror_rgb_ci4[0x80];
+#else
 static u8 rom_conveni_mirror_rgb_ci4[] = {
 #include "assets/rom_shop2_fuku/rom_conveni_mirror_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_shop2_fuku_v[0xFE0 / sizeof(Vtx)];
+#else
 Vtx rom_shop2_fuku_v[] = {
 #include "assets/rom_shop2_fuku_v.inc"
 };
+#endif
 
 Gfx rom_shop2_fuku_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -261,3 +361,33 @@ Gfx rom_shop2_fuku_model[] = {
     gsSPNTrianglesInit_5b(2, 20, 21, 22, 21, 23, 22, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_shop2_fuku_c(void) {
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_ent_pal.bin", rom_conveni_ent_pal, 0x20, 0xC2CBC0, 0, 1);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_cooler_pal.bin", rom_conveni_cooler_pal, 0x20, 0xC2CBE0, 0, 1);
+    pc_load_asset("assets/rom_shop2_fuku/rom_shop_kouhaku_pal.bin", rom_shop_kouhaku_pal, 0x20, 0xC4F520, 0, 1);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_tana_pal.bin", rom_conveni_tana_pal, 0x20, 0xC2CC20, 0, 1);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_floor_E_pal.bin", rom_conveni_floor_E_pal, 0x20, 0xC2CC40, 0, 1);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_leji_pal.bin", rom_conveni_leji_pal, 0x20, 0xC2CC60, 0, 1);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_mirror_rgb_ci4_pal.bin", rom_conveni_mirror_rgb_ci4_pal, 0x20, 0xC2CC80, 0, 1);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_ent.bin", rom_conveni_ent, 0x200, 0xC2CCA0, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_maruwaku.bin", rom_conveni_maruwaku, 0x200, 0xC2CEA0, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_shop_kouhaku_tex.bin", rom_shop_kouhaku_tex, 0x800, 0xC53740, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_counter.bin", rom_conveni_counter, 0x200, 0xC2D8A0, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_bou.bin", rom_conveni_bou, 0x80, 0xC2DAA0, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_tana_bf2.bin", rom_conveni_tana_bf2, 0x80, 0xC2DB20, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_floor_E.bin", rom_conveni_floor_E, 0x200, 0xC2DBA0, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_tana_f.bin", rom_conveni_tana_f, 0x80, 0xC2DDA0, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_convevi_kage1.bin", rom_convevi_kage1, 0x100, 0xC2DE20, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_leji_e.bin", rom_conveni_leji_e, 0x80, 0xC2DF20, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_leji_k.bin", rom_conveni_leji_k, 0x80, 0xC2DFA0, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_leji_s.bin", rom_conveni_leji_s, 0x80, 0xC2E020, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_leji_t.bin", rom_conveni_leji_t, 0x80, 0xC2E0A0, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_wall_C.bin", rom_conveni_wall_C, 0x400, 0xC2E120, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_door.bin", rom_conveni_door, 0x300, 0xC2E520, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_tana_bf.bin", rom_conveni_tana_bf, 0x80, 0xC2E820, 0, 0);
+    pc_load_asset("assets/rom_shop2_fuku/rom_conveni_mirror_rgb_ci4.bin", rom_conveni_mirror_rgb_ci4, 0x80, 0xC2E8A0, 0, 0);
+}
+#endif

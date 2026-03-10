@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_gre_counter01_v[];
+#ifdef TARGET_PC
+u16 int_sum_gre_counter01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_gre_counter01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_gre_counter01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_counter01_front_tex[0x400];
+#else
 u8 int_sum_gre_counter01_front_tex[] = {
 #include "assets/int_sum_gre_counter01_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_counter01_side_tex[0x100];
+#else
 u8 int_sum_gre_counter01_side_tex[] = {
 #include "assets/int_sum_gre_counter01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_counter01_top_tex[0x100];
+#else
 u8 int_sum_gre_counter01_top_tex[] = {
 #include "assets/int_sum_gre_counter01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_counter01_can_tex[0x80];
+#else
 u8 int_sum_gre_counter01_can_tex[] = {
 #include "assets/int_sum_gre_counter01_can_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_counter01_wine_tex[0x100];
+#else
 u8 int_sum_gre_counter01_wine_tex[] = {
 #include "assets/int_sum_gre_counter01_wine_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_gre_counter01_shadow_tex[0x80];
+#else
 u8 int_sum_gre_counter01_shadow_tex[] = {
 #include "assets/int_sum_gre_counter01_shadow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_gre_counter01_v[0x480 / sizeof(Vtx)];
+#else
 Vtx int_sum_gre_counter01_v[] = {
 #include "assets/int_sum_gre_counter01_v.inc"
 };
+#endif
 
 Gfx int_sum_counter01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

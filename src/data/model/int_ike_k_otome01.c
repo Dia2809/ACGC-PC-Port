@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_k_otome01_v[];
+#ifdef TARGET_PC
+u16 int_ike_k_otome01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_k_otome01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_k_otome01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_otomefront_tex[0x80];
+#else
 u8 int_ike_k_otomefront_tex[] = {
 #include "assets/int_ike_k_otomefront_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_otomeleg_tex[0x200];
+#else
 u8 int_ike_k_otomeleg_tex[] = {
 #include "assets/int_ike_k_otomeleg_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_otomeside_tex[0x80];
+#else
 u8 int_ike_k_otomeside_tex[] = {
 #include "assets/int_ike_k_otomeside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_otometop_tex[0x80];
+#else
 u8 int_ike_k_otometop_tex[] = {
 #include "assets/int_ike_k_otometop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_otometle1_tex[0x200];
+#else
 u8 int_ike_k_otometle1_tex[] = {
 #include "assets/int_ike_k_otometle1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_otometle2_tex[0x80];
+#else
 u8 int_ike_k_otometle2_tex[] = {
 #include "assets/int_ike_k_otometle2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_k_otometle3_tex[0x80];
+#else
 u8 int_ike_k_otometle3_tex[] = {
 #include "assets/int_ike_k_otometle3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_k_otome01_v[0x6E0 / sizeof(Vtx)];
+#else
 Vtx int_ike_k_otome01_v[] = {
 #include "assets/int_ike_k_otome01_v.inc"
 };
+#endif
 
 Gfx int_ike_k_otome01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

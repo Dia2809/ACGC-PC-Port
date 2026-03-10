@@ -5,9 +5,13 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+Vtx inv_mb_v[0x80 / sizeof(Vtx)];
+#else
 Vtx inv_mb_v[] = {
 #include "assets/inv_mb_v.inc"
 };
+#endif
 
 Gfx inv_md_base_model_before[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

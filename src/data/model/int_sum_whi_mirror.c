@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_whi_mirror_v[];
+#ifdef TARGET_PC
+u16 int_sum_whi_mirror_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_whi_mirror_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_whi_mirror_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_whi_mirror_glass_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_whi_mirror_glass_tex_rgb_ci4_pal[] = {
 #include "assets/int_sum_whi_mirror_glass_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_mirror_front_tex[0x180];
+#else
 u8 int_sum_whi_mirror_front_tex[] = {
 #include "assets/int_sum_whi_mirror_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_mirror_side_tex[0x200];
+#else
 u8 int_sum_whi_mirror_side_tex[] = {
 #include "assets/int_sum_whi_mirror_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_mirror_short_tex[0x80];
+#else
 u8 int_sum_whi_mirror_short_tex[] = {
 #include "assets/int_sum_whi_mirror_short_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_mirror_mirror_tex[0x200];
+#else
 u8 int_sum_whi_mirror_mirror_tex[] = {
 #include "assets/int_sum_whi_mirror_mirror_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_mirror_top_tex[0x100];
+#else
 u8 int_sum_whi_mirror_top_tex[] = {
 #include "assets/int_sum_whi_mirror_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_mirror_up_tex[0x80];
+#else
 u8 int_sum_whi_mirror_up_tex[] = {
 #include "assets/int_sum_whi_mirror_up_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_mirror_glass_tex[0x80];
+#else
 u8 int_sum_whi_mirror_glass_tex[] = {
 #include "assets/int_sum_whi_mirror_glass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_whi_mirror_v[0x420 / sizeof(Vtx)];
+#else
 Vtx int_sum_whi_mirror_v[] = {
 #include "assets/int_sum_whi_mirror_v.inc"
 };
+#endif
 
 Gfx int_sum_whi_mirror_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

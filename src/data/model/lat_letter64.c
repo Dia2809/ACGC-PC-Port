@@ -10,9 +10,13 @@ extern u8 lat_letter64_aw_tex[];
 extern u16 lat_letter64_pal[];
 extern u8 lat_letter64_ti_tex[];
 extern u8 lat_letter64_ik_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter64_v[0x260 / sizeof(Vtx)];
+#else
 Vtx lat_letter64_v[] = {
 #include "assets/lat_letter64_v.inc"
 };
+#endif
 
 Gfx lat_letter64_model[] = {
     gsDPSetRenderMode(G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2),

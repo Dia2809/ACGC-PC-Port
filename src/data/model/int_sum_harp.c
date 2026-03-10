@@ -6,49 +6,93 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_harp_v[];
+#ifdef TARGET_PC
+u16 int_sum_harp_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_harp_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_harp_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_stand_tex[0x100];
+#else
 u8 int_sum_harp_stand_tex[] = {
 #include "assets/int_sum_harp_stand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_standdown_tex[0x100];
+#else
 u8 int_sum_harp_standdown_tex[] = {
 #include "assets/int_sum_harp_standdown_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_borad_tex[0x100];
+#else
 u8 int_sum_harp_borad_tex[] = {
 #include "assets/int_sum_harp_borad_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_boraddown_tex[0x100];
+#else
 u8 int_sum_harp_boraddown_tex[] = {
 #include "assets/int_sum_harp_boraddown_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_gen_tex[0x100];
+#else
 u8 int_sum_harp_gen_tex[] = {
 #include "assets/int_sum_harp_gen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_kata_tex[0x80];
+#else
 u8 int_sum_harp_kata_tex[] = {
 #include "assets/int_sum_harp_kata_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_pedal_tex[0x100];
+#else
 u8 int_sum_harp_pedal_tex[] = {
 #include "assets/int_sum_harp_pedal_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_base_tex[0x80];
+#else
 u8 int_sum_harp_base_tex[] = {
 #include "assets/int_sum_harp_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_harp_baseside_tex[0x80];
+#else
 u8 int_sum_harp_baseside_tex[] = {
 #include "assets/int_sum_harp_baseside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_harp_v[0x3F0 / sizeof(Vtx)];
+#else
 Vtx int_sum_harp_v[] = {
 #include "assets/int_sum_harp_v.inc"
 };
+#endif
 
 Gfx int_sum_harp_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

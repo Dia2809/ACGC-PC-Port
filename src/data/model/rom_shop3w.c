@@ -6,121 +6,237 @@
 #include "ef_effect_control.h"
 
 extern Vtx rom_shop3w_v[];
+#ifdef TARGET_PC
+static u16 rom_shop3_ent_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop3_ent_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_shop3w/rom_shop3_ent_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop3_tana_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop3_tana_pal[] = {
 #include "assets/rom_shop3w/rom_shop3_tana_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop3_leji_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop3_leji_pal[] = {
 #include "assets/rom_shop3w/rom_shop3_leji_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop3_desk_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop3_desk_pal[] = {
 #include "assets/rom_shop3w/rom_shop3_desk_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop3_mat_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop3_mat_pal[] = {
 #include "assets/rom_shop3w/rom_shop3_mat_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop3_bini_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop3_bini_pal[] = {
 #include "assets/rom_shop3w/rom_shop3_bini_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop3_wallC_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop3_wallC_pal[] = {
 #include "assets/rom_shop3w/rom_shop3_wallC_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_ent[0x200];
+#else
 static u8 rom_shop3_ent[] = {
 #include "assets/rom_shop3w/rom_shop3_ent.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop3_tana[0x100];
+#else
 u8 rom_shop3_tana[] = {
 #include "assets/rom_shop3_tana.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_kago_b[0x100];
+#else
 static u8 rom_shop3_kago_b[] = {
 #include "assets/rom_shop3w/rom_shop3_kago_b.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop3_kago_t[0x80];
+#else
 u8 rom_shop3_kago_t[] = {
 #include "assets/rom_shop3_kago_t.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_leji_f[0x80];
+#else
 static u8 rom_shop3_leji_f[] = {
 #include "assets/rom_shop3w/rom_shop3_leji_f.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_leji_k[0x80];
+#else
 static u8 rom_shop3_leji_k[] = {
 #include "assets/rom_shop3w/rom_shop3_leji_k.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_leji_b[0x80];
+#else
 static u8 rom_shop3_leji_b[] = {
 #include "assets/rom_shop3w/rom_shop3_leji_b.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_desk_a[0x200];
+#else
 static u8 rom_shop3_desk_a[] = {
 #include "assets/rom_shop3w/rom_shop3_desk_a.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_desk_b[0x80];
+#else
 static u8 rom_shop3_desk_b[] = {
 #include "assets/rom_shop3w/rom_shop3_desk_b.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_desk_c[0x200];
+#else
 static u8 rom_shop3_desk_c[] = {
 #include "assets/rom_shop3w/rom_shop3_desk_c.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_tana_t[0x80];
+#else
 static u8 rom_shop3_tana_t[] = {
 #include "assets/rom_shop3w/rom_shop3_tana_t.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop3_mat_a[0x80];
+#else
 u8 rom_shop3_mat_a[] = {
 #include "assets/rom_shop3_mat_a.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop3_mat_b[0x100];
+#else
 u8 rom_shop3_mat_b[] = {
 #include "assets/rom_shop3_mat_b.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_bini[0x80];
+#else
 static u8 rom_shop3_bini[] = {
 #include "assets/rom_shop3w/rom_shop3_bini.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_bini_b[0x80];
+#else
 static u8 rom_shop3_bini_b[] = {
 #include "assets/rom_shop3w/rom_shop3_bini_b.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_car[0x100];
+#else
 static u8 rom_shop3_car[] = {
 #include "assets/rom_shop3w/rom_shop3_car.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_bini_a[0x80];
+#else
 static u8 rom_shop3_bini_a[] = {
 #include "assets/rom_shop3w/rom_shop3_bini_a.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_wallC[0x800];
+#else
 static u8 rom_shop3_wallC[] = {
 #include "assets/rom_shop3w/rom_shop3_wallC.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_wallD[0x800];
+#else
 static u8 rom_shop3_wallD[] = {
 #include "assets/rom_shop3w/rom_shop3_wallD.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_floorE[0x200];
+#else
 static u8 rom_shop3_floorE[] = {
 #include "assets/rom_shop3w/rom_shop3_floorE.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop3_kage1[0x80];
+#else
 static u8 rom_shop3_kage1[] = {
 #include "assets/rom_shop3w/rom_shop3_kage1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_shop3w_v[0x2320 / sizeof(Vtx)];
+#else
 Vtx rom_shop3w_v[] = {
 #include "assets/rom_shop3w_v.inc"
 };
+#endif
 
 Gfx rom_shop3w_modelT[] = {
     gsSPEndDisplayList(),
@@ -383,3 +499,33 @@ Gfx rom_shop3w_model[] = {
     gsSPNTriangles_5b(11, 13, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_shop3w_c(void) {
+    pc_load_asset("assets/rom_shop3w/rom_shop3_ent_pal.bin", rom_shop3_ent_pal, 0x20, 0xC470A0, 0, 1);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_tana_pal.bin", rom_shop3_tana_pal, 0x20, 0xC470E0, 0, 1);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_leji_pal.bin", rom_shop3_leji_pal, 0x20, 0xC47100, 0, 1);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_desk_pal.bin", rom_shop3_desk_pal, 0x20, 0xC47120, 0, 1);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_mat_pal.bin", rom_shop3_mat_pal, 0x20, 0xC47160, 0, 1);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_bini_pal.bin", rom_shop3_bini_pal, 0x20, 0xC47140, 0, 1);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_wallC_pal.bin", rom_shop3_wallC_pal, 0x20, 0xC47180, 0, 1);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_ent.bin", rom_shop3_ent, 0x200, 0xC471A0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_kago_b.bin", rom_shop3_kago_b, 0x100, 0xC47CA0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_leji_f.bin", rom_shop3_leji_f, 0x80, 0xC47DA0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_leji_k.bin", rom_shop3_leji_k, 0x80, 0xC47E20, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_leji_b.bin", rom_shop3_leji_b, 0x80, 0xC47EA0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_desk_a.bin", rom_shop3_desk_a, 0x200, 0xC47F20, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_desk_b.bin", rom_shop3_desk_b, 0x80, 0xC48120, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_desk_c.bin", rom_shop3_desk_c, 0x200, 0xC481A0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_tana_t.bin", rom_shop3_tana_t, 0x80, 0xC483A0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_bini.bin", rom_shop3_bini, 0x80, 0xC48420, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_bini_b.bin", rom_shop3_bini_b, 0x80, 0xC484A0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_car.bin", rom_shop3_car, 0x100, 0xC48520, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_bini_a.bin", rom_shop3_bini_a, 0x80, 0xC48620, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_wallC.bin", rom_shop3_wallC, 0x800, 0xC486A0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_wallD.bin", rom_shop3_wallD, 0x800, 0xC48EA0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_floorE.bin", rom_shop3_floorE, 0x200, 0xC496A0, 0, 0);
+    pc_load_asset("assets/rom_shop3w/rom_shop3_kage1.bin", rom_shop3_kage1, 0x80, 0xC498A0, 0, 0);
+}
+#endif

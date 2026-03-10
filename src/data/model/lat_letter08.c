@@ -10,9 +10,13 @@ extern u8 lat_letter08_3[];
 extern u8 lat_letter08_1[];
 extern u8 lat_letter08_sen[];
 extern u8 lat_letter08_2[];
+#ifdef TARGET_PC
+Vtx lat_letter08_v[0x280 / sizeof(Vtx)];
+#else
 Vtx lat_letter08_v[] = {
 #include "assets/lat_letter08_v.inc"
 };
+#endif
 
 Gfx lat_letter08_win_model[] = {
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE),

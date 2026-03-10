@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yaz_fish_trophy_v[];
+#ifdef TARGET_PC
+u8 int_yaz_fish_trophy_fish_txt[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_yaz_fish_trophy_fish_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yaz_fish_trophy_fish_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_fish_trophy_grip_txt[0x100];
+#else
 u8 int_yaz_fish_trophy_grip_txt[] = {
 #include "assets/int_yaz_fish_trophy_grip_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_fish_trophy_base_txt[0x200];
+#else
 u8 int_yaz_fish_trophy_base_txt[] = {
 #include "assets/int_yaz_fish_trophy_base_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_fish_trophy_body_txt[0x100];
+#else
 u8 int_yaz_fish_trophy_body_txt[] = {
 #include "assets/int_yaz_fish_trophy_body_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yaz_fish_trophy_v[0x650 / sizeof(Vtx)];
+#else
 Vtx int_yaz_fish_trophy_v[] = {
 #include "assets/int_yaz_fish_trophy_v.inc"
 };
+#endif
 
 Gfx int_yaz_fish_trophy_cup_model[] = {
     gsSPTexture(4000, 4000, 0, G_TX_RENDERTILE, G_ON),

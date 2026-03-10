@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ike_art_sya_v[];
+#ifdef TARGET_PC
+u16 int_ike_art_sya_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_ike_art_sya_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ike_art_sya_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_art_syafront_tex[0x200];
+#else
 u8 int_ike_art_syafront_tex[] = {
 #include "assets/int_ike_art_syafront_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_art_syastand_tex[0x200];
+#else
 u8 int_ike_art_syastand_tex[] = {
 #include "assets/int_ike_art_syastand_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_art_sya_tex[0x300];
+#else
 u8 int_ike_art_sya_tex[] = {
 #include "assets/int_ike_art_sya_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ike_art_syagaku_tex[0x100];
+#else
 u8 int_ike_art_syagaku_tex[] = {
 #include "assets/int_ike_art_syagaku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ike_art_sya_v[0x340 / sizeof(Vtx)];
+#else
 Vtx int_ike_art_sya_v[] = {
 #include "assets/int_ike_art_sya_v.inc"
 };
+#endif
 
 Gfx int_ike_art_sya01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

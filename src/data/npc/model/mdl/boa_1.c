@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx boa_1_v[0x1C50 / sizeof(Vtx)];
+#else
 static Vtx boa_1_v[] = {
 #include "assets/npc/mdl/boa_1_v.inc"
 };
+#endif
 
 static Gfx head_boa_model[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -750,3 +754,10 @@ static cKF_Joint_R_c cKF_je_r_boa_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_boa_1 = { 26, 12, cKF_je_r_boa_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_boa_1_c(void) {
+    pc_load_asset("assets/npc/mdl/boa_1_v.bin", boa_1_v, 0x1C50, 0x5586E8, 0, 2);
+}
+#endif

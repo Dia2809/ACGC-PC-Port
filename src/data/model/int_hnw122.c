@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_hnw122_v[];
+#ifdef TARGET_PC
+u16 int_hnw122_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_hnw122_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_hnw122_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw122_arm_tex_txt[0x100];
+#else
 u8 int_hnw122_arm_tex_txt[] = {
 #include "assets/int_hnw122_arm_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw122_armtop_tex_txt[0x80];
+#else
 u8 int_hnw122_armtop_tex_txt[] = {
 #include "assets/int_hnw122_armtop_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw122_c_front_tex_txt[0x300];
+#else
 u8 int_hnw122_c_front_tex_txt[] = {
 #include "assets/int_hnw122_c_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw122_c_back_tex_txt[0x180];
+#else
 u8 int_hnw122_c_back_tex_txt[] = {
 #include "assets/int_hnw122_c_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw122_b_back_tex_txt[0x80];
+#else
 u8 int_hnw122_b_back_tex_txt[] = {
 #include "assets/int_hnw122_b_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hnw122_b_front_tex_txt[0x100];
+#else
 u8 int_hnw122_b_front_tex_txt[] = {
 #include "assets/int_hnw122_b_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_hnw122_v[0x470 / sizeof(Vtx)];
+#else
 Vtx int_hnw122_v[] = {
 #include "assets/int_hnw122_v.inc"
 };
+#endif
 
 Gfx int_hnw122_chest_model[] = {
     gsSPMatrix(anime_6_mdl, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),

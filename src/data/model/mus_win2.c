@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 mus_win_tagu_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 mus_win_tagu_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/mus_win_tagu_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx mus_win2_v[0x40 / sizeof(Vtx)];
+#else
 Vtx mus_win2_v[] = {
 #include "assets/mus_win2_v.inc"
 };
+#endif
 
 Gfx mus_tag_nes_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

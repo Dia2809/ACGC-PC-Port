@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_donko_v[];
+#ifdef TARGET_PC
+static u16 int_sum_donko_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_sum_donko_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_donko/int_sum_donko_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_donko_glass_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_donko_glass_pic_ci4_pal[] = {
 #include "assets/int_sum_donko_glass_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_donko_body_txt[0x200];
+#else
 u8 int_sum_donko_body_txt[] = {
 #include "assets/int_sum_donko_body_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_donko_side_txt[0x200];
+#else
 u8 int_sum_donko_side_txt[] = {
 #include "assets/int_sum_donko_side_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_donko_base_txt[0x80];
+#else
 u8 int_sum_donko_base_txt[] = {
 #include "assets/int_sum_donko_base_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_donko_etc_txt[0x80];
+#else
 u8 int_sum_donko_etc_txt[] = {
 #include "assets/int_sum_donko_etc_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_donko_top_txt[0x100];
+#else
 u8 int_sum_donko_top_txt[] = {
 #include "assets/int_sum_donko_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_donko_glass_txt[0x100];
+#else
 u8 int_sum_donko_glass_txt[] = {
 #include "assets/int_sum_donko_glass_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_donko_v[0x370 / sizeof(Vtx)];
+#else
 Vtx int_sum_donko_v[] = {
 #include "assets/int_sum_donko_v.inc"
 };
+#endif
 
 Gfx int_sum_donko_sakana_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -141,3 +177,10 @@ cKF_Joint_R_c cKF_je_r_int_sum_donko_tbl[] = {
 };
 
 cKF_Skeleton_R_c cKF_bs_r_int_sum_donko = { ARRAY_COUNT(cKF_je_r_int_sum_donko_tbl), 4, cKF_je_r_int_sum_donko_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_sum_donko_c(void) {
+    pc_load_asset("assets/int_sum_donko/int_sum_donko_pal.bin", int_sum_donko_pal, 0x20, 0xCB96C0, 0, 1);
+}
+#endif

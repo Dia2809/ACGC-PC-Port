@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_gong_v[];
+#ifdef TARGET_PC
+u16 int_nog_gong_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_gong_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_gong_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_gong_bell_tex_txt[0x100];
+#else
 u8 int_nog_gong_bell_tex_txt[] = {
 #include "assets/int_nog_gong_bell_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_gong_spring_tex_txt[0x200];
+#else
 u8 int_nog_gong_spring_tex_txt[] = {
 #include "assets/int_nog_gong_spring_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_gong_hammer_tex_txt[0x100];
+#else
 u8 int_nog_gong_hammer_tex_txt[] = {
 #include "assets/int_nog_gong_hammer_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_gong_base_tex_txt[0x200];
+#else
 u8 int_nog_gong_base_tex_txt[] = {
 #include "assets/int_nog_gong_base_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_gong_v[0x2E0 / sizeof(Vtx)];
+#else
 Vtx int_nog_gong_v[] = {
 #include "assets/int_nog_gong_v.inc"
 };
+#endif
 
 Gfx int_nog_gong_bell_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

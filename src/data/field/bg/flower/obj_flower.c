@@ -2,21 +2,37 @@
 
 // clang-format off
 
+#ifdef TARGET_PC
+static u8 obj_flower_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 obj_flower_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/flower/obj_flower_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx obj_flower_a_v[0x80 / sizeof(Vtx)];
+#else
 static Vtx obj_flower_a_v[] = {
 #include "assets/flower/obj_flower_a_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx obj_flower_b_v[0x80 / sizeof(Vtx)];
+#else
 static Vtx obj_flower_b_v[] = {
 #include "assets/flower/obj_flower_b_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx obj_flower_c_v[0x80 / sizeof(Vtx)];
+#else
 static Vtx obj_flower_c_v[] = {
 #include "assets/flower/obj_flower_c_v.inc"
 };
+#endif
 
 extern Gfx obj_flower_aT_mat_model[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -88,3 +104,13 @@ extern Gfx obj_flower_cT_gfx_model[] = {
 };
 
 // clang-format on
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_flower_obj_flower_c(void) {
+    pc_load_asset("assets/flower/obj_flower_tex.bin", obj_flower_tex, 0x800, 0x3E0700, 0, 0);
+    pc_load_asset("assets/flower/obj_flower_a_v.bin", obj_flower_a_v, 0x80, 0x3E04C0, 0, 2);
+    pc_load_asset("assets/flower/obj_flower_b_v.bin", obj_flower_b_v, 0x80, 0x3E0540, 0, 2);
+    pc_load_asset("assets/flower/obj_flower_c_v.bin", obj_flower_c_v, 0x80, 0x3E05C0, 0, 2);
+}
+#endif

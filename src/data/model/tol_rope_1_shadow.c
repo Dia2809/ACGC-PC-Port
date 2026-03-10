@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 tol_rope_1_shadow_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 tol_rope_1_shadow_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_rope_1_shadow_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_rope_1_shadow_v[0x200 / sizeof(Vtx)];
+#else
 Vtx tol_rope_1_shadow_v[] = {
 #include "assets/tol_rope_1_shadow_v.inc"
 };
+#endif
 
 Gfx tol_rope_1_shadowT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

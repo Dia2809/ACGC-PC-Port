@@ -5,29 +5,53 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kan_win_waku4_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 u8 kan_win_waku4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kan_win_waku4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_waku3_tex[0x1000];
+#else
 u8 kan_win_waku3_tex[] = {
 #include "assets/kan_win_waku3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_waku5_tex[0x1000];
+#else
 u8 kan_win_waku5_tex[] = {
 #include "assets/kan_win_waku5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_waku1a_tex[0x1000];
+#else
 u8 kan_win_waku1a_tex[] = {
 #include "assets/kan_win_waku1a_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 kan_win_waku1b_tex[0x1000];
+#else
 u8 kan_win_waku1b_tex[] = {
 #include "assets/kan_win_waku1b_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx kan_waku_v[0x140 / sizeof(Vtx)];
+#else
 Vtx kan_waku_v[] = {
 #include "assets/kan_waku_v.inc"
 };
+#endif
 
 Gfx kan_waku_w1T_model[] = {
     gsSPDisplayList(anime_4_txt + 0x58),

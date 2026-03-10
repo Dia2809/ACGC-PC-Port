@@ -16,9 +16,13 @@ extern u8 lat_letter63_cloth2_tex[];
 extern u8 lat_letter63_cloth8_tex[];
 extern u8 lat_letter63_cloth9_tex[];
 extern u8 lat_letter63_cloth3_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter63_v[0x640 / sizeof(Vtx)];
+#else
 Vtx lat_letter63_v[] = {
 #include "assets/lat_letter63_v.inc"
 };
+#endif
 
 Gfx lat_letter63_win_model[] = {
     gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_yaji_v[];
+#ifdef TARGET_PC
+u16 int_tak_yaji_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_yaji_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_yaji_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_yaji_top_tex[0x80];
+#else
 u8 int_tak_yaji_top_tex[] = {
 #include "assets/int_tak_yaji_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_yaji_front_tex[0x100];
+#else
 u8 int_tak_yaji_front_tex[] = {
 #include "assets/int_tak_yaji_front_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_yaji_side_tex[0x100];
+#else
 u8 int_tak_yaji_side_tex[] = {
 #include "assets/int_tak_yaji_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_yaji_back_tex[0x80];
+#else
 u8 int_tak_yaji_back_tex[] = {
 #include "assets/int_tak_yaji_back_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_yaji_v[0x180 / sizeof(Vtx)];
+#else
 Vtx int_tak_yaji_v[] = {
 #include "assets/int_tak_yaji_v.inc"
 };
+#endif
 
 Gfx int_tak_yaji_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

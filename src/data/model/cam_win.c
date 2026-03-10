@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx cam_win_v[];
+#ifdef TARGET_PC
+static u8 ct_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ct_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cam_win/ct_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cam_win_camera_tex[0x400];
+#else
 u8 cam_win_camera_tex[] = {
 #include "assets/cam_win_camera_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ban_win_waku3_tex[0x200];
+#else
 u8 ban_win_waku3_tex[] = {
 #include "assets/ban_win_waku3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 ban_win_waku4_tex[0x200];
+#else
 u8 ban_win_waku4_tex[] = {
 #include "assets/ban_win_waku4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yaji[0x80];
+#else
 static u8 yaji[] = {
 #include "assets/cam_win/yaji.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 elc_win_moji_tex[0x80];
+#else
 u8 elc_win_moji_tex[] = {
 #include "assets/elc_win_moji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 elc_win_z_tex[0x400];
+#else
 u8 elc_win_z_tex[] = {
 #include "assets/elc_win_z_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 elc_win_light_tex[0x400];
+#else
 u8 elc_win_light_tex[] = {
 #include "assets/elc_win_light_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx cam_win_v[0x400 / sizeof(Vtx)];
+#else
 Vtx cam_win_v[] = {
 #include "assets/cam_win_v.inc"
 };
+#endif
 
 Gfx cam_win_yajirushi_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -152,3 +188,11 @@ Gfx elc_win_moji2T_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 1, 3, 2, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_cam_win_c(void) {
+    pc_load_asset("assets/cam_win/ct_tex.bin", ct_tex, 0x400, 0xB5BD80, 0, 0);
+    pc_load_asset("assets/cam_win/yaji.bin", yaji, 0x80, 0xB5C980, 0, 0);
+}
+#endif

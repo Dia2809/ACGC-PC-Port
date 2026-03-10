@@ -1,56 +1,108 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_train_1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_train_1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_train_2_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_train_2_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_2_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_train_3_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_train_3_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_3_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_seat1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_seat1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_seat1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_seat2_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_seat2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_seat2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_floor_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_floor_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_floor_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_wall1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_wall1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_wall1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_roof_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_roof_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_roof_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_wall2_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_wall2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_wall2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_net_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_net_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_net_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_glass_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_glass_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_glass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_train_light_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_train_light_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_train_light_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx rom_train_in_v[0x20F0 / sizeof(Vtx)];
+#else
 static Vtx rom_train_in_v[] = {
 #include "assets/field/bg/rom_train_in_v.inc"
 };
+#endif
 
 extern Gfx rom_train_in_modelT[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -619,3 +671,22 @@ extern Gfx rom_train_in_model[] = {
                       ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_rom_train_in_rom_train_in_c(void) {
+    pc_load_asset("assets/field/bg/rom_train_1_pal.bin", rom_train_1_pal, 0x20, 0xD96B80, 0, 1);
+    pc_load_asset("assets/field/bg/rom_train_2_pal.bin", rom_train_2_pal, 0x20, 0xD96BA0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_train_3_pal.bin", rom_train_3_pal, 0x20, 0xD96BC0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_train_seat1_tex.bin", rom_train_seat1_tex, 0x800, 0xD96BE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_seat2_tex.bin", rom_train_seat2_tex, 0x800, 0xD973E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_floor_tex.bin", rom_train_floor_tex, 0x800, 0xD97BE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_wall1_tex.bin", rom_train_wall1_tex, 0x800, 0xD983E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_roof_tex.bin", rom_train_roof_tex, 0x800, 0xD98BE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_wall2_tex.bin", rom_train_wall2_tex, 0x800, 0xD993E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_net_tex.bin", rom_train_net_tex, 0x800, 0xD99BE0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_glass_tex.bin", rom_train_glass_tex, 0x80, 0xD9A3E0, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_light_tex.bin", rom_train_light_tex, 0x200, 0xD9A460, 0, 0);
+    pc_load_asset("assets/field/bg/rom_train_in_v.bin", rom_train_in_v, 0x20F0, 0xD9A660, 0, 2);
+}
+#endif

@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_blue_lowchest01_v[];
+#ifdef TARGET_PC
+u16 int_sum_blue_lowchest01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_blue_lowchest01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_blue_lowchest01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_lowchest01_hikiin_tex_txt[0x80];
+#else
 u8 int_sum_blue_lowchest01_hikiin_tex_txt[] = {
 #include "assets/int_sum_blue_lowchest01_hikiin_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_lowchest01_hiki_tex_txt[0x100];
+#else
 u8 int_sum_blue_lowchest01_hiki_tex_txt[] = {
 #include "assets/int_sum_blue_lowchest01_hiki_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_lowchest01_front_tex_txt[0x400];
+#else
 u8 int_sum_blue_lowchest01_front_tex_txt[] = {
 #include "assets/int_sum_blue_lowchest01_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_lowchest01_top_tex_txt[0x80];
+#else
 u8 int_sum_blue_lowchest01_top_tex_txt[] = {
 #include "assets/int_sum_blue_lowchest01_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_lowchest01_sibe_tex_txt[0x100];
+#else
 u8 int_sum_blue_lowchest01_sibe_tex_txt[] = {
 #include "assets/int_sum_blue_lowchest01_sibe_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_blue_lowchest01_v[0x340 / sizeof(Vtx)];
+#else
 Vtx int_sum_blue_lowchest01_v[] = {
 #include "assets/int_sum_blue_lowchest01_v.inc"
 };
+#endif
 
 Gfx sum_blue_lowchest01_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

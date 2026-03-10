@@ -3,109 +3,213 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 obj_hole_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_hole_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_hole_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole0_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole0_v[] = {
 #include "assets/obj_hole0_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole1_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole1_v[] = {
 #include "assets/obj_hole1_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole2_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole2_v[] = {
 #include "assets/obj_hole2_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole3_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole3_v[] = {
 #include "assets/obj_hole3_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole4_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole4_v[] = {
 #include "assets/obj_hole4_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole5_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole5_v[] = {
 #include "assets/obj_hole5_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole6_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole6_v[] = {
 #include "assets/obj_hole6_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole7_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole7_v[] = {
 #include "assets/obj_hole7_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole8_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole8_v[] = {
 #include "assets/obj_hole8_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole9_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole9_v[] = {
 #include "assets/obj_hole9_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole10_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole10_v[] = {
 #include "assets/obj_hole10_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole11_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole11_v[] = {
 #include "assets/obj_hole11_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole12_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole12_v[] = {
 #include "assets/obj_hole12_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole13_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole13_v[] = {
 #include "assets/obj_hole13_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole14_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole14_v[] = {
 #include "assets/obj_hole14_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole15_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole15_v[] = {
 #include "assets/obj_hole15_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole16_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole16_v[] = {
 #include "assets/obj_hole16_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole17_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole17_v[] = {
 #include "assets/obj_hole17_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole18_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole18_v[] = {
 #include "assets/obj_hole18_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole19_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole19_v[] = {
 #include "assets/obj_hole19_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole20_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole20_v[] = {
 #include "assets/obj_hole20_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole21_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole21_v[] = {
 #include "assets/obj_hole21_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole22_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole22_v[] = {
 #include "assets/obj_hole22_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole23_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole23_v[] = {
 #include "assets/obj_hole23_v.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_hole24_v[0x50 / sizeof(Vtx)];
+#else
 Vtx obj_hole24_v[] = {
 #include "assets/obj_hole24_v.inc"
 };
+#endif
 
 Gfx obj_hole0T_g_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

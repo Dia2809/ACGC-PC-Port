@@ -6,73 +6,141 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_museum5_v[];
+#ifdef TARGET_PC
+u16 obj_museum5_on_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_museum5_on_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_museum5_on_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_museum5_wallB_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_museum5_wallB_pal[] = {
 #include "assets/obj_museum5_wallB_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_museum5_soko_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_museum5_soko_pal[] = {
 #include "assets/obj_museum5_soko_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_museum5_hitode_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_museum5_hitode_pal[] = {
 #include "assets/obj_museum5_hitode_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_museum5_evw_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_museum5_evw_tex_rgb_ci4_pal[] = {
 #include "assets/obj_museum5_evw_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_isi_tex[0x800];
+#else
 u8 obj_museum5_isi_tex[] = {
 #include "assets/obj_museum5_isi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_pink_tex[0x800];
+#else
 u8 obj_museum5_pink_tex[] = {
 #include "assets/obj_museum5_pink_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_inside_tex[0x80];
+#else
 u8 obj_museum5_inside_tex[] = {
 #include "assets/obj_museum5_inside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_soko_tex[0x400];
+#else
 u8 obj_museum5_soko_tex[] = {
 #include "assets/obj_museum5_soko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_hitode1_tex[0x100];
+#else
 u8 obj_museum5_hitode1_tex[] = {
 #include "assets/obj_museum5_hitode1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_wallB_tex[0x400];
+#else
 u8 obj_museum5_wallB_tex[] = {
 #include "assets/obj_museum5_wallB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_hitode2_tex[0x100];
+#else
 u8 obj_museum5_hitode2_tex[] = {
 #include "assets/obj_museum5_hitode2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_fuji_tex[0x80];
+#else
 u8 obj_museum5_fuji_tex[] = {
 #include "assets/obj_museum5_fuji_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_evw_tex[0x80];
+#else
 u8 obj_museum5_evw_tex[] = {
 #include "assets/obj_museum5_evw_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_water1_tex_rgb_i4[0x200];
+#else
 u8 obj_museum5_water1_tex_rgb_i4[] = {
 #include "assets/obj_museum5_water1_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_museum5_water2_tex_rgb_i4[0x200];
+#else
 u8 obj_museum5_water2_tex_rgb_i4[] = {
 #include "assets/obj_museum5_water2_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_museum5_v[0x18D0 / sizeof(Vtx)];
+#else
 Vtx obj_museum5_v[] = {
 #include "assets/obj_museum5_v.inc"
 };
+#endif
 
 Gfx obj_museum5_modelT[] = {
     gsSPTexture(1500, 5000, 0, G_TX_RENDERTILE, G_ON),

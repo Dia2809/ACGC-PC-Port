@@ -5,6 +5,10 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 museum_fossil_actable[0x30];
+#else
 u8 museum_fossil_actable[] = {
 #include "assets/museum_fossil_actable.inc"
 };
+#endif

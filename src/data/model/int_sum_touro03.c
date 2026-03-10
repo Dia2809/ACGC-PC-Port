@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_touro03_v[];
+#ifdef TARGET_PC
+u16 int_sum_touro03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_touro03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_touro03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_madoside_tex[0x80];
+#else
 u8 int_sum_touro03_madoside_tex[] = {
 #include "assets/int_sum_touro03_madoside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_mado_tex[0x100];
+#else
 u8 int_sum_touro03_mado_tex[] = {
 #include "assets/int_sum_touro03_mado_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_yanetop_tex[0x80];
+#else
 u8 int_sum_touro03_yanetop_tex[] = {
 #include "assets/int_sum_touro03_yanetop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_standup_tex[0x80];
+#else
 u8 int_sum_touro03_standup_tex[] = {
 #include "assets/int_sum_touro03_standup_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_kazari_tex[0x80];
+#else
 u8 int_sum_touro03_kazari_tex[] = {
 #include "assets/int_sum_touro03_kazari_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_yane_tex[0x100];
+#else
 u8 int_sum_touro03_yane_tex[] = {
 #include "assets/int_sum_touro03_yane_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_foot_tex[0x200];
+#else
 u8 int_sum_touro03_foot_tex[] = {
 #include "assets/int_sum_touro03_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_footop_tex[0x100];
+#else
 u8 int_sum_touro03_footop_tex[] = {
 #include "assets/int_sum_touro03_footop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_kazaritop_tex[0x80];
+#else
 u8 int_sum_touro03_kazaritop_tex[] = {
 #include "assets/int_sum_touro03_kazaritop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_touro03_madotop_tex[0x80];
+#else
 u8 int_sum_touro03_madotop_tex[] = {
 #include "assets/int_sum_touro03_madotop_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_touro03_v[0x570 / sizeof(Vtx)];
+#else
 Vtx int_sum_touro03_v[] = {
 #include "assets/int_sum_touro03_v.inc"
 };
+#endif
 
 Gfx int_sum_touro03_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

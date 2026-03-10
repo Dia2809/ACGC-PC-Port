@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_sprinkler_v[];
+#ifdef TARGET_PC
+u8 int_noga_sprinkler[0x20] ATTRIBUTE_ALIGN(32);
+#else
 u8 int_noga_sprinkler[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_noga_sprinkler.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_sprinkler_tex[0x800];
+#else
 u8 int_nog_sprinkler_tex[] = {
 #include "assets/int_nog_sprinkler_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_sprinkler_fade_tex_rgb_i4[0x80];
+#else
 u8 int_nog_sprinkler_fade_tex_rgb_i4[] = {
 #include "assets/int_nog_sprinkler_fade_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_sprinkler_water_tex_rgb_i4[0x80];
+#else
 u8 int_nog_sprinkler_water_tex_rgb_i4[] = {
 #include "assets/int_nog_sprinkler_water_tex_rgb_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_sprinkler_v[0x630 / sizeof(Vtx)];
+#else
 Vtx int_nog_sprinkler_v[] = {
 #include "assets/int_nog_sprinkler_v.inc"
 };
+#endif
 
 Gfx int_nog_sprinkler_water_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

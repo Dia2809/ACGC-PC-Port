@@ -5,17 +5,29 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 int_iku_mario_renga_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iku_mario_renga_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iku_mario_renga_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_mario_renga_tex[0x400];
+#else
 u8 int_iku_mario_renga_tex[] = {
 #include "assets/int_iku_mario_renga_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iku_mario_renga_v[0x140 / sizeof(Vtx)];
+#else
 Vtx int_iku_mario_renga_v[] = {
 #include "assets/int_iku_mario_renga_v.inc"
 };
+#endif
 
 Gfx int_iku_mario_renga_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

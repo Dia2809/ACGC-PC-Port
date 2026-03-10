@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_hos_mario_hata_v[];
+#ifdef TARGET_PC
+u16 int_hos_mario_hata_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_hos_mario_hata_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_hos_mario_hata_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_mario_hata_b_tex_txt[0x80];
+#else
 u8 int_hos_mario_hata_b_tex_txt[] = {
 #include "assets/int_hos_mario_hata_b_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_mario_hata_c_tex_txt[0x80];
+#else
 u8 int_hos_mario_hata_c_tex_txt[] = {
 #include "assets/int_hos_mario_hata_c_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_hos_mario_hata_a_tex_txt[0x40];
+#else
 u8 int_hos_mario_hata_a_tex_txt[] = {
 #include "assets/int_hos_mario_hata_a_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_hos_mario_hata_v[0x4E0 / sizeof(Vtx)];
+#else
 Vtx int_hos_mario_hata_v[] = {
 #include "assets/int_hos_mario_hata_v.inc"
 };
+#endif
 
 Gfx int_hos_mario_hata_all_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

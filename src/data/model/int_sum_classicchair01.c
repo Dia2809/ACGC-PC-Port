@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_classicchair01_v[];
+#ifdef TARGET_PC
+u16 int_sum_classicchair01_pal01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_classicchair01_pal01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_classicchair01_pal01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchair01_seat[0x100];
+#else
 u8 int_sum_classicchair01_seat[] = {
 #include "assets/int_sum_classicchair01_seat.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchair01_back[0x200];
+#else
 u8 int_sum_classicchair01_back[] = {
 #include "assets/int_sum_classicchair01_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchair01_side[0x80];
+#else
 u8 int_sum_classicchair01_side[] = {
 #include "assets/int_sum_classicchair01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchair01_foot[0x100];
+#else
 u8 int_sum_classicchair01_foot[] = {
 #include "assets/int_sum_classicchair01_foot.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchair01_frontseat[0x40];
+#else
 u8 int_sum_classicchair01_frontseat[] = {
 #include "assets/int_sum_classicchair01_frontseat.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchair01_backfoot[0x100];
+#else
 u8 int_sum_classicchair01_backfoot[] = {
 #include "assets/int_sum_classicchair01_backfoot.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchairspindle[0x40];
+#else
 u8 int_sum_classicchairspindle[] = {
 #include "assets/int_sum_classicchairspindle.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_classicchair01_backseat[0x40];
+#else
 u8 int_sum_classicchair01_backseat[] = {
 #include "assets/int_sum_classicchair01_backseat.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_classicchair01_v[0x430 / sizeof(Vtx)];
+#else
 Vtx int_sum_classicchair01_v[] = {
 #include "assets/int_sum_classicchair01_v.inc"
 };
+#endif
 
 Gfx int_sum_classicchair01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

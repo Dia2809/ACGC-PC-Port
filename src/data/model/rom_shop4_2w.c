@@ -6,89 +6,173 @@
 #include "ef_effect_control.h"
 
 extern Vtx rom_shop4_2w_v[];
+#ifdef TARGET_PC
+static u16 rom_shop4_1_floor_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_shop4_1_floor_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_shop4_2w/rom_shop4_1_floor_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_shop4_2_stair_tex_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_shop4_2_stair_tex_pal[] = {
 #include "assets/rom_shop4_2_stair_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_1_table_tex_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop4_1_table_tex_pal[] = {
 #include "assets/rom_shop4_2w/rom_shop4_1_table_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_shop4_2_wall_tex_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_shop4_2_wall_tex_pal[] = {
 #include "assets/rom_shop4_2_wall_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_shop4_2_sign01_tex_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_shop4_2_sign01_tex_pal[] = {
 #include "assets/rom_shop4_2_sign01_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_shop4_2_sign01_us_tex_pal[0x20 / sizeof(u16)];
+#else
 static u16 rom_shop4_2_sign01_us_tex_pal[] = {
 #include "assets/rom_shop4_2w/rom_shop4_2_sign01_us_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 rom_shop4_2_space_tex_pal[0x20 / sizeof(u16)];
+#else
 u16 rom_shop4_2_space_tex_pal[] = {
 #include "assets/rom_shop4_2_space_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_floor01_tex[0x800];
+#else
 u8 rom_shop4_2_floor01_tex[] = {
 #include "assets/rom_shop4_2_floor01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_stair01_tex[0x100];
+#else
 u8 rom_shop4_2_stair01_tex[] = {
 #include "assets/rom_shop4_2_stair01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_table01_tex[0x100];
+#else
 u8 rom_shop4_2_table01_tex[] = {
 #include "assets/rom_shop4_2_table01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_table02_tex[0x100];
+#else
 u8 rom_shop4_2_table02_tex[] = {
 #include "assets/rom_shop4_2_table02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_wall01_tex[0x800];
+#else
 u8 rom_shop4_2_wall01_tex[] = {
 #include "assets/rom_shop4_2_wall01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_sign05_tex[0x80];
+#else
 u8 rom_shop4_2_sign05_tex[] = {
 #include "assets/rom_shop4_2_sign05_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_shop4_2_us_sign01_tex[0x400];
+#else
 static u8 rom_shop4_2_us_sign01_tex[] = {
 #include "assets/rom_shop4_2w/rom_shop4_2_us_sign01_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_space_tex[0x400];
+#else
 u8 rom_shop4_2_space_tex[] = {
 #include "assets/rom_shop4_2_space_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_wall02_tex[0x800];
+#else
 u8 rom_shop4_2_wall02_tex[] = {
 #include "assets/rom_shop4_2_wall02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_floor02_tex[0x800];
+#else
 u8 rom_shop4_2_floor02_tex[] = {
 #include "assets/rom_shop4_2_floor02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_floor03_tex[0x800];
+#else
 u8 rom_shop4_2_floor03_tex[] = {
 #include "assets/rom_shop4_2_floor03_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_floor04_tex[0x800];
+#else
 u8 rom_shop4_2_floor04_tex[] = {
 #include "assets/rom_shop4_2_floor04_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 rom_shop4_2_shadow02_tex[0x100];
+#else
 u8 rom_shop4_2_shadow02_tex[] = {
 #include "assets/rom_shop4_2_shadow02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx rom_shop4_2w_v[0xE20 / sizeof(Vtx)];
+#else
 Vtx rom_shop4_2w_v[] = {
 #include "assets/rom_shop4_2w_v.inc"
 };
+#endif
 
 Gfx rom_shop4_2w_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -209,3 +293,13 @@ Gfx rom_shop4_2w_model[] = {
     gsSPNTrianglesInit_5b(2, 0, 1, 2, 0, 2, 3, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_rom_shop4_2w_c(void) {
+    pc_load_asset("assets/rom_shop4_2w/rom_shop4_1_floor_tex_pal.bin", rom_shop4_1_floor_tex_pal, 0x20, 0xC3CC60, 0, 1);
+    pc_load_asset("assets/rom_shop4_2w/rom_shop4_1_table_tex_pal.bin", rom_shop4_1_table_tex_pal, 0x20, 0xC3CCA0, 0, 1);
+    pc_load_asset("assets/rom_shop4_2w/rom_shop4_2_sign01_us_tex_pal.bin", rom_shop4_2_sign01_us_tex_pal, 0x20, 0xC3CD00, 0, 1);
+    pc_load_asset("assets/rom_shop4_2w/rom_shop4_2_us_sign01_tex.bin", rom_shop4_2_us_sign01_tex, 0x400, 0xC3E0C0, 0, 0);
+}
+#endif

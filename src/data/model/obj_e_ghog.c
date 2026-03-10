@@ -5,45 +5,85 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_e_ghog_m_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_e_ghog_m_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_e_ghog_m_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 obj_e_ghog_n_pal[0x20 / sizeof(u16)];
+#else
 u16 obj_e_ghog_n_pal[] = {
 #include "assets/obj_e_ghog_n_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_ghog_m1[0x40];
+#else
 u8 obj_e_ghog_m1[] = {
 #include "assets/obj_e_ghog_m1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_ghog_m2[0x40];
+#else
 u8 obj_e_ghog_m2[] = {
 #include "assets/obj_e_ghog_m2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_ghog_m3[0x100];
+#else
 u8 obj_e_ghog_m3[] = {
 #include "assets/obj_e_ghog_m3.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_ghog_m4[0x80];
+#else
 u8 obj_e_ghog_m4[] = {
 #include "assets/obj_e_ghog_m4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_ghog_m5[0x80];
+#else
 u8 obj_e_ghog_m5[] = {
 #include "assets/obj_e_ghog_m5.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_ghog_n2[0x80];
+#else
 u8 obj_e_ghog_n2[] = {
 #include "assets/obj_e_ghog_n2.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_e_ghog_n1[0x200];
+#else
 u8 obj_e_ghog_n1[] = {
 #include "assets/obj_e_ghog_n1.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_e_ghog_v[0x450 / sizeof(Vtx)];
+#else
 Vtx obj_e_ghog_v[] = {
 #include "assets/obj_e_ghog_v.inc"
 };
+#endif
 
 Gfx obj_e_ghog_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

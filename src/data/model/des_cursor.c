@@ -5,49 +5,93 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 des_cursor_undo_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_undo_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_undo_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_sp_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_sp_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_sp_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_sen_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_sen_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_sen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_pen_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_pen_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_pen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_nuri_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_nuri_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_nuri_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_mark1_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_mark1_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_mark1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_mark2_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_mark2_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_mark2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_mark3_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_mark3_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_mark3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_mark4_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_mark4_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_mark4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_cursor_waku_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_cursor_waku_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_cursor_waku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx des_cursor_v[0x2C0 / sizeof(Vtx)];
+#else
 Vtx des_cursor_v[] = {
 #include "assets/des_cursor_v.inc"
 };
+#endif
 
 Gfx des_cursor_mark1_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

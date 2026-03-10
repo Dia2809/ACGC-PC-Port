@@ -1,9 +1,13 @@
 #include "c_keyframe.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static Vtx kab_1_v[0x18C0 / sizeof(Vtx)];
+#else
 static Vtx kab_1_v[] = {
 #include "assets/npc/mdl/kab_1_v.inc"
 };
+#endif
 
 static Gfx head_kab_model[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -629,3 +633,10 @@ static cKF_Joint_R_c cKF_je_r_kab_1_tbl[] = {
 // clang-format on
 
 extern cKF_Skeleton_R_c cKF_bs_r_kab_1 = { 26, 12, cKF_je_r_kab_1_tbl };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_npc_model_mdl_kab_1_c(void) {
+    pc_load_asset("assets/npc/mdl/kab_1_v.bin", kab_1_v, 0x18C0, 0x68FFF0, 0, 2);
+}
+#endif

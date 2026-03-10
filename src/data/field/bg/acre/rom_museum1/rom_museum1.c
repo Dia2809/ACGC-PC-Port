@@ -1,72 +1,140 @@
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u16 rom_museum1_mado_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum1_mado_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_mado_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_museum1_step_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum1_step_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_step_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_museum1_floor_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum1_floor_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_floor_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 rom_museum1_wall_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 rom_museum1_wall_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_wall_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_mado1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_mado1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_mado1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_step1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_step1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_step1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_step2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_step2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_step2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_floorA_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_floorA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_floorA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_floorB_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_floorB_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_floorB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_mado2_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_mado2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_mado2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_sign1_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_sign1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_sign1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_wallA_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_wallA_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_wallA_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_wallB_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_wallB_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_wallB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_sign2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_sign2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_sign2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_sign3_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_sign3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_sign3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 rom_museum1_sign4_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 rom_museum1_sign4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/field/bg/rom_museum1_sign4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx rom_museum1_v[0x12C0 / sizeof(Vtx)];
+#else
 static Vtx rom_museum1_v[] = {
 #include "assets/field/bg/rom_museum1_v.inc"
 };
+#endif
 
 extern Gfx rom_museum1_modelT[] = {
     gsSPTexture(0, 0, 0, 0, G_ON),
@@ -410,3 +478,26 @@ extern Gfx rom_museum1_model[] = {
                       ),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_field_bg_acre_rom_museum1_rom_museum1_c(void) {
+    pc_load_asset("assets/field/bg/rom_museum1_mado_pal.bin", rom_museum1_mado_pal, 0x20, 0xBA38E0, 0, 1);
+    pc_load_asset("assets/field/bg/rom_museum1_step_pal.bin", rom_museum1_step_pal, 0x20, 0xBA3900, 0, 1);
+    pc_load_asset("assets/field/bg/rom_museum1_floor_pal.bin", rom_museum1_floor_pal, 0x20, 0xBA3920, 0, 1);
+    pc_load_asset("assets/field/bg/rom_museum1_wall_pal.bin", rom_museum1_wall_pal, 0x20, 0xBA3940, 0, 1);
+    pc_load_asset("assets/field/bg/rom_museum1_mado1_tex.bin", rom_museum1_mado1_tex, 0x800, 0xBA3960, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_step1_tex.bin", rom_museum1_step1_tex, 0x800, 0xBA4160, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_step2_tex.bin", rom_museum1_step2_tex, 0x400, 0xBA4960, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_floorA_tex.bin", rom_museum1_floorA_tex, 0x800, 0xBA4D60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_floorB_tex.bin", rom_museum1_floorB_tex, 0x800, 0xBA5560, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_mado2_tex.bin", rom_museum1_mado2_tex, 0x800, 0xBA5D60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_sign1_tex.bin", rom_museum1_sign1_tex, 0x400, 0xBA6560, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_wallA_tex.bin", rom_museum1_wallA_tex, 0x800, 0xBA6960, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_wallB_tex.bin", rom_museum1_wallB_tex, 0x800, 0xBA7160, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_sign2_tex.bin", rom_museum1_sign2_tex, 0x400, 0xBA7960, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_sign3_tex.bin", rom_museum1_sign3_tex, 0x400, 0xBA7D60, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_sign4_tex.bin", rom_museum1_sign4_tex, 0x400, 0xBA8160, 0, 0);
+    pc_load_asset("assets/field/bg/rom_museum1_v.bin", rom_museum1_v, 0x12C0, 0xBA8560, 0, 2);
+}
+#endif

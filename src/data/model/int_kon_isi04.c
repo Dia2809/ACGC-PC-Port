@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_isi04_v[];
+#ifdef TARGET_PC
+u16 int_kon_isi04_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_isi04_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_isi04_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_isi04_yoko_tex[0x100];
+#else
 u8 int_kon_isi04_yoko_tex[] = {
 #include "assets/int_kon_isi04_yoko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_isi04_ue_tex[0x180];
+#else
 u8 int_kon_isi04_ue_tex[] = {
 #include "assets/int_kon_isi04_ue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_isi04_mae_tex[0x480];
+#else
 u8 int_kon_isi04_mae_tex[] = {
 #include "assets/int_kon_isi04_mae_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_isi04_koke_tex[0x80];
+#else
 u8 int_kon_isi04_koke_tex[] = {
 #include "assets/int_kon_isi04_koke_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_isi04_v[0x350 / sizeof(Vtx)];
+#else
 Vtx int_kon_isi04_v[] = {
 #include "assets/int_kon_isi04_v.inc"
 };
+#endif
 
 Gfx int_kon_isi04_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

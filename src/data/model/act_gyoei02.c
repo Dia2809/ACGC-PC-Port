@@ -3,25 +3,45 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 act_gyoei02_0_int_i4[0x100];
+#else
 u8 act_gyoei02_0_int_i4[] = {
 #include "assets/act_gyoei02_0_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_gyoei02_1_int_i4[0x100];
+#else
 u8 act_gyoei02_1_int_i4[] = {
 #include "assets/act_gyoei02_1_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_gyoei02_2_int_i4[0x100];
+#else
 u8 act_gyoei02_2_int_i4[] = {
 #include "assets/act_gyoei02_2_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_gyoei02_3_int_i4[0x100];
+#else
 u8 act_gyoei02_3_int_i4[] = {
 #include "assets/act_gyoei02_3_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_gyoei02_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx act_gyoei02_00_v[] = {
 #include "assets/act_gyoei02_00_v.inc"
 };
+#endif
 
 Gfx act_gyoei02_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

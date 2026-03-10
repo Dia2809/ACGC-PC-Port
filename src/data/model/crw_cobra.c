@@ -6,17 +6,29 @@
 #include "ef_effect_control.h"
 
 extern Vtx crw_cobra_v[];
+#ifdef TARGET_PC
+u16 crw_cobra_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 crw_cobra_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/crw_cobra_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 crw_cobra_tex_txt[0x200];
+#else
 u8 crw_cobra_tex_txt[] = {
 #include "assets/crw_cobra_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx crw_cobra_v[0x300 / sizeof(Vtx)];
+#else
 Vtx crw_cobra_v[] = {
 #include "assets/crw_cobra_v.inc"
 };
+#endif
 
 Gfx crw_cobra_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

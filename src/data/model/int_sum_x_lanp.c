@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_x_lanp_v[];
+#ifdef TARGET_PC
+u16 int_sum_x_lanp_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_x_lanp_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_x_lanp_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_lanp_base[0x400];
+#else
 u8 int_sum_x_lanp_base[] = {
 #include "assets/int_sum_x_lanp_base.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_lanp_head[0x80];
+#else
 u8 int_sum_x_lanp_head[] = {
 #include "assets/int_sum_x_lanp_head.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_lanp_top[0x100];
+#else
 u8 int_sum_x_lanp_top[] = {
 #include "assets/int_sum_x_lanp_top.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_lanp_shade[0x100];
+#else
 u8 int_sum_x_lanp_shade[] = {
 #include "assets/int_sum_x_lanp_shade.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_lanp_stand[0x100];
+#else
 u8 int_sum_x_lanp_stand[] = {
 #include "assets/int_sum_x_lanp_stand.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_lanp_hiki[0x80];
+#else
 u8 int_sum_x_lanp_hiki[] = {
 #include "assets/int_sum_x_lanp_hiki.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_x_lanp_v[0x3B0 / sizeof(Vtx)];
+#else
 Vtx int_sum_x_lanp_v[] = {
 #include "assets/int_sum_x_lanp_v.inc"
 };
+#endif
 
 Gfx int_sum_x_lanp_onT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

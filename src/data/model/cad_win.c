@@ -5,69 +5,133 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 cad_win_ws4_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 cad_win_ws4_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_ws4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 cad_win_ws1_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 cad_win_ws1_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_ws1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 cad_win_ws2_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 cad_win_ws2_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_ws2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 cad_win_ws3_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 cad_win_ws3_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_ws3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 cad_win_nuno_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 cad_win_nuno_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_nuno_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_w1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 cad_win_w1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_w2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 cad_win_w2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_w3_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 cad_win_w3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_w4_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 cad_win_w4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cad_win_w4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 inv_carde_waku_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 inv_carde_waku_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/inv_carde_waku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_ws4_tex_rgb_ci4[0x80];
+#else
 u8 cad_win_ws4_tex_rgb_ci4[] = {
 #include "assets/cad_win_ws4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_ws1_tex_rgb_ci4[0x400];
+#else
 u8 cad_win_ws1_tex_rgb_ci4[] = {
 #include "assets/cad_win_ws1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_ws2_tex_rgb_ci4[0x200];
+#else
 u8 cad_win_ws2_tex_rgb_ci4[] = {
 #include "assets/cad_win_ws2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_ws3_tex_rgb_ci4[0x200];
+#else
 u8 cad_win_ws3_tex_rgb_ci4[] = {
 #include "assets/cad_win_ws3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cad_win_nuno_tex_rgb_ci4[0x200];
+#else
 u8 cad_win_nuno_tex_rgb_ci4[] = {
 #include "assets/cad_win_nuno_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx cad_win_v[0x500 / sizeof(Vtx)];
+#else
 Vtx cad_win_v[] = {
 #include "assets/cad_win_v.inc"
 };
+#endif
 
 Gfx cad_win_w9_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, cad_win_ws4_tex_rgb_ci4_pal),

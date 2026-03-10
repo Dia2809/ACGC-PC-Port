@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_uwa_poto01_v[];
+#ifdef TARGET_PC
+u16 int_sum_uwa_poto01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_uwa_poto01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_uwa_poto01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_poto01_back[0x100];
+#else
 u8 int_sum_uwa_poto01_back[] = {
 #include "assets/int_sum_uwa_poto01_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_poto01_front[0x300];
+#else
 u8 int_sum_uwa_poto01_front[] = {
 #include "assets/int_sum_uwa_poto01_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_poto01_stand[0x100];
+#else
 u8 int_sum_uwa_poto01_stand[] = {
 #include "assets/int_sum_uwa_poto01_stand.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_uwa_poto01_v[0x200 / sizeof(Vtx)];
+#else
 Vtx int_sum_uwa_poto01_v[] = {
 #include "assets/int_sum_uwa_poto01_v.inc"
 };
+#endif
 
 Gfx int_sum_uwa_poto01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

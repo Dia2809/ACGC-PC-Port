@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_whi_sofa01_v[];
+#ifdef TARGET_PC
+u16 int_sum_whi_sofa01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_whi_sofa01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_whi_sofa01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_sofa01_seat_tex[0x200];
+#else
 u8 int_sum_whi_sofa01_seat_tex[] = {
 #include "assets/int_sum_whi_sofa01_seat_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_sofa01_heard_tex[0x100];
+#else
 u8 int_sum_whi_sofa01_heard_tex[] = {
 #include "assets/int_sum_whi_sofa01_heard_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_sofa01_arm_tex[0x100];
+#else
 u8 int_sum_whi_sofa01_arm_tex[] = {
 #include "assets/int_sum_whi_sofa01_arm_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_sofa01_foot_tex[0x100];
+#else
 u8 int_sum_whi_sofa01_foot_tex[] = {
 #include "assets/int_sum_whi_sofa01_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_sofa01_side_tex[0x200];
+#else
 u8 int_sum_whi_sofa01_side_tex[] = {
 #include "assets/int_sum_whi_sofa01_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_whi_sofa01_top_tex[0x80];
+#else
 u8 int_sum_whi_sofa01_top_tex[] = {
 #include "assets/int_sum_whi_sofa01_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_whi_sofa01_v[0x3C0 / sizeof(Vtx)];
+#else
 Vtx int_sum_whi_sofa01_v[] = {
 #include "assets/int_sum_whi_sofa01_v.inc"
 };
+#endif
 
 Gfx int_sum_whi_sofa01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

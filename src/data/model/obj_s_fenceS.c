@@ -3,9 +3,13 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+Vtx obj_s_fenceS_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_s_fenceS_v[] = {
 #include "assets/obj_s_fenceS_v.inc"
 };
+#endif
 extern u16 obj_fence_pal[];
 extern u8 obj_s_fence_tex[];
 

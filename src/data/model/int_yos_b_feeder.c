@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_yos_b_feeder_v[];
+#ifdef TARGET_PC
+u16 int_yaz_b_feeder_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_yaz_b_feeder_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_yaz_b_feeder_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_b_feeder_pole_tex_txt[0x1C0];
+#else
 u8 int_yaz_b_feeder_pole_tex_txt[] = {
 #include "assets/int_yaz_b_feeder_pole_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_b_feeder_ana_tex_txt[0x180];
+#else
 u8 int_yaz_b_feeder_ana_tex_txt[] = {
 #include "assets/int_yaz_b_feeder_ana_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_b_feeder_ura_tex_txt[0x180];
+#else
 u8 int_yaz_b_feeder_ura_tex_txt[] = {
 #include "assets/int_yaz_b_feeder_ura_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_b_feeder_wood_tex_txt[0x80];
+#else
 u8 int_yaz_b_feeder_wood_tex_txt[] = {
 #include "assets/int_yaz_b_feeder_wood_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_b_feeder_yane_tex_txt[0x80];
+#else
 u8 int_yaz_b_feeder_yane_tex_txt[] = {
 #include "assets/int_yaz_b_feeder_yane_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_yaz_b_feeder_wa_tex_txt[0x200];
+#else
 u8 int_yaz_b_feeder_wa_tex_txt[] = {
 #include "assets/int_yaz_b_feeder_wa_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_yos_b_feeder_v[0x410 / sizeof(Vtx)];
+#else
 Vtx int_yos_b_feeder_v[] = {
 #include "assets/int_yos_b_feeder_v.inc"
 };
+#endif
 
 Gfx int_yaz_b_feeder_body_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

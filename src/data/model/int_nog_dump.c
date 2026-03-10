@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_dump_v[];
+#ifdef TARGET_PC
+u16 int_nog_dump_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_dump_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_dump_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u16 obj_item_trash_pal[0x20 / sizeof(u16)];
+#else
 static u16 obj_item_trash_pal[] = {
 #include "assets/int_nog_dump/obj_item_trash_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_dump_body_tex[0x200];
+#else
 u8 int_nog_dump_body_tex[] = {
 #include "assets/int_nog_dump_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_dump_grass_tex[0x200];
+#else
 u8 int_nog_dump_grass_tex[] = {
 #include "assets/int_nog_dump_grass_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_dump_wire_tex[0x100];
+#else
 u8 int_nog_dump_wire_tex[] = {
 #include "assets/int_nog_dump_wire_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_dump_v[0xDC0 / sizeof(Vtx)];
+#else
 Vtx int_nog_dump_v[] = {
 #include "assets/int_nog_dump_v.inc"
 };
+#endif
 
 Gfx int_nog_dump_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -114,3 +138,10 @@ Gfx int_nog_dumpT_model[] = {
     gsSPNTriangles_5b(8, 4, 1, 7, 6, 10, 7, 10, 11, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_nog_dump_c(void) {
+    pc_load_asset("assets/int_nog_dump/obj_item_trash_pal.bin", obj_item_trash_pal, 0x20, 0xBD4080, 0, 1);
+}
+#endif

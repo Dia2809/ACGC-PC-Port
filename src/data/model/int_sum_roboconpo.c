@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_roboconpo_v[];
+#ifdef TARGET_PC
+u16 int_roboconpo_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_roboconpo_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_roboconpo_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboconpo_stand_tex_txt[0x80];
+#else
 u8 int_sum_roboconpo_stand_tex_txt[] = {
 #include "assets/int_sum_roboconpo_stand_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboconpo_body_tex_txt[0x400];
+#else
 u8 int_sum_roboconpo_body_tex_txt[] = {
 #include "assets/int_sum_roboconpo_body_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboconpo_spika_tex_txt[0x100];
+#else
 u8 int_sum_roboconpo_spika_tex_txt[] = {
 #include "assets/int_sum_roboconpo_spika_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboconpo_top_tex_txt[0x100];
+#else
 u8 int_sum_roboconpo_top_tex_txt[] = {
 #include "assets/int_sum_roboconpo_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboconpo_face1_TA_tex_txt[0x80];
+#else
 u8 int_sum_roboconpo_face1_TA_tex_txt[] = {
 #include "assets/int_sum_roboconpo_face1_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboconpo_face2_TA_tex_txt[0x80];
+#else
 u8 int_sum_roboconpo_face2_TA_tex_txt[] = {
 #include "assets/int_sum_roboconpo_face2_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboconpo_hed_tex_txt[0x80];
+#else
 u8 int_sum_roboconpo_hed_tex_txt[] = {
 #include "assets/int_sum_roboconpo_hed_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_roboconpo_neck_tex_txt[0x80];
+#else
 u8 int_sum_roboconpo_neck_tex_txt[] = {
 #include "assets/int_sum_roboconpo_neck_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_roboconpo_v[0x4F0 / sizeof(Vtx)];
+#else
 Vtx int_sum_roboconpo_v[] = {
 #include "assets/int_sum_roboconpo_v.inc"
 };
+#endif
 
 Gfx int_sum_roboconpo_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,21 +5,37 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_station1_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_station1_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_station1_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_station1_t2_tex_txt[0x800];
+#else
 u8 obj_s_station1_t2_tex_txt[] = {
 #include "assets/obj_s_station1_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_station1_t1_tex_txt[0x800];
+#else
 u8 obj_s_station1_t1_tex_txt[] = {
 #include "assets/obj_s_station1_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_station1_v[0x7D0 / sizeof(Vtx)];
+#else
 Vtx obj_s_station1_v[] = {
 #include "assets/obj_s_station1_v.inc"
 };
+#endif
 
 Gfx obj_s_station1_t3_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -109,21 +125,37 @@ cKF_Animation_R_c cKF_ba_r_obj_s_station1 = {
     cKF_ckcb_r_obj_s_station1_tbl, NULL, NULL, cKF_c_obj_s_station1_tbl, -1, 2
 };
 
+#ifdef TARGET_PC
+u8 obj_w_station1_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_station1_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_station1_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_station1_t2_tex_txt[0x800];
+#else
 u8 obj_w_station1_t2_tex_txt[] = {
 #include "assets/obj_w_station1_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_station1_t1_tex_txt[0x800];
+#else
 u8 obj_w_station1_t1_tex_txt[] = {
 #include "assets/obj_w_station1_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_station1_v[0x7B0 / sizeof(Vtx)];
+#else
 Vtx obj_w_station1_v[] = {
 #include "assets/obj_w_station1_v.inc"
 };
+#endif
 
 Gfx obj_w_station1_t3_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -216,21 +248,37 @@ cKF_Animation_R_c cKF_ba_r_obj_w_station1 = {
     cKF_ckcb_r_obj_w_station1_tbl, NULL, NULL, cKF_c_obj_w_station1_tbl, -1, 2
 };
 
+#ifdef TARGET_PC
+u8 obj_s_station2_t1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_station2_t1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_station2_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_station2_t2_tex_txt[0x800];
+#else
 u8 obj_s_station2_t2_tex_txt[] = {
 #include "assets/obj_s_station2_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_station2_t3_tex_txt[0x800];
+#else
 u8 obj_s_station2_t3_tex_txt[] = {
 #include "assets/obj_s_station2_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_station2_v[0x710 / sizeof(Vtx)];
+#else
 Vtx obj_s_station2_v[] = {
 #include "assets/obj_s_station2_v.inc"
 };
+#endif
 
 Gfx obj_s_station2_t3_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -319,21 +367,37 @@ s16 cKF_c_obj_s_station2_tbl[] = { 0, 0, 0, 0, 0, 0, 0, 0, 900, 0, 0, 0, 0, 0, 9
 cKF_Animation_R_c cKF_ba_r_obj_s_station2 = { cKF_ckcb_r_obj_s_station2_tbl, NULL, NULL,
                                               cKF_c_obj_s_station2_tbl,      -1,   25 };
 
+#ifdef TARGET_PC
+u8 obj_w_station2_t1_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_station2_t1_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_station2_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_station2_t2_tex_txt[0x800];
+#else
 u8 obj_w_station2_t2_tex_txt[] = {
 #include "assets/obj_w_station2_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_station2_t3_tex_txt[0x800];
+#else
 u8 obj_w_station2_t3_tex_txt[] = {
 #include "assets/obj_w_station2_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_station2_v[0x730 / sizeof(Vtx)];
+#else
 Vtx obj_w_station2_v[] = {
 #include "assets/obj_w_station2_v.inc"
 };
+#endif
 
 Gfx obj_w_station2_t3_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -422,21 +486,37 @@ s16 cKF_c_obj_w_station2_tbl[] = { 0, 0, 0, 0, 0, 0, 0, 0, 900, 0, 0, 0, 0, 0, 9
 cKF_Animation_R_c cKF_ba_r_obj_w_station2 = { cKF_ckcb_r_obj_w_station2_tbl, NULL, NULL,
                                               cKF_c_obj_w_station2_tbl,      -1,   25 };
 
+#ifdef TARGET_PC
+u8 obj_s_station3_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_station3_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_station3_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_station3_t1_tex_txt[0x800];
+#else
 u8 obj_s_station3_t1_tex_txt[] = {
 #include "assets/obj_s_station3_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_station3_t2_tex_txt[0x800];
+#else
 u8 obj_s_station3_t2_tex_txt[] = {
 #include "assets/obj_s_station3_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_station3_v[0x660 / sizeof(Vtx)];
+#else
 Vtx obj_s_station3_v[] = {
 #include "assets/obj_s_station3_v.inc"
 };
+#endif
 
 Gfx obj_s_station3_t3_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -525,21 +605,37 @@ s16 cKF_c_obj_s_station3_tbl[] = { 0, 0, 0, 0, 0, 0, 0, 0, 900, 0, 0, 0, 0, 0, 9
 cKF_Animation_R_c cKF_ba_r_obj_s_station3 = { cKF_ckcb_r_obj_s_station3_tbl, NULL, NULL,
                                               cKF_c_obj_s_station3_tbl,      -1,   25 };
 
+#ifdef TARGET_PC
+u8 obj_w_station3_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_station3_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_station3_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_station3_t2_tex_txt[0x800];
+#else
 u8 obj_w_station3_t2_tex_txt[] = {
 #include "assets/obj_w_station3_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_station3_t1_tex_txt[0x800];
+#else
 u8 obj_w_station3_t1_tex_txt[] = {
 #include "assets/obj_w_station3_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_station3_v[0x670 / sizeof(Vtx)];
+#else
 Vtx obj_w_station3_v[] = {
 #include "assets/obj_w_station3_v.inc"
 };
+#endif
 
 Gfx obj_w_station3_t3_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

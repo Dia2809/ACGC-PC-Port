@@ -5,13 +5,21 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 kan_win_eki_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 kan_win_eki_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/kan_win_eki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx kan_eki_v[0x40 / sizeof(Vtx)];
+#else
 Vtx kan_eki_v[] = {
 #include "assets/kan_eki_v.inc"
 };
+#endif
 
 Gfx kan_win_ekiT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx tol_umb_04_v[];
+#ifdef TARGET_PC
+u16 tol_umb_04_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 tol_umb_04_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/tol_umb_04_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_umb_04_kasa1_tex_txt[0x100];
+#else
 u8 tol_umb_04_kasa1_tex_txt[] = {
 #include "assets/tol_umb_04_kasa1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_umb_04_kasa2_tex_txt[0x100];
+#else
 u8 tol_umb_04_kasa2_tex_txt[] = {
 #include "assets/tol_umb_04_kasa2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 tol_umb_04_tuka_tex_txt[0x200];
+#else
 u8 tol_umb_04_tuka_tex_txt[] = {
 #include "assets/tol_umb_04_tuka_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx tol_umb_04_v[0x380 / sizeof(Vtx)];
+#else
 Vtx tol_umb_04_v[] = {
 #include "assets/tol_umb_04_v.inc"
 };
+#endif
 
 Gfx kasa_umb04_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

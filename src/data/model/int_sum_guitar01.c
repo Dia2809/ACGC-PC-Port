@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_guitar01_v[];
+#ifdef TARGET_PC
+u16 int_sum_guitar01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_guitar01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_guitar01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar01_front[0x400];
+#else
 u8 int_sum_guitar01_front[] = {
 #include "assets/int_sum_guitar01_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar01_back[0x100];
+#else
 u8 int_sum_guitar01_back[] = {
 #include "assets/int_sum_guitar01_back.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar01_side[0x80];
+#else
 u8 int_sum_guitar01_side[] = {
 #include "assets/int_sum_guitar01_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar01_neck[0x80];
+#else
 u8 int_sum_guitar01_neck[] = {
 #include "assets/int_sum_guitar01_neck.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar01_headstock[0x80];
+#else
 u8 int_sum_guitar01_headstock[] = {
 #include "assets/int_sum_guitar01_headstock.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar01_hand[0x80];
+#else
 u8 int_sum_guitar01_hand[] = {
 #include "assets/int_sum_guitar01_hand.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_guitar01_chest[0x100];
+#else
 u8 int_sum_guitar01_chest[] = {
 #include "assets/int_sum_guitar01_chest.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_guitar01_v[0x3C0 / sizeof(Vtx)];
+#else
 Vtx int_sum_guitar01_v[] = {
 #include "assets/int_sum_guitar01_v.inc"
 };
+#endif
 
 Gfx int_sum_guitar01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_moti_v[];
+#ifdef TARGET_PC
+u16 int_tak_moti_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_tak_moti_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_moti_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_moti_body_tex[0x400];
+#else
 u8 int_tak_moti_body_tex[] = {
 #include "assets/int_tak_moti_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_moti_maru_tex[0x80];
+#else
 u8 int_tak_moti_maru_tex[] = {
 #include "assets/int_tak_moti_maru_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_moti_moti_tex[0x80];
+#else
 u8 int_tak_moti_moti_tex[] = {
 #include "assets/int_tak_moti_moti_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_moti_kine_tex[0x200];
+#else
 u8 int_tak_moti_kine_tex[] = {
 #include "assets/int_tak_moti_kine_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_moti_v[0x4C0 / sizeof(Vtx)];
+#else
 Vtx int_tak_moti_v[] = {
 #include "assets/int_tak_moti_v.inc"
 };
+#endif
 
 Gfx int_tak_moti_onT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -5,97 +5,189 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_dai_tex_txt[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_douzou_dai_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_douzou_dai_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_name_tex_txt[0x80];
+#else
 u8 obj_s_douzou_name_tex_txt[] = {
 #include "assets/obj_s_douzou_name_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_b1_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_b1_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_b1_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_b2_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_b2_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_b2_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_b3_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_b3_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_b3_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_b4_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_b4_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_b4_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_b5_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_b5_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_b5_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_b6_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_b6_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_b6_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_b7_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_b7_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_b7_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_b8_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_b8_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_b8_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_bm1_tex_pic_i4[0x80];
+#else
 u8 obj_s_douzou_bm1_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_bm1_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_bm2_tex_pic_i4[0x80];
+#else
 u8 obj_s_douzou_bm2_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_bm2_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_g1_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_g1_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_g1_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_g2_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_g2_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_g2_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_g3_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_g3_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_g3_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_g4_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_g4_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_g4_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_g5_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_g5_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_g5_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_g6_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_g6_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_g6_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_g8_tex_pic_i4[0x100];
+#else
 u8 obj_s_douzou_g8_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_g8_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_gm1_tex_pic_i4[0x80];
+#else
 u8 obj_s_douzou_gm1_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_gm1_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_gm2_tex_pic_i4[0x80];
+#else
 u8 obj_s_douzou_gm2_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_gm2_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_douzou_metal_tex_pic_i4[0x40];
+#else
 u8 obj_s_douzou_metal_tex_pic_i4[] = {
 #include "assets/obj_s_douzou_metal_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_douzou_v[0x11B0 / sizeof(Vtx)];
+#else
 Vtx obj_s_douzou_v[] = {
 #include "assets/obj_s_douzou_v.inc"
 };
+#endif
 
 Gfx obj_s_douzou_name_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -289,97 +381,189 @@ cKF_Joint_R_c cKF_je_r_obj_s_douzou_tbl[] = {
 
 cKF_Skeleton_R_c cKF_bs_r_obj_s_douzou = { ARRAY_COUNT(cKF_je_r_obj_s_douzou_tbl), 8, cKF_je_r_obj_s_douzou_tbl };
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_dai_tex_txt[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_douzou_dai_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_douzou_dai_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_name_tex_txt[0x80];
+#else
 u8 obj_w_douzou_name_tex_txt[] = {
 #include "assets/obj_w_douzou_name_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_b1_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_b1_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_b1_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_b2_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_b2_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_b2_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_b3_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_b3_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_b3_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_b4_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_b4_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_b4_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_b5_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_b5_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_b5_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_b6_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_b6_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_b6_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_b7_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_b7_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_b7_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_b8_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_b8_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_b8_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_bm1_tex_pic_i4[0x80];
+#else
 u8 obj_w_douzou_bm1_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_bm1_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_bm2_tex_pic_i4[0x80];
+#else
 u8 obj_w_douzou_bm2_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_bm2_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_g1_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_g1_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_g1_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_g2_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_g2_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_g2_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_g3_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_g3_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_g3_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_g4_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_g4_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_g4_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_g5_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_g5_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_g5_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_g6_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_g6_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_g6_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_g8_tex_pic_i4[0x100];
+#else
 u8 obj_w_douzou_g8_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_g8_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_gm1_tex_pic_i4[0x80];
+#else
 u8 obj_w_douzou_gm1_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_gm1_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_gm2_tex_pic_i4[0x80];
+#else
 u8 obj_w_douzou_gm2_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_gm2_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_douzou_metal_tex_pic_i4[0x40];
+#else
 u8 obj_w_douzou_metal_tex_pic_i4[] = {
 #include "assets/obj_w_douzou_metal_tex_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_douzou_v[0x11B0 / sizeof(Vtx)];
+#else
 Vtx obj_w_douzou_v[] = {
 #include "assets/obj_w_douzou_v.inc"
 };
+#endif
 
 Gfx obj_w_douzou_name_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

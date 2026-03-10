@@ -17,13 +17,21 @@ Gfx lat_sousa_mode[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 lat_sousa_sp_tex[0x80];
+#else
 u8 lat_sousa_sp_tex[] = {
 #include "assets/lat_sousa_sp_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx lat_sp_v[0x40 / sizeof(Vtx)];
+#else
 Vtx lat_sp_v[] = {
 #include "assets/lat_sp_v.inc"
 };
+#endif
 
 Gfx lat_sousa_spT_model[] = {
     gsDPPipeSync(),
@@ -45,13 +53,21 @@ Gfx lat_sousa_spT_model[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 lat_tegami_end_tex[0x400];
+#else
 u8 lat_tegami_end_tex[] = {
 #include "assets/lat_tegami_end_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx lat_end_v[0x40 / sizeof(Vtx)];
+#else
 Vtx lat_end_v[] = {
 #include "assets/lat_end_v.inc"
 };
+#endif
 
 Gfx lat_end_cordT_model[] = {
     gsDPPipeSync(),

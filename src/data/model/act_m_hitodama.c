@@ -4,17 +4,29 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+u8 act_m_hitodama_h2_txt[0x200];
+#else
 u8 act_m_hitodama_h2_txt[] = {
 #include "assets/act_m_hitodama_h2_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 act_m_hitodama_h1_txt[0x200];
+#else
 u8 act_m_hitodama_h1_txt[] = {
 #include "assets/act_m_hitodama_h1_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx act_m_hitodama_v[0x80 / sizeof(Vtx)];
+#else
 Vtx act_m_hitodama_v[] = {
 #include "assets/act_m_hitodama_v.inc"
 };
+#endif
 
 Gfx act_m_hitodama_b_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

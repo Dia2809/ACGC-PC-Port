@@ -5,9 +5,13 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 lat_atena_win_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 lat_atena_win_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/lat_atena_win_tex.inc"
 };
+#endif
 
 Gfx lat_atena_kageT_model[] = {
     gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0),

@@ -5,29 +5,53 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+static u16 obj_w_kamakura_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 obj_w_kamakura_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_kamakura/obj_w_kamakura_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_kamakura_t1_tex[0x800];
+#else
 u8 obj_w_kamakura_t1_tex[] = {
 #include "assets/obj_w_kamakura_t1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_kamakura_t2_tex[0x800];
+#else
 u8 obj_w_kamakura_t2_tex[] = {
 #include "assets/obj_w_kamakura_t2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_kamakura_t3_tex[0x800];
+#else
 u8 obj_w_kamakura_t3_tex[] = {
 #include "assets/obj_w_kamakura_t3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_kamakura_light02_tex[0x80];
+#else
 u8 obj_w_kamakura_light02_tex[] = {
 #include "assets/obj_w_kamakura_light02_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_kamakura_v[0x540 / sizeof(Vtx)];
+#else
 Vtx obj_w_kamakura_v[] = {
 #include "assets/obj_w_kamakura_v.inc"
 };
+#endif
 
 Gfx obj_w_kamakura_light_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -115,3 +139,10 @@ Gfx kamakura_DL_model[] = {
     gsSPDisplayList(obj_w_kamakura_t3_onT_model),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_w_kamakura_c(void) {
+    pc_load_asset("assets/obj_w_kamakura/obj_w_kamakura_pal.bin", obj_w_kamakura_pal, 0x20, 0x812A00, 0, 1);
+}
+#endif

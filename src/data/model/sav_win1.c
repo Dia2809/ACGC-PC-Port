@@ -5,113 +5,221 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 sav_win_w6_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 sav_win_w6_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win_w6_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 sav_win_w1_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 sav_win_w1_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win_w1_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 sav_win_w2_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 sav_win_w2_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win_w2_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 sav_win_w3_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 sav_win_w3_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win_w3_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 sav_win_w4_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 sav_win_w4_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win_w4_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 sav_win_w5_tex_rgb_ci4_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 sav_win_w5_tex_rgb_ci4_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win_w5_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 inv_original_futa2_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 inv_original_futa2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1/inv_original_futa2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win1_aw1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_win1_aw1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1_aw1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win1_aw6_tex[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_win1_aw6_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1_aw6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 sav_win_waku_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 sav_win_waku_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1/sav_win_waku_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win1_aw2_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_win1_aw2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1_aw2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win1_aw3_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_win1_aw3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1_aw3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win1_aw4_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_win1_aw4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1_aw4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win1_aw5_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_win1_aw5_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1_aw5_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 ctl_win_tagu2_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_win_tagu2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1/ctl_win_tagu2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 ctl_win_waku1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_win_waku1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1/ctl_win_waku1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 ctl_win_waku2_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_win_waku2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win1/ctl_win_waku2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win_1_kage1_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_win_1_kage1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win_1_kage1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win_1_kage2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 sav_win_1_kage2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/sav_win_1_kage2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win1_nuno_tex_rgb_ci4[0x200];
+#else
 u8 sav_win1_nuno_tex_rgb_ci4[] = {
 #include "assets/sav_win1_nuno_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win_w6_tex_rgb_ci4[0x80];
+#else
 u8 sav_win_w6_tex_rgb_ci4[] = {
 #include "assets/sav_win_w6_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win_w1_tex_rgb_ci4[0x400];
+#else
 u8 sav_win_w1_tex_rgb_ci4[] = {
 #include "assets/sav_win_w1_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win_w2_tex_rgb_ci4[0x400];
+#else
 u8 sav_win_w2_tex_rgb_ci4[] = {
 #include "assets/sav_win_w2_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win_w3_tex_rgb_ci4[0x400];
+#else
 u8 sav_win_w3_tex_rgb_ci4[] = {
 #include "assets/sav_win_w3_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win_w4_tex_rgb_ci4[0x400];
+#else
 u8 sav_win_w4_tex_rgb_ci4[] = {
 #include "assets/sav_win_w4_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 sav_win_w5_tex_rgb_ci4[0x400];
+#else
 u8 sav_win_w5_tex_rgb_ci4[] = {
 #include "assets/sav_win_w5_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx sav_win1_v[0x1180 / sizeof(Vtx)];
+#else
 Vtx sav_win1_v[] = {
 #include "assets/sav_win1_v.inc"
 };
+#endif
 
 Gfx sav_win1_w9_model[] = {
     gsDPLoadTLUT_Dolphin(15, 16, 1, sav_win_w6_tex_rgb_ci4_pal),
@@ -353,3 +461,14 @@ Gfx save_win1_w_all_model[] = {
     gsSPDisplayList(sav_win1_w7T_model), gsSPDisplayList(sav_win1_w8T_model),
     gsSPDisplayList(sav_win1_w9_model),  gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_sav_win1_c(void) {
+    pc_load_asset("assets/sav_win1/inv_original_futa2_tex.bin", inv_original_futa2_tex, 0x200, 0x79D6E0, 0, 0);
+    pc_load_asset("assets/sav_win1/sav_win_waku_tex.bin", sav_win_waku_tex, 0x200, 0x79D4E0, 0, 0);
+    pc_load_asset("assets/sav_win1/ctl_win_tagu2_tex.bin", ctl_win_tagu2_tex, 0x200, 0x6CFFA0, 0, 0);
+    pc_load_asset("assets/sav_win1/ctl_win_waku1_tex.bin", ctl_win_waku1_tex, 0x800, 0x6D01A0, 0, 0);
+    pc_load_asset("assets/sav_win1/ctl_win_waku2_tex.bin", ctl_win_waku2_tex, 0x800, 0x6D09A0, 0, 0);
+}
+#endif

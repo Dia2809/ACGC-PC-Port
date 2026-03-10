@@ -6,13 +6,21 @@
 #include "ef_effect_control.h"
 
 extern Vtx ef_car01_v[];
+#ifdef TARGET_PC
+u8 ef_car01_1_int_i4[0x80] ATTRIBUTE_ALIGN(32);
+#else
 u8 ef_car01_1_int_i4[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ef_car01_1_int_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_car01_v[0x250 / sizeof(Vtx)];
+#else
 Vtx ef_car01_v[] = {
 #include "assets/ef_car01_v.inc"
 };
+#endif
 
 Gfx ef_car01_modelT[] = {
     gsSPTexture(5000, 4000, 0, G_TX_RENDERTILE, G_ON),
@@ -52,13 +60,21 @@ Gfx ef_car01_modelT[] = {
     gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+u8 ef_carhosi01_01[0x400];
+#else
 u8 ef_carhosi01_01[] = {
 #include "assets/ef_carhosi01_01.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx ef_carhosi01_00_v[0x40 / sizeof(Vtx)];
+#else
 Vtx ef_carhosi01_00_v[] = {
 #include "assets/ef_carhosi01_00_v.inc"
 };
+#endif
 
 Gfx ef_carhosi01_00_modelT[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

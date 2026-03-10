@@ -5,9 +5,13 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+Vtx des_sen_v[0x40 / sizeof(Vtx)];
+#else
 Vtx des_sen_v[] = {
 #include "assets/des_sen_v.inc"
 };
+#endif
 
 Gfx des_sen_waku_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

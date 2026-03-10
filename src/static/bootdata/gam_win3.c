@@ -1,12 +1,21 @@
 #include "bootdata.h"
 #include "libforest/gbi_extensions.h"
 
+#ifdef TARGET_PC
+static u8 gam_win_moji3_tex[0x500] ATTRIBUTE_ALIGN(32);
+u8 gam_win_moji5_tex[0x380] ATTRIBUTE_ALIGN(32);
+#else
 #include "assets/bootdata/win3/gam_win_moji3_tex.inc"
 #include "assets/bootdata/win3/gam_win_moji5_tex.inc"
+#endif
 
+#ifdef TARGET_PC
+static Vtx gam_win3_v[0x340 / sizeof(Vtx)];
+#else
 static Vtx gam_win3_v[] = {
 #include "assets/bootdata/win3/gam_win3_v.inc"
 };
+#endif
 
 Gfx gam_win3_moji_model[] = {
   gsSPTexture(0, 0, 0, 0, G_ON),
@@ -31,3 +40,12 @@ Gfx gam_win3_moji_model[] = {
   ),
   gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_static_bootdata_gam_win3_c(void) {
+    pc_load_asset("assets/bootdata/win3/gam_win3_v.bin", gam_win3_v, 0x340, 0xBB0A0, 1, 2);
+    pc_load_asset("assets/bootdata/win3/gam_win_moji3_tex.bin", gam_win_moji3_tex, 0x500, 0xBA820, 1, 0);
+    pc_load_asset("assets/bootdata/win3/gam_win_moji5_tex.bin", gam_win_moji5_tex, 0x380, 0xBAD20, 1, 0);
+}
+#endif

@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_ratan_lanp_v[];
+#ifdef TARGET_PC
+u16 int_sum_ratan_lanp_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_ratan_lanp_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_ratan_lanp_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_lanp_kasa_tax[0x100];
+#else
 u8 int_sum_ratan_lanp_kasa_tax[] = {
 #include "assets/int_sum_ratan_lanp_kasa_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_lanp_stand_tax[0x100];
+#else
 u8 int_sum_ratan_lanp_stand_tax[] = {
 #include "assets/int_sum_ratan_lanp_stand_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_lanp_base_tax[0x100];
+#else
 u8 int_sum_ratan_lanp_base_tax[] = {
 #include "assets/int_sum_ratan_lanp_base_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_lanp_basetop_tax[0x80];
+#else
 u8 int_sum_ratan_lanp_basetop_tax[] = {
 #include "assets/int_sum_ratan_lanp_basetop_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_ratan_lanp_hiki_tax[0x80];
+#else
 u8 int_sum_ratan_lanp_hiki_tax[] = {
 #include "assets/int_sum_ratan_lanp_hiki_tax.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_ratan_lanp_v[0x280 / sizeof(Vtx)];
+#else
 Vtx int_sum_ratan_lanp_v[] = {
 #include "assets/int_sum_ratan_lanp_v.inc"
 };
+#endif
 
 Gfx int_sum_ratan_lanp_off_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

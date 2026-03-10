@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_hal_clk01_v[];
+#ifdef TARGET_PC
+u16 int_sum_hal_clk01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_hal_clk01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_hal_clk01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_clk01_hari_tex_txt[0x100];
+#else
 u8 int_sum_hal_clk01_hari_tex_txt[] = {
 #include "assets/int_sum_hal_clk01_hari_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_clk01_back_tex_txt[0x180];
+#else
 u8 int_sum_hal_clk01_back_tex_txt[] = {
 #include "assets/int_sum_hal_clk01_back_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_clk01_base_tex_txt[0x80];
+#else
 u8 int_sum_hal_clk01_base_tex_txt[] = {
 #include "assets/int_sum_hal_clk01_base_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_clk01_front_tex_txt[0x300];
+#else
 u8 int_sum_hal_clk01_front_tex_txt[] = {
 #include "assets/int_sum_hal_clk01_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_clk01_top_tex_txt[0x80];
+#else
 u8 int_sum_hal_clk01_top_tex_txt[] = {
 #include "assets/int_sum_hal_clk01_top_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_clk01_kuki_tex_txt[0x80];
+#else
 u8 int_sum_hal_clk01_kuki_tex_txt[] = {
 #include "assets/int_sum_hal_clk01_kuki_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_clk01_hiki_tex_txt[0x80];
+#else
 u8 int_sum_hal_clk01_hiki_tex_txt[] = {
 #include "assets/int_sum_hal_clk01_hiki_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_hal_clk01_hari02_tex_txt[0x80];
+#else
 u8 int_sum_hal_clk01_hari02_tex_txt[] = {
 #include "assets/int_sum_hal_clk01_hari02_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_hal_clk01_v[0x4B0 / sizeof(Vtx)];
+#else
 Vtx int_sum_hal_clk01_v[] = {
 #include "assets/int_sum_hal_clk01_v.inc"
 };
+#endif
 
 Gfx int_sum_hal_clk01_long_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

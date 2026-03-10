@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_hutaba_neck_v[];
+#ifdef TARGET_PC
+static u16 int_din_hutaba_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_hutaba_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_hutaba_neck/int_din_hutaba_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_hutaba_kubi2c_tex[0x80];
+#else
 u8 int_din_hutaba_kubi2c_tex[] = {
 #include "assets/int_din_hutaba_kubi2c_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_hutaba_baceB_tex[0x200];
+#else
 u8 int_din_hutaba_baceB_tex[] = {
 #include "assets/int_din_hutaba_baceB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_hutaba_poleB_tex[0x80];
+#else
 u8 int_din_hutaba_poleB_tex[] = {
 #include "assets/int_din_hutaba_poleB_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_hutaba_kubic_tex[0x100];
+#else
 u8 int_din_hutaba_kubic_tex[] = {
 #include "assets/int_din_hutaba_kubic_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_hutaba_neck_v[0x320 / sizeof(Vtx)];
+#else
 Vtx int_din_hutaba_neck_v[] = {
 #include "assets/int_din_hutaba_neck_v.inc"
 };
+#endif
 
 Gfx int_din_hutaba_neck_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -73,3 +97,10 @@ Gfx int_din_hutaba_neckT_model[] = {
     gsSPNTriangles_5b(12, 14, 15, 13, 0, 3, 13, 3, 14, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_hutaba_neck_c(void) {
+    pc_load_asset("assets/int_din_hutaba_neck/int_din_hutaba_pal.bin", int_din_hutaba_pal, 0x20, 0x912C80, 0, 1);
+}
+#endif

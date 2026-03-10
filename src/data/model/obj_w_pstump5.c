@@ -3,13 +3,21 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+static u8 obj_w_palm_stump_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 obj_w_palm_stump_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_pstump5/obj_w_palm_stump_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_pstump5_v[0x70 / sizeof(Vtx)];
+#else
 Vtx obj_w_pstump5_v[] = {
 #include "assets/obj_w_pstump5_v.inc"
 };
+#endif
 
 Gfx obj_w_spstump5T_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -24,3 +32,10 @@ Gfx obj_w_spstump5T_gfx_model[] = {
     gsSPNTriangles_5b(5, 4, 1, 4, 2, 1, 6, 1, 0, 6, 5, 1),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_w_pstump5_c(void) {
+    pc_load_asset("assets/obj_w_pstump5/obj_w_palm_stump_tex.bin", obj_w_palm_stump_tex, 0x400, 0x3F9C20, 0, 0);
+}
+#endif

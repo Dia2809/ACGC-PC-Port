@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kob_locker1_v[];
+#ifdef TARGET_PC
+u16 int_kob_locker_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kob_locker_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kob_locker_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_locker_door_tex_txt[0x300];
+#else
 u8 int_kob_locker_door_tex_txt[] = {
 #include "assets/int_kob_locker_door_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_locker_side_tex_txt[0x180];
+#else
 u8 int_kob_locker_side_tex_txt[] = {
 #include "assets/int_kob_locker_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_locker_front_tex_txt[0x180];
+#else
 u8 int_kob_locker_front_tex_txt[] = {
 #include "assets/int_kob_locker_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kob_locker1_v[0x320 / sizeof(Vtx)];
+#else
 Vtx int_kob_locker1_v[] = {
 #include "assets/int_kob_locker1_v.inc"
 };
+#endif
 
 Gfx int_kob_locker1_door_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

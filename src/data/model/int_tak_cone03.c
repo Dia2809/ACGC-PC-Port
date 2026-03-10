@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_tak_cone03_v[];
+#ifdef TARGET_PC
+static u16 int_tak_cone02_asi_tex_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_tak_cone02_asi_tex_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_tak_cone03/int_tak_cone02_asi_tex_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_cone03_asi_tex[0x80];
+#else
 u8 int_tak_cone03_asi_tex[] = {
 #include "assets/int_tak_cone03_asi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_cone03_body_tex[0x100];
+#else
 u8 int_tak_cone03_body_tex[] = {
 #include "assets/int_tak_cone03_body_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_tak_cone03_top_tex[0x80];
+#else
 u8 int_tak_cone03_top_tex[] = {
 #include "assets/int_tak_cone03_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_tak_cone03_v[0x200 / sizeof(Vtx)];
+#else
 Vtx int_tak_cone03_v[] = {
 #include "assets/int_tak_cone03_v.inc"
 };
+#endif
 
 Gfx int_tak_cone03_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -60,3 +80,10 @@ Gfx int_tak_cone03_onT_model[] = {
     gsSPNTriangles_5b(18, 3, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_tak_cone03_c(void) {
+    pc_load_asset("assets/int_tak_cone03/int_tak_cone02_asi_tex_pal.bin", int_tak_cone02_asi_tex_pal, 0x20, 0xD6F240, 0, 1);
+}
+#endif

@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iku_mario_coin_v[];
+#ifdef TARGET_PC
+u16 int_iku_mario_coin_a_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iku_mario_coin_a_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iku_mario_coin_a_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_iku_mario_coin_b_pal[0x20 / sizeof(u16)];
+#else
 u16 int_iku_mario_coin_b_pal[] = {
 #include "assets/int_iku_mario_coin_b_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_iku_mario_coin_c_pal[0x20 / sizeof(u16)];
+#else
 u16 int_iku_mario_coin_c_pal[] = {
 #include "assets/int_iku_mario_coin_c_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_mario_coin_tex[0x200];
+#else
 u8 int_iku_mario_coin_tex[] = {
 #include "assets/int_iku_mario_coin_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_mario_coin_center_tex[0x100];
+#else
 u8 int_iku_mario_coin_center_tex[] = {
 #include "assets/int_iku_mario_coin_center_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iku_mario_coin_v[0x2C0 / sizeof(Vtx)];
+#else
 Vtx int_iku_mario_coin_v[] = {
 #include "assets/int_iku_mario_coin_v.inc"
 };
+#endif
 
 Gfx int_iku_mario_coin_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

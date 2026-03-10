@@ -4,9 +4,13 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+Vtx hnw_v[0x1140 / sizeof(Vtx)];
+#else
 Vtx hnw_v[] = {
 #include "assets/hnw_v.inc"
 };
+#endif
 
 Gfx head_hnw_model[] = {
     gsSPMatrix(anime_6_mdl, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),

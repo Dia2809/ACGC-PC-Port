@@ -9,41 +9,85 @@
 #include "dolphin/gx.h"
 
 /* imports */
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji1_1_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji1_1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji1_1_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji1_2_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji1_2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji1_2_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji1_3_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji1_3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji1_3_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji1_4_tex[0x600] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji1_4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji1_4_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 ctl_att_w1_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_att_w1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w1_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 ctl_att_w2_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_att_w2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w2_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 ctl_att_w3_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_att_w3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w3_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 ctl_att_w4_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_att_w4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w4_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 ctl_att_w5_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_att_w5_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w5_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 ctl_att_w6_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 ctl_att_w6_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/ctl_att_w6_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx dvd_keikoku1_v[0x3C0 / sizeof(Vtx)];
+#else
 static Vtx dvd_keikoku1_v[] = {
 #include "assets/dvd_keikoku1_v.inc"
 };
+#endif
 static Gfx keikoku1_dvd_att_moji_model[] = {
   /* init */
   gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -175,19 +219,35 @@ static Gfx keikoku1_dvd_att_winT_model[] = {
   gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji2_tex[0x280] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji2_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji2_2_tex[0x600] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji2_2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji2_2_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji2_3_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji2_3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji2_3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx dvd_keikoku2_v[0x380 / sizeof(Vtx)];
+#else
 static Vtx dvd_keikoku2_v[] = {
 #include "assets/dvd_keikoku2_v.inc"
 };
+#endif
 static Gfx keikoku2_dvd_att_moji_model[] = {
   gsSPTexture(0, 0, 0, 0, G_ON),
   gsDPSetCombineMode(G_CC_BLENDPRIMDECALA, G_CC_PASS2),
@@ -302,22 +362,42 @@ static Gfx keikoku2_dvd_att_winT_model[] = {
   gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji4_tex[0x280] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji4_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji4_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji3_1_tex[0x600] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji3_1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji3_1_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji3_2_tex[0x280] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji3_2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji3_2_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji3_3_tex[0x80] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji3_3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji3_3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx dvd_keikoku3_v[0x440 / sizeof(Vtx)];
+#else
 static Vtx dvd_keikoku3_v[] = {
 #include "assets/dvd_keikoku3_v.inc"
 };
+#endif
 static Gfx keikoku3_dvd_att_moji_model[] = {
   gsSPTexture(0, 0, 0, 0, G_ON),
   gsDPSetCombineMode(G_CC_BLENDPRIMDECALA, G_CC_PASS2),
@@ -451,31 +531,63 @@ static Gfx keikoku3_dvd_att_winT_model[] = {
   gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji5_tex[0x300] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji5_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji5_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji6_2_tex[0x480] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji6_2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji6_2_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji6_3_tex[0x280] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji6_3_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji6_3_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji6_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji6_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji6_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji6_1_tex[0x580] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji6_1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji6_1_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji6_new1_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji6_new1_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji6_new1_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji6_new2_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji6_new2_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji6_new2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx dvd_keikoku4_v[0x480 / sizeof(Vtx)];
+#else
 static Vtx dvd_keikoku4_v[] = {
 #include "assets/dvd_keikoku4_v.inc"
 };
+#endif
 static Gfx keikoku4_dvd_att_moji_model[] = {
   gsSPTexture(0, 0, 0, 0, G_ON),
   gsDPSetCombineMode(G_CC_BLENDPRIMDECALA, G_CC_PASS2),
@@ -618,28 +730,56 @@ static Gfx keikoku4_dvd_att_winT_model[] = {
   gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji7_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji7_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji7_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji8_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji8_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji8_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji10_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji10_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji10_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji11_tex[0x480] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji11_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji11_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji12_tex[0x280] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji12_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji12_tex.inc"
 };
+#endif
+#ifdef TARGET_PC
+static u8 dvd_keikoku_moji9_tex[0x500] ATTRIBUTE_ALIGN(32);
+#else
 static u8 dvd_keikoku_moji9_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/dvd_keikoku_moji9_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx dvd_keikoku5_v[0x440 / sizeof(Vtx)];
+#else
 static Vtx dvd_keikoku5_v[] = {
 #include "assets/dvd_keikoku5_v.inc"
 };
+#endif
 static Gfx keikoku5_dvd_att_moji_model[] = {
   gsSPTexture(0, 0, 0, 0, G_ON),
   gsDPSetCombineMode(G_CC_BLENDPRIMDECALA, G_CC_PASS2),
@@ -950,3 +1090,44 @@ extern void dvderr_init() {
   guOrtho(&this->ortho, -160.0f, 160.0f, -120.0f, 120.0f, -800.0f, 800.0f, 1.0f); /* TODO: N64 screen size macros (float) */
   guLookAt(&this->projection, 0.0f, 0.0f, 400.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_static_dvderr_c(void) {
+    pc_load_asset("assets/dvd_keikoku_moji1_1_tex.bin", dvd_keikoku_moji1_1_tex, 0x500, 0xADA60, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji1_2_tex.bin", dvd_keikoku_moji1_2_tex, 0x500, 0xADF60, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji1_3_tex.bin", dvd_keikoku_moji1_3_tex, 0x200, 0xAE460, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji1_4_tex.bin", dvd_keikoku_moji1_4_tex, 0x600, 0xAE660, 1, 0);
+    pc_load_asset("assets/ctl_att_w1_tex.bin", ctl_att_w1_tex, 0x400, 0x6A6C80, 0, 0);
+    pc_load_asset("assets/ctl_att_w2_tex.bin", ctl_att_w2_tex, 0x400, 0x6A7080, 0, 0);
+    pc_load_asset("assets/ctl_att_w3_tex.bin", ctl_att_w3_tex, 0x400, 0x6A7480, 0, 0);
+    pc_load_asset("assets/ctl_att_w4_tex.bin", ctl_att_w4_tex, 0x400, 0x6A7880, 0, 0);
+    pc_load_asset("assets/ctl_att_w5_tex.bin", ctl_att_w5_tex, 0x400, 0x6A7C80, 0, 0);
+    pc_load_asset("assets/ctl_att_w6_tex.bin", ctl_att_w6_tex, 0x80, 0x6A8080, 0, 0);
+    pc_load_asset("assets/dvd_keikoku1_v.bin", dvd_keikoku1_v, 0x3C0, 0xB00E0, 1, 2);
+    pc_load_asset("assets/dvd_keikoku_moji2_tex.bin", dvd_keikoku_moji2_tex, 0x280, 0xB0640, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji2_2_tex.bin", dvd_keikoku_moji2_2_tex, 0x600, 0xB08C0, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji2_3_tex.bin", dvd_keikoku_moji2_3_tex, 0x80, 0xB0EC0, 1, 0);
+    pc_load_asset("assets/dvd_keikoku2_v.bin", dvd_keikoku2_v, 0x380, 0xB0F40, 1, 2);
+    pc_load_asset("assets/dvd_keikoku_moji4_tex.bin", dvd_keikoku_moji4_tex, 0x280, 0xB1440, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji3_1_tex.bin", dvd_keikoku_moji3_1_tex, 0x600, 0xB16C0, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji3_2_tex.bin", dvd_keikoku_moji3_2_tex, 0x280, 0xB1CC0, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji3_3_tex.bin", dvd_keikoku_moji3_3_tex, 0x80, 0xB1F40, 1, 0);
+    pc_load_asset("assets/dvd_keikoku3_v.bin", dvd_keikoku3_v, 0x440, 0xB1FC0, 1, 2);
+    pc_load_asset("assets/dvd_keikoku_moji5_tex.bin", dvd_keikoku_moji5_tex, 0x300, 0xB25A0, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji6_2_tex.bin", dvd_keikoku_moji6_2_tex, 0x480, 0xB28A0, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji6_3_tex.bin", dvd_keikoku_moji6_3_tex, 0x280, 0xB2D20, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji6_tex.bin", dvd_keikoku_moji6_tex, 0x400, 0xB2FA0, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji6_1_tex.bin", dvd_keikoku_moji6_1_tex, 0x580, 0xB33A0, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji6_new1_tex.bin", dvd_keikoku_moji6_new1_tex, 0x200, 0xB3920, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji6_new2_tex.bin", dvd_keikoku_moji6_new2_tex, 0x200, 0xB3B20, 1, 0);
+    pc_load_asset("assets/dvd_keikoku4_v.bin", dvd_keikoku4_v, 0x480, 0xB3D20, 1, 2);
+    pc_load_asset("assets/dvd_keikoku_moji7_tex.bin", dvd_keikoku_moji7_tex, 0x500, 0xB4380, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji8_tex.bin", dvd_keikoku_moji8_tex, 0x400, 0xB4880, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji10_tex.bin", dvd_keikoku_moji10_tex, 0x200, 0xB4C80, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji11_tex.bin", dvd_keikoku_moji11_tex, 0x480, 0xB4E80, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji12_tex.bin", dvd_keikoku_moji12_tex, 0x280, 0xB5300, 1, 0);
+    pc_load_asset("assets/dvd_keikoku_moji9_tex.bin", dvd_keikoku_moji9_tex, 0x500, 0xB5580, 1, 0);
+    pc_load_asset("assets/dvd_keikoku5_v.bin", dvd_keikoku5_v, 0x440, 0xB5A80, 1, 2);
+}
+#endif

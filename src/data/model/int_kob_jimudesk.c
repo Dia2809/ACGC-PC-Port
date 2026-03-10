@@ -6,45 +6,85 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kob_jimudesk_v[];
+#ifdef TARGET_PC
+u16 int_kob_jimudesk_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kob_jimudesk_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kob_jimudesk_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_jimudesk_ashi1_tex[0x100];
+#else
 u8 int_kob_jimudesk_ashi1_tex[] = {
 #include "assets/int_kob_jimudesk_ashi1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_jimudesk_ashi2_tex[0x200];
+#else
 u8 int_kob_jimudesk_ashi2_tex[] = {
 #include "assets/int_kob_jimudesk_ashi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_jimudesk_ashi3_tex[0x80];
+#else
 u8 int_kob_jimudesk_ashi3_tex[] = {
 #include "assets/int_kob_jimudesk_ashi3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_jimudesk_ashioki_tex[0x80];
+#else
 u8 int_kob_jimudesk_ashioki_tex[] = {
 #include "assets/int_kob_jimudesk_ashioki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_jimudesk_hikidashi2_tex[0x80];
+#else
 u8 int_kob_jimudesk_hikidashi2_tex[] = {
 #include "assets/int_kob_jimudesk_hikidashi2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_jimudesk_hikidashi1_tex[0x100];
+#else
 u8 int_kob_jimudesk_hikidashi1_tex[] = {
 #include "assets/int_kob_jimudesk_hikidashi1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_jimudesk_side_tex[0x100];
+#else
 u8 int_kob_jimudesk_side_tex[] = {
 #include "assets/int_kob_jimudesk_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kob_jimudesk_tenban_tex[0x100];
+#else
 u8 int_kob_jimudesk_tenban_tex[] = {
 #include "assets/int_kob_jimudesk_tenban_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kob_jimudesk_v[0x460 / sizeof(Vtx)];
+#else
 Vtx int_kob_jimudesk_v[] = {
 #include "assets/int_kob_jimudesk_v.inc"
 };
+#endif
 
 Gfx int_kob_jimudesk_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

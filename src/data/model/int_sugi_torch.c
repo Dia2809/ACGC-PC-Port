@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sugi_torch_v[];
+#ifdef TARGET_PC
+u16 int_sugi_touch_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sugi_touch_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sugi_touch_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sugi_touch_all_tex_txt[0x400];
+#else
 u8 int_sugi_touch_all_tex_txt[] = {
 #include "assets/int_sugi_touch_all_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_fire_a_tex_4i4_pic_i4[0x200];
+#else
 u8 int_fire_a_tex_4i4_pic_i4[] = {
 #include "assets/int_fire_a_tex_4i4_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_fire_b_tex_4i4_pic_i4[0x400];
+#else
 u8 int_fire_b_tex_4i4_pic_i4[] = {
 #include "assets/int_fire_b_tex_4i4_pic_i4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sugi_torch_v[0x6C0 / sizeof(Vtx)];
+#else
 Vtx int_sugi_torch_v[] = {
 #include "assets/int_sugi_torch_v.inc"
 };
+#endif
 
 Gfx sugi_tu_core_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

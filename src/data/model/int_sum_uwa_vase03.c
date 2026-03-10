@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_uwa_vase03_v[];
+#ifdef TARGET_PC
+u16 int_sum_uwa_vase03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_uwa_vase03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_uwa_vase03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase03_side[0x100];
+#else
 u8 int_sum_uwa_vase03_side[] = {
 #include "assets/int_sum_uwa_vase03_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase03_kuki[0x100];
+#else
 u8 int_sum_uwa_vase03_kuki[] = {
 #include "assets/int_sum_uwa_vase03_kuki.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase03_leaf[0x100];
+#else
 u8 int_sum_uwa_vase03_leaf[] = {
 #include "assets/int_sum_uwa_vase03_leaf.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase03_flawer[0x100];
+#else
 u8 int_sum_uwa_vase03_flawer[] = {
 #include "assets/int_sum_uwa_vase03_flawer.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase03_naka[0x80];
+#else
 u8 int_sum_uwa_vase03_naka[] = {
 #include "assets/int_sum_uwa_vase03_naka.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_uwa_vase03_base[0x80];
+#else
 u8 int_sum_uwa_vase03_base[] = {
 #include "assets/int_sum_uwa_vase03_base.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_uwa_vase03_v[0x330 / sizeof(Vtx)];
+#else
 Vtx int_sum_uwa_vase03_v[] = {
 #include "assets/int_sum_uwa_vase03_v.inc"
 };
+#endif
 
 Gfx int_sum_uwa_vase03_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

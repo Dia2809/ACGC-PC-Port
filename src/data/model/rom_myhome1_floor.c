@@ -4,9 +4,13 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+Vtx rom_myhome1_floor_v[0x560 / sizeof(Vtx)] ATTRIBUTE_ALIGN(32);
+#else
 Vtx rom_myhome1_floor_v[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/rom_myhome1_floor_v.inc"
 };
+#endif
 
 Gfx rom_myhome1_floor_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

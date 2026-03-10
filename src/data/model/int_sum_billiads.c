@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_billiads_v[];
+#ifdef TARGET_PC
+u16 int_sum_billards_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_billards_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_billards_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_billiads_cueball_tex[0x80];
+#else
 u8 int_sum_billiads_cueball_tex[] = {
 #include "assets/int_sum_billiads_cueball_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_billiads_side_tex[0x80];
+#else
 u8 int_sum_billiads_side_tex[] = {
 #include "assets/int_sum_billiads_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_billiads_top_tex[0x200];
+#else
 u8 int_sum_billiads_top_tex[] = {
 #include "assets/int_sum_billiads_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_billiads_foot_tex[0x100];
+#else
 u8 int_sum_billiads_foot_tex[] = {
 #include "assets/int_sum_billiads_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_billiads_sitaside_tex[0x80];
+#else
 u8 int_sum_billiads_sitaside_tex[] = {
 #include "assets/int_sum_billiads_sitaside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_billiads_cue_tex[0x80];
+#else
 u8 int_sum_billiads_cue_tex[] = {
 #include "assets/int_sum_billiads_cue_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_billiads_ball_tex[0x200];
+#else
 u8 int_sum_billiads_ball_tex[] = {
 #include "assets/int_sum_billiads_ball_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_billiads_v[0x420 / sizeof(Vtx)];
+#else
 Vtx int_sum_billiads_v[] = {
 #include "assets/int_sum_billiads_v.inc"
 };
+#endif
 
 Gfx int_sum_billiads_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

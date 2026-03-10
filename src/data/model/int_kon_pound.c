@@ -6,37 +6,69 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_kon_pound_v[];
+#ifdef TARGET_PC
+u16 int_kon_pound_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_kon_pound_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_kon_pound_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_kon_pound_suimen_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_kon_pound_suimen_tex_rgb_ci4_pal[] = {
 #include "assets/int_kon_pound_suimen_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_pound_rock_tex[0x200];
+#else
 u8 int_kon_pound_rock_tex[] = {
 #include "assets/int_kon_pound_rock_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_pound_gl_tex[0x200];
+#else
 u8 int_kon_pound_gl_tex[] = {
 #include "assets/int_kon_pound_gl_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_pound_soko_tex[0x80];
+#else
 u8 int_kon_pound_soko_tex[] = {
 #include "assets/int_kon_pound_soko_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_pound_flo_tex[0x200];
+#else
 u8 int_kon_pound_flo_tex[] = {
 #include "assets/int_kon_pound_flo_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_kon_pound_suimen_tex[0x80];
+#else
 u8 int_kon_pound_suimen_tex[] = {
 #include "assets/int_kon_pound_suimen_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_kon_pound_v[0x420 / sizeof(Vtx)];
+#else
 Vtx int_kon_pound_v[] = {
 #include "assets/int_kon_pound_v.inc"
 };
+#endif
 
 Gfx int_kon_pound_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

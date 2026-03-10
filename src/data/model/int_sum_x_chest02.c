@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_x_chest02_v[];
+#ifdef TARGET_PC
+u16 int_sum_x_chest02_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_x_chest02_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_x_chest02_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest02_into_txt[0x80];
+#else
 u8 int_sum_x_chest02_into_txt[] = {
 #include "assets/int_sum_x_chest02_into_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest02_hiki_txt[0x100];
+#else
 u8 int_sum_x_chest02_hiki_txt[] = {
 #include "assets/int_sum_x_chest02_hiki_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest02_head_txt[0x80];
+#else
 u8 int_sum_x_chest02_head_txt[] = {
 #include "assets/int_sum_x_chest02_head_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest02_front_txt[0x400];
+#else
 u8 int_sum_x_chest02_front_txt[] = {
 #include "assets/int_sum_x_chest02_front_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest02_top_txt[0x200];
+#else
 u8 int_sum_x_chest02_top_txt[] = {
 #include "assets/int_sum_x_chest02_top_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_x_chest02_v[0x480 / sizeof(Vtx)];
+#else
 Vtx int_sum_x_chest02_v[] = {
 #include "assets/int_sum_x_chest02_v.inc"
 };
+#endif
 
 Gfx int_sum_x_chest02_door_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

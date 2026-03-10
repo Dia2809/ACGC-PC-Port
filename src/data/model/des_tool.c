@@ -5,85 +5,165 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 des_tool_undo_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 des_tool_undo_tex[] ATTRIBUTE_ALIGN(32)= {
 #include "assets/des_tool_undo_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_waku5_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_waku5_tex_rgb_ia8[] = {
 #include "assets/des_tool_waku5_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_nuri6_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_nuri6_tex_rgb_ia8[] = {
 #include "assets/des_tool_nuri6_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_mark1_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_mark1_tex_rgb_ia8[] = {
 #include "assets/des_tool_mark1_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_mark2_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_mark2_tex_rgb_ia8[] = {
 #include "assets/des_tool_mark2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_mark3_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_mark3_tex_rgb_ia8[] = {
 #include "assets/des_tool_mark3_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_mark4_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_mark4_tex_rgb_ia8[] = {
 #include "assets/des_tool_mark4_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_nuri1_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_nuri1_tex_rgb_ia8[] = {
 #include "assets/des_tool_nuri1_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_nuri2_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_nuri2_tex_rgb_ia8[] = {
 #include "assets/des_tool_nuri2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_nuri3_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_nuri3_tex_rgb_ia8[] = {
 #include "assets/des_tool_nuri3_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_nuri4_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_nuri4_tex_rgb_ia8[] = {
 #include "assets/des_tool_nuri4_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_nuri5_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_nuri5_tex_rgb_ia8[] = {
 #include "assets/des_tool_nuri5_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_pen1_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_pen1_tex_rgb_ia8[] = {
 #include "assets/des_tool_pen1_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_pen2_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_pen2_tex_rgb_ia8[] = {
 #include "assets/des_tool_pen2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_pen3_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_pen3_tex_rgb_ia8[] = {
 #include "assets/des_tool_pen3_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_waku1_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_waku1_tex_rgb_ia8[] = {
 #include "assets/des_tool_waku1_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_waku2_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_waku2_tex_rgb_ia8[] = {
 #include "assets/des_tool_waku2_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_waku3_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_waku3_tex_rgb_ia8[] = {
 #include "assets/des_tool_waku3_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 des_tool_waku4_tex_rgb_ia8[0x400];
+#else
 u8 des_tool_waku4_tex_rgb_ia8[] = {
 #include "assets/des_tool_waku4_tex_rgb_ia8.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx des_tool_v[0x4C0 / sizeof(Vtx)];
+#else
 Vtx des_tool_v[] = {
 #include "assets/des_tool_v.inc"
 };
+#endif
 
 Gfx des_tool_pen1T_model[] = {
 gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

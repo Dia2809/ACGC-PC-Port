@@ -6,21 +6,37 @@
 #include "ef_effect_control.h"
 
 extern Vtx obj_romtrain_door_v[];
+#ifdef TARGET_PC
+u16 obj_romtrain_door_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_romtrain_door_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_romtrain_door_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_romtrain_door_tex_txt[0x400];
+#else
 u8 obj_romtrain_door_tex_txt[] = {
 #include "assets/obj_romtrain_door_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_romtrain_glass_tex_txt[0x100];
+#else
 u8 obj_romtrain_glass_tex_txt[] = {
 #include "assets/obj_romtrain_glass_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_romtrain_door_v[0xF0 / sizeof(Vtx)];
+#else
 Vtx obj_romtrain_door_v[] = {
 #include "assets/obj_romtrain_door_v.inc"
 };
+#endif
 
 Gfx obj_romtrain_base_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

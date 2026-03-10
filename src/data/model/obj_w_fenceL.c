@@ -3,13 +3,21 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 obj_w_fence_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_fence_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_fence_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_fenceL_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_w_fenceL_v[] = {
 #include "assets/obj_w_fenceL_v.inc"
 };
+#endif
 
 extern u16 obj_fence_pal[];
 

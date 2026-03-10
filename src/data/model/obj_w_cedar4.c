@@ -3,13 +3,21 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+u8 obj_w_cedar_trunk_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_cedar_trunk_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_cedar_trunk_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_cedar4_v[0x360 / sizeof(Vtx)];
+#else
 Vtx obj_w_cedar4_v[] = {
 #include "assets/obj_w_cedar4_v.inc"
 };
+#endif
 
 Gfx obj_w_cedar4_trunkT_mat_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -3,17 +3,29 @@
 #include "evw_anime.h"
 #include "c_keyframe.h"
 
+#ifdef TARGET_PC
+static u8 obj_s_palm_leaf_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 obj_s_palm_leaf_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_palm4/obj_s_palm_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 obj_s_palm_trunk_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 obj_s_palm_trunk_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_palm4/obj_s_palm_trunk_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_palm4_v[0x270 / sizeof(Vtx)];
+#else
 Vtx obj_s_palm4_v[] = {
 #include "assets/obj_s_palm4_v.inc"
 };
+#endif
 
 Gfx obj_s_palm4_leafT_mat_model[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_CI, G_IM_SIZ_4b, 128, 32, obj_s_palm_leaf_tex),
@@ -44,3 +56,11 @@ Gfx obj_s_palm4_trunkT_gfx_model[] = {
     gsSPNTriangles_5b(2, 4, 5, 3, 2, 5, 3, 5, 6, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_obj_s_palm4_c(void) {
+    pc_load_asset("assets/obj_s_palm4/obj_s_palm_leaf_tex.bin", obj_s_palm_leaf_tex, 0x800, 0x3E7860, 0, 0);
+    pc_load_asset("assets/obj_s_palm4/obj_s_palm_trunk_tex.bin", obj_s_palm_trunk_tex, 0x800, 0x3E8060, 0, 0);
+}
+#endif

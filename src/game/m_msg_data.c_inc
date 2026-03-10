@@ -1,18 +1,34 @@
+#ifdef TARGET_PC
+static u8 con_kaiwa2_w1_tex[0x800] ATTRIBUTE_ALIGN(32);
+#else
 static u8 con_kaiwa2_w1_tex[] ATTRIBUTE_ALIGN(32) = {
   #include "assets/msg/con_kaiwa2_w1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 con_kaiwa2_w2_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 static u8 con_kaiwa2_w2_tex[] ATTRIBUTE_ALIGN(32) = {
   #include "assets/msg/con_kaiwa2_w2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 con_kaiwa2_w3_tex[0x1000] ATTRIBUTE_ALIGN(32);
+#else
 static u8 con_kaiwa2_w3_tex[] ATTRIBUTE_ALIGN(32) = {
   #include "assets/msg/con_kaiwa2_w3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx con_kaiwa2_v[0x180 / sizeof(Vtx)];
+#else
 static Vtx con_kaiwa2_v[] = {
   #include "assets/msg/con_kaiwa2_v.inc"
 };
+#endif
 
 static Gfx con_kaiwa2_modelT[] = {
   gsSPTexture(0, 0, 0, 0, G_ON),
@@ -59,13 +75,21 @@ static Gfx con_kaiwa2_modelT[] = {
   gsSPEndDisplayList(),
 };
 
+#ifdef TARGET_PC
+static u8 con_namefuti_TXT[0x400] ATTRIBUTE_ALIGN(32);
+#else
 static u8 con_namefuti_TXT[] ATTRIBUTE_ALIGN(32) = {
   #include "assets/msg/con_namefuti_TXT.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static Vtx con_kaiwaname_v[0x40 / sizeof(Vtx)];
+#else
 static Vtx con_kaiwaname_v[] = {
   #include "assets/msg/con_kaiwaname_v.inc"
 };
+#endif
 
 static Gfx con_kaiwaname_modelT[] = {
   gsSPTexture(0, 0, 0, 0, G_ON),
@@ -95,3 +119,15 @@ static Gfx mMsg_init_disp[] = {
   gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
   gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_game_m_msg_data_c_inc(void) {
+    pc_load_asset("assets/msg/con_kaiwa2_w1_tex.bin", con_kaiwa2_w1_tex, 0x800, 0x2E71A0, 0, 0);
+    pc_load_asset("assets/msg/con_kaiwa2_w2_tex.bin", con_kaiwa2_w2_tex, 0x1000, 0x2E79A0, 0, 0);
+    pc_load_asset("assets/msg/con_kaiwa2_w3_tex.bin", con_kaiwa2_w3_tex, 0x1000, 0x2E89A0, 0, 0);
+    pc_load_asset("assets/msg/con_kaiwa2_v.bin", con_kaiwa2_v, 0x180, 0x2E99A0, 0, 2);
+    pc_load_asset("assets/msg/con_namefuti_TXT.bin", con_namefuti_TXT, 0x400, 0x2E9BA0, 0, 0);
+    pc_load_asset("assets/msg/con_kaiwaname_v.bin", con_kaiwaname_v, 0x40, 0x2E9FA0, 0, 2);
+}
+#endif

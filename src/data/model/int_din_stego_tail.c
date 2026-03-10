@@ -6,29 +6,53 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_stego_tail_v[];
+#ifdef TARGET_PC
+static u16 int_din_stego_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_din_stego_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_stego_tail/int_din_stego_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 int_din_stego_fin_tex[0x200];
+#else
 static u8 int_din_stego_fin_tex[] = {
 #include "assets/int_din_stego_tail/int_din_stego_fin_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_kubi2C_tex[0x80];
+#else
 u8 int_din_stego_kubi2C_tex[] = {
 #include "assets/int_din_stego_kubi2C_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_baceC_tex[0x200];
+#else
 u8 int_din_stego_baceC_tex[] = {
 #include "assets/int_din_stego_baceC_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stego_poleC_tex[0x80];
+#else
 u8 int_din_stego_poleC_tex[] = {
 #include "assets/int_din_stego_poleC_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_stego_tail_v[0x3C0 / sizeof(Vtx)];
+#else
 Vtx int_din_stego_tail_v[] = {
 #include "assets/int_din_stego_tail_v.inc"
 };
+#endif
 
 Gfx int_din_stego_tail_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -73,3 +97,11 @@ Gfx int_din_stego_tailT_model[] = {
     gsSPNTrianglesInit_5b(2, 4, 5, 6, 7, 8, 9, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_din_stego_tail_c(void) {
+    pc_load_asset("assets/int_din_stego_tail/int_din_stego_pal.bin", int_din_stego_pal, 0x20, 0x919260, 0, 1);
+    pc_load_asset("assets/int_din_stego_tail/int_din_stego_fin_tex.bin", int_din_stego_fin_tex, 0x200, 0x919280, 0, 0);
+}
+#endif

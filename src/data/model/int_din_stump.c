@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_din_stump_v[];
+#ifdef TARGET_PC
+u16 int_din_stump_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_din_stump_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_din_stump_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stump_3_tex[0x200];
+#else
 u8 int_din_stump_3_tex[] = {
 #include "assets/int_din_stump_3_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stump_1_tex[0x400];
+#else
 u8 int_din_stump_1_tex[] = {
 #include "assets/int_din_stump_1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_din_stump_2_tex[0x100];
+#else
 u8 int_din_stump_2_tex[] = {
 #include "assets/int_din_stump_2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_din_stump_v[0x290 / sizeof(Vtx)];
+#else
 Vtx int_din_stump_v[] = {
 #include "assets/int_din_stump_v.inc"
 };
+#endif
 
 Gfx int_din_stump_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_blue_clk_v[];
+#ifdef TARGET_PC
+u16 int_sum_blue_clk_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_blue_clk_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_blue_clk_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_sum_blue_clk_grass_tex_pic_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_sum_blue_clk_grass_tex_pic_ci4_pal[] = {
 #include "assets/int_sum_blue_clk_grass_tex_pic_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_clk_hari_tex_txt[0x80];
+#else
 u8 int_sum_blue_clk_hari_tex_txt[] = {
 #include "assets/int_sum_blue_clk_hari_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_clk_intop_tex_txt[0x80];
+#else
 u8 int_sum_blue_clk_intop_tex_txt[] = {
 #include "assets/int_sum_blue_clk_intop_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_clk_side_tex_txt[0x200];
+#else
 u8 int_sum_blue_clk_side_tex_txt[] = {
 #include "assets/int_sum_blue_clk_side_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_clk_front_tex_txt[0x400];
+#else
 u8 int_sum_blue_clk_front_tex_txt[] = {
 #include "assets/int_sum_blue_clk_front_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_clk_fuliko_tex_txt[0x80];
+#else
 u8 int_sum_blue_clk_fuliko_tex_txt[] = {
 #include "assets/int_sum_blue_clk_fuliko_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_blue_clk_grass_tex_txt[0x80];
+#else
 u8 int_sum_blue_clk_grass_tex_txt[] = {
 #include "assets/int_sum_blue_clk_grass_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_blue_clk_v[0x310 / sizeof(Vtx)];
+#else
 Vtx int_sum_blue_clk_v[] = {
 #include "assets/int_sum_blue_clk_v.inc"
 };
+#endif
 
 Gfx int_sum_blue_clk_long_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

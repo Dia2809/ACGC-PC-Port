@@ -5,25 +5,45 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u8 clg_win_top_tex[0x200] ATTRIBUTE_ALIGN(32);
+#else
 u8 clg_win_top_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/clg_win_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clg_win_bottom_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 clg_win_bottom_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/clg_win_bottom_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 cat_c_tex[0x400] ATTRIBUTE_ALIGN(32);
+#else
 u8 cat_c_tex[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/cat_c_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+static u8 yaji[0x80];
+#else
 static u8 yaji[] = {
 #include "assets/clg_hyouji/yaji.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx clg_hyouji_v[0x140 / sizeof(Vtx)];
+#else
 Vtx clg_hyouji_v[] = {
 #include "assets/clg_hyouji_v.inc"
 };
+#endif
 
 Gfx clg_win_cbT_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -54,3 +74,10 @@ Gfx clg_win_cbT_model[] = {
     gsSPNTrianglesInit_5b(2, 4, 5, 6, 5, 7, 6, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_clg_hyouji_c(void) {
+    pc_load_asset("assets/clg_hyouji/yaji.bin", yaji, 0x80, 0xB5C980, 0, 0);
+}
+#endif

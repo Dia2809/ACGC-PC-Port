@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_nog_ari_v[];
+#ifdef TARGET_PC
+u16 int_nog_ari_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_nog_ari_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_nog_ari_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u16 int_nog_ari_glass_tex_rgb_ci4_pal[0x20 / sizeof(u16)];
+#else
 u16 int_nog_ari_glass_tex_rgb_ci4_pal[] = {
 #include "assets/int_nog_ari_glass_tex_rgb_ci4_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_ari_side_tex[0x200];
+#else
 u8 int_nog_ari_side_tex[] = {
 #include "assets/int_nog_ari_side_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_ari_foot_tex[0x80];
+#else
 u8 int_nog_ari_foot_tex[] = {
 #include "assets/int_nog_ari_foot_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_ari_face_tex[0x300];
+#else
 u8 int_nog_ari_face_tex[] = {
 #include "assets/int_nog_ari_face_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_ari_top_tex[0x100];
+#else
 u8 int_nog_ari_top_tex[] = {
 #include "assets/int_nog_ari_top_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_ari_base_tex[0x80];
+#else
 u8 int_nog_ari_base_tex[] = {
 #include "assets/int_nog_ari_base_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_nog_ari_glass_tex_rgb_ci4[0x100];
+#else
 u8 int_nog_ari_glass_tex_rgb_ci4[] = {
 #include "assets/int_nog_ari_glass_tex_rgb_ci4.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_nog_ari_v[0x340 / sizeof(Vtx)];
+#else
 Vtx int_nog_ari_v[] = {
 #include "assets/int_nog_ari_v.inc"
 };
+#endif
 
 Gfx int_nog_ari_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

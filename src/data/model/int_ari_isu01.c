@@ -6,25 +6,45 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_ari_isu01_v[];
+#ifdef TARGET_PC
+static u16 int_ari_nagaisu1_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 static u16 int_ari_nagaisu1_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_ari_isu01/int_ari_nagaisu1_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ari_isu01_1_tex[0x200];
+#else
 u8 int_ari_isu01_1_tex[] = {
 #include "assets/int_ari_isu01_1_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ari_isu01_0_tex[0x400];
+#else
 u8 int_ari_isu01_0_tex[] = {
 #include "assets/int_ari_isu01_0_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_ari_isu01_2_tex[0x200];
+#else
 u8 int_ari_isu01_2_tex[] = {
 #include "assets/int_ari_isu01_2_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_ari_isu01_v[0x260 / sizeof(Vtx)];
+#else
 Vtx int_ari_isu01_v[] = {
 #include "assets/int_ari_isu01_v.inc"
 };
+#endif
 
 Gfx int_ari_isu01_00T_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -54,3 +74,10 @@ Gfx int_ari_isu01_00T_model[] = {
     gsSPNTriangles_5b(0, 19, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsSPEndDisplayList(),
 };
+
+#ifdef TARGET_PC
+extern void pc_load_asset(const char*, void*, unsigned int, unsigned int, int, int);
+void _pc_load_src_data_model_int_ari_isu01_c(void) {
+    pc_load_asset("assets/int_ari_isu01/int_ari_nagaisu1_pal.bin", int_ari_nagaisu1_pal, 0x20, 0x8E88A0, 0, 1);
+}
+#endif

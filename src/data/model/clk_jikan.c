@@ -6,53 +6,101 @@
 #include "ef_effect_control.h"
 
 extern Vtx clk_jikan_v[];
+#ifdef TARGET_PC
+u8 clk_win_jikan0_TA_tex_txt[0x100] ATTRIBUTE_ALIGN(32);
+#else
 u8 clk_win_jikan0_TA_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/clk_win_jikan0_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan1_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan1_TA_tex_txt[] = {
 #include "assets/clk_win_jikan1_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan2_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan2_TA_tex_txt[] = {
 #include "assets/clk_win_jikan2_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan3_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan3_TA_tex_txt[] = {
 #include "assets/clk_win_jikan3_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan4_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan4_TA_tex_txt[] = {
 #include "assets/clk_win_jikan4_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan5_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan5_TA_tex_txt[] = {
 #include "assets/clk_win_jikan5_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan6_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan6_TA_tex_txt[] = {
 #include "assets/clk_win_jikan6_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan7_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan7_TA_tex_txt[] = {
 #include "assets/clk_win_jikan7_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan8_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan8_TA_tex_txt[] = {
 #include "assets/clk_win_jikan8_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan9_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan9_TA_tex_txt[] = {
 #include "assets/clk_win_jikan9_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 clk_win_jikan_TA_tex_txt[0x100];
+#else
 u8 clk_win_jikan_TA_tex_txt[] = {
 #include "assets/clk_win_jikan_TA_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx clk_jikan_v[0x100 / sizeof(Vtx)];
+#else
 Vtx clk_jikan_v[] = {
 #include "assets/clk_jikan_v.inc"
 };
+#endif
 
 Gfx clk_win_jikan3_bottom_model[] = {
     gsDPSetTextureImage_Dolphin(G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, anime_1_txt),

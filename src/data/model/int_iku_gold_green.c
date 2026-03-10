@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_iku_gold_green_v[];
+#ifdef TARGET_PC
+u16 int_iku_gold_green_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_iku_gold_green_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_iku_gold_green_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_gold_green1_tex_txt[0x200];
+#else
 u8 int_iku_gold_green1_tex_txt[] = {
 #include "assets/int_iku_gold_green1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_gold_green5_tex_txt[0x200];
+#else
 u8 int_iku_gold_green5_tex_txt[] = {
 #include "assets/int_iku_gold_green5_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_gold_green2_tex_txt[0x200];
+#else
 u8 int_iku_gold_green2_tex_txt[] = {
 #include "assets/int_iku_gold_green2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_gold_green4_tex_txt[0x100];
+#else
 u8 int_iku_gold_green4_tex_txt[] = {
 #include "assets/int_iku_gold_green4_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_iku_gold_green3_tex_txt[0x100];
+#else
 u8 int_iku_gold_green3_tex_txt[] = {
 #include "assets/int_iku_gold_green3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_iku_gold_green_v[0x510 / sizeof(Vtx)];
+#else
 Vtx int_iku_gold_green_v[] = {
 #include "assets/int_iku_gold_green_v.inc"
 };
+#endif
 
 Gfx int_iku_gold_green_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

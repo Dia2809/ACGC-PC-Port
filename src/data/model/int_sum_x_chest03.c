@@ -6,41 +6,77 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_x_chest03_v[];
+#ifdef TARGET_PC
+u16 int_sum_x_chest03_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_x_chest03_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_x_chest03_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest03_side[0x200];
+#else
 u8 int_sum_x_chest03_side[] = {
 #include "assets/int_sum_x_chest03_side.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest03_into[0x80];
+#else
 u8 int_sum_x_chest03_into[] = {
 #include "assets/int_sum_x_chest03_into.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest03_front[0x280];
+#else
 u8 int_sum_x_chest03_front[] = {
 #include "assets/int_sum_x_chest03_front.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest03_head[0x80];
+#else
 u8 int_sum_x_chest03_head[] = {
 #include "assets/int_sum_x_chest03_head.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest03_tree[0x100];
+#else
 u8 int_sum_x_chest03_tree[] = {
 #include "assets/int_sum_x_chest03_tree.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest03_book[0x100];
+#else
 u8 int_sum_x_chest03_book[] = {
 #include "assets/int_sum_x_chest03_book.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_x_chest03_present[0x80];
+#else
 u8 int_sum_x_chest03_present[] = {
 #include "assets/int_sum_x_chest03_present.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_x_chest03_v[0x540 / sizeof(Vtx)];
+#else
 Vtx int_sum_x_chest03_v[] = {
 #include "assets/int_sum_x_chest03_v.inc"
 };
+#endif
 
 Gfx int_sum_x_chest03_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

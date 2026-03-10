@@ -9,9 +9,13 @@ extern u16 lat_letter37_pal[];
 extern u8 lat_letter37_kd_tex[];
 extern u8 lat_letter37_k_tex[];
 extern u8 lat_letter37_ed_tex[];
+#ifdef TARGET_PC
+Vtx lat_letter37_v[0x300 / sizeof(Vtx)];
+#else
 Vtx lat_letter37_v[] = {
 #include "assets/lat_letter37_v.inc"
 };
+#endif
 
 Gfx lat_letter37_sen_model[] = {
     gsDPSetPrimColor(0, 255, 165, 185, 185, 255),

@@ -5,33 +5,61 @@
 #include "ac_npc.h"
 #include "ef_effect_control.h"
 
+#ifdef TARGET_PC
+u16 obj_myhome_mark_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 obj_myhome_mark_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_myhome_mark_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome1_t3_tex_txt[0x800];
+#else
 u8 obj_s_myhome1_t3_tex_txt[] = {
 #include "assets/obj_s_myhome1_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_myhome_mark_tex_txt[0x200];
+#else
 u8 obj_myhome_mark_tex_txt[] = {
 #include "assets/obj_myhome_mark_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome1_window_txt[0x80];
+#else
 u8 obj_s_myhome1_window_txt[] = {
 #include "assets/obj_s_myhome1_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome1_t2_tex_txt[0x800];
+#else
 u8 obj_s_myhome1_t2_tex_txt[] = {
 #include "assets/obj_s_myhome1_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome1_t1_tex_txt[0x800];
+#else
 u8 obj_s_myhome1_t1_tex_txt[] = {
 #include "assets/obj_s_myhome1_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_myhome1_v[0x780 / sizeof(Vtx)];
+#else
 Vtx obj_s_myhome1_v[] = {
 #include "assets/obj_s_myhome1_v.inc"
 };
+#endif
 
 Gfx obj_s_myhome1_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -228,25 +256,45 @@ cKF_Animation_R_c cKF_ba_r_obj_s_myhome1_out = { cKF_ckcb_r_obj_s_myhome1_out_tb
                                                  -1,
                                                  51 };
 
+#ifdef TARGET_PC
+u8 obj_s_myhome2_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_myhome2_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_myhome2_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome2_window_txt[0x80];
+#else
 u8 obj_s_myhome2_window_txt[] = {
 #include "assets/obj_s_myhome2_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome2_t2_tex_txt[0x800];
+#else
 u8 obj_s_myhome2_t2_tex_txt[] = {
 #include "assets/obj_s_myhome2_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome2_t1_tex_txt[0x800];
+#else
 u8 obj_s_myhome2_t1_tex_txt[] = {
 #include "assets/obj_s_myhome2_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_myhome2_v[0x880 / sizeof(Vtx)];
+#else
 Vtx obj_s_myhome2_v[] = {
 #include "assets/obj_s_myhome2_v.inc"
 };
+#endif
 
 Gfx obj_s_myhome2_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -447,25 +495,45 @@ cKF_Animation_R_c cKF_ba_r_obj_s_myhome2_out = { cKF_ckcb_r_obj_s_myhome2_out_tb
                                                  -1,
                                                  51 };
 
+#ifdef TARGET_PC
+u8 obj_s_myhome3_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_myhome3_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_myhome3_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome3_t2_tex_txt[0x800];
+#else
 u8 obj_s_myhome3_t2_tex_txt[] = {
 #include "assets/obj_s_myhome3_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome3_window_txt[0x80];
+#else
 u8 obj_s_myhome3_window_txt[] = {
 #include "assets/obj_s_myhome3_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome3_t1_tex_txt[0x800];
+#else
 u8 obj_s_myhome3_t1_tex_txt[] = {
 #include "assets/obj_s_myhome3_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_myhome3_v[0x980 / sizeof(Vtx)];
+#else
 Vtx obj_s_myhome3_v[] = {
 #include "assets/obj_s_myhome3_v.inc"
 };
+#endif
 
 Gfx obj_s_myhome3_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -670,25 +738,45 @@ cKF_Animation_R_c cKF_ba_r_obj_s_myhome3_out = { cKF_ckcb_r_obj_s_myhome3_out_tb
                                                  -1,
                                                  51 };
 
+#ifdef TARGET_PC
+u8 obj_w_myhome1_t3_tex_txt[0x800];
+#else
 u8 obj_w_myhome1_t3_tex_txt[] = {
 #include "assets/obj_w_myhome1_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome1_window_txt[0x80];
+#else
 u8 obj_w_myhome1_window_txt[] = {
 #include "assets/obj_w_myhome1_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome1_t2_tex_txt[0x800];
+#else
 u8 obj_w_myhome1_t2_tex_txt[] = {
 #include "assets/obj_w_myhome1_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome1_t1_tex_txt[0x800];
+#else
 u8 obj_w_myhome1_t1_tex_txt[] = {
 #include "assets/obj_w_myhome1_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_myhome1_v[0x780 / sizeof(Vtx)];
+#else
 Vtx obj_w_myhome1_v[] = {
 #include "assets/obj_w_myhome1_v.inc"
 };
+#endif
 
 Gfx obj_w_myhome1_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -886,25 +974,45 @@ cKF_Animation_R_c cKF_ba_r_obj_w_myhome1_out = { cKF_ckcb_r_obj_w_myhome1_out_tb
                                                  -1,
                                                  51 };
 
+#ifdef TARGET_PC
+u8 obj_w_myhome2_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_myhome2_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_myhome2_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome2_window_txt[0x80];
+#else
 u8 obj_w_myhome2_window_txt[] = {
 #include "assets/obj_w_myhome2_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome2_t2_tex_txt[0x800];
+#else
 u8 obj_w_myhome2_t2_tex_txt[] = {
 #include "assets/obj_w_myhome2_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome2_t1_tex_txt[0x800];
+#else
 u8 obj_w_myhome2_t1_tex_txt[] = {
 #include "assets/obj_w_myhome2_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_myhome2_v[0x840 / sizeof(Vtx)];
+#else
 Vtx obj_w_myhome2_v[] = {
 #include "assets/obj_w_myhome2_v.inc"
 };
+#endif
 
 Gfx obj_w_myhome2_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1104,25 +1212,45 @@ cKF_Animation_R_c cKF_ba_r_obj_w_myhome2_out = { cKF_ckcb_r_obj_w_myhome2_out_tb
                                                  -1,
                                                  51 };
 
+#ifdef TARGET_PC
+u8 obj_w_myhome3_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_w_myhome3_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_w_myhome3_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome3_t2_tex_txt[0x800];
+#else
 u8 obj_w_myhome3_t2_tex_txt[] = {
 #include "assets/obj_w_myhome3_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome3_window_txt[0x80];
+#else
 u8 obj_w_myhome3_window_txt[] = {
 #include "assets/obj_w_myhome3_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome3_t1_tex_txt[0x800];
+#else
 u8 obj_w_myhome3_t1_tex_txt[] = {
 #include "assets/obj_w_myhome3_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_myhome3_v[0x980 / sizeof(Vtx)];
+#else
 Vtx obj_w_myhome3_v[] = {
 #include "assets/obj_w_myhome3_v.inc"
 };
+#endif
 
 Gfx obj_w_myhome3_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1326,25 +1454,45 @@ cKF_Animation_R_c cKF_ba_r_obj_w_myhome3_out = { cKF_ckcb_r_obj_w_myhome3_out_tb
                                                  -1,
                                                  51 };
 
+#ifdef TARGET_PC
+u8 obj_s_myhome4_t3_tex_txt[0x800] ATTRIBUTE_ALIGN(32);
+#else
 u8 obj_s_myhome4_t3_tex_txt[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/obj_s_myhome4_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome4_t2_tex_txt[0x800];
+#else
 u8 obj_s_myhome4_t2_tex_txt[] = {
 #include "assets/obj_s_myhome4_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome4_t1_tex_txt[0x800];
+#else
 u8 obj_s_myhome4_t1_tex_txt[] = {
 #include "assets/obj_s_myhome4_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_s_myhome4_window_txt[0x80];
+#else
 u8 obj_s_myhome4_window_txt[] = {
 #include "assets/obj_s_myhome4_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_s_myhome4_v[0xC60 / sizeof(Vtx)];
+#else
 Vtx obj_s_myhome4_v[] = {
 #include "assets/obj_s_myhome4_v.inc"
 };
+#endif
 
 Gfx obj_s_myhome4_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),
@@ -1557,25 +1705,45 @@ cKF_Animation_R_c cKF_ba_r_obj_s_myhome4_out = { cKF_ckcb_r_obj_s_myhome4_out_tb
                                                  -1,
                                                  51 };
 
+#ifdef TARGET_PC
+u8 obj_w_myhome4_t3_tex_txt[0x800];
+#else
 u8 obj_w_myhome4_t3_tex_txt[] = {
 #include "assets/obj_w_myhome4_t3_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome4_t2_tex_txt[0x800];
+#else
 u8 obj_w_myhome4_t2_tex_txt[] = {
 #include "assets/obj_w_myhome4_t2_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome4_t1_tex_txt[0x800];
+#else
 u8 obj_w_myhome4_t1_tex_txt[] = {
 #include "assets/obj_w_myhome4_t1_tex_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 obj_w_myhome4_window_txt[0x80];
+#else
 u8 obj_w_myhome4_window_txt[] = {
 #include "assets/obj_w_myhome4_window_txt.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx obj_w_myhome4_v[0xC60 / sizeof(Vtx)];
+#else
 Vtx obj_w_myhome4_v[] = {
 #include "assets/obj_w_myhome4_v.inc"
 };
+#endif
 
 Gfx obj_w_myhome4_window_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

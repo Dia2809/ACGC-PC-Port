@@ -4,9 +4,13 @@
 #include "c_keyframe.h"
 #include "ac_npc.h"
 
+#ifdef TARGET_PC
+Vtx obj_misin_cloth_v[0x40 / sizeof(Vtx)];
+#else
 Vtx obj_misin_cloth_v[] = {
 #include "assets/obj_misin_cloth_v.inc"
 };
+#endif
 
 Gfx obj_misin_cloth_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

@@ -6,33 +6,61 @@
 #include "ef_effect_control.h"
 
 extern Vtx int_sum_bon_matu01_v[];
+#ifdef TARGET_PC
+u16 int_sum_bon_matu01_pal[0x20 / sizeof(u16)] ATTRIBUTE_ALIGN(32);
+#else
 u16 int_sum_bon_matu01_pal[] ATTRIBUTE_ALIGN(32) = {
 #include "assets/int_sum_bon_matu01_pal.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_matu01_hachi_tex[0x100];
+#else
 u8 int_sum_bon_matu01_hachi_tex[] = {
 #include "assets/int_sum_bon_matu01_hachi_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_matu01_miki_tex[0x300];
+#else
 u8 int_sum_bon_matu01_miki_tex[] = {
 #include "assets/int_sum_bon_matu01_miki_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_matu01_mikiside_tex[0x180];
+#else
 u8 int_sum_bon_matu01_mikiside_tex[] = {
 #include "assets/int_sum_bon_matu01_mikiside_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_matu01_leaf_tex[0x100];
+#else
 u8 int_sum_bon_matu01_leaf_tex[] = {
 #include "assets/int_sum_bon_matu01_leaf_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+u8 int_sum_bon_matu01_earth_tex[0x100];
+#else
 u8 int_sum_bon_matu01_earth_tex[] = {
 #include "assets/int_sum_bon_matu01_earth_tex.inc"
 };
+#endif
 
+#ifdef TARGET_PC
+Vtx int_sum_bon_matu01_v[0x560 / sizeof(Vtx)];
+#else
 Vtx int_sum_bon_matu01_v[] = {
 #include "assets/int_sum_bon_matu01_v.inc"
 };
+#endif
 
 Gfx int_sum_bon_matu01_on_model[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_ON),

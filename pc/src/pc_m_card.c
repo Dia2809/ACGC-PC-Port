@@ -60,6 +60,20 @@ static void pc_init_diary_entries(void* block) {
     }
 }
 
+/* Match GC's mCD_set_init_mail_data: clear mail slots with font=0xFF (unused) */
+static void pc_init_mail_entries(void* block) {
+    mCD_keep_mail_c* keep_mail = (mCD_keep_mail_c*)block;
+    Mail_c* mail = (Mail_c*)keep_mail->mail;
+    int i, j;
+    for (i = 0; i < mCD_KEEP_MAIL_PAGE_COUNT; i++) {
+        mem_clear(keep_mail->folder_names[i], sizeof(keep_mail->folder_names[i]), CHAR_SPACE);
+        for (j = 0; j < mCD_KEEP_MAIL_COUNT; j++) {
+            mMl_clear_mail(mail);
+            mail++;
+        }
+    }
+}
+
 void mCD_save_data_aram_malloc(void) {
     int i;
     for (i = 0; i < mCD_ARAM_DATA_NUM; i++) {
@@ -69,6 +83,8 @@ void mCD_save_data_aram_malloc(void) {
                 memset(l_aram_block_p_table[i], 0, l_aram_alloc_size_table[i]);
                 if (i == mCD_ARAM_DATA_DIARY) {
                     pc_init_diary_entries(l_aram_block_p_table[i]);
+                } else if (i == mCD_ARAM_DATA_MAIL) {
+                    pc_init_mail_entries(l_aram_block_p_table[i]);
                 }
             }
         }
@@ -106,6 +122,8 @@ void mCD_set_aram_save_data(void) {
             memset(l_aram_block_p_table[i], 0, l_aram_alloc_size_table[i]);
             if (i == mCD_ARAM_DATA_DIARY) {
                 pc_init_diary_entries(l_aram_block_p_table[i]);
+            } else if (i == mCD_ARAM_DATA_MAIL) {
+                pc_init_mail_entries(l_aram_block_p_table[i]);
             }
         }
     }

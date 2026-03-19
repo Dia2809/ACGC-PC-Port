@@ -279,6 +279,10 @@ int pc_platform_poll_events(void) {
                     g_pc_no_framelimit ^= 1;
                     printf("[PC] Frame limiter %s\n", g_pc_no_framelimit ? "OFF" : "ON");
                 }
+                if (event.key.keysym.sym == SDLK_F4 && !event.key.repeat) {
+                    g_pc_fast_forward ^= 1;
+                    printf("[PC] Fast forward %s (2x)\n", g_pc_fast_forward ? "ON" : "OFF");
+                }
                 break;
         }
     }

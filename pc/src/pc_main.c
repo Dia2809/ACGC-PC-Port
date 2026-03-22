@@ -1,4 +1,7 @@
 /* pc_main.c - PC entry point: SDL2/GL init, crash protection, boot sequence */
+#ifndef _WIN32
+#define _GNU_SOURCE  /* needed for dladdr */
+#endif
 #include "pc_platform.h"
 #include "pc_gx_internal.h"
 #include "pc_texture_pack.h"
@@ -17,6 +20,7 @@ SDL_Window*   g_pc_window = NULL;
 SDL_GLContext  g_pc_gl_context = NULL;
 int           g_pc_running = 1;
 int           g_pc_no_framelimit = 0;
+int           g_pc_fast_forward = 0;
 int           g_pc_verbose = 0;
 int           g_pc_time_override = -1; /* -1=system clock, 0-23=override hour */
 int           g_pc_window_w = PC_SCREEN_WIDTH;
@@ -25,13 +29,13 @@ int           g_pc_widescreen_stretch = 0;
 int           g_pc_frameskip_active = 0;
 
 /* exe image range — used by seg2k0 to distinguish pointers from segment addresses */
-unsigned int pc_image_base = 0;
-unsigned int pc_image_end  = 0;
+uintptr_t pc_image_base = 0;
+uintptr_t pc_image_end  = 0;
 
 static jmp_buf* pc_active_jmpbuf = NULL;
-static volatile unsigned int pc_last_crash_addr = 0;
+static volatile uintptr_t pc_last_crash_addr = 0;
 
-static volatile unsigned int pc_last_crash_data_addr = 0;
+static volatile uintptr_t pc_last_crash_data_addr = 0;
 
 #ifdef _WIN32
 /* longjmp from VEH is technically UB, but works on x86 MinGW (no SEH to corrupt).
@@ -43,9 +47,9 @@ static LONG WINAPI pc_veh_handler(PEXCEPTION_POINTERS ep) {
          code == EXCEPTION_ILLEGAL_INSTRUCTION ||
          code == EXCEPTION_INT_DIVIDE_BY_ZERO ||
          code == EXCEPTION_PRIV_INSTRUCTION)) {
-        pc_last_crash_addr = (unsigned int)(uintptr_t)ep->ExceptionRecord->ExceptionAddress;
+        pc_last_crash_addr = (uintptr_t)ep->ExceptionRecord->ExceptionAddress;
         if (code == EXCEPTION_ACCESS_VIOLATION)
-            pc_last_crash_data_addr = (unsigned int)(uintptr_t)ep->ExceptionRecord->ExceptionInformation[1];
+            pc_last_crash_data_addr = (uintptr_t)ep->ExceptionRecord->ExceptionInformation[1];
         else
             pc_last_crash_data_addr = 0;
         jmp_buf* buf = pc_active_jmpbuf;
@@ -61,9 +65,9 @@ static LONG WINAPI pc_veh_handler(PEXCEPTION_POINTERS ep) {
 static void pc_signal_handler(int sig, siginfo_t* info, void* ucontext) {
     (void)ucontext;
     if (pc_active_jmpbuf != NULL) {
-        pc_last_crash_addr = (unsigned int)(uintptr_t)info->si_addr;
+        pc_last_crash_addr = (uintptr_t)info->si_addr;
         pc_last_crash_data_addr = (sig == SIGSEGV) ?
-            (unsigned int)(uintptr_t)info->si_addr : 0;
+            (uintptr_t)info->si_addr : 0;
         jmp_buf* buf = pc_active_jmpbuf;
         pc_active_jmpbuf = NULL;
         /* Unblock this signal so future crashes can be caught */
@@ -78,7 +82,7 @@ static void pc_signal_handler(int sig, siginfo_t* info, void* ucontext) {
 }
 #endif
 
-unsigned int pc_crash_get_data_addr(void) {
+uintptr_t pc_crash_get_data_addr(void) {
     return pc_last_crash_data_addr;
 }
 
@@ -108,7 +112,7 @@ jmp_buf* pc_crash_get_jmpbuf(void) {
     return pc_active_jmpbuf;
 }
 
-unsigned int pc_crash_get_addr(void) {
+uintptr_t pc_crash_get_addr(void) {
     return pc_last_crash_addr;
 }
 
@@ -130,6 +134,10 @@ void pc_platform_init(void) {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+#ifdef __APPLE__
+    /* macOS requires forward-compatible flag for Core Profile contexts */
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
+#endif
 #endif
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
@@ -233,6 +241,30 @@ void pc_platform_update_window_size(void) {
 }
 
 void pc_platform_swap_buffers(void) {
+    /* One-time pixel color diagnostic */
+    {
+        static int diag_frame = 0;
+        if (diag_frame >= 180 && diag_frame < 185) {
+            u8 px[4];
+            int cx = g_pc_window_w / 2, cy = g_pc_window_h / 2;
+            /* Sample center, and 5 points around the character area */
+            struct { int x, y; const char* label; } pts[] = {
+                {cx, cy, "center"},
+                {cx, cy + 50, "char_body"},
+                {cx - 30, cy + 30, "char_left"},
+                {cx + 30, cy + 30, "char_right"},
+                {cx, cy - 80, "above"},
+                {50, 50, "top_left"},
+            };
+            fprintf(stderr, "[PIXEL] frame=%d:", diag_frame);
+            for (int i = 0; i < 6; i++) {
+                glReadPixels(pts[i].x, g_pc_window_h - pts[i].y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, px);
+                fprintf(stderr, " %s=(%d,%d,%d,%d)", pts[i].label, px[0], px[1], px[2], px[3]);
+            }
+            fprintf(stderr, "\n");
+        }
+        diag_frame++;
+    }
     SDL_GL_SwapWindow(g_pc_window);
 }
 
@@ -277,6 +309,10 @@ int pc_platform_poll_events(void) {
                 if (event.key.keysym.sym == SDLK_F3 && !event.key.repeat) {
                     g_pc_no_framelimit ^= 1;
                     printf("[PC] Frame limiter %s\n", g_pc_no_framelimit ? "OFF" : "ON");
+                }
+                if (event.key.keysym.sym == SDLK_F4 && !event.key.repeat) {
+                    g_pc_fast_forward ^= 1;
+                    printf("[PC] Fast forward %s (2x)\n", g_pc_fast_forward ? "ON" : "OFF");
                 }
                 break;
         }
@@ -336,23 +372,48 @@ int main(int argc, char* argv[]) {
         HMODULE exe = GetModuleHandle(NULL);
         IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)exe;
         IMAGE_NT_HEADERS* nt = (IMAGE_NT_HEADERS*)((char*)exe + dos->e_lfanew);
-        pc_image_base = (unsigned int)(uintptr_t)exe;
+        pc_image_base = (uintptr_t)exe;
         pc_image_end = pc_image_base + nt->OptionalHeader.SizeOfImage;
+    }
+#elif defined(__APPLE__)
+    {
+        /* macOS: use dladdr — no ELF headers available */
+        Dl_info dl;
+        if (dladdr((void*)main, &dl) && dl.dli_fbase) {
+            pc_image_base = (uintptr_t)dl.dli_fbase;
+            /* Estimate image end — on 64-bit, seg2k0 uses threshold check
+             * instead of image range, so this is defense-in-depth only. */
+            pc_image_end = pc_image_base + 0x10000000;
+        }
     }
 #else
     {
         Dl_info dl;
         if (dladdr((void*)main, &dl) && dl.dli_fbase) {
-            pc_image_base = (unsigned int)(uintptr_t)dl.dli_fbase;
-            Elf32_Ehdr* ehdr = (Elf32_Ehdr*)dl.dli_fbase;
-            Elf32_Phdr* phdr = (Elf32_Phdr*)((char*)dl.dli_fbase + ehdr->e_phoff);
-            unsigned int max_end = 0;
+            pc_image_base = (uintptr_t)dl.dli_fbase;
+#if UINTPTR_MAX > 0xFFFFFFFFu
+            /* 64-bit ELF */
+            Elf64_Ehdr* ehdr = (Elf64_Ehdr*)dl.dli_fbase;
+            Elf64_Phdr* phdr = (Elf64_Phdr*)((char*)dl.dli_fbase + ehdr->e_phoff);
+            uintptr_t max_end = 0;
             for (int i = 0; i < ehdr->e_phnum; i++) {
                 if (phdr[i].p_type == PT_LOAD) {
-                    unsigned int seg_end = phdr[i].p_vaddr + phdr[i].p_memsz;
+                    uintptr_t seg_end = phdr[i].p_vaddr + phdr[i].p_memsz;
                     if (seg_end > max_end) max_end = seg_end;
                 }
             }
+#else
+            /* 32-bit ELF */
+            Elf32_Ehdr* ehdr = (Elf32_Ehdr*)dl.dli_fbase;
+            Elf32_Phdr* phdr = (Elf32_Phdr*)((char*)dl.dli_fbase + ehdr->e_phoff);
+            uintptr_t max_end = 0;
+            for (int i = 0; i < ehdr->e_phnum; i++) {
+                if (phdr[i].p_type == PT_LOAD) {
+                    uintptr_t seg_end = phdr[i].p_vaddr + phdr[i].p_memsz;
+                    if (seg_end > max_end) max_end = seg_end;
+                }
+            }
+#endif
             /* ET_EXEC: p_vaddr is absolute. ET_DYN (PIE): relative to load address. */
             if (ehdr->e_type == ET_DYN) {
                 pc_image_end = pc_image_base + max_end;

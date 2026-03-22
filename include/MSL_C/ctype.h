@@ -1,18 +1,8 @@
-#ifndef MSL_CTYPE_H
-#define MSL_CTYPE_H
+#ifndef _MSL_C_CTYPE_H
+#define _MSL_C_CTYPE_H
 
 #ifdef TARGET_PC
-/* On PC use the system ctype.h — __declspec(weak) is MSVC/MinGW-only,
- * and the original _CTYPE_H guard collides with glibc's system header. */
-#include <ctype.h>
-/* Underscore aliases used by game code via MSL inlines */
-#define _isalpha(c)  isalpha(c)
-#define _isdigit(c)  isdigit(c)
-#define _isspace(c)  isspace(c)
-#define _isupper(c)  isupper(c)
-#define _isxdigit(c) isxdigit(c)
-#define _tolower(c)  tolower(c)
-#define _toupper(c)  toupper(c)
+#include_next <ctype.h>
 #else
 
 #include "MSL_C/locale.h"
@@ -57,5 +47,6 @@ inline int _toupper(int c) {
 #ifdef __cplusplus
 }
 #endif
+
 #endif /* !TARGET_PC */
-#endif /* MSL_CTYPE_H */
+#endif /* _MSL_C_CTYPE_H */

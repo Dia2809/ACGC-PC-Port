@@ -70,7 +70,11 @@ bool JKRHeap::initArena(char** outUserRamStart, u32* outUserRamSize, int numHeap
     OSSetArenaLo(arenaHi);
     OSSetArenaHi(arenaHi);
     *outUserRamStart = (char*)arenaLo;
+#ifdef TARGET_PC
+    *outUserRamSize = (u32)((uintptr_t)arenaHi - (uintptr_t)arenaLo);
+#else
     *outUserRamSize = (u32)arenaHi - (u32)arenaLo;
+#endif
     return true;
 }
 
@@ -207,7 +211,11 @@ JKRHeap* JKRHeap::findAllHeap(void* memory) const {
 }
 
 // generates __as__25JSUTreeIterator<7JKRHeap>FP17JSUTree<7JKRHeap> and __ct__25JSUTreeIterator<7JKRHeap>Fv, remove this
+#ifdef TARGET_PC
+void JKRHeap::dispose_subroutine(uintptr_t begin, uintptr_t end) {
+#else
 void JKRHeap::dispose_subroutine(u32 begin, u32 end) {
+#endif
     JSUListIterator<JKRDisposer> last_iterator;
     JSUListIterator<JKRDisposer> next_iterator;
     JSUListIterator<JKRDisposer> iterator;
@@ -231,14 +239,23 @@ void JKRHeap::dispose_subroutine(u32 begin, u32 end) {
 }
 
 bool JKRHeap::dispose(void* memory, u32 size) {
+#ifdef TARGET_PC
+    uintptr_t begin = (uintptr_t)memory;
+    uintptr_t end = (uintptr_t)memory + size;
+#else
     u32 begin = (u32)memory;
     u32 end = (u32)memory + size;
+#endif
     dispose_subroutine(begin, end);
     return false;
 }
 
 void JKRHeap::dispose(void* begin, void* end) {
+#ifdef TARGET_PC
+    dispose_subroutine((uintptr_t)begin, (uintptr_t)end);
+#else
     dispose_subroutine((u32)begin, (u32)end);
+#endif
 }
 
 void JKRHeap::dispose() {
@@ -297,20 +314,22 @@ bool JKRHeap::isSubHeap(JKRHeap* heap) const {
 }
 
 #ifdef TARGET_PC
-/* On PC, system libraries (Mesa/LLVM/SDL2) run on background threads that
- * call operator new/delete. On Linux, the game's operator new/delete symbols
- * leak into shared libraries via ELF symbol interposition. Two problems:
- *   1. Before JKRHeap init: sCurrentHeap is NULL → alloc returns NULL → crash
- *   2. After JKRHeap init: SDL threads call JKRHeap which isn't thread-safe → crash
+/* On PC, the default operator new uses system malloc (not JKRHeap), because
+ * macOS/Linux frameworks also call global operator new and expect malloc memory.
+ * On Linux, visibility("hidden") prevents ELF symbol interposition so shared
+ * libraries (Mesa/LLVM/SDL2) keep using libstdc++'s operator new/delete.
  *
- * Fix: hide these symbols from shared libraries (visibility("hidden")) so only
- * the game binary's own code uses them. Shared libraries keep using libstdc++'s
- * operator new/delete backed by glibc malloc. On Windows, DLLs have separate
- * CRT allocators so this isn't an issue.
- *
- * The game's own new/delete still needs the malloc fallback for allocations
- * that happen before JKRHeap::createRoot (e.g., C++ global constructors). */
-#include <cstdlib>
+ * operator delete must handle BOTH malloc'd memory AND JKR heap memory (from
+ * objects allocated via `new (heap, alignment)` which uses JKRHeap::alloc). */
+extern u8* arena_memory; /* from pc_os.c */
+
+static inline bool pc_is_arena_ptr(void* p) {
+    if (!arena_memory || !p) return false;
+    uintptr_t addr = (uintptr_t)p;
+    uintptr_t base = (uintptr_t)arena_memory;
+    /* 48MB arena on 64-bit, 24MB on 32-bit */
+    return (addr >= base && addr < base + (48u * 1024u * 1024u));
+}
 
 #ifdef __GNUC__
 #define HIDDEN __attribute__((visibility("hidden")))
@@ -319,48 +338,33 @@ bool JKRHeap::isSubHeap(JKRHeap* heap) const {
 #endif
 
 HIDDEN void* operator new(u32 byteCount) {
-    if (!JKRHeap::sCurrentHeap) return std::malloc(byteCount);
-    return JKRHeap::alloc(byteCount, 4, nullptr);
+    return malloc(byteCount);
 }
 HIDDEN void* operator new(u32 byteCount, int alignment) {
-    if (!JKRHeap::sCurrentHeap) return std::malloc(byteCount);
-    return JKRHeap::alloc(byteCount, alignment, nullptr);
+    return malloc(byteCount);
 }
-HIDDEN void* operator new(u32 byteCount, JKRHeap* heap, int alignment) {
-    return JKRHeap::alloc(byteCount, alignment, heap);
-}
-
 HIDDEN void* operator new[](u32 byteCount) {
-    if (!JKRHeap::sCurrentHeap) return std::malloc(byteCount);
-    return JKRHeap::alloc(byteCount, 4, nullptr);
+    return malloc(byteCount);
 }
 HIDDEN void* operator new[](u32 byteCount, int alignment) {
-    if (!JKRHeap::sCurrentHeap) return std::malloc(byteCount);
-    return JKRHeap::alloc(byteCount, alignment, nullptr);
+    return malloc(byteCount);
 }
-HIDDEN void* operator new[](u32 byteCount, JKRHeap* heap, int alignment) {
-    return JKRHeap::alloc(byteCount, alignment, heap);
-}
-
 HIDDEN void operator delete(void* memory) {
-    if (!JKRHeap::sRootHeap || !JKRHeap::findFromRoot(memory))
-        { std::free(memory); return; }
-    JKRHeap::free(memory, nullptr);
+    if (pc_is_arena_ptr(memory)) { JKRHeap::free(memory, nullptr); return; }
+    free(memory);
 }
 HIDDEN void operator delete[](void* memory) {
-    if (!JKRHeap::sRootHeap || !JKRHeap::findFromRoot(memory))
-        { std::free(memory); return; }
-    JKRHeap::free(memory, nullptr);
+    if (pc_is_arena_ptr(memory)) { JKRHeap::free(memory, nullptr); return; }
+    free(memory);
 }
+/* C++14 sized deallocation - GCC 15 generates calls to these by default. */
 HIDDEN void operator delete(void* memory, size_t) {
-    if (!JKRHeap::sRootHeap || !JKRHeap::findFromRoot(memory))
-        { std::free(memory); return; }
-    JKRHeap::free(memory, nullptr);
+    if (pc_is_arena_ptr(memory)) { JKRHeap::free(memory, nullptr); return; }
+    free(memory);
 }
 HIDDEN void operator delete[](void* memory, size_t) {
-    if (!JKRHeap::sRootHeap || !JKRHeap::findFromRoot(memory))
-        { std::free(memory); return; }
-    JKRHeap::free(memory, nullptr);
+    if (pc_is_arena_ptr(memory)) { JKRHeap::free(memory, nullptr); return; }
+    free(memory);
 }
 
 #undef HIDDEN
@@ -373,21 +377,12 @@ void* operator new(u32 byteCount) {
 void* operator new(u32 byteCount, int alignment) {
     return JKRHeap::alloc(byteCount, alignment, nullptr);
 }
-void* operator new(u32 byteCount, JKRHeap* heap, int alignment) {
-    return JKRHeap::alloc(byteCount, alignment, heap);
-}
-
 void* operator new[](u32 byteCount) {
     return JKRHeap::alloc(byteCount, 4, nullptr);
 }
 void* operator new[](u32 byteCount, int alignment) {
     return JKRHeap::alloc(byteCount, alignment, nullptr);
 }
-void* operator new[](u32 byteCount, JKRHeap* heap, int alignment) {
-    return JKRHeap::alloc(byteCount, alignment, heap);
-}
-
-// this is not needed without the other pragma and asm bs
 void operator delete(void* memory) {
     JKRHeap::free(memory, nullptr);
 }
@@ -395,6 +390,12 @@ void operator delete[](void* memory) {
     JKRHeap::free(memory, nullptr);
 }
 #endif
+void* operator new(u32 byteCount, JKRHeap* heap, int alignment) {
+    return JKRHeap::alloc(byteCount, alignment, heap);
+}
+void* operator new[](u32 byteCount, JKRHeap* heap, int alignment) {
+    return JKRHeap::alloc(byteCount, alignment, heap);
+}
 
 /*JKRHeap::TState::TState(const JKRHeap::TState::TArgument &arg, const JKRHeap::TState::TLocation &location)
 {

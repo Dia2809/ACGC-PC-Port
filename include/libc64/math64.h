@@ -30,9 +30,10 @@ f32 facos(f32);
 #include <math.h>
 s16 sins(u16);
 s16 coss(u16);
-#define fatan2(x, y) atan2f((f32)(x), (f32)(y))
-#define fsqrt(x)     sqrtf(x)
-#define facos(x)     acosf(x)
+f32 fatan2(f32, f32);
+f32 game_fsqrt(f32);
+#define fsqrt game_fsqrt
+f32 facos(f32);
 #endif
 
 #ifdef __cplusplus

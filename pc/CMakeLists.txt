@@ -26,15 +26,12 @@ option(PC_CONSOLE "Show console window (disables -mwindows, useful for debugging
 option(PC_USE_GLES "Use OpenGL ES 3.2 instead of OpenGL 3.3" OFF)
 
 # =============================================================================
-# 32-bit enforcement (required: JSystem casts pointers to u32)
+# Platform info
 # =============================================================================
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    message(FATAL_ERROR
-        "This project MUST be built as 32-bit (pointer-to-u32 casts in JSystem).\n"
-        "  Windows/MSYS2: Use the MINGW32 shell (not MINGW64)\n"
-        "  Linux: Use a 32-bit toolchain, e.g.:\n"
-        "    cmake .. -DCMAKE_C_COMPILER=i686-linux-gnu-gcc -DCMAKE_CXX_COMPILER=i686-linux-gnu-g++\n"
-        "    OR: cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain-linux32.cmake")
+    message(STATUS "Building as 64-bit (pointer size = 8 bytes)")
+else()
+    message(STATUS "Building as 32-bit (pointer size = 4 bytes)")
 endif()
 
 # Allow mixed C/C++ linkage
@@ -49,9 +46,13 @@ add_compile_definitions(
     VERSION=0
     F3DEX_GBI_2
     NDEBUG
+    BUGFIXES       # Fix original game bugs (buffer overflows, etc.) that crash on modern platforms
     _LANGUAGE_C    # Required for N64 GBI/ultratypes headers
     PC_ENHANCEMENTS  # Optional visual improvements (MSAA, etc). Remove to get pure PC port.
 )
+if(APPLE)
+    add_compile_definitions(GL_SILENCE_DEPRECATION)
+endif()
 
 # _GNU_SOURCE: required only for pc_main.c (dladdr/Dl_info for image range detection).
 # Do NOT define globally — it causes glibc to expose fsqrt(double) which conflicts
@@ -165,8 +166,9 @@ if(NOT SDL2_FOUND)
     if(NOT SDL2_FOUND)
         message(FATAL_ERROR
             "SDL2 not found!\n"
-            "  Linux (x86):   sudo apt install libsdl2-dev:i386  (Debian/Ubuntu)\n"
-            "                 sudo dnf install SDL2-devel.i686   (Fedora)\n"
+            "  macOS:         brew install sdl2\n"
+            "  Linux:         sudo apt install libsdl2-dev  (Debian/Ubuntu)\n"
+            "                 sudo dnf install SDL2-devel   (Fedora)\n"
             "  Linux (armhf): sudo apt install libsdl2-dev:armhf (Debian/Ubuntu)\n"
             "  Windows/MSYS2: pacman -S mingw-w64-i686-SDL2\n"
             "  Or download SDL2 development libraries to ${CMAKE_CURRENT_SOURCE_DIR}/lib/SDL2")
@@ -362,15 +364,32 @@ add_compile_options($<$<COMPILE_LANGUAGE:C>:-Dnullptr=NULL>)
 # =============================================================================
 # Per-source warning settings & GCC compatibility
 # =============================================================================
+# Decomp code: suppress all warnings (fires heavily on decompiled code)
+# Clang treats some decomp patterns as errors even with -w:
+# -Wno-return-type: missing return values in non-void functions
+# -Wno-initializer-overrides: GBI macros use designated initializers with overlapping fields
+set(DECOMP_WARN_FLAGS "-w;-fpermissive;-Wno-return-type;-Wno-error=return-type")
+if(CMAKE_C_COMPILER_ID MATCHES "Clang")
+    list(APPEND DECOMP_WARN_FLAGS "-Wno-c99-designator" "-Wno-initializer-overrides")
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        message(FATAL_ERROR
+            "64-bit builds require GCC (Clang rejects pointer-to-u32 truncation in GBI static initializers).\n"
+            "  macOS:  brew install gcc && cmake .. -DCMAKE_C_COMPILER=gcc-15 -DCMAKE_CXX_COMPILER=g++-15\n"
+            "          (adjust version number to match installed GCC, e.g. gcc-14/g++-14)\n"
+            "  Linux:  GCC is typically the default compiler.")
+    endif()
+endif()
+
 # Decomp code uses K&R-style empty parameter lists: void f() {} with prototype
-# void f(int, int). In C99/C11 () means "no args" → type conflict. In gnu89
-# () means "unspecified args" → compatible. Use gnu89 for all decomp C sources.
-# -fpermissive: on GCC 12+ also downgrades unnamed-param errors to warnings;
-# on GCC <12 it's silently ignored for C (unnamed params fixed in source).
-set(DECOMP_C_WARN_FLAGS "-w;-std=gnu89;-fpermissive")
-set(DECOMP_CXX_WARN_FLAGS "-w;-fpermissive")
+# void f(int, int). In C99/C11 () means "no args" -> type conflict. In gnu89
+# () means "unspecified args" -> compatible. Use gnu89 for all decomp C sources.
+set(DECOMP_C_WARN_FLAGS "${DECOMP_WARN_FLAGS};-std=gnu89")
+set(DECOMP_CXX_WARN_FLAGS "${DECOMP_WARN_FLAGS}")
 set_source_files_properties(${GAME_C_SOURCES}
     PROPERTIES COMPILE_OPTIONS "${DECOMP_C_WARN_FLAGS}"
+)
+set_source_files_properties(${GAME_CXX_SOURCES}
+    PROPERTIES COMPILE_OPTIONS "${DECOMP_CXX_WARN_FLAGS}"
 )
 
 # These .c files contain C++ code (classes, namespaces, ::) — compile as C++.
@@ -386,7 +405,7 @@ set_source_files_properties(
 # jaudio_NES and libforest decomp files contain PC-port additions using C99/C11
 # features (for-loop declarations, declarations after labels). Override all of them
 # to gnu11. Files already set to LANGUAGE CXX above are unaffected (CXX wins).
-set(DECOMP_C11_WARN_FLAGS "-w;-std=gnu11;-fpermissive")
+set(DECOMP_C11_WARN_FLAGS "${DECOMP_WARN_FLAGS};-std=gnu11")
 file(GLOB _JAUDIO_C_FILES
     "${DECOMP_ROOT}/src/static/jaudio_NES/game/*.c"
     "${DECOMP_ROOT}/src/static/jaudio_NES/internal/*.c"
@@ -396,10 +415,6 @@ set_source_files_properties(${_JAUDIO_C_FILES}
     PROPERTIES COMPILE_OPTIONS "${DECOMP_C11_WARN_FLAGS}"
 )
 
-set_source_files_properties(${GAME_CXX_SOURCES}
-    PROPERTIES COMPILE_OPTIONS "${DECOMP_CXX_WARN_FLAGS}"
-)
-
 # PC port code: enable warnings to catch bugs in code we control
 set(PC_C_SOURCES ${PC_SOURCES})
 list(FILTER PC_C_SOURCES EXCLUDE REGEX "\\.cpp$")
@@ -407,7 +422,10 @@ set(PC_CXX_SOURCES ${PC_SOURCES})
 list(FILTER PC_CXX_SOURCES INCLUDE REGEX "\\.cpp$")
 # Note: -Wno-comment/-Wno-unused-function/-Wno-builtin-declaration-mismatch suppress
 # warnings from decomp headers (types.h, gfxprint.h, OSRtc.h, libultra.h) that we can't modify.
-set(PC_WARN_SUPPRESS "-Wno-unused-parameter;-Wno-sign-compare;-Wno-comment;-Wno-unused-function;-Wno-builtin-declaration-mismatch")
+set(PC_WARN_SUPPRESS "-Wno-unused-parameter;-Wno-sign-compare;-Wno-comment;-Wno-unused-function")
+if(NOT CMAKE_C_COMPILER_ID MATCHES "Clang")
+    list(APPEND PC_WARN_SUPPRESS "-Wno-builtin-declaration-mismatch")
+endif()
 set_source_files_properties(${PC_C_SOURCES}
     PROPERTIES COMPILE_OPTIONS "-std=gnu11;-Wall;-Wextra;${PC_WARN_SUPPRESS}"
 )
@@ -442,6 +460,9 @@ endif()
 
 if(WIN32)
     target_link_libraries(ac_pc opengl32 winmm imm32 version setupapi)
+elseif(APPLE)
+    find_package(OpenGL REQUIRED)
+    target_link_libraries(ac_pc OpenGL::GL "-framework Cocoa" "-framework IOKit" pthread m)
 elseif(PC_USE_GLES)
     target_link_libraries(ac_pc dl pthread m)
     find_library(GLESV2_LIB GLESv2)

@@ -50,10 +50,8 @@ extern "C" {
 #define CONT_ERR_VOICE_NO_RESPONSE 15
 
 #ifdef TARGET_PC
-/* 'errno' is a macro on Linux/PC (<errno.h> via SDL2 → strings.h include chain).
- * Undefine it so the struct field named 'errno' compiles as a plain identifier.
- * Do NOT restore it — game code only uses errno as a struct field, never as the
- * C standard error variable, so leaving it undefined is safe. */
+/* 'errno' is a macro on POSIX (from <errno.h>). Permanently undefine it so
+ * the struct field named 'errno' works. Game code never uses C errno. */
 #ifdef errno
 #undef errno
 #endif

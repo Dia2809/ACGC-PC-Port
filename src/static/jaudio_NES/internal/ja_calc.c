@@ -11,7 +11,7 @@ namespace std {
     using ::sinf;
 }
 #else
-#include "PowerPC_EABI_Support/msl/MSL_C/PPC_EABI/cmath_gcn.h"
+#include "PowerPC_EABI_Support/Msl/MSL_C/PPC_EABI/cmath_gcn.h"
 #endif
 
 #define SINTABLE_LENGTH (257)

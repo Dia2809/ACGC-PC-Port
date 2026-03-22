@@ -6,18 +6,60 @@
 
 #ifdef TARGET_PC
 /* Executable image range from pc_main.c — BSS/data can collide with N64 segments */
-extern "C" unsigned int pc_image_base;
-extern "C" unsigned int pc_image_end;
+extern "C" uintptr_t pc_image_base;
+extern "C" uintptr_t pc_image_end;
 
-/* Page-granularity cache for VirtualQuery results.
- * Avoids repeated syscalls for addresses in the same page. */
+#if UINTPTR_MAX > 0xFFFFFFFFu
+#include "pc_gbi_ptr.h"
+
+/* === 64-bit seg2k0 ===
+ * On 64-bit, real PC pointers are always above 0x0FFFFFFF. N64 segment
+ * addresses are always 0x03XXXXXX-0x0FXXXXXX. However, truncated 64-bit
+ * pointers (low 32 bits of a real pointer stored in a u32 Gfx field) can
+ * fall ANYWHERE in the 32-bit range, including the segment address range.
+ *
+ * Strategy: first try segment resolution. If the segment base is 0 (unused
+ * segment), try recovering the full pointer from the truncated value using
+ * the known image/arena base addresses. */
+uintptr_t emu64::seg2k0(uintptr_t segadr) {
+    /* Full 64-bit pointer — already resolved */
+    if (segadr > 0xFFFFFFFFu) return segadr;
+    /* Zero — can't recover */
+    if (segadr == 0) return 0;
+
+    /* Try N64 segment resolution first (0x03-0x0F range) */
+    if (segadr >= 0x03000000u && segadr <= 0x0FFFFFFFu) {
+        uintptr_t seg = (segadr >> 24) & 0xF;
+        uintptr_t offset = segadr & 0xFFFFFF;
+        if (this->segments[seg] != 0) {
+            this->resolved_addresses++;
+            return this->segments[seg] + offset;
+        }
+        /* Segment base is 0 — this might be a truncated PC pointer,
+         * not a real segment address. Fall through to recovery. */
+    }
+
+    /* Try to recover a full 64-bit pointer from the truncated 32-bit value */
+    uintptr_t recovered = pc_gbi_recover_ptr((unsigned int)segadr);
+    if (recovered != segadr) {
+        /* Successfully recovered — this was a truncated pointer */
+        return recovered;
+    }
+
+    /* Unrecoverable — return as-is (may crash, handled by VEH/signal) */
+    return segadr;
+}
+#else
+/* === 32-bit seg2k0 (Windows) ===
+ * On 32-bit, PC pointers can collide with N64 segment addresses (both in
+ * 0x03-0x0F range). Use VirtualQuery + page cache to disambiguate. */
+
 #define SEG2K0_PAGE_CACHE_SIZE 32
 static struct { u32 page; u8 committed; } seg2k0_page_cache[SEG2K0_PAGE_CACHE_SIZE];
 static int seg2k0_cache_next = 0;
 
 static int seg2k0_is_committed(u32 addr) {
     u32 page = addr & ~0xFFF;
-    /* Check cache first */
     for (int i = 0; i < SEG2K0_PAGE_CACHE_SIZE; i++) {
         if (seg2k0_page_cache[i].page == page) {
             return seg2k0_page_cache[i].committed;
@@ -27,7 +69,7 @@ static int seg2k0_is_committed(u32 addr) {
     int committed = 0;
 #ifdef _WIN32
     MEMORY_BASIC_INFORMATION mbi;
-    if (VirtualQuery((void*)addr, &mbi, sizeof(mbi)) > 0 && mbi.State == MEM_COMMIT) {
+    if (VirtualQuery((void*)(uintptr_t)addr, &mbi, sizeof(mbi)) > 0 && mbi.State == MEM_COMMIT) {
         committed = 1;
     }
 #else
@@ -41,14 +83,11 @@ static int seg2k0_is_committed(u32 addr) {
     return committed;
 }
 
-u32 emu64::seg2k0(u32 segadr) {
-    /* Addresses above the N64 segment range (upper nibble != 0) or below
-       the minimum segment address are definitely raw PC pointers. */
+uintptr_t emu64::seg2k0(uintptr_t segadr) {
     if ((segadr >> 28) != 0 || segadr < 0x03000000) {
         return segadr;
     }
 
-    /* Check if address falls within the executable image (BSS/data/code). */
     if (segadr >= pc_image_base && segadr < pc_image_end) {
         return segadr;
     }
@@ -60,34 +99,21 @@ u32 emu64::seg2k0(u32 segadr) {
         return segadr;
     }
 
-    /* On PC, raw heap/DLL pointers can fall in the 0x03000000-0x0FFFFFFF range,
-       colliding with N64 segmented addresses (seg<<24|offset). On GC, all real
-       pointers had bit 31 set (k0 space) so they bypassed segment resolution.
+    uintptr_t resolved = this->segments[seg] + offset;
 
-       Strategy: try segment resolution first (this is what the game expects).
-       If the resolved address is NOT in committed memory, it's likely a
-       misidentification — the original address was a raw PC pointer. */
-    u32 resolved = (u32)this->segments[seg] + offset;
-
-    if (seg2k0_is_committed(resolved)) {
-        /* Segment resolution gave a valid address — use it (normal path) */
+    if (seg2k0_is_committed((u32)resolved)) {
         this->resolved_addresses++;
         return resolved;
     }
 
-    /* Resolved address is invalid. Check if the raw address is valid memory. */
-    if (seg2k0_is_committed(segadr)) {
-        /* Raw address IS valid — it's a direct PC pointer misidentified as
-           a segment reference. This happens when heap/stack/DLL pointers
-           fall in the 0x03-0x0F range. Return as-is. */
+    if (seg2k0_is_committed((u32)segadr)) {
         return segadr;
     }
 
-    /* Neither resolved nor raw is committed. Fall through to segment resolution
-       (may crash, but the VEH crash recovery will handle it). */
     this->resolved_addresses++;
     return resolved;
 }
+#endif /* UINTPTR_MAX */
 #else
 u32 emu64::seg2k0(u32 segadr) {
     u32 k0;

@@ -472,11 +472,7 @@ static void aAL_setupAction(ANIMAL_LOGO_ACTOR* actor, GAME* game, int action) {
     &aAL_logo_in,
     &aAL_back_fadein,
     &aAL_start_key_chk_start_wait,
-#ifdef PC_ENHANCEMENTS
-    &aAL_pc_game_start_wait,
-#else
     &aAL_game_start_wait,
-#endif
     &aAL_fade_out_start_wait,
     (ANIMAL_LOGO_ACTION_PROC)&none_proc1,
     (ANIMAL_LOGO_ACTION_PROC)&none_proc1
@@ -1040,10 +1036,10 @@ static void aAL_actor_draw(ACTOR* actor, GAME* game) {
       case aAL_ACTION_GAME_START:
       case aAL_ACTION_FADE_OUT_START:
       case aAL_ACTION_OUT:
-#ifdef PC_ENHANCEMENTS
-        aAL_pc_menu_draw(logo_actor, game);
-#else
         aAL_press_start_draw(logo_actor, graph);
+#ifdef PC_ENHANCEMENTS
+        /* TODO: polygon font rendering for PC menu needs further work;
+           use original press_start_draw (texture rectangles) for now */
 #endif
         break;
     }

@@ -77,12 +77,10 @@ elif [ "$ARCH" = "armhf" ]; then
         export PKG_CONFIG=arm-linux-gnueabihf-pkg-config
     fi
 
-    if [ ! -f Makefile ]; then
-        echo "=== Configuring CMake (Linux ARMhf 32-bit) ==="
-        cmake .. -G "Unix Makefiles" \
-            -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-arm-linux-gnueabihf.cmake" \
-            $USE_GLES
-    fi
+    echo "=== Configuring CMake (Linux ARMhf 32-bit) ==="
+    cmake .. -G "Unix Makefiles" \
+        -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-arm-linux-gnueabihf.cmake" \
+        $USE_GLES
     echo "=== Building ==="
     make -j$(nproc)
 
@@ -94,10 +92,8 @@ else
 
     if echo "$GCC_TARGET" | grep -q "arm"; then
         # Native ARM 32-bit (chroot, RPi, etc.) — no toolchain needed
-        if [ ! -f Makefile ]; then
-            echo "=== Configuring CMake (Linux ARM 32-bit native) ==="
-            cmake .. -G "Unix Makefiles" $USE_GLES
-        fi
+        echo "=== Configuring CMake (Linux ARM 32-bit native) ==="
+        cmake .. -G "Unix Makefiles" $USE_GLES
 
     elif [ "$HOST_ARCH" = "x86_64" ] || [ "$HOST_ARCH" = "i686" ]; then
         # x86: need 32-bit toolchain on x86_64 hosts

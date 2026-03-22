@@ -26,7 +26,13 @@ static s64 gc_epoch_offset_ticks = 0; /* Ticks from GC epoch to program start */
 s64 osGetTime(void) {
     u64 now = SDL_GetPerformanceCounter();
     u64 freq = SDL_GetPerformanceFrequency();
-    s64 elapsed = (s64)((now - time_base_start) * (u64)GC_TIMER_CLOCK / freq);
+    /* Split to avoid u64 overflow: (delta * GC_TIMER_CLOCK) can overflow when
+     * freq is large (1e9 on Linux).  Compute whole-seconds and remainder separately. */
+    u64 delta = now - time_base_start;
+    s64 whole_secs = (s64)(delta / freq);
+    u64 remainder  = delta % freq;
+    s64 elapsed = whole_secs * (s64)GC_TIMER_CLOCK +
+                  (s64)(remainder * (u64)GC_TIMER_CLOCK / freq);
     return gc_epoch_offset_ticks + elapsed;
 }
 

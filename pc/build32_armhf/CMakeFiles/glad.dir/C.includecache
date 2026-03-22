@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/glad/include/KHR/khrplatform.h
+stdint.h
+-
+inttypes.h
+-
+stdint.h
+-
+
+../lib/glad/include/glad/gles2.h
+winapifamily.h
+-
+KHR/khrplatform.h
+-
+
+/home/dia/github/ACGC-PC-Port/pc/lib/glad/src/gles2.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+glad/gles2.h
+-
+

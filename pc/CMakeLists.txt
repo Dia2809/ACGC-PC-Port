@@ -146,21 +146,33 @@ if(NOT SDL2_FOUND)
         # Linux manual fallback: search 32-bit multiarch paths directly.
         # Needed when pkg-config returns the host (64-bit) SDL2 instead of the
         # 32-bit one, or when pkg-config is not installed.
-        find_library(SDL2_MANUAL_LIB
-            NAMES SDL2
-            PATHS
-                /usr/lib/i386-linux-gnu    # Debian/Ubuntu multiarch i386
-                /usr/lib32                  # Fedora/Arch lib32
-                /usr/lib/arm-linux-gnueabihf  # Debian/Ubuntu multiarch armhf
+        # Prefer shared libraries (.so) over static (.a) so the binary works
+        # across devices with different SDL2 video/audio backends.
+        set(_sdl2_search_paths
+            /usr/lib/i386-linux-gnu        # Debian/Ubuntu multiarch i386
+            /usr/lib32                      # Fedora/Arch lib32
+            /usr/lib/arm-linux-gnueabihf   # Debian/Ubuntu multiarch armhf
+        )
+        # First try to find the shared library explicitly
+        find_library(SDL2_SHARED_LIB
+            NAMES libSDL2.so
+            PATHS ${_sdl2_search_paths}
             NO_DEFAULT_PATH
         )
-        if(SDL2_MANUAL_LIB)
+        if(NOT SDL2_SHARED_LIB)
+            # Fall back to any SDL2 library (may be static)
+            find_library(SDL2_SHARED_LIB
+                NAMES SDL2
+                PATHS ${_sdl2_search_paths}
+                NO_DEFAULT_PATH
+            )
+        endif()
+        if(SDL2_SHARED_LIB)
             set(SDL2_FOUND TRUE)
-            set(SDL2_LIBRARIES "${SDL2_MANUAL_LIB}")
-            # Headers are architecture-independent; SDL2 always installs to /usr/include/SDL2
+            set(SDL2_LIBRARIES "${SDL2_SHARED_LIB}")
             set(SDL2_INCLUDE_DIRS "/usr/include/SDL2")
         endif()
-        unset(SDL2_MANUAL_LIB CACHE)
+        unset(SDL2_SHARED_LIB CACHE)
     endif()
 
     if(NOT SDL2_FOUND)
@@ -174,6 +186,33 @@ if(NOT SDL2_FOUND)
             "  Or download SDL2 development libraries to ${CMAKE_CURRENT_SOURCE_DIR}/lib/SDL2")
     endif()
 endif()
+# On Linux, force shared SDL2 linking for cross-device portability.
+# Static SDL2 bakes in specific video/audio backends at compile time;
+# dynamic linking uses the target device's SDL2 which has the right backends.
+if(UNIX AND NOT APPLE AND SDL2_FOUND)
+    set(_sdl2_so_search_paths
+        /usr/lib/arm-linux-gnueabihf
+        /usr/lib/i386-linux-gnu
+        /usr/lib32
+        /usr/lib
+    )
+    find_library(_sdl2_shared_lib
+        NAMES libSDL2.so
+        PATHS ${_sdl2_so_search_paths}
+        NO_DEFAULT_PATH
+    )
+    if(NOT _sdl2_shared_lib)
+        # Also try default search paths
+        find_library(_sdl2_shared_lib NAMES libSDL2.so)
+    endif()
+    if(_sdl2_shared_lib)
+        set(SDL2_LIBRARIES "${_sdl2_shared_lib}")
+        set(SDL2_FORCE_SHARED TRUE)
+        message(STATUS "SDL2 forced shared: ${_sdl2_shared_lib}")
+    endif()
+    unset(_sdl2_shared_lib CACHE)
+endif()
+
 include_directories(${SDL2_INCLUDE_DIRS})
 message(STATUS "SDL2 include: ${SDL2_INCLUDE_DIRS}")
 message(STATUS "SDL2 libraries: ${SDL2_LIBRARIES}")
@@ -451,7 +490,9 @@ add_executable(ac_pc
 )
 
 # Link SDL2 without SDL2main (we define SDL_MAIN_HANDLED)
-if(TARGET SDL2::SDL2)
+# On Linux, prefer the explicit shared library path over the imported target
+# (SDL2::SDL2 may resolve to static libSDL2.a)
+if(TARGET SDL2::SDL2 AND NOT SDL2_FORCE_SHARED)
     target_link_libraries(ac_pc glad SDL2::SDL2)
 else()
     list(FILTER SDL2_LIBRARIES EXCLUDE REGEX "SDL2main")

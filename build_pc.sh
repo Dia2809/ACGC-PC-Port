@@ -79,12 +79,12 @@ elif [ "$ARCH" = "armhf" ]; then
 
     if [ ! -f Makefile ]; then
         echo "=== Configuring CMake (Linux ARMhf 32-bit) ==="
-        cmake .. -G "Unix Makefiles" \
+        cmake .. -G"Ninja" \
             -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-arm-linux-gnueabihf.cmake" \
             $USE_GLES
     fi
     echo "=== Building ==="
-    make -j$(nproc)
+    ninja
 
 else
     # --- Linux native 32-bit ---

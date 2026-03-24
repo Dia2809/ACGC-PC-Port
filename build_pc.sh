@@ -96,7 +96,7 @@ else
         # Native ARM 32-bit (chroot, RPi, etc.) — no toolchain needed
         if [ ! -f Makefile ]; then
             echo "=== Configuring CMake (Linux ARM 32-bit native) ==="
-            cmake .. -G "Unix Makefiles" $USE_GLES
+            cmake .. -G "Ninja" $USE_GLES
         fi
 
     elif [ "$HOST_ARCH" = "x86_64" ] || [ "$HOST_ARCH" = "i686" ]; then
@@ -116,7 +116,7 @@ else
 
         if [ ! -f Makefile ]; then
             echo "=== Configuring CMake (Linux x86 32-bit) ==="
-            cmake .. -G "Unix Makefiles" \
+            cmake .. -G "Ninja" \
                 -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-linux32.cmake" \
                 $USE_GLES
         fi
@@ -125,12 +125,12 @@ else
         # Other 32-bit arch — try native
         if [ ! -f Makefile ]; then
             echo "=== Configuring CMake (Linux $(uname -m) native) ==="
-            cmake .. -G "Unix Makefiles" $USE_GLES
+            cmake .. -G "Ninja" $USE_GLES
         fi
     fi
 
     echo "=== Building ==="
-    make -j$(nproc)
+    ninja
 fi
 
 # --- Create runtime directories ---

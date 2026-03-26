@@ -80,7 +80,7 @@ static void pc_audio_callback(void* userdata, Uint8* stream, int len) {
     copy &= ~1;
 
     for (int i = 0; i < copy; i++) {
-        out[i] = ring_buffer[(rp + i) & RING_BUF_MASK] >> 1;
+        out[i] = ring_buffer[(rp + i) & RING_BUF_MASK];
     }
     if (copy < total_samples) {
         memset(&out[copy], 0, (total_samples - copy) * sizeof(s16));

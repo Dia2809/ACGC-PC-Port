@@ -1,8 +1,0 @@
-/home/dia/github/ACGC-PC-Port/pc/build32/CMakeFiles/install.dir
-/home/dia/github/ACGC-PC-Port/pc/build32/CMakeFiles/list_install_components.dir
-/home/dia/github/ACGC-PC-Port/pc/build32/CMakeFiles/install/local.dir
-/home/dia/github/ACGC-PC-Port/pc/build32/CMakeFiles/rebuild_cache.dir
-/home/dia/github/ACGC-PC-Port/pc/build32/CMakeFiles/edit_cache.dir
-/home/dia/github/ACGC-PC-Port/pc/build32/CMakeFiles/ac_pc.dir
-/home/dia/github/ACGC-PC-Port/pc/build32/CMakeFiles/install/strip.dir
-/home/dia/github/ACGC-PC-Port/pc/build32/CMakeFiles/glad.dir

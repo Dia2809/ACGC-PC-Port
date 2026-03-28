@@ -19,9 +19,7 @@ orig/*/*
 *.MAP
 
 # Build files
-build/
-build32/
-build64/
+build*/
 .ninja_*
 build.ninja
 

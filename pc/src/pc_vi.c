@@ -1,14 +1,14 @@
 /* pc_vi.c - video interface → SDL window swap + frame pacing */
 #include "pc_platform.h"
 #include "pc_settings.h"
+#include "pc_overlay.h"
 
 /* GL timing and frame reset from pc_gx.c */
 extern void pc_gx_frame_timing_snapshot(void);
 extern void pc_gx_begin_frame(void);
+extern void pc_gx_blit_to_screen(void);
 extern Uint64 pc_gx_flush_time_us;
 extern Uint64 pc_gx_texload_time_us;
-
-static int frameskip_counter = 0;
 
 #define VI_TVMODE_NTSC_INT    0
 #define VI_TVMODE_NTSC_DS     1
@@ -23,6 +23,9 @@ static Uint64 perf_freq = 0;
 static void (*vi_pre_callback)(u32) = NULL;
 static void (*vi_post_callback)(u32) = NULL;
 
+/* Total logic ticks since last FPS update (includes skipped render ticks) */
+static int s_logic_tick_count = 0;
+
 void VIInit(void) { }
 
 void VIConfigure(void* rm) { (void)rm; }
@@ -31,33 +34,79 @@ void VISetNextFrameBuffer(void* fb) { (void)fb; }
 
 void VIFlush(void) {}
 
+/* --- Auto-adaptive FPS controller ---
+ * Monitors render FPS vs target and drops/raises the FPS tier automatically
+ * when fps_target == 5 (Auto). */
+static void pc_adaptive_fps_update(double render_fps) {
+    static int tier = 0;    /* 0=60, 1=50, 2=40, 3=30, 4=20 */
+    static int stable = 0;
+    static const int tiers[5] = {60, 50, 40, 30, 20};
+
+    if (g_pc_settings.fps_target != 6) return; /* only in Auto mode */
+
+    int target = tiers[tier];
+    if (render_fps < target * 0.85 && tier < 4) {
+        /* Struggling: drop to next lower tier immediately */
+        tier++;
+        stable = 0;
+        g_pc_fps_target = tiers[tier];
+        printf("[VI] Auto FPS: dropped to %d fps (render=%.1f)\n", g_pc_fps_target, render_fps);
+    } else if (render_fps > target * 1.10 && tier > 0) {
+        /* Headroom: promote after 2 seconds of stable performance */
+        stable++;
+        if (stable > 4) {
+            tier--;
+            stable = 0;
+            g_pc_fps_target = tiers[tier];
+            printf("[VI] Auto FPS: raised to %d fps (render=%.1f)\n", g_pc_fps_target, render_fps);
+        }
+    } else {
+        stable = 0;
+    }
+}
+
 void VIWaitForRetrace(void) {
     if (!perf_freq) perf_freq = SDL_GetPerformanceFrequency();
 
-    /* --- frame time diagnostic --- */
+    /* Always pump events — even on logic-only ticks — to avoid OS hangs */
+    if (!pc_platform_poll_events()) {
+        g_pc_running = 0;
+        return;
+    }
+
+    /* Count every tick (logic-only and render) for game speed calculation */
+    s_logic_tick_count++;
+
+    /* --- Logic-only tick fast path ---
+     * No swap, no pacing, no overlay. frame_start_time is intentionally NOT
+     * reset here so that the render tick at the end of the batch measures the
+     * full batch duration for pacing. */
+    if (g_pc_frameskip_active) {
+        pc_gx_begin_frame();
+        retrace_count++;
+        pc_frame_counter++;
+        return;
+    }
+
+    /* --- Render tick: measure frame time --- */
     Uint64 vi_enter = SDL_GetPerformanceCounter();
     double frame_ms = 0.0;
     if (frame_start_time) {
         frame_ms = (double)(vi_enter - frame_start_time) * 1000.0 / (double)perf_freq;
     }
 
-    if (!pc_platform_poll_events()) {
-        g_pc_running = 0;
-        return;
-    }
-
+    /* Overlay + buffer swap */
     Uint64 t_before_swap = SDL_GetPerformanceCounter();
-    if (!g_pc_frameskip_active) {
-        pc_platform_swap_buffers();
-    }
+    pc_gx_blit_to_screen();
+    pc_overlay_draw();
+    pc_platform_swap_buffers();
     Uint64 t_after_swap = SDL_GetPerformanceCounter();
 
+    /* Frame pacing: wait until the target visual-frame period has elapsed since
+     * frame_start_time (which was set at the start of this batch, not this tick). */
     Uint64 t_before_pace = SDL_GetPerformanceCounter();
-    if (!g_pc_no_framelimit) {
-        /* Timer-based pacing: sleep until target frame time.
-         * Audio production runs on a dedicated thread and is no longer
-         * tied to game frame timing. */
-        Uint64 target_us = g_pc_fast_forward ? 8333 : 16667; /* 2x = 120Hz, 1x = 60Hz */
+    if (!g_pc_no_framelimit && g_pc_fps_target > 0) {
+        Uint64 target_us = g_pc_fast_forward ? 8333 : 1000000 / (Uint64)g_pc_fps_target;
         if (frame_start_time) {
             Uint64 now = SDL_GetPerformanceCounter();
             Uint64 elapsed_us = (now - frame_start_time) * 1000000 / perf_freq;
@@ -76,63 +125,67 @@ void VIWaitForRetrace(void) {
     /* Snapshot GL timing before reporting */
     pc_gx_frame_timing_snapshot();
 
-    /* report slow frames (>20ms = missed 60fps by >4ms) */
-    if (frame_ms > 20.0 && g_pc_verbose) {
-        double swap_ms = (double)(t_after_swap - t_before_swap) * 1000.0 / (double)perf_freq;
-        double pace_ms = (double)(t_after_pace - t_before_pace) * 1000.0 / (double)perf_freq;
-        double work_ms = (double)(vi_enter - frame_start_time) * 1000.0 / (double)perf_freq;
-        double flush_ms = (double)pc_gx_flush_time_us / 1000.0;
-        double texld_ms = (double)pc_gx_texload_time_us / 1000.0;
-        printf("[STUTTER] frame %u: total=%.1fms work=%.1fms swap=%.1fms pace=%.1fms gl=%.1fms tex=%.1fms draws=%d\n",
-               pc_frame_counter, frame_ms, work_ms, swap_ms, pace_ms,
-               flush_ms, texld_ms, pc_gx_draw_call_count);
+    /* Adaptive stutter detection: only log frames significantly above average */
+    {
+        static double avg_frame_ms = 16.67;
+        if (frame_ms > 0.0)
+            avg_frame_ms = avg_frame_ms * 0.95 + frame_ms * 0.05;
+        double stutter_thresh = avg_frame_ms * 1.5;
+        if (stutter_thresh < 20.0) stutter_thresh = 20.0;
+        if (frame_ms > stutter_thresh && g_pc_verbose) {
+            double swap_ms = (double)(t_after_swap - t_before_swap) * 1000.0 / (double)perf_freq;
+            double pace_ms = (double)(t_after_pace - t_before_pace) * 1000.0 / (double)perf_freq;
+            double work_ms = (double)(vi_enter - frame_start_time) * 1000.0 / (double)perf_freq;
+            double flush_ms = (double)pc_gx_flush_time_us / 1000.0;
+            double texld_ms = (double)pc_gx_texload_time_us / 1000.0;
+            printf("[STUTTER] frame %u: total=%.1fms (avg=%.1fms) work=%.1fms swap=%.1fms pace=%.1fms gl=%.1fms tex=%.1fms draws=%d\n",
+                   pc_frame_counter, frame_ms, avg_frame_ms, work_ms, swap_ms, pace_ms,
+                   flush_ms, texld_ms, pc_gx_draw_call_count);
+        }
     }
 
+    /* FPS counter: report render FPS and true game speed every 60 render frames */
     {
         static Uint64 fps_start = 0;
         static int fps_count = 0;
-        if (fps_start == 0) fps_start = SDL_GetPerformanceCounter();
+        static int logic_count_snap = 0;
+        if (fps_start == 0) { fps_start = SDL_GetPerformanceCounter(); logic_count_snap = s_logic_tick_count; }
         fps_count++;
         if (fps_count >= 60) {
             Uint64 now = SDL_GetPerformanceCounter();
             double secs = (double)(now - fps_start) / (double)perf_freq;
-            double fps = (double)fps_count / secs;
+            double render_fps = (double)fps_count / secs;
+            int logic_ticks = s_logic_tick_count - logic_count_snap;
+            double logic_tps = (double)logic_ticks / secs;
+            double speed_pct = logic_tps / 60.0 * 100.0;
+
             char title[128];
-            snprintf(title, sizeof(title), "Animal Crossing - %.1f FPS (%d draws)%s", fps,
-                     pc_gx_draw_call_count, g_pc_fast_forward ? " [2x]" : "");
+            snprintf(title, sizeof(title), "Animal Crossing - %.1f FPS (%.0f%% Speed, %d draws)%s",
+                     render_fps, speed_pct, pc_gx_draw_call_count, g_pc_fast_forward ? " [2x]" : "");
             SDL_SetWindowTitle(g_pc_window, title);
+            pc_overlay_update(render_fps, speed_pct);
+
             if (g_pc_verbose) {
                 extern int pc_emu64_frame_cmds, pc_emu64_frame_crashes;
                 double flush_ms = (double)pc_gx_flush_time_us / 1000.0;
                 double texld_ms = (double)pc_gx_texload_time_us / 1000.0;
-                printf("[PERF] %.1f FPS | draws=%d cmds=%d crashes=%d gl=%.1fms tex=%.1fms\n",
-                       fps, pc_gx_draw_call_count, pc_emu64_frame_cmds, pc_emu64_frame_crashes,
-                       flush_ms, texld_ms);
+                printf("[PERF] %.1f FPS | %.0f%% speed | draws=%d cmds=%d crashes=%d gl=%.1fms tex=%.1fms\n",
+                       render_fps, speed_pct, pc_gx_draw_call_count, pc_emu64_frame_cmds,
+                       pc_emu64_frame_crashes, flush_ms, texld_ms);
             }
+
+            pc_adaptive_fps_update(render_fps);
+
             fps_start = now;
             fps_count = 0;
+            logic_count_snap = s_logic_tick_count;
         }
     }
 
+    /* Reset batch start time for next visual frame */
     frame_start_time = SDL_GetPerformanceCounter();
 
-    /* Frameskip: decide if next frame should skip GL rendering */
-    if (g_pc_settings.frameskip > 0) {
-        frameskip_counter++;
-        if (frameskip_counter > g_pc_settings.frameskip) {
-            frameskip_counter = 0;
-            g_pc_frameskip_active = 0;  /* render this frame */
-        } else {
-            g_pc_frameskip_active = 1;  /* skip this frame */
-        }
-    } else {
-        g_pc_frameskip_active = 0;
-        frameskip_counter = 0;
-    }
-
-    /* Reset per-frame counters and GL state for next frame */
     pc_gx_begin_frame();
-
     retrace_count++;
     pc_frame_counter++;
 }

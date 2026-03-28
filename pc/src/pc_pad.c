@@ -1,5 +1,7 @@
 /* pc_pad.c - GC controller input via SDL gamepad + keyboard */
 #include "pc_platform.h"
+#include "pc_settings.h"
+#include "pc_typing.h"
 #include "pc_keybindings.h"
 #include <dolphin/pad.h>
 
@@ -10,6 +12,13 @@
 #define RUMBLE_DURATION_MS  200
 
 static SDL_GameController* g_controller = NULL;
+
+/* L1 double-tap detection for zoom reset */
+#define L1_DOUBLETAP_MS 300
+static Uint32 l1_last_release = 0;
+static int    l1_was_held = 0;
+static Uint32 kb_l_last_release = 0;
+static int    kb_l_was_held = 0;
 
 BOOL PADInit(void) {
     for (int i = 0; i < SDL_NumJoysticks(); i++) {
@@ -26,39 +35,78 @@ BOOL PADInit(void) {
 u32 PADRead(PADStatus* status) {
     memset(status, 0, sizeof(PADStatus) * 4);
 
+    /* Suppress all game input while settings menu is open */
+    if (g_pc_menu_open) {
+        status[0].err = 0;
+        return PAD_CHAN0_BIT;
+    }
+
     const u8* keys = SDL_GetKeyboardState(NULL);
+    u32 mouse = SDL_GetMouseState(NULL, NULL);
     u16 buttons = 0;
     s8 stickX = 0, stickY = 0;
     s8 cstickX = 0, cstickY = 0;
 
-    /* buttons (from keybindings.ini) */
-    PCKeybindings* kb = &g_pc_keybindings;
-    if (keys[kb->a])     buttons |= PAD_BUTTON_A;
-    if (keys[kb->b])     buttons |= PAD_BUTTON_B;
-    if (keys[kb->x])     buttons |= PAD_BUTTON_X;
-    if (keys[kb->y])     buttons |= PAD_BUTTON_Y;
-    if (keys[kb->start]) buttons |= PAD_BUTTON_START;
-    if (keys[kb->z])     buttons |= PAD_TRIGGER_Z;
-    if (keys[kb->l])     buttons |= PAD_TRIGGER_L;
-    if (keys[kb->r])     buttons |= PAD_TRIGGER_R;
+    /* Suppress keyboard-to-button mapping when typing into the in-game text editor */
+    if (!(g_pc_typing_mode && g_pc_editor_active)) {
+        /* helper: check if a PCInputCode is currently pressed */
+        #define INPUT_PRESSED(code) \
+            (((code) & PC_INPUT_MOUSE_BIT) \
+                ? (mouse & SDL_BUTTON((code) & 0xFF)) \
+                : keys[(SDL_Scancode)(code)])
 
-    /* main stick */
-    if (keys[kb->stick_up])    stickY += STICK_MAGNITUDE;
-    if (keys[kb->stick_down])  stickY -= STICK_MAGNITUDE;
-    if (keys[kb->stick_left])  stickX -= STICK_MAGNITUDE;
-    if (keys[kb->stick_right]) stickX += STICK_MAGNITUDE;
+        /* buttons (from keybindings.ini) */
+        PCKeybindings* kb = &g_pc_keybindings;
+        if (INPUT_PRESSED(kb->a))     buttons |= PAD_BUTTON_A;
+        if (INPUT_PRESSED(kb->b))     buttons |= PAD_BUTTON_B;
+        if (INPUT_PRESSED(kb->x))     buttons |= PAD_BUTTON_X;
+        if (INPUT_PRESSED(kb->y))     buttons |= PAD_BUTTON_Y;
+        if (INPUT_PRESSED(kb->start)) buttons |= PAD_BUTTON_START;
+        if (INPUT_PRESSED(kb->z))     buttons |= PAD_TRIGGER_Z;
+        if (INPUT_PRESSED(kb->l))     buttons |= PAD_TRIGGER_L;
+        if (INPUT_PRESSED(kb->r))     buttons |= PAD_TRIGGER_R;
 
-    /* C-stick */
-    if (keys[kb->cstick_up])    cstickY += STICK_MAGNITUDE;
-    if (keys[kb->cstick_down])  cstickY -= STICK_MAGNITUDE;
-    if (keys[kb->cstick_left])  cstickX -= STICK_MAGNITUDE;
-    if (keys[kb->cstick_right]) cstickX += STICK_MAGNITUDE;
+        /* Keyboard L double-tap to reset zoom */
+        {
+            int l_now = INPUT_PRESSED(kb->l);
+            if (l_now && !kb_l_was_held) {
+                Uint32 now = SDL_GetTicks();
+                if (now - kb_l_last_release < L1_DOUBLETAP_MS)
+                    g_pc_zoom = 1.0f;
+            }
+            if (!l_now && kb_l_was_held)
+                kb_l_last_release = SDL_GetTicks();
+            kb_l_was_held = l_now;
+        }
 
-    /* D-pad */
-    if (keys[kb->dpad_up])    buttons |= PAD_BUTTON_UP;
-    if (keys[kb->dpad_down])  buttons |= PAD_BUTTON_DOWN;
-    if (keys[kb->dpad_left])  buttons |= PAD_BUTTON_LEFT;
-    if (keys[kb->dpad_right]) buttons |= PAD_BUTTON_RIGHT;
+        /* main stick */
+        if (INPUT_PRESSED(kb->stick_up))    stickY += STICK_MAGNITUDE;
+        if (INPUT_PRESSED(kb->stick_down))  stickY -= STICK_MAGNITUDE;
+        if (INPUT_PRESSED(kb->stick_left))  stickX -= STICK_MAGNITUDE;
+        if (INPUT_PRESSED(kb->stick_right)) stickX += STICK_MAGNITUDE;
+
+        /* C-stick */
+        if (INPUT_PRESSED(kb->cstick_up))    cstickY += STICK_MAGNITUDE;
+        if (INPUT_PRESSED(kb->cstick_down))  cstickY -= STICK_MAGNITUDE;
+        if (INPUT_PRESSED(kb->cstick_left))  cstickX -= STICK_MAGNITUDE;
+        if (INPUT_PRESSED(kb->cstick_right)) cstickX += STICK_MAGNITUDE;
+
+        /* D-pad — L + D-pad Up/Down = zoom (when enabled) */
+        if (g_pc_settings.zoom_enabled && INPUT_PRESSED(kb->l) && INPUT_PRESSED(kb->dpad_up)) {
+            g_pc_zoom += PC_ZOOM_STEP;
+            if (g_pc_zoom > PC_ZOOM_MAX) g_pc_zoom = PC_ZOOM_MAX;
+        } else if (g_pc_settings.zoom_enabled && INPUT_PRESSED(kb->l) && INPUT_PRESSED(kb->dpad_down)) {
+            g_pc_zoom -= PC_ZOOM_STEP;
+            if (g_pc_zoom < PC_ZOOM_MIN) g_pc_zoom = PC_ZOOM_MIN;
+        } else {
+            if (INPUT_PRESSED(kb->dpad_up))    buttons |= PAD_BUTTON_UP;
+            if (INPUT_PRESSED(kb->dpad_down))  buttons |= PAD_BUTTON_DOWN;
+        }
+        if (INPUT_PRESSED(kb->dpad_left))  buttons |= PAD_BUTTON_LEFT;
+        if (INPUT_PRESSED(kb->dpad_right)) buttons |= PAD_BUTTON_RIGHT;
+
+        #undef INPUT_PRESSED
+    }
 
     /* hotplug */
     if (!g_controller) {
@@ -82,11 +130,39 @@ u32 PADRead(PADStatus* status) {
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_X)) buttons |= PAD_BUTTON_X;
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_Y)) buttons |= PAD_BUTTON_Y;
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_START)) buttons |= PAD_BUTTON_START;
-        if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_BACK))  buttons |= PAD_BUTTON_START;
-        if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_LEFTSHOULDER))  buttons |= PAD_TRIGGER_L;
+        /* BACK/Select used for overlay toggle (handled in pc_main.c event loop) */
+        int l1_held = SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
+        int dpad_up = SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
+        int dpad_down = SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+
+        /* L1 double-tap to reset zoom */
+        if (l1_held && !l1_was_held) {
+            /* L1 just pressed — check if it's a double-tap */
+            Uint32 now = SDL_GetTicks();
+            if (now - l1_last_release < L1_DOUBLETAP_MS) {
+                g_pc_zoom = 1.0f;
+            }
+        }
+        if (!l1_held && l1_was_held) {
+            /* L1 just released — record time */
+            l1_last_release = SDL_GetTicks();
+        }
+        l1_was_held = l1_held;
+
+        if (l1_held) buttons |= PAD_TRIGGER_L;
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) buttons |= PAD_TRIGGER_Z;
-        if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_UP))    buttons |= PAD_BUTTON_UP;
-        if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN))  buttons |= PAD_BUTTON_DOWN;
+
+        /* L1 + D-pad Up/Down = camera zoom; otherwise pass D-pad to game */
+        if (g_pc_settings.zoom_enabled && l1_held && dpad_up) {
+            g_pc_zoom += PC_ZOOM_STEP;
+            if (g_pc_zoom > PC_ZOOM_MAX) g_pc_zoom = PC_ZOOM_MAX;
+        } else if (g_pc_settings.zoom_enabled && l1_held && dpad_down) {
+            g_pc_zoom -= PC_ZOOM_STEP;
+            if (g_pc_zoom < PC_ZOOM_MIN) g_pc_zoom = PC_ZOOM_MIN;
+        } else {
+            if (dpad_up)   buttons |= PAD_BUTTON_UP;
+            if (dpad_down) buttons |= PAD_BUTTON_DOWN;
+        }
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT))  buttons |= PAD_BUTTON_LEFT;
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) buttons |= PAD_BUTTON_RIGHT;
 
@@ -159,3 +235,5 @@ void PADSetSpec(u32 spec) { (void)spec; }
 void PADSetAnalogMode(u32 mode) { (void)mode; }
 /* PADClamp compiled from decomp: src/static/dolphin/pad/Padclamp.c */
 BOOL PADGetType(s32 chan, u32* type) { if (type) *type = 0x09000000; return TRUE; }
+
+SDL_GameController* pc_pad_get_controller(void) { return g_controller; }

@@ -86,6 +86,8 @@ extern int           g_pc_verbose;
 extern int           g_pc_no_framelimit;
 extern int           g_pc_fast_forward;
 extern int           g_pc_time_override;
+extern int           g_pc_min_override;
+extern int           g_pc_sec_override;
 
 extern int g_pc_window_w;
 extern int g_pc_window_h;
@@ -102,10 +104,27 @@ void pc_platform_update_window_size(void);
 #define PC_NOOP_WIDESCREEN_STRETCH_OFF 0xAC5700u
 extern int g_pc_widescreen_stretch;
 
-/* --- Frameskip --- */
-extern int g_pc_frameskip_active;  /* 1 = this frame is being skipped (no GL draws) */
+/* --- Frameskip / tick batching --- */
+extern int g_pc_frameskip_active;  /* 1 = this is a logic-only tick (no GL draws, no pacing) */
+
+/* --- FPS target & render resolution --- */
+extern int g_pc_fps_target;   /* target FPS: 60, 50, 40, 30, or 0=unlimited; driven by fps_target setting */
+extern int g_pc_render_w;     /* render width  = window_w * render_scale/100 */
+extern int g_pc_render_h;     /* render height = window_h * render_scale/100 */
+extern int g_pc_scale_mode;   /* 0=stretch, 1=center */
+
+/* --- Camera zoom --- */
+extern float g_pc_zoom;  /* 1.0 = default, >1.0 = zoomed out, <1.0 = zoomed in */
+#define PC_ZOOM_MIN  0.5f
+#define PC_ZOOM_MAX  2.0f
+#define PC_ZOOM_STEP 0.02f
+
+/* --- Settings menu --- */
+extern int g_pc_menu_open;  /* 1 = settings menu is open, suppress game input */
+SDL_GameController* pc_pad_get_controller(void);
 
 /* --- Functions --- */
+void pc_gx_blit_to_screen(void);
 void pc_platform_init(void);
 void pc_platform_shutdown(void);
 void pc_platform_swap_buffers(void);

@@ -18,8 +18,8 @@ set(CMAKE_CXX_STANDARD 17)
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type" FORCE)
 endif()
-set(CMAKE_C_FLAGS_RELEASE "-DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
-set(CMAKE_CXX_FLAGS_RELEASE " -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
+set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
 
 # Options
 option(PC_CONSOLE "Show console window (disables -mwindows, useful for debugging)" OFF)
@@ -48,7 +48,8 @@ add_compile_definitions(
     NDEBUG
     BUGFIXES       # Fix original game bugs (buffer overflows, etc.) that crash on modern platforms
     _LANGUAGE_C    # Required for N64 GBI/ultratypes headers
-    PC_ENHANCEMENTS  # Optional visual improvements (MSAA, etc). Remove to get pure PC port.
+    PC_ENHANCEMENTS   # Optional visual improvements (MSAA, etc). Remove to get pure PC port.
+    KEYBOARD_TYPING   # Physical keyboard typing in text editor. Remove for platforms without keyboards.
 )
 if(APPLE)
     add_compile_definitions(GL_SILENCE_DEPRECATION)
@@ -362,6 +363,7 @@ set(PC_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_os.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_dvd.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_pad.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_typing.c
     ${DECOMP_ROOT}/src/static/dolphin/pad/Padclamp.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_card.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_vi.c
@@ -375,6 +377,7 @@ set(PC_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_texture_pack.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_settings.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_keybindings.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_overlay.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_stubs.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_stubs_cpp.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pc_assets.c
@@ -466,10 +469,10 @@ if(NOT CMAKE_C_COMPILER_ID MATCHES "Clang")
     list(APPEND PC_WARN_SUPPRESS "-Wno-builtin-declaration-mismatch")
 endif()
 set_source_files_properties(${PC_C_SOURCES}
-    PROPERTIES COMPILE_OPTIONS "-std=gnu11;-Wall;-Wextra;${PC_WARN_SUPPRESS}"
+    PROPERTIES COMPILE_OPTIONS "-O3;-std=gnu11;-Wall;-Wextra;${PC_WARN_SUPPRESS}"
 )
 set_source_files_properties(${PC_CXX_SOURCES}
-    PROPERTIES COMPILE_OPTIONS "-Wall;-Wextra;${PC_WARN_SUPPRESS};-fpermissive"
+    PROPERTIES COMPILE_OPTIONS "-O3;-Wall;-Wextra;${PC_WARN_SUPPRESS};-fpermissive"
 )
 
 # =============================================================================

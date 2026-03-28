@@ -42,7 +42,7 @@ static GLuint compile_shader(GLenum type, const char* source) {
 #ifdef PC_USE_GLES
     const char* version_line = "#version 310 es\n";
     const char* precision_line = (type == GL_FRAGMENT_SHADER)
-        ? "precision mediump float;\nprecision mediump int;\n"
+        ? "precision mediump float;\nprecision highp int;\n"
         : "precision highp float;\nprecision highp int;\n";
     const char* past_version = source;
     if (strncmp(source, "#version", 8) == 0) {
@@ -335,7 +335,8 @@ static char* generate_frag(PCGXState* st) {
     P("in vec2 v_texcoord0;\n");
     P("in vec2 v_texcoord1;\n");
     P("in vec3 v_normal;\n");
-    P("in float v_fog_z;\n\n");
+    P("in float v_fog_z;\n");
+    P("in vec3 v_light_accum;\n\n");
 
     /* --- Uniforms: only declare what this specific shader reads.
      * pc_gx.c's uniform upload uses if(loc >= 0), so undeclared
@@ -436,9 +437,9 @@ static char* generate_frag(PCGXState* st) {
 
         if (st->chan_ctrl_enable[0] != 0) {
             if (st->chan_ctrl_amb_src[0] != 0)
-                P("    rasColor.rgb = matC * clamp(v_color.rgb, 0.0, 1.0);\n");
+                P("    rasColor.rgb = matC * clamp(v_color.rgb + v_light_accum, 0.0, 1.0);\n");
             else
-                P("    rasColor.rgb = matC * clamp(u_amb_color.rgb, 0.0, 1.0);\n");
+                P("    rasColor.rgb = matC * clamp(u_amb_color.rgb + v_light_accum, 0.0, 1.0);\n");
         } else {
             P("    rasColor.rgb = matC;\n");
         }

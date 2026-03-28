@@ -18,8 +18,8 @@ set(CMAKE_CXX_STANDARD 17)
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type" FORCE)
 endif()
-set(CMAKE_C_FLAGS_RELEASE "-DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
-set(CMAKE_CXX_FLAGS_RELEASE " -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
+set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
 
 # Options
 option(PC_CONSOLE "Show console window (disables -mwindows, useful for debugging)" OFF)
@@ -412,10 +412,10 @@ list(FILTER PC_CXX_SOURCES INCLUDE REGEX "\\.cpp$")
 # warnings from decomp headers (types.h, gfxprint.h, OSRtc.h, libultra.h) that we can't modify.
 set(PC_WARN_SUPPRESS "-Wno-unused-parameter;-Wno-sign-compare;-Wno-comment;-Wno-unused-function;-Wno-builtin-declaration-mismatch")
 set_source_files_properties(${PC_C_SOURCES}
-    PROPERTIES COMPILE_OPTIONS "-std=gnu11;-Wall;-Wextra;${PC_WARN_SUPPRESS}"
+    PROPERTIES COMPILE_OPTIONS "-O3;-std=gnu11;-Wall;-Wextra;${PC_WARN_SUPPRESS}"
 )
 set_source_files_properties(${PC_CXX_SOURCES}
-    PROPERTIES COMPILE_OPTIONS "-Wall;-Wextra;${PC_WARN_SUPPRESS};-fpermissive"
+    PROPERTIES COMPILE_OPTIONS "-O3;-Wall;-Wextra;${PC_WARN_SUPPRESS};-fpermissive"
 )
 
 # =============================================================================

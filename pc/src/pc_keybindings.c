@@ -1,7 +1,7 @@
 #include "pc_keybindings.h"
 #include "pc_platform.h"
 
-PCKeybindings g_pc_keybindings = {
+static const PCKeybindings s_defaults = {
     /* buttons */
     .a     = SDL_SCANCODE_SPACE,
     .b     = SDL_SCANCODE_LSHIFT,
@@ -30,6 +30,8 @@ PCKeybindings g_pc_keybindings = {
     .dpad_left  = SDL_SCANCODE_J,
     .dpad_right = SDL_SCANCODE_L,
 };
+
+PCKeybindings g_pc_keybindings;
 
 static const char* KEYBINDINGS_FILE = "keybindings.ini";
 
@@ -92,9 +94,10 @@ static void trim_end(char* s) {
     }
 }
 
-/* get display name for an input code */
+/* get display name for an input code (-1 = unbound → "None") */
 static const char* input_code_name(PCInputCode code) {
-    if (code & PC_INPUT_MOUSE_BIT) {
+    if (code < 0) return "None";
+    if ((unsigned)code & PC_INPUT_MOUSE_BIT) {
         for (int i = 0; i < (int)NUM_MOUSE_BUTTONS; i++) {
             if (s_mouse_buttons[i].code == code)
                 return s_mouse_buttons[i].name;
@@ -106,6 +109,9 @@ static const char* input_code_name(PCInputCode code) {
 
 /* parse an input value string to a PCInputCode */
 static PCInputCode parse_input_code(const char* value) {
+    /* "None" = explicitly unbound */
+    if (SDL_strcasecmp(value, "None") == 0) return -1;
+
     /* check mouse button names first (case-insensitive) */
     for (int i = 0; i < (int)NUM_MOUSE_BUTTONS; i++) {
         if (SDL_strcasecmp(value, s_mouse_buttons[i].name) == 0) {
@@ -124,7 +130,7 @@ static PCInputCode parse_input_code(const char* value) {
 
 static void apply_keybind(const char* key, const char* value) {
     PCInputCode code = parse_input_code(value);
-    if (code < 0) {
+    if (code < 0 && SDL_strcasecmp(value, "None") != 0) {
         printf("[Keybindings] WARNING: unknown key name '%s' for '%s'\n", value, key);
         return;
     }
@@ -166,7 +172,34 @@ static void write_defaults(const char* path) {
     fclose(f);
 }
 
+void pc_keybindings_save(void) {
+    write_defaults(KEYBINDINGS_FILE);
+}
+
+void pc_keybindings_reset(void) {
+    g_pc_keybindings = s_defaults;
+    pc_keybindings_save();
+}
+
+const char* pc_keybinding_label(int idx) {
+    if (idx < 0 || idx >= (int)NUM_ENTRIES) return "";
+    /* Replace underscores with spaces for display */
+    static char buf[32];
+    const char* src = s_entries[idx].ini_key;
+    int i;
+    for (i = 0; i < (int)(sizeof(buf) - 1) && src[i]; i++)
+        buf[i] = (src[i] == '_') ? ' ' : src[i];
+    buf[i] = '\0';
+    return buf;
+}
+
+PCInputCode* pc_keybinding_ptr(int idx) {
+    if (idx < 0 || idx >= (int)NUM_ENTRIES) return NULL;
+    return (PCInputCode*)((char*)&g_pc_keybindings + s_entries[idx].offset);
+}
+
 void pc_keybindings_load(void) {
+    g_pc_keybindings = s_defaults; /* start from defaults; file overrides only what it specifies */
     FILE* f = fopen(KEYBINDINGS_FILE, "r");
     if (!f) {
         write_defaults(KEYBINDINGS_FILE);

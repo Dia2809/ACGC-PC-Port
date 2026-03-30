@@ -166,14 +166,17 @@ u32 PADRead(PADStatus* status) {
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT))  buttons |= PAD_BUTTON_LEFT;
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) buttons |= PAD_BUTTON_RIGHT;
 
+        int ldz = (int)(g_pc_settings.left_deadzone  / 100.0f * 32767.0f);
+        int rdz = (int)(g_pc_settings.right_deadzone / 100.0f * 32767.0f);
+
         s16 lx = SDL_GameControllerGetAxis(g_controller, SDL_CONTROLLER_AXIS_LEFTX);
         s16 ly = SDL_GameControllerGetAxis(g_controller, SDL_CONTROLLER_AXIS_LEFTY);
-        if (abs(lx) > AXIS_DEADZONE) {
+        if (abs(lx) > ldz) {
             int sx = lx >> 8;
             if (sx > 127) sx = 127; else if (sx < -128) sx = -128;
             stickX = (s8)sx;
         }
-        if (abs(ly) > AXIS_DEADZONE) {
+        if (abs(ly) > ldz) {
             int sy = -(ly >> 8);
             if (sy > 127) sy = 127; else if (sy < -128) sy = -128;
             stickY = (s8)sy;
@@ -181,12 +184,12 @@ u32 PADRead(PADStatus* status) {
 
         s16 rx = SDL_GameControllerGetAxis(g_controller, SDL_CONTROLLER_AXIS_RIGHTX);
         s16 ry = SDL_GameControllerGetAxis(g_controller, SDL_CONTROLLER_AXIS_RIGHTY);
-        if (abs(rx) > AXIS_DEADZONE) {
+        if (abs(rx) > rdz) {
             int srx = rx >> 8;
             if (srx > 127) srx = 127; else if (srx < -128) srx = -128;
             cstickX = (s8)srx;
         }
-        if (abs(ry) > AXIS_DEADZONE) {
+        if (abs(ry) > rdz) {
             int sry = -(ry >> 8);
             if (sry > 127) sry = 127; else if (sry < -128) sry = -128;
             cstickY = (s8)sry;
@@ -198,6 +201,29 @@ u32 PADRead(PADStatus* status) {
         if (rt > TRIGGER_THRESHOLD) buttons |= PAD_TRIGGER_R;
         status[0].triggerLeft = lt;
         status[0].triggerRight = rt;
+    }
+
+    /* Swap A↔B and X↔Y face buttons */
+    if (g_pc_settings.swap_ab_xy) {
+        u16 a = (buttons & PAD_BUTTON_A) ? 1 : 0;
+        u16 b = (buttons & PAD_BUTTON_B) ? 1 : 0;
+        u16 x = (buttons & PAD_BUTTON_X) ? 1 : 0;
+        u16 y = (buttons & PAD_BUTTON_Y) ? 1 : 0;
+        buttons &= ~(PAD_BUTTON_A | PAD_BUTTON_B | PAD_BUTTON_X | PAD_BUTTON_Y);
+        if (b) buttons |= PAD_BUTTON_A;
+        if (a) buttons |= PAD_BUTTON_B;
+        if (y) buttons |= PAD_BUTTON_X;
+        if (x) buttons |= PAD_BUTTON_Y;
+    }
+
+    /* D-pad also drives main analog stick (overrides axis when pressed) */
+    if (g_pc_settings.dpad_as_stick) {
+        if (buttons & PAD_BUTTON_LEFT)  stickX = -STICK_MAGNITUDE;
+        if (buttons & PAD_BUTTON_RIGHT) stickX =  STICK_MAGNITUDE;
+        if (buttons & PAD_BUTTON_DOWN)  stickY = -STICK_MAGNITUDE;
+        if (buttons & PAD_BUTTON_UP)    stickY =  STICK_MAGNITUDE;
+        /* Consume dpad — don't also send PAD_BUTTON_* to game */
+        buttons &= ~(PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT | PAD_BUTTON_UP | PAD_BUTTON_DOWN);
     }
 
     status[0].button = buttons;

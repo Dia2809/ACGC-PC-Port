@@ -473,10 +473,10 @@ if(NOT CMAKE_C_COMPILER_ID MATCHES "Clang")
     list(APPEND PC_WARN_SUPPRESS "-Wno-builtin-declaration-mismatch")
 endif()
 set_source_files_properties(${PC_C_SOURCES}
-    PROPERTIES COMPILE_OPTIONS "-O3;-std=gnu11;-Wall;-Wextra;${PC_WARN_SUPPRESS}"
+    PROPERTIES COMPILE_OPTIONS "-std=gnu11;-Wall;-Wextra;${PC_WARN_SUPPRESS}"
 )
 set_source_files_properties(${PC_CXX_SOURCES}
-    PROPERTIES COMPILE_OPTIONS "-O3;-Wall;-Wextra;${PC_WARN_SUPPRESS};-fpermissive"
+    PROPERTIES COMPILE_OPTIONS "-Wall;-Wextra;${PC_WARN_SUPPRESS};-fpermissive"
 )
 
 # =============================================================================

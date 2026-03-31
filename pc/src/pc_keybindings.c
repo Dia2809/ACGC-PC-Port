@@ -96,7 +96,14 @@ static void trim_end(char* s) {
 
 /* get display name for an input code (-1 = unbound → "None") */
 static const char* input_code_name(PCInputCode code) {
+    static char gpbuf[24];
     if (code < 0) return "None";
+    if ((unsigned)code & PC_INPUT_GAMEPAD_BIT) {
+        const char* s = SDL_GameControllerGetStringForButton(
+            (SDL_GameControllerButton)(code & 0xFF));
+        snprintf(gpbuf, sizeof(gpbuf), "GP_%s", s ? s : "unknown");
+        return gpbuf;
+    }
     if ((unsigned)code & PC_INPUT_MOUSE_BIT) {
         for (int i = 0; i < (int)NUM_MOUSE_BUTTONS; i++) {
             if (s_mouse_buttons[i].code == code)
@@ -117,6 +124,14 @@ static PCInputCode parse_input_code(const char* value) {
         if (SDL_strcasecmp(value, s_mouse_buttons[i].name) == 0) {
             return s_mouse_buttons[i].code;
         }
+    }
+
+    /* gamepad button: "GP_" prefix + SDL controller button name (e.g. GP_a, GP_leftshoulder) */
+    if (SDL_strncasecmp(value, "GP_", 3) == 0) {
+        SDL_GameControllerButton btn = SDL_GameControllerGetButtonFromString(value + 3);
+        if (btn != SDL_CONTROLLER_BUTTON_INVALID)
+            return PC_INPUT_GAMEPAD_BTN(btn);
+        return -1;
     }
 
     /* fall back to SDL scancode */
@@ -179,6 +194,15 @@ void pc_keybindings_save(void) {
 void pc_keybindings_reset(void) {
     g_pc_keybindings = s_defaults;
     pc_keybindings_save();
+}
+
+int pc_keybindings_uses_gamepad(void) {
+    int i;
+    for (i = 0; i < (int)NUM_ENTRIES; i++) {
+        PCInputCode* p = pc_keybinding_ptr(i);
+        if (p && ((unsigned)*p & PC_INPUT_GAMEPAD_BIT)) return 1;
+    }
+    return 0;
 }
 
 const char* pc_keybinding_label(int idx) {

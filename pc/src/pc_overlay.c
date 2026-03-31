@@ -35,8 +35,12 @@ static int   ctrl_scroll       = 0;   /* scroll offset within Controls tab */
 static int   ctrl_capture_idx  = -1;  /* index into KB_COUNT being captured, -1 = none */
 static Uint32 ctrl_capture_start = 0; /* SDL_GetTicks() when capture started */
 #define CTRL_CAPTURE_MS 3000
-static Uint8 s_prev_keys[SDL_NUM_SCANCODES]; /* previous-frame keyboard state for edge detection */
-static int   s_prev_ctrl_a = 0;             /* gamepad A button last frame */
+static Uint8 s_prev_keys[SDL_NUM_SCANCODES];              /* previous-frame keyboard state for edge detection */
+static Uint8 s_prev_gamepad[SDL_CONTROLLER_BUTTON_MAX];   /* previous-frame gamepad button state */
+static int   s_prev_ctrl_a = 0;                           /* gamepad A button last frame (for enter-capture edge) */
+static Uint32 ctrl_clear_start  = 0;  /* SDL_GetTicks() when X/Del hold started on a KB item, 0 = not held */
+static int    ctrl_clear_kb_idx = -1; /* which kb_idx is being held for clear */
+#define CTRL_CLEAR_MS 1500            /* hold this long to clear a binding */
 
 /* ---- Menu items ---- */
 enum {
@@ -186,7 +190,7 @@ static void menu_get_value(int item, char* buf, int sz) {
         snprintf(buf, sz, "%s", g_pc_settings.scale_mode == 1 ? "Center" : "Stretch");
         break;
     case MI_VERBOSE:         snprintf(buf, sz, "%s", g_pc_settings.verbose ? "ON" : "OFF"); break;
-    case MI_CTRL_SWAP_AB:    snprintf(buf, sz, "%s", g_pc_settings.swap_ab_xy ? "ON" : "OFF"); break;
+    case MI_CTRL_SWAP_AB:    snprintf(buf, sz, "Press >"); break;
     case MI_CTRL_DPAD_STICK: snprintf(buf, sz, "%s", g_pc_settings.dpad_as_stick ? "ON" : "OFF"); break;
     case MI_LEFT_DEADZONE:   snprintf(buf, sz, "%d%%", g_pc_settings.left_deadzone); break;
     case MI_RIGHT_DEADZONE:  snprintf(buf, sz, "%d%%", g_pc_settings.right_deadzone); break;
@@ -195,16 +199,25 @@ static void menu_get_value(int item, char* buf, int sz) {
         if (item >= MI_KB_BASE && item < MI_KB_BASE + KB_COUNT) {
             int kb_idx = item - MI_KB_BASE;
             if (kb_idx == ctrl_capture_idx) {
-                /* Show countdown */
+                /* Rebind capture: show countdown */
                 Uint32 elapsed = SDL_GetTicks() - ctrl_capture_start;
                 int secs_left = (int)((CTRL_CAPTURE_MS - (int)elapsed + 999) / 1000);
                 if (secs_left < 1) secs_left = 1;
                 snprintf(buf, sz, "[%d...]", secs_left);
+            } else if (kb_idx == ctrl_clear_kb_idx && ctrl_clear_start) {
+                /* Hold-to-clear: show shrinking countdown */
+                int ms_left = CTRL_CLEAR_MS - (int)(SDL_GetTicks() - ctrl_clear_start);
+                if (ms_left < 0) ms_left = 0;
+                snprintf(buf, sz, "[CLR %d]", (ms_left + 999) / 1000);
             } else {
                 PCInputCode* p = pc_keybinding_ptr(kb_idx);
                 PCInputCode code = p ? *p : -1;
                 if (code < 0) snprintf(buf, sz, "[NONE]");
-                else {
+                else if ((unsigned)code & PC_INPUT_GAMEPAD_BIT) {
+                    const char* s = SDL_GameControllerGetStringForButton(
+                        (SDL_GameControllerButton)(code & 0xFF));
+                    snprintf(buf, sz, "GP %s", s ? s : "?");
+                } else {
                     const char* name = SDL_GetScancodeName((SDL_Scancode)code);
                     snprintf(buf, sz, "%.*s", sz - 1, name);
                 }
@@ -283,7 +296,14 @@ static void menu_adjust(int item, int dir) {
         g_pc_scale_mode = g_pc_settings.scale_mode;
         break;
     case MI_VERBOSE:         g_pc_settings.verbose ^= 1; break;
-    case MI_CTRL_SWAP_AB:    g_pc_settings.swap_ab_xy ^= 1; break;
+    case MI_CTRL_SWAP_AB: {
+        /* Swap A↔B and X↔Y directly in keybindings so the mapping list reflects it */
+        PCInputCode tmp;
+        tmp = g_pc_keybindings.a; g_pc_keybindings.a = g_pc_keybindings.b; g_pc_keybindings.b = tmp;
+        tmp = g_pc_keybindings.x; g_pc_keybindings.x = g_pc_keybindings.y; g_pc_keybindings.y = tmp;
+        pc_keybindings_save();
+        break;
+    }
     case MI_CTRL_DPAD_STICK: g_pc_settings.dpad_as_stick ^= 1; break;
     case MI_LEFT_DEADZONE: {
         int v = g_pc_settings.left_deadzone + dir * 5;
@@ -547,9 +567,29 @@ static void menu_process_input(void) {
                 }
             }
         }
-        /* Always update prev_keys and return — suppress normal nav in capture mode */
+        /* Also scan gamepad buttons (covers PortMaster and other gamepad-only devices) */
+        if (ctrl_capture_idx >= 0 && ctrl) {
+            int btn;
+            for (btn = 0; btn < SDL_CONTROLLER_BUTTON_MAX; btn++) {
+                int cur = SDL_GameControllerGetButton(ctrl, (SDL_GameControllerButton)btn);
+                if (cur && !s_prev_gamepad[btn]) {
+                    PCInputCode* p = pc_keybinding_ptr(ctrl_capture_idx);
+                    if (p) *p = PC_INPUT_GAMEPAD_BTN(btn);
+                    pc_keybindings_save();
+                    ctrl_capture_idx = -1;
+                    break;
+                }
+            }
+        }
+
+        /* Always update prev state and return — suppress normal nav in capture mode */
         if (nkeys > SDL_NUM_SCANCODES) nkeys = SDL_NUM_SCANCODES;
         SDL_memcpy(s_prev_keys, keys, nkeys);
+        {
+            int btn;
+            for (btn = 0; btn < SDL_CONTROLLER_BUTTON_MAX; btn++)
+                s_prev_gamepad[btn] = (Uint8)(ctrl ? SDL_GameControllerGetButton(ctrl, (SDL_GameControllerButton)btn) : 0);
+        }
         s_prev_ctrl_a = ctrl ? SDL_GameControllerGetButton(ctrl, SDL_CONTROLLER_BUTTON_A) : 0;
         return;
     }
@@ -613,15 +653,27 @@ static void menu_process_input(void) {
                 ctrl_capture_idx = mi - MI_KB_BASE;
                 ctrl_capture_start = SDL_GetTicks();
             }
-            /* X button (rising edge) or Delete key (new press) → clear binding */
-            static int s_prev_ctrl_x = 0;
-            int del_new = keys[SDL_SCANCODE_DELETE] && !s_prev_keys[SDL_SCANCODE_DELETE];
-            int x_edge  = ctrl_x && !s_prev_ctrl_x;
-            s_prev_ctrl_x = ctrl_x;
-            if (x_edge || del_new) {
-                PCInputCode* p = pc_keybinding_ptr(mi - MI_KB_BASE);
-                if (p) *p = -1;
-                pc_keybindings_save();
+            /* X button or Delete key held → clear binding after CTRL_CLEAR_MS.
+             * Uses a hold timer rather than edge detection to prevent the button
+             * just used for capture from immediately clearing the new binding. */
+            {
+                int x_or_del = ctrl_x || keys[SDL_SCANCODE_DELETE];
+                if (x_or_del) {
+                    if (!ctrl_clear_start) {
+                        ctrl_clear_start  = SDL_GetTicks();
+                        ctrl_clear_kb_idx = mi - MI_KB_BASE;
+                    }
+                    if (SDL_GetTicks() - ctrl_clear_start >= CTRL_CLEAR_MS) {
+                        PCInputCode* p = pc_keybinding_ptr(mi - MI_KB_BASE);
+                        if (p) *p = -1;
+                        pc_keybindings_save();
+                        ctrl_clear_start  = 0;
+                        ctrl_clear_kb_idx = -1;
+                    }
+                } else {
+                    ctrl_clear_start  = 0;
+                    ctrl_clear_kb_idx = -1;
+                }
             }
         }
     }
@@ -629,6 +681,11 @@ static void menu_process_input(void) {
     /* Update edge-detection state */
     if (nkeys > SDL_NUM_SCANCODES) nkeys = SDL_NUM_SCANCODES;
     SDL_memcpy(s_prev_keys, keys, nkeys);
+    {
+        int btn;
+        for (btn = 0; btn < SDL_CONTROLLER_BUTTON_MAX; btn++)
+            s_prev_gamepad[btn] = (Uint8)(ctrl ? SDL_GameControllerGetButton(ctrl, (SDL_GameControllerButton)btn) : 0);
+    }
     s_prev_ctrl_a = ctrl_a;
 }
 
@@ -729,7 +786,7 @@ static void draw_menu(float cw, float ch, float pad) {
 
         ov_string(get_item_label(i), tx + 2 * cw, ty, cw, ch, r, g, b, 1);
 
-        char val[16];
+        char val[32];
         menu_get_value(i, val, sizeof(val));
         float vr = 1, vg = 1, vb = 1;
         if (selected) { vr = 1; vg = 1; vb = 0.5f; }
@@ -863,7 +920,9 @@ void pc_overlay_menu_toggle(void) {
         /* Save settings and keybindings on close */
         pc_settings_save();
         pc_keybindings_save();
-        ctrl_capture_idx = -1;
+        ctrl_capture_idx  = -1;
+        ctrl_clear_start  = 0;
+        ctrl_clear_kb_idx = -1;
     }
     /* Reset repeat timers */
     rep_up = rep_down = rep_left = rep_right = 0;

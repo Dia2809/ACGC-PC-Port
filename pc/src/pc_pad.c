@@ -53,7 +53,9 @@ u32 PADRead(PADStatus* status) {
         #define INPUT_PRESSED(code) \
             (((code) & PC_INPUT_MOUSE_BIT) \
                 ? (mouse & SDL_BUTTON((code) & 0xFF)) \
-                : keys[(SDL_Scancode)(code)])
+                : (((code) & PC_INPUT_GAMEPAD_BIT) \
+                    ? (g_controller ? SDL_GameControllerGetButton(g_controller, (SDL_GameControllerButton)((code) & 0xFF)) : 0) \
+                    : ((code) >= 0 ? keys[(SDL_Scancode)(code)] : 0)))
 
         /* buttons (from keybindings.ini) */
         PCKeybindings* kb = &g_pc_keybindings;
@@ -124,7 +126,10 @@ u32 PADRead(PADStatus* status) {
             g_controller = NULL;
         }
     }
-    if (g_controller) {
+    /* Hardcoded gamepad path: used when no gamepad buttons are bound via PCInputCode.
+     * When the user has rebound controls to gamepad buttons, the INPUT_PRESSED path
+     * above handles them, and this block is skipped to avoid double-firing. */
+    if (g_controller && !pc_keybindings_uses_gamepad()) {
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_A)) buttons |= PAD_BUTTON_A;
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_B)) buttons |= PAD_BUTTON_B;
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_X)) buttons |= PAD_BUTTON_X;
@@ -165,7 +170,19 @@ u32 PADRead(PADStatus* status) {
         }
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT))  buttons |= PAD_BUTTON_LEFT;
         if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) buttons |= PAD_BUTTON_RIGHT;
+    } else if (g_controller && !((unsigned)g_pc_keybindings.dpad_up & PC_INPUT_GAMEPAD_BIT)) {
+        /* Mixed-binding mode: D-pad bindings are still keyboard scancodes that won't
+         * fire on a controller-only device, so read the physical D-pad directly.
+         * Zoom is already handled by the PCInputCode path above. */
+        if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_UP))    buttons |= PAD_BUTTON_UP;
+        if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN))  buttons |= PAD_BUTTON_DOWN;
+        if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT))  buttons |= PAD_BUTTON_LEFT;
+        if (SDL_GameControllerGetButton(g_controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) buttons |= PAD_BUTTON_RIGHT;
+    }
 
+    /* Analog axes always run regardless of binding mode — sticks and triggers are
+     * not part of PCInputCode and have no remappable equivalent. */
+    if (g_controller) {
         int ldz = (int)(g_pc_settings.left_deadzone  / 100.0f * 32767.0f);
         int rdz = (int)(g_pc_settings.right_deadzone / 100.0f * 32767.0f);
 
@@ -201,19 +218,6 @@ u32 PADRead(PADStatus* status) {
         if (rt > TRIGGER_THRESHOLD) buttons |= PAD_TRIGGER_R;
         status[0].triggerLeft = lt;
         status[0].triggerRight = rt;
-    }
-
-    /* Swap A↔B and X↔Y face buttons */
-    if (g_pc_settings.swap_ab_xy) {
-        u16 a = (buttons & PAD_BUTTON_A) ? 1 : 0;
-        u16 b = (buttons & PAD_BUTTON_B) ? 1 : 0;
-        u16 x = (buttons & PAD_BUTTON_X) ? 1 : 0;
-        u16 y = (buttons & PAD_BUTTON_Y) ? 1 : 0;
-        buttons &= ~(PAD_BUTTON_A | PAD_BUTTON_B | PAD_BUTTON_X | PAD_BUTTON_Y);
-        if (b) buttons |= PAD_BUTTON_A;
-        if (a) buttons |= PAD_BUTTON_B;
-        if (y) buttons |= PAD_BUTTON_X;
-        if (x) buttons |= PAD_BUTTON_Y;
     }
 
     /* D-pad also drives main analog stick (overrides axis when pressed) */

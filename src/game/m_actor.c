@@ -424,26 +424,30 @@ extern void Actor_info_dt(Actor_info* actor_info, GAME_PLAY* play) {
 }
 
 extern void Actor_info_call_actor(GAME_PLAY* play, Actor_info* actor_info) {
-    // GAME* game = (GAME*)play;
     PLAYER_ACTOR* player_actor = get_player_actor_withoutCheck(play);
     ACTOR* actor;
+    ACTOR* next_node; // Temporary storage to prevent Use-After-Free
     int i;
 
     mFI_FieldMove(player_actor->actor_class.world.position);
     mBI_move(play);
 
     for (i = 0; i < ACTOR_PART_NUM; i++) {
-        ACTOR* next;
         actor = actor_info->list[i].actor;
 
         while (actor != NULL) {
+            // CRITICAL FIX: Capture the next pointer BEFORE any logic that might free 'actor'
+            next_node = actor->next_actor;
+
             play->game.doing_point = actor->id;
             play->game.doing_point_specific = 151;
 
+            // Simple floor clamping
             if (actor->world.position.y < -25000.0f) {
                 actor->world.position.y = -25000.0f;
             }
 
+            // Case 1: Actor is currently initializing (Constructor)
             if (actor->ct_proc != NULL) {
                 if (Actor_data_bank_dma_end_check(actor, play) == TRUE) {
                     play->game.doing_point_specific = 152;
@@ -451,50 +455,97 @@ extern void Actor_info_call_actor(GAME_PLAY* play, Actor_info* actor_info) {
                     play->game.doing_point_specific = 153;
                     actor->ct_proc = NULL;
                 }
-
-                next = actor->next_actor;
-            } else {
+                // We don't run mv_proc on the same frame as ct_proc
+            } 
+            // Case 2: Actor failed DMA or is marked for deletion
+            else {
                 if (Actor_data_bank_dma_end_check(actor, play) == FALSE) {
                     play->game.doing_point_specific = 154;
-                    Actor_delete(actor);
+                    Actor_delete(actor); 
                     play->game.doing_point_specific = 155;
-                    next = actor->next_actor;
-                } else if (actor->mv_proc == NULL) {
+                } 
+                else if (actor->mv_proc == NULL) {
                     if (actor->drawn == FALSE) {
                         play->game.doing_point_specific = 156;
-                        next = Actor_info_delete(&play->actor_info, actor, (GAME*)play);
+                        // This specific function already returns the next actor, 
+                        // but we use our cached next_node for consistency.
+                        Actor_info_delete(&play->actor_info, actor, (GAME*)play);
                         play->game.doing_point_specific = 157;
                     } else {
                         play->game.doing_point_specific = 158;
                         Actor_dt(actor, (GAME*)play);
                         play->game.doing_point_specific = 159;
-                        next = actor->next_actor;
                     }
-                } else {
+                } 
+                // Case 3: Standard Actor Update (Movement/AI)
+                else {
                     play->game.doing_point_specific = 160;
+                    
+                    // Update positional history and player distance
                     xyz_t_move(&actor->last_world_position, &actor->world.position);
-                    actor->player_distance_xz =
-                        search_position_distanceXZ(&actor->world.position, &player_actor->actor_class.world.position);
+                    actor->player_distance_xz = search_position_distanceXZ(&actor->world.position, &player_actor->actor_class.world.position);
                     actor->player_distance_y = player_actor->actor_class.world.position.y - actor->world.position.y;
-                    actor->player_distance = actor->player_distance_xz * actor->player_distance_xz +
-                                             actor->player_distance_y * actor->player_distance_y;
-                    actor->player_angle_y =
-                        search_position_angleY(&actor->world.position, &player_actor->actor_class.world.position);
+                    
+                    // Squared distance (x^2 + y^2)
+                    actor->player_distance = (actor->player_distance_xz * actor->player_distance_xz) +
+                                             (actor->player_distance_y * actor->player_distance_y);
+                    
+                    actor->player_angle_y = search_position_angleY(&actor->world.position, &player_actor->actor_class.world.position);
+                    
+                    // Clear state bit
                     actor->state_bitfield &= ~ACTOR_STATE_24;
 
+                    // Execute move procedure if not culled or if it's an NPC
                     if ((actor->state_bitfield & (ACTOR_STATE_NO_MOVE_WHILE_CULLED | ACTOR_STATE_NO_CULL)) ||
                         actor->part == ACTOR_PART_NPC) {
+
                         play->game.doing_point_specific = 161;
-                        (*actor->mv_proc)(actor, (GAME*)play);
+
+                        /* PC port: validate actor before calling mv_proc to catch
+                         * use-after-free and memory corruption.  Check multiple fields
+                         * for consistency — if any are clearly wrong, the actor memory
+                         * is corrupted and we skip it instead of crashing. */
+#ifdef TARGET_PC
+                        {
+                            int actor_corrupted = FALSE;
+                            if (actor->id >= mAc_PROFILE_NUM) {
+                                actor_corrupted = TRUE;
+                            } else if (actor->mv_proc == NULL) {
+                                actor_corrupted = TRUE;
+                            } else if (actor->dlftbl != NULL) {
+                                ACTOR_DLFTBL* dt = actor->dlftbl;
+                                if ((uintptr_t)dt < (uintptr_t)actor_dlftbls ||
+                                    (uintptr_t)dt >= (uintptr_t)(actor_dlftbls + mAc_PROFILE_NUM)) {
+                                    actor_corrupted = TRUE;
+                                }
+                            }
+                            if (actor_corrupted) {
+                                fprintf(stderr, "[PC] CORRUPT ACTOR at %p: id=0x%X(%d) mv_proc=%p dlftbl=%p npc_id=0x%X part=%d pos=(%.0f,%.0f,%.0f)\n",
+                                    (void*)actor, actor->id, actor->id,
+                                    (void*)actor->mv_proc, (void*)actor->dlftbl,
+                                    actor->npc_id, actor->part,
+                                    (double)actor->world.position.x,
+                                    (double)actor->world.position.y,
+                                    (double)actor->world.position.z);
+                                actor->mv_proc = NULL;
+                                actor->dw_proc = NULL;
+                            }
+                        }
+#endif
+
+                        if (actor->mv_proc != NULL) {
+                            (*actor->mv_proc)(actor, (GAME*)play);
+                        }
                         play->game.doing_point_specific = 162;
                     }
 
+                    // Reset collision status for the next frame
                     CollisionCheck_Status_Clear(&actor->status_data);
-                    next = actor->next_actor;
                 }
             }
 
-            actor = next;
+            // Move to the next actor using our safe pointer
+            actor = next_node;
         }
     }
 

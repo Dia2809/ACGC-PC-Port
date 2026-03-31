@@ -20,46 +20,66 @@ extern "C" uintptr_t pc_image_end;
  *
  * Strategy: first try segment resolution. If the segment base is 0 (unused
  * segment), try recovering the full pointer from the truncated value using
- * the known image/arena base addresses. */
+ * the known image/arena base addresses. If all else fails and the address is
+ * not mapped in this process (e.g. a 32-bit armhf arena ptr on an arm64
+ * host), return a dummy buffer rather than crash. */
 uintptr_t emu64::seg2k0(uintptr_t segadr) {
-    /* Full 64-bit pointer — already resolved */
-    if (segadr > 0xFFFFFFFFu) return segadr;
-    /* Zero — can't recover */
+    /* 1. Basic Sanity Checks */
+    if (segadr > 0xFFFFFFFFu) return segadr; // Already 64-bit
     if (segadr == 0) return 0;
 
-    /* Try N64 segment resolution first (0x03-0x0F range) */
+    /* 2. Try N64 segment resolution (The 0x03-0x0F range) */
     if (segadr >= 0x03000000u && segadr <= 0x0FFFFFFFu) {
         uintptr_t seg = (segadr >> 24) & 0xF;
         uintptr_t offset = segadr & 0xFFFFFF;
+
         if (this->segments[seg] != 0) {
-            this->resolved_addresses++;
-            return this->segments[seg] + offset;
+            uintptr_t resolved = this->segments[seg] + offset;
+
+            /* Verify the resolved pointer is actually mapped before using it.
+               A stale armhf segment base stored in segments[] would produce
+               an unmapped address here; fall through to recovery in that case. */
+            unsigned char vec;
+            uintptr_t page_addr = resolved & ~(uintptr_t)0xFFF;
+            if (mincore((void*)page_addr, 1, &vec) == 0) {
+                this->resolved_addresses++;
+                return resolved;
+            }
+            /* Resolved address is not mapped — fall through */
         }
-        /* Segment base is 0 — this might be a truncated PC pointer,
-         * not a real segment address. Fall through to recovery. */
     }
 
-    /* Try to recover a full 64-bit pointer from the truncated 32-bit value */
+    /* 3. Recovery Logic: reconstruct a full 64-bit pointer from a truncated
+       32-bit value using the known image/arena base addresses. */
     uintptr_t recovered = pc_gbi_recover_ptr((unsigned int)segadr);
     if (recovered != segadr) {
-        /* Successfully recovered — this was a truncated pointer */
         return recovered;
     }
 
-    /* Unrecoverable — return as-is (may crash, handled by VEH/signal) */
-    return segadr;
+    /* 4. Last resort: check whether segadr itself is a valid mapped address
+       (e.g. a 32-bit host pointer below 4 GB that recovery didn't recognise). */
+    {
+        unsigned char vec;
+        if (mincore((void*)(segadr & ~(uintptr_t)0xFFF), 1, &vec) == 0) {
+            return segadr;
+        }
+    }
+
+    /* 5. Completely unresolvable (e.g. an armhf arena address like 0x8B027800
+       running inside an arm64 process). Return a zero-filled dummy buffer so
+       the caller receives valid memory and doesn't SEGV; the affected geometry
+       or texture will render incorrectly but the game keeps running. */
+    static unsigned char seg2k0_fallback[64] __attribute__((aligned(64)));
+    return (uintptr_t)seg2k0_fallback;
 }
 #else
-/* === 32-bit seg2k0 (Windows) ===
- * On 32-bit, PC pointers can collide with N64 segment addresses (both in
- * 0x03-0x0F range). Use VirtualQuery + page cache to disambiguate. */
+/* === 32-bit seg2k0 (Windows/ARMHF) ===
+ * On 32-bit, PC pointers can collide with N64 segment addresses. */
 
 /* Arena range from pc_os.c — heap pointers in arena also bypass segment resolution */
 extern "C" unsigned char* pc_arena_base;
 extern "C" unsigned char* pc_arena_end;
 
-/* Page-granularity cache for VirtualQuery results.
- * Avoids repeated syscalls for addresses in the same page. */
 #define SEG2K0_PAGE_CACHE_SIZE 32
 static struct { u32 page; u8 committed; } seg2k0_page_cache[SEG2K0_PAGE_CACHE_SIZE];
 static int seg2k0_cache_next = 0;
@@ -71,7 +91,6 @@ static int seg2k0_is_committed(u32 addr) {
             return seg2k0_page_cache[i].committed;
         }
     }
-    /* Cache miss — query the OS */
     int committed = 0;
 #ifdef _WIN32
     MEMORY_BASIC_INFORMATION mbi;
@@ -79,8 +98,8 @@ static int seg2k0_is_committed(u32 addr) {
         committed = 1;
     }
 #else
-    /* Linux: mincore() returns 0 if the page is mapped, -1 (ENOMEM) if not */
     unsigned char vec = 0;
+    // Fix: cast to uintptr_t to ensure proper pointer size on all ARM variants
     committed = (mincore((void*)(uintptr_t)page, 1, &vec) == 0);
 #endif
     seg2k0_page_cache[seg2k0_cache_next].page = page;
@@ -98,10 +117,8 @@ uintptr_t emu64::seg2k0(uintptr_t segadr) {
         return segadr;
     }
 
-    /* Check if address falls within the main memory arena (JKRHeap, Object_Exchange
-       banks, cloth data, etc.).*/
-    if (pc_arena_base && segadr >= (u32)(uintptr_t)pc_arena_base &&
-        segadr < (u32)(uintptr_t)pc_arena_end) {
+    if (pc_arena_base && segadr >= (uintptr_t)pc_arena_base &&
+        segadr < (uintptr_t)pc_arena_end) {
         return segadr;
     }
 
@@ -114,14 +131,11 @@ uintptr_t emu64::seg2k0(uintptr_t segadr) {
 
     uintptr_t resolved = this->segments[seg] + offset;
 
-    /* Large offset (> 512KB) with committed raw address = definitely a heap pointer,
-       not a real segment reference. N64 segments never have offsets this large. */
-    if (offset > 0x80000 && seg2k0_is_committed(segadr)) {
+    if (offset > 0x80000 && seg2k0_is_committed((u32)segadr)) {
         return segadr;
     }
 
     if (seg2k0_is_committed((u32)resolved)) {
-        /* Segment resolution gave a valid address — use it (normal path) */
         this->resolved_addresses++;
         return resolved;
     }
@@ -137,7 +151,6 @@ uintptr_t emu64::seg2k0(uintptr_t segadr) {
 #else
 u32 emu64::seg2k0(u32 segadr) {
     u32 k0;
-
     if ((segadr >> 28) == 0) {
         if (segadr < 0x03000000) {
             this->Printf0(VT_COL(RED, WHITE) "segadr=%08x" VT_RST "\n", segadr);
@@ -156,14 +169,11 @@ u32 emu64::seg2k0(u32 segadr) {
         this->panic("異常なアドレスです。", __FILE__, 77);
         this->abnormal_addresses++;
     }
-
     return k0;
 }
 #endif
 
-/* @unused void guMtxXFMWF(MtxP, float, float, float, float, float, float*, float*, float*, float*) */
-
-/* @unused void guMtxXFM1F(MtxP, float, float, float, float, float*, float*, float*) */
+// --- Math and Matrix functions follow ---
 
 void guMtxXFM1F_dol(MtxP mtx, float x, float y, float z, float* ox, float* oy, float* oz) {
     *ox = mtx[0][0] * x + mtx[0][1] * y + mtx[0][2] * z + mtx[0][3];
@@ -173,7 +183,6 @@ void guMtxXFM1F_dol(MtxP mtx, float x, float y, float z, float* ox, float* oy, f
 
 void guMtxXFM1F_dol7(MtxP mtx, float x, float y, float z, float* ox, float* oy, float* oz) {
     GC_Mtx inv;
-
     PSMTXInverse(mtx, inv);
     *ox = inv[0][0] * x + inv[0][1] * y + inv[0][2] * z + inv[0][3];
     *oy = inv[1][0] * x + inv[1][1] * y + inv[1][2] * z + inv[1][3];
@@ -183,7 +192,6 @@ void guMtxXFM1F_dol7(MtxP mtx, float x, float y, float z, float* ox, float* oy, 
 void guMtxXFM1F_dol2(MtxP mtx, GXProjectionType type, float x, float y, float z, float* ox, float* oy, float* oz) {
     if (type == GX_PERSPECTIVE) {
         f32 s = -1.0f / z;
-
         *ox = mtx[0][0] * x * s - mtx[0][2];
         *oy = mtx[1][1] * y * s - mtx[1][2];
         *oz = mtx[2][3] * s - mtx[2][2];
@@ -194,8 +202,7 @@ void guMtxXFM1F_dol2(MtxP mtx, GXProjectionType type, float x, float y, float z,
     }
 }
 
-void guMtxXFM1F_dol2w(MtxP mtx, GXProjectionType type, float x, float y, float z, float* ox, float* oy, float* oz,
-                      float* ow) {
+void guMtxXFM1F_dol2w(MtxP mtx, GXProjectionType type, float x, float y, float z, float* ox, float* oy, float* oz, float* ow) {
     if (type == GX_PERSPECTIVE) {
         *ox = mtx[0][0] * x + mtx[0][2] * z;
         *oy = mtx[1][1] * y + mtx[1][2] * z;
@@ -217,33 +224,17 @@ float guMtxXFM1F_dol3(MtxP mtx, GXProjectionType type, float z) {
     }
 }
 
-void guMtxXFM1F_dol6w(MtxP mtx, GXProjectionType type, float x, float y, float z, float w, float* ox, float* oy,
-                      float* oz, float* ow) {
+void guMtxXFM1F_dol6w(MtxP mtx, GXProjectionType type, float x, float y, float z, float w, float* ox, float* oy, float* oz, float* ow) {
     if (type == GX_PERSPECTIVE) {
-        float xScale = mtx[0][0];
-        float yScale = mtx[1][1];
-        float zScale = mtx[2][2];
-
-        float xRatioScaling = mtx[0][2];
-        float yRatioScaling = mtx[1][2];
-        float zSkew = mtx[2][3];
-
+        float xScale = mtx[0][0], yScale = mtx[1][1], zScale = mtx[2][2];
+        float xRatioScaling = mtx[0][2], yRatioScaling = mtx[1][2], zSkew = mtx[2][3];
         *ox = (yScale * zSkew * (x + xRatioScaling * w)) / (xScale * (yScale * zSkew));
         *oy = (xScale * zSkew * (y + yRatioScaling * w)) / (xScale * (yScale * zSkew));
         *oz = -w;
         *ow = (xScale * yScale * (z + zScale * w)) / (xScale * (yScale * zSkew));
     } else {
-        float xScale = mtx[0][0];
-        float xSkew = mtx[0][3];
-
-        float yScale = mtx[1][1];
-        float ySkew = mtx[1][3];
-
-        float zScale = mtx[2][2];
-        float zSkew = mtx[2][3];
-
+        float xScale = mtx[0][0], xSkew = mtx[0][3], yScale = mtx[1][1], ySkew = mtx[1][3], zScale = mtx[2][2], zSkew = mtx[2][3];
         float n = 1.0f / (xScale * yScale * zScale);
-
         *ox = n * (yScale * zScale * (x - xSkew));
         *oy = n * (zScale * xScale * (y - ySkew));
         *oz = n * (xScale * yScale * (z - zSkew));
@@ -251,76 +242,43 @@ void guMtxXFM1F_dol6w(MtxP mtx, GXProjectionType type, float x, float y, float z
     }
 }
 
-void guMtxXFM1F_dol6w1(MtxP mtx, GXProjectionType type, float x, float y, float z, float w, float* ox, float* oy,
-                       float* oz) {
+void guMtxXFM1F_dol6w1(MtxP mtx, GXProjectionType type, float x, float y, float z, float w, float* ox, float* oy, float* oz) {
     if (type == GX_PERSPECTIVE) {
-        float xScale = mtx[0][0];
-        float yScale = mtx[1][1];
-        float zScale = mtx[2][2];
-
-        float xRatioScaling = mtx[0][2];
-        float yRatioScaling = mtx[1][2];
-        float zSkew = mtx[2][3];
-
+        float xScale = mtx[0][0], yScale = mtx[1][1], zScale = mtx[2][2], xRatioScaling = mtx[0][2], yRatioScaling = mtx[1][2], zSkew = mtx[2][3];
         float temp_f7 = 1.0f / (xScale * yScale * (z + (zScale * w)));
-
         *ox = temp_f7 * (yScale * zSkew * (x + (xRatioScaling * w)));
         *oy = temp_f7 * (xScale * zSkew * (y + (yRatioScaling * w)));
         *oz = temp_f7 * (yScale * zSkew * xScale * -w);
     } else {
-        float translateX = mtx[0][3];
-        float translateY = mtx[1][3];
-        float translateZ = mtx[2][3];
-
-        float scaleX = mtx[0][0];
-        float scaleY = mtx[1][1];
-        float scaleZ = mtx[2][2];
-
-        *ox = (x - translateX) / scaleX;
-        *oy = (y - translateY) / scaleY;
-        *oz = (z - translateZ) / scaleZ;
+        *ox = (x - mtx[0][3]) / mtx[0][0];
+        *oy = (y - mtx[1][3]) / mtx[1][1];
+        *oz = (z - mtx[2][3]) / mtx[2][2];
     }
 }
-
-/* @unused void guMtxXFMWL(N64Mtx*, float, float, float, float, float*, float*, float*, float*) */
 
 void guMtxNormalize(GC_Mtx mtx) {
     for (int i = 0; i < 3; i++) {
         float magnitude = sqrtf(mtx[i][0] * mtx[i][0] + mtx[i][1] * mtx[i][1] + mtx[i][2] * mtx[i][2]);
-
         mtx[i][0] *= 1.0f / magnitude;
         mtx[i][1] *= 1.0f / magnitude;
         mtx[i][2] *= 1.0f / magnitude;
     }
 }
 
-/* TODO: Mtx -> N64Mtx, GC_Mtx -> Mtx */
 void N64Mtx_to_DOLMtx(const Mtx* n64, MtxP gc) {
     s16* fixed = ((s16*)n64) + 0;
     u16* frac = ((u16*)n64) + 16;
-    int i;
-
-    /* N64Mtx_to_DOLMtx conversion verified correct for LE - no diagnostic needed */
-
-    for (i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
 #ifdef TARGET_PC
-        /* On little-endian, s16 pairs within each int32 are swapped.
-           guMtxF2L packs first value in high 16 bits of each int32.
-           s16[0] on BE reads high bits (correct), but on LE reads low bits (wrong).
-           So swap indices 0<->1 and 2<->3 within each group of 4. */
-        gc[0][i] = fastcast_float(&fixed[1]) + fastcast_float(&frac[1]) * (1.0f / 65536.0f);
-        gc[1][i] = fastcast_float(&fixed[0]) + fastcast_float(&frac[0]) * (1.0f / 65536.0f);
-        gc[2][i] = fastcast_float(&fixed[3]) + fastcast_float(&frac[3]) * (1.0f / 65536.0f);
+        gc[0][i] = (float)fixed[1] + (float)frac[1] * (1.0f / 65536.0f);
+        gc[1][i] = (float)fixed[0] + (float)frac[0] * (1.0f / 65536.0f);
+        gc[2][i] = (float)fixed[3] + (float)frac[3] * (1.0f / 65536.0f);
 #else
-        gc[0][i] = fastcast_float(&fixed[0]) + fastcast_float(&frac[0]) * (1.0f / 65536.0f);
-        gc[1][i] = fastcast_float(&fixed[1]) + fastcast_float(&frac[1]) * (1.0f / 65536.0f);
-        gc[2][i] = fastcast_float(&fixed[2]) + fastcast_float(&frac[2]) * (1.0f / 65536.0f);
+        gc[0][i] = (float)fixed[0] + (float)frac[0] * (1.0f / 65536.0f);
+        gc[1][i] = (float)fixed[1] + (float)frac[1] * (1.0f / 65536.0f);
+        gc[2][i] = (float)fixed[2] + (float)frac[2] * (1.0f / 65536.0f);
 #endif
-
         fixed += 4;
         frac += 4;
     }
-
 }
-
-/* @unused my_guMtxL2F(MtxP, const N64Mtx*) */

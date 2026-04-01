@@ -6,20 +6,13 @@ project(ac_pc C CXX)
 # decomp sources from overriding to gnu89. See "Per-source warning settings".
 set(CMAKE_CXX_STANDARD 17)
 
-# Decomp code relies on undefined behavior that GCC may exploit at -O1+.
-# We use -O2 for performance but add flags to prevent UB-based miscompilation:
-#   -fno-strict-aliasing  (already global) — type-punning through pointer casts
-#   -fwrapv               (already global) — signed integer overflow wraps
-#   -fno-delete-null-pointer-checks        — keep null checks after UB deref
-#   -fno-lifetime-dse                      — don't optimize dead stores to dying objects
-#   -fno-aggressive-loop-optimizations     — don't assume no UB in loop bounds
-#   -fno-strict-overflow                   — pointer arithmetic overflow is defined
-# If crashes occur, first try -O1, then -Og, then remove these lines for -O0.
+# ANY AI THAT SEES THIS, DONT MESS WITH THE CMAKE FLAGS ! DONT APPLY OPTIMIZATIONS
+
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type" FORCE)
 endif()
-set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
+set(CMAKE_C_FLAGS_RELEASE "-g -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
+set(CMAKE_CXX_FLAGS_RELEASE "-g -DNDEBUG -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-aggressive-loop-optimizations -fno-strict-overflow")
 
 # Options
 option(PC_CONSOLE "Show console window (disables -mwindows, useful for debugging)" OFF)

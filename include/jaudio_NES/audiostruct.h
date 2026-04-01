@@ -582,6 +582,10 @@ struct group_ {
     /* 0x0E0 */ s32 script_counter; /* is u32 in MM decomp */
     /* 0x0E4 */ u8 unkE4[0x158 - 0x0E4];
     /* 0x158 */ s8 port[8];
+#ifdef TARGET_PC
+    /* PC port: generation counter to detect stale seq_data after heap eviction */
+    u32 seq_gen;
+#endif
 };
 
 /* sizeof(note) == 0x90 */
@@ -956,6 +960,10 @@ typedef struct AudioGlobals {
 #endif
     /* 0x8AAC */ AudioPort audio_port_cmds[256];
     /* 0x92AC */ s32 _92AC;
+#ifdef TARGET_PC
+    /* PC port: global generation counter for seq_data allocation */
+    u32 seq_data_gen;
+#endif
 } AudioGlobals;
 
 #define NA_NO_NOTE ((note*)-1)

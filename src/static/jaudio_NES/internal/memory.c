@@ -116,6 +116,9 @@ void Nas_ForceStopSeq(s32 id) {
             Nas_ReleaseGroup(AG.groups_p[i]);
         }
     }
+#ifdef TARGET_PC
+    AG.seq_data_gen++;
+#endif
 }
 
 /*

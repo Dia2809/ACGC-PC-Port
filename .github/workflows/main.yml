@@ -5,6 +5,7 @@ on:
     branches: [ main, arm64 ]
   pull_request:
     branches: [ main, arm64 ]
+  workflow_dispatch:
 
 jobs:
   build:

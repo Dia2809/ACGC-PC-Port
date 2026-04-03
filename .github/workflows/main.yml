@@ -1,0 +1,36 @@
+name: Build x86_64 Linux
+
+on:
+  push:
+    branches: [ main, arm64 ]
+  pull_request:
+    branches: [ main, arm64 ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt update
+        sudo apt install -y gcc-multilib g++-multilib cmake libsdl2-dev:i386
+
+    - name: Make build script executable
+      run: chmod +x build_make.sh
+
+    - name: Build
+      run: ./build_make.sh
+
+    - name: Zip build directory
+      run: cd pc && zip -r ../build32.zip build32/
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: AnimalCrossing-Linux-x86_64
+        path: build32.zip

@@ -2,6 +2,16 @@
 #include "pc_settings.h"
 #include "pc_platform.h"
 
+float pc_settings_cull_limit_xz(float cull_distance, float cull_radius) {
+    float t = cull_distance + cull_radius + (float)g_pc_settings.frustum_cull_z_margin;
+    int cap = g_pc_settings.frustum_cull_max_distance;
+
+    if (cap > 0 && t > (float)cap) {
+        t = (float)cap;
+    }
+    return t;
+}
+
 PCSettings g_pc_settings = {
     .window_width  = PC_SCREEN_WIDTH,
     .window_height = PC_SCREEN_HEIGHT,
@@ -25,6 +35,11 @@ PCSettings g_pc_settings = {
     .left_deadzone  = 0,
     .right_deadzone = 0,
     .swap_ab_xy     = 0,
+    .frustum_cull              = 0,
+    .frustum_cull_z_margin     = 50,
+    .frustum_cull_max_distance = 0,
+    .shadow_quality         = 0,
+    .reduce_acre_draw       = 0,
 };
 
 static const char* SETTINGS_FILE = "settings.ini";
@@ -89,6 +104,23 @@ static const char* DEFAULT_SETTINGS =
     "\n"
     "# Swap A↔B and X↔Y: 0 = off, 1 = on\n"
     "swap_ab_xy = 0\n"
+    "\n"
+    "[LowSpec]\n"
+    "# Distance cull (props/actors vs player XZ): 0=off, 1=on (not GPU frustum)\n"
+    "frustum_cull = 0\n"
+    "\n"
+    "# Extra draw range in world units (0-200). Higher = draw farther = less culling.\n"
+    "frustum_cull_z_margin = 50\n"
+    "\n"
+    "# Hard max XZ draw distance (0 = no cap, use per-object range + margin only).\n"
+    "# Set e.g. 500-800 to see distant trees/props disappear (lower = more aggressive).\n"
+    "frustum_cull_max_distance = 0\n"
+    "\n"
+    "# Shadow quality: 0=all, 1=player only, 2=off (actors + trees/sign decals), 3=player+NPC\n"
+    "shadow_quality = 0\n"
+    "\n"
+    "# Acre background draw: 0=full (adjacent), 1=cross (orthogonal only), 2=current acre only\n"
+    "reduce_acre_draw = 0\n";
 
 static const char* skip_ws(const char* s) {
     while (*s == ' ' || *s == '\t') s++;
@@ -155,6 +187,19 @@ static void apply_setting(const char* key, const char* value) {
         if (val >= 0 && val <= 50) g_pc_settings.right_deadzone = val;
     } else if (strcmp(key, "swap_ab_xy") == 0) {
         if (val == 0 || val == 1) g_pc_settings.swap_ab_xy = val;
+    } else if (strcmp(key, "frustum_cull") == 0) {
+        if (val == 0 || val == 1) g_pc_settings.frustum_cull = val;
+    } else if (strcmp(key, "frustum_cull_z_margin") == 0) {
+        if (val >= 0 && val <= 200) g_pc_settings.frustum_cull_z_margin = val;
+    } else if (strcmp(key, "frustum_cull_max_distance") == 0) {
+        if (val >= 0 && val <= 2500) g_pc_settings.frustum_cull_max_distance = val;
+    } else if (strcmp(key, "frustum_cull_x_margin") == 0) {
+        /* Legacy ini key (was unused in-game). Ignored. */
+        (void)val;
+    } else if (strcmp(key, "shadow_quality") == 0) {
+        if (val >= 0 && val <= 3) g_pc_settings.shadow_quality = val;
+    } else if (strcmp(key, "reduce_acre_draw") == 0) {
+        if (val >= 0 && val <= 2) g_pc_settings.reduce_acre_draw = val;
     }
 }
 
@@ -226,6 +271,21 @@ void pc_settings_save(void) {
     fprintf(f, "\n");
     fprintf(f, "# Swap A↔B and X↔Y: 0 = off, 1 = on\n");
     fprintf(f, "swap_ab_xy = %d\n", g_pc_settings.swap_ab_xy);
+    fprintf(f, "[LowSpec]\n");
+    fprintf(f, "# Distance cull vs player XZ: 0=off, 1=on\n");
+    fprintf(f, "frustum_cull = %d\n", g_pc_settings.frustum_cull);
+    fprintf(f, "\n");
+    fprintf(f, "# Extra draw range (world units, 0-200). Higher = less culling.\n");
+    fprintf(f, "frustum_cull_z_margin = %d\n", g_pc_settings.frustum_cull_z_margin);
+    fprintf(f, "\n");
+    fprintf(f, "# Max XZ draw distance (0=no cap). Lower = more culling (try 500-900 to verify).\n");
+    fprintf(f, "frustum_cull_max_distance = %d\n", g_pc_settings.frustum_cull_max_distance);
+    fprintf(f, "\n");
+    fprintf(f, "# Shadow quality: 0=all, 1=player only, 2=off, 3=player+NPC\n");
+    fprintf(f, "shadow_quality = %d\n", g_pc_settings.shadow_quality);
+    fprintf(f, "\n");
+    fprintf(f, "# Acre background draw: 0=full (adjacent), 1=cross (orthogonal only), 2=current acre only\n");
+    fprintf(f, "reduce_acre_draw = %d\n", g_pc_settings.reduce_acre_draw);
     fclose(f);
     printf("[Settings] Saved %s\n", SETTINGS_FILE);
 }

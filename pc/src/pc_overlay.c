@@ -67,7 +67,7 @@ enum {
     /* Perf tab */
     MI_FRUSTUM_CULL,
     MI_CULL_Z_MARGIN,
-    MI_CULL_X_MARGIN,
+    MI_CULL_MAX_DISTANCE,
     MI_ACTOR_UPDATE_DIST,
     MI_WEATHER_PARTICLES,
     MI_SHADOW_QUALITY,
@@ -98,9 +98,9 @@ static const char* menu_labels[MI_COUNT] = {
     [MI_LEFT_DEADZONE]   = "L-Stick Deadzone",
     [MI_RIGHT_DEADZONE]  = "R-Stick Deadzone",
     [MI_CTRL_RESET]      = "Reset Defaults",
-    [MI_FRUSTUM_CULL]       = "Frustum Cull",
-    [MI_CULL_Z_MARGIN]      = "Cull Z Margin",
-    [MI_CULL_X_MARGIN]      = "Cull X Margin",
+    [MI_FRUSTUM_CULL]       = "Distance cull",
+    [MI_CULL_Z_MARGIN]      = "Cull +range (units)",
+    [MI_CULL_MAX_DISTANCE]  = "Cull max dist (u)",
     [MI_ACTOR_UPDATE_DIST]  = "Actor Update Dist",
     [MI_WEATHER_PARTICLES]  = "Weather Particles",
     [MI_SHADOW_QUALITY]     = "Shadows",
@@ -143,7 +143,7 @@ static const int menu_item_tab[MI_COUNT] = {
     [MI_CTRL_RESET]      = TAB_CONTROLS,
     [MI_FRUSTUM_CULL]       = TAB_PERF,
     [MI_CULL_Z_MARGIN]      = TAB_PERF,
-    [MI_CULL_X_MARGIN]      = TAB_PERF,
+    [MI_CULL_MAX_DISTANCE]  = TAB_PERF,
     [MI_ACTOR_UPDATE_DIST]  = TAB_PERF,
     [MI_WEATHER_PARTICLES]  = TAB_PERF,
     [MI_SHADOW_QUALITY]     = TAB_PERF,
@@ -221,13 +221,12 @@ static void menu_get_value(int item, char* buf, int sz) {
     case MI_RIGHT_DEADZONE:  snprintf(buf, sz, "%d%%", g_pc_settings.right_deadzone); break;
     case MI_CTRL_RESET:      snprintf(buf, sz, "Press >"); break;
     case MI_FRUSTUM_CULL:    snprintf(buf, sz, "%s", g_pc_settings.frustum_cull ? "ON" : "OFF"); break;
-    case MI_CULL_Z_MARGIN:   snprintf(buf, sz, "%d", g_pc_settings.frustum_cull_z_margin); break;
-    case MI_CULL_X_MARGIN: {
-        static const char* xnames[] = {"Tight", "Normal", "Loose", "V.Loose"};
-        static const int   xvals[]  = {10, 15, 20, 30};
-        int cur = 1;
-        for (int i = 0; i < 4; i++) if (xvals[i] == g_pc_settings.frustum_cull_x_margin) { cur = i; break; }
-        snprintf(buf, sz, "%s", xnames[cur]);
+    case MI_CULL_Z_MARGIN:   snprintf(buf, sz, "+%d", g_pc_settings.frustum_cull_z_margin); break;
+    case MI_CULL_MAX_DISTANCE: {
+        if (g_pc_settings.frustum_cull_max_distance == 0)
+            snprintf(buf, sz, "Off (no cap)");
+        else
+            snprintf(buf, sz, "%d", g_pc_settings.frustum_cull_max_distance);
         break;
     }
     case MI_ACTOR_UPDATE_DIST: {
@@ -389,13 +388,22 @@ static void menu_adjust(int item, int dir) {
         g_pc_settings.frustum_cull_z_margin = v;
         break;
     }
-    case MI_CULL_X_MARGIN: {
-        static const int xvals[] = {10, 15, 20, 30};
-        int cur = 1;
-        for (int i = 0; i < 4; i++) if (xvals[i] == g_pc_settings.frustum_cull_x_margin) { cur = i; break; }
+    case MI_CULL_MAX_DISTANCE: {
+        /* 0 = uncapped; stepped caps so you can see culling in-game (lower = stricter). */
+        static const int caps[] = {
+            0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000,
+            1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000
+        };
+        int cur = 0;
+        for (int i = 0; i < (int)(sizeof caps / sizeof caps[0]); i++)
+            if (caps[i] == g_pc_settings.frustum_cull_max_distance) {
+                cur = i;
+                break;
+            }
         cur += dir;
-        if (cur < 0) cur = 3; if (cur > 3) cur = 0;
-        g_pc_settings.frustum_cull_x_margin = xvals[cur];
+        if (cur < 0) cur = (int)(sizeof caps / sizeof caps[0]) - 1;
+        if (cur >= (int)(sizeof caps / sizeof caps[0])) cur = 0;
+        g_pc_settings.frustum_cull_max_distance = caps[cur];
         break;
     }
     case MI_ACTOR_UPDATE_DIST: {

@@ -282,24 +282,11 @@ extern int Actor_draw_actor_no_culling_check2(ACTOR* actor, xyz_t* camera_pos, f
         (void)camera_w;
         return TRUE;
     }
-    /* Diagnostic: print actual clip-space values so we can calibrate the thresholds.
-     * Prints the first 5 actors encountered after enabling cull, then stops. */
+    /* World-space XZ distance vs player (see pc_settings: margin + optional max cap). */
     {
-        static int s_printed = 0;
-        if (s_printed < 5) {
-            s_printed++;
-            printf("[cull] id=%d  cam_z=%.2f  cam_x=%.2f  cam_w=%.2f"
-                   "  pdist=%.1f  cull_dist=%.0f  cull_r=%.0f  cull_w=%.0f\n",
-                   actor->id, camera_pos->z, camera_pos->x, camera_w,
-                   actor->player_distance_xz,
-                   actor->cull_distance, actor->cull_radius, actor->cull_width);
-        }
-    }
-    /* World-space distance cull using player_distance_xz (already computed in call_actor).
-     * Avoids projection matrix convention uncertainty entirely. */
-    {
-        f32 z_pad = (f32)g_pc_settings.frustum_cull_z_margin;
-        return (actor->player_distance_xz <= actor->cull_distance + actor->cull_radius + z_pad);
+        f32 lim = (f32)pc_settings_cull_limit_xz((float)actor->cull_distance, (float)actor->cull_radius);
+
+        return (actor->player_distance_xz <= lim);
     }
 #else
     int res = FALSE;

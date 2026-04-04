@@ -29,9 +29,9 @@ typedef struct {
     int right_deadzone;   /* right stick deadzone 0-50 (percent of axis range) */
     int swap_ab_xy;       /* 0=off, 1=on — swap A↔B and X↔Y on the hardcoded gamepad path */
     /* Performance (ARM64 low-spec) — all hot-toggled at runtime, no restart needed */
-    int frustum_cull;           /* 0=off, 1=on */
-    int frustum_cull_z_margin;  /* extra Z padding beyond cull_radius/distance; 0-200 world units */
-    int frustum_cull_x_margin;  /* X edge multiplier as 10ths: 10=1.0, 15=1.5, 20=2.0, 30=3.0 */
+    int frustum_cull;              /* 0=off, 1=on — PC uses horizontal distance from player, not GPU frustum */
+    int frustum_cull_z_margin;     /* extra world units added to each actor's draw range; higher = less culling */
+    int frustum_cull_max_distance; /* 0=no cap, else max XZ draw distance (world units); lower = more culling */
     int actor_update_dist;      /* 0=off, else max XZ world units for non-NPC mv_proc */
     int weather_particles;      /* 0=full, 1=reduced (half spawn rate), 2=off */
     int shadow_quality;         /* 0=all, 1=player only, 2=off */
@@ -40,6 +40,9 @@ typedef struct {
 } PCSettings;
 
 extern PCSettings g_pc_settings;
+
+/* Effective XZ cull radius when frustum_cull is on: min(cull_distance+cull_radius+margin, max) or uncapped max */
+float pc_settings_cull_limit_xz(float cull_distance, float cull_radius);
 
 void pc_settings_load(void);
 void pc_settings_save(void);

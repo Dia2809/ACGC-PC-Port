@@ -2,6 +2,16 @@
 #include "pc_settings.h"
 #include "pc_platform.h"
 
+float pc_settings_cull_limit_xz(float cull_distance, float cull_radius) {
+    float t = cull_distance + cull_radius + (float)g_pc_settings.frustum_cull_z_margin;
+    int cap = g_pc_settings.frustum_cull_max_distance;
+
+    if (cap > 0 && t > (float)cap) {
+        t = (float)cap;
+    }
+    return t;
+}
+
 PCSettings g_pc_settings = {
     .window_width  = PC_SCREEN_WIDTH,
     .window_height = PC_SCREEN_HEIGHT,
@@ -25,9 +35,9 @@ PCSettings g_pc_settings = {
     .left_deadzone  = 0,
     .right_deadzone = 0,
     .swap_ab_xy     = 0,
-    .frustum_cull           = 0,
-    .frustum_cull_z_margin  = 50,
-    .frustum_cull_x_margin  = 15,
+    .frustum_cull              = 0,
+    .frustum_cull_z_margin     = 50,
+    .frustum_cull_max_distance = 0,
     .actor_update_dist      = 0,
     .weather_particles      = 0,
     .shadow_quality         = 0,
@@ -93,20 +103,21 @@ static const char* DEFAULT_SETTINGS =
     "\n"
     "# Left/right stick deadzone in percent (0-50, increments of 5)\n"
     "left_deadzone = 0\n"
-    "right_deadzone = 0\n";
+    "right_deadzone = 0\n"
     "\n"
     "# Swap A↔B and X↔Y: 0 = off, 1 = on\n"
     "swap_ab_xy = 0\n"
     "\n"
     "[LowSpec]\n"
-    "# Frustum culling: 0=off (original behavior), 1=on\n"
+    "# Distance cull (props/actors vs player XZ): 0=off, 1=on (not GPU frustum)\n"
     "frustum_cull = 0\n"
     "\n"
-    "# Frustum cull Z margin: extra world units of padding on depth (0-200)\n"
+    "# Extra draw range in world units (0-200). Higher = draw farther = less culling.\n"
     "frustum_cull_z_margin = 50\n"
     "\n"
-    "# Frustum cull X margin as 10ths: 10=tight, 15=normal, 20=loose, 30=very loose\n"
-    "frustum_cull_x_margin = 15\n"
+    "# Hard max XZ draw distance (0 = no cap, use per-object range + margin only).\n"
+    "# Set e.g. 500-800 to see distant trees/props disappear (lower = more aggressive).\n"
+    "frustum_cull_max_distance = 0\n"
     "\n"
     "# Actor update distance: 0=off, or max XZ units for non-NPC logic (320/480/640)\n"
     "actor_update_dist = 0\n"
@@ -190,8 +201,11 @@ static void apply_setting(const char* key, const char* value) {
         if (val == 0 || val == 1) g_pc_settings.frustum_cull = val;
     } else if (strcmp(key, "frustum_cull_z_margin") == 0) {
         if (val >= 0 && val <= 200) g_pc_settings.frustum_cull_z_margin = val;
+    } else if (strcmp(key, "frustum_cull_max_distance") == 0) {
+        if (val >= 0 && val <= 2500) g_pc_settings.frustum_cull_max_distance = val;
     } else if (strcmp(key, "frustum_cull_x_margin") == 0) {
-        if (val >= 5 && val <= 50) g_pc_settings.frustum_cull_x_margin = val;
+        /* Legacy ini key (was unused in-game). Ignored. */
+        (void)val;
     } else if (strcmp(key, "actor_update_dist") == 0) {
         if (val >= 0) g_pc_settings.actor_update_dist = val;
     } else if (strcmp(key, "weather_particles") == 0) {
@@ -272,14 +286,14 @@ void pc_settings_save(void) {
     fprintf(f, "right_deadzone = %d\n", g_pc_settings.right_deadzone);
     fprintf(f, "\n");
     fprintf(f, "[LowSpec]\n");
-    fprintf(f, "# Frustum culling: 0=off (original behavior), 1=on\n");
+    fprintf(f, "# Distance cull vs player XZ: 0=off, 1=on\n");
     fprintf(f, "frustum_cull = %d\n", g_pc_settings.frustum_cull);
     fprintf(f, "\n");
-    fprintf(f, "# Frustum cull Z margin: extra world units of padding on depth (0-200)\n");
+    fprintf(f, "# Extra draw range (world units, 0-200). Higher = less culling.\n");
     fprintf(f, "frustum_cull_z_margin = %d\n", g_pc_settings.frustum_cull_z_margin);
     fprintf(f, "\n");
-    fprintf(f, "# Frustum cull X margin as 10ths: 10=tight, 15=normal, 20=loose, 30=very loose\n");
-    fprintf(f, "frustum_cull_x_margin = %d\n", g_pc_settings.frustum_cull_x_margin);
+    fprintf(f, "# Max XZ draw distance (0=no cap). Lower = more culling (try 500-900 to verify).\n");
+    fprintf(f, "frustum_cull_max_distance = %d\n", g_pc_settings.frustum_cull_max_distance);
     fprintf(f, "\n");
     fprintf(f, "# Actor update distance: 0=off, or max XZ units for non-NPC logic\n");
     fprintf(f, "actor_update_dist = %d\n", g_pc_settings.actor_update_dist);

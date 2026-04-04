@@ -64,6 +64,15 @@ enum {
     MI_LEFT_DEADZONE,
     MI_RIGHT_DEADZONE,
     MI_CTRL_RESET,
+    /* Perf tab */
+    MI_FRUSTUM_CULL,
+    MI_CULL_Z_MARGIN,
+    MI_CULL_X_MARGIN,
+    MI_ACTOR_UPDATE_DIST,
+    MI_WEATHER_PARTICLES,
+    MI_SHADOW_QUALITY,
+    MI_REDUCE_ACRE_DRAW,
+    MI_BG_ANIM_THROTTLE,
     MI_KB_BASE,
     MI_COUNT = MI_KB_BASE + KB_COUNT,
 };
@@ -89,6 +98,14 @@ static const char* menu_labels[MI_COUNT] = {
     [MI_LEFT_DEADZONE]   = "L-Stick Deadzone",
     [MI_RIGHT_DEADZONE]  = "R-Stick Deadzone",
     [MI_CTRL_RESET]      = "Reset Defaults",
+    [MI_FRUSTUM_CULL]       = "Frustum Cull",
+    [MI_CULL_Z_MARGIN]      = "Cull Z Margin",
+    [MI_CULL_X_MARGIN]      = "Cull X Margin",
+    [MI_ACTOR_UPDATE_DIST]  = "Actor Update Dist",
+    [MI_WEATHER_PARTICLES]  = "Weather Particles",
+    [MI_SHADOW_QUALITY]     = "Shadows",
+    [MI_REDUCE_ACRE_DRAW]   = "Acre Draw",
+    [MI_BG_ANIM_THROTTLE]   = "BG Animation",
     /* MI_KB_BASE..MI_KB_BASE+KB_COUNT-1: NULL, handled via pc_keybinding_label() */
 };
 
@@ -99,8 +116,8 @@ static const char* get_item_label(int i) {
 }
 
 /* ---- Menu tabs ---- */
-enum { TAB_VIDEO, TAB_AUDIO, TAB_CONTROLS, TAB_DEBUG, TAB_COUNT };
-static const char* tab_labels[TAB_COUNT] = { "VIDEO", "AUDIO", "CTRL", "DEBUG" };
+enum { TAB_VIDEO, TAB_AUDIO, TAB_CONTROLS, TAB_DEBUG, TAB_PERF, TAB_COUNT };
+static const char* tab_labels[TAB_COUNT] = { "VIDEO", "AUDIO", "CTRL", "DEBUG", "PERF" };
 static int s_active_tab = 0;
 
 /* Which tab each menu item belongs to (indexed by MI_*) */
@@ -124,6 +141,14 @@ static const int menu_item_tab[MI_COUNT] = {
     [MI_LEFT_DEADZONE]   = TAB_CONTROLS,
     [MI_RIGHT_DEADZONE]  = TAB_CONTROLS,
     [MI_CTRL_RESET]      = TAB_CONTROLS,
+    [MI_FRUSTUM_CULL]       = TAB_PERF,
+    [MI_CULL_Z_MARGIN]      = TAB_PERF,
+    [MI_CULL_X_MARGIN]      = TAB_PERF,
+    [MI_ACTOR_UPDATE_DIST]  = TAB_PERF,
+    [MI_WEATHER_PARTICLES]  = TAB_PERF,
+    [MI_SHADOW_QUALITY]     = TAB_PERF,
+    [MI_REDUCE_ACRE_DRAW]   = TAB_PERF,
+    [MI_BG_ANIM_THROTTLE]   = TAB_PERF,
     /* MI_KB_BASE..MI_KB_BASE+KB_COUNT-1: handled by item_tab() helper below */
 };
 
@@ -195,6 +220,45 @@ static void menu_get_value(int item, char* buf, int sz) {
     case MI_LEFT_DEADZONE:   snprintf(buf, sz, "%d%%", g_pc_settings.left_deadzone); break;
     case MI_RIGHT_DEADZONE:  snprintf(buf, sz, "%d%%", g_pc_settings.right_deadzone); break;
     case MI_CTRL_RESET:      snprintf(buf, sz, "Press >"); break;
+    case MI_FRUSTUM_CULL:    snprintf(buf, sz, "%s", g_pc_settings.frustum_cull ? "ON" : "OFF"); break;
+    case MI_CULL_Z_MARGIN:   snprintf(buf, sz, "%d", g_pc_settings.frustum_cull_z_margin); break;
+    case MI_CULL_X_MARGIN: {
+        static const char* xnames[] = {"Tight", "Normal", "Loose", "V.Loose"};
+        static const int   xvals[]  = {10, 15, 20, 30};
+        int cur = 1;
+        for (int i = 0; i < 4; i++) if (xvals[i] == g_pc_settings.frustum_cull_x_margin) { cur = i; break; }
+        snprintf(buf, sz, "%s", xnames[cur]);
+        break;
+    }
+    case MI_ACTOR_UPDATE_DIST: {
+        if (g_pc_settings.actor_update_dist == 0) snprintf(buf, sz, "Off");
+        else snprintf(buf, sz, "%d", g_pc_settings.actor_update_dist);
+        break;
+    }
+    case MI_WEATHER_PARTICLES: {
+        static const char* wnames[] = {"Full", "Reduced", "Off"};
+        int w = g_pc_settings.weather_particles;
+        if (w < 0 || w > 2) w = 0;
+        snprintf(buf, sz, "%s", wnames[w]);
+        break;
+    }
+    case MI_SHADOW_QUALITY: {
+        static const char* snames[] = {"All", "Player Only", "Off"};
+        int s = g_pc_settings.shadow_quality;
+        if (s < 0 || s > 2) s = 0;
+        snprintf(buf, sz, "%s", snames[s]);
+        break;
+    }
+    case MI_REDUCE_ACRE_DRAW:
+        snprintf(buf, sz, "%s", g_pc_settings.reduce_acre_draw ? "Cross (5)" : "Full (9)");
+        break;
+    case MI_BG_ANIM_THROTTLE: {
+        static const char* bnames[] = {"", "Full", "Half", "", "Quarter"};
+        int t = g_pc_settings.bg_anim_throttle;
+        if (t == 1 || t == 2 || t == 4) snprintf(buf, sz, "%s", bnames[t]);
+        else snprintf(buf, sz, "%d", t);
+        break;
+    }
     default:
         if (item >= MI_KB_BASE && item < MI_KB_BASE + KB_COUNT) {
             int kb_idx = item - MI_KB_BASE;
@@ -318,6 +382,53 @@ static void menu_adjust(int item, int dir) {
         break;
     }
     case MI_CTRL_RESET:      pc_keybindings_reset(); break;
+    case MI_FRUSTUM_CULL:    g_pc_settings.frustum_cull ^= 1; break;
+    case MI_CULL_Z_MARGIN: {
+        int v = g_pc_settings.frustum_cull_z_margin + dir * 10;
+        if (v < 0) v = 0; if (v > 200) v = 200;
+        g_pc_settings.frustum_cull_z_margin = v;
+        break;
+    }
+    case MI_CULL_X_MARGIN: {
+        static const int xvals[] = {10, 15, 20, 30};
+        int cur = 1;
+        for (int i = 0; i < 4; i++) if (xvals[i] == g_pc_settings.frustum_cull_x_margin) { cur = i; break; }
+        cur += dir;
+        if (cur < 0) cur = 3; if (cur > 3) cur = 0;
+        g_pc_settings.frustum_cull_x_margin = xvals[cur];
+        break;
+    }
+    case MI_ACTOR_UPDATE_DIST: {
+        static const int dvals[] = {0, 320, 480, 640};
+        int cur = 0;
+        for (int i = 0; i < 4; i++) if (dvals[i] == g_pc_settings.actor_update_dist) { cur = i; break; }
+        cur += dir;
+        if (cur < 0) cur = 3; if (cur > 3) cur = 0;
+        g_pc_settings.actor_update_dist = dvals[cur];
+        break;
+    }
+    case MI_WEATHER_PARTICLES: {
+        int v = g_pc_settings.weather_particles + dir;
+        if (v < 0) v = 2; if (v > 2) v = 0;
+        g_pc_settings.weather_particles = v;
+        break;
+    }
+    case MI_SHADOW_QUALITY: {
+        int v = g_pc_settings.shadow_quality + dir;
+        if (v < 0) v = 2; if (v > 2) v = 0;
+        g_pc_settings.shadow_quality = v;
+        break;
+    }
+    case MI_REDUCE_ACRE_DRAW: g_pc_settings.reduce_acre_draw ^= 1; break;
+    case MI_BG_ANIM_THROTTLE: {
+        static const int tvals[] = {1, 2, 4};
+        int cur = 0;
+        for (int i = 0; i < 3; i++) if (tvals[i] == g_pc_settings.bg_anim_throttle) { cur = i; break; }
+        cur += dir;
+        if (cur < 0) cur = 2; if (cur > 2) cur = 0;
+        g_pc_settings.bg_anim_throttle = tvals[cur];
+        break;
+    }
     default:
         if (item >= MI_KB_BASE && item < MI_KB_BASE + KB_COUNT && dir == 1) {
             ctrl_capture_idx = item - MI_KB_BASE;

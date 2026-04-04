@@ -24,6 +24,15 @@ PCSettings g_pc_settings = {
     .dpad_as_stick  = 0,
     .left_deadzone  = 0,
     .right_deadzone = 0,
+    .swap_ab_xy     = 0,
+    .frustum_cull           = 0,
+    .frustum_cull_z_margin  = 50,
+    .frustum_cull_x_margin  = 15,
+    .actor_update_dist      = 0,
+    .weather_particles      = 0,
+    .shadow_quality         = 0,
+    .reduce_acre_draw       = 0,
+    .bg_anim_throttle       = 1,
 };
 
 static const char* SETTINGS_FILE = "settings.ini";
@@ -85,6 +94,34 @@ static const char* DEFAULT_SETTINGS =
     "# Left/right stick deadzone in percent (0-50, increments of 5)\n"
     "left_deadzone = 0\n"
     "right_deadzone = 0\n";
+    "\n"
+    "# Swap A↔B and X↔Y: 0 = off, 1 = on\n"
+    "swap_ab_xy = 0\n"
+    "\n"
+    "[LowSpec]\n"
+    "# Frustum culling: 0=off (original behavior), 1=on\n"
+    "frustum_cull = 0\n"
+    "\n"
+    "# Frustum cull Z margin: extra world units of padding on depth (0-200)\n"
+    "frustum_cull_z_margin = 50\n"
+    "\n"
+    "# Frustum cull X margin as 10ths: 10=tight, 15=normal, 20=loose, 30=very loose\n"
+    "frustum_cull_x_margin = 15\n"
+    "\n"
+    "# Actor update distance: 0=off, or max XZ units for non-NPC logic (320/480/640)\n"
+    "actor_update_dist = 0\n"
+    "\n"
+    "# Weather particles: 0=full, 1=reduced (half spawn), 2=off\n"
+    "weather_particles = 0\n"
+    "\n"
+    "# Shadow quality: 0=all actors, 1=player only, 2=off\n"
+    "shadow_quality = 0\n"
+    "\n"
+    "# Acre background draw: 0=full 3x3 (9 acres), 1=cross (5 acres, skip diagonals)\n"
+    "reduce_acre_draw = 0\n"
+    "\n"
+    "# BG animation throttle: 1=every frame, 2=half-rate, 4=quarter-rate\n"
+    "bg_anim_throttle = 1\n";
 
 static const char* skip_ws(const char* s) {
     while (*s == ' ' || *s == '\t') s++;
@@ -149,6 +186,22 @@ static void apply_setting(const char* key, const char* value) {
         if (val >= 0 && val <= 50) g_pc_settings.left_deadzone = val;
     } else if (strcmp(key, "right_deadzone") == 0) {
         if (val >= 0 && val <= 50) g_pc_settings.right_deadzone = val;
+    } else if (strcmp(key, "frustum_cull") == 0) {
+        if (val == 0 || val == 1) g_pc_settings.frustum_cull = val;
+    } else if (strcmp(key, "frustum_cull_z_margin") == 0) {
+        if (val >= 0 && val <= 200) g_pc_settings.frustum_cull_z_margin = val;
+    } else if (strcmp(key, "frustum_cull_x_margin") == 0) {
+        if (val >= 5 && val <= 50) g_pc_settings.frustum_cull_x_margin = val;
+    } else if (strcmp(key, "actor_update_dist") == 0) {
+        if (val >= 0) g_pc_settings.actor_update_dist = val;
+    } else if (strcmp(key, "weather_particles") == 0) {
+        if (val >= 0 && val <= 2) g_pc_settings.weather_particles = val;
+    } else if (strcmp(key, "shadow_quality") == 0) {
+        if (val >= 0 && val <= 2) g_pc_settings.shadow_quality = val;
+    } else if (strcmp(key, "reduce_acre_draw") == 0) {
+        if (val == 0 || val == 1) g_pc_settings.reduce_acre_draw = val;
+    } else if (strcmp(key, "bg_anim_throttle") == 0) {
+        if (val == 1 || val == 2 || val == 4) g_pc_settings.bg_anim_throttle = val;
     }
 }
 
@@ -217,6 +270,31 @@ void pc_settings_save(void) {
     fprintf(f, "# Left/right stick deadzone in percent (0-50)\n");
     fprintf(f, "left_deadzone = %d\n", g_pc_settings.left_deadzone);
     fprintf(f, "right_deadzone = %d\n", g_pc_settings.right_deadzone);
+    fprintf(f, "\n");
+    fprintf(f, "[LowSpec]\n");
+    fprintf(f, "# Frustum culling: 0=off (original behavior), 1=on\n");
+    fprintf(f, "frustum_cull = %d\n", g_pc_settings.frustum_cull);
+    fprintf(f, "\n");
+    fprintf(f, "# Frustum cull Z margin: extra world units of padding on depth (0-200)\n");
+    fprintf(f, "frustum_cull_z_margin = %d\n", g_pc_settings.frustum_cull_z_margin);
+    fprintf(f, "\n");
+    fprintf(f, "# Frustum cull X margin as 10ths: 10=tight, 15=normal, 20=loose, 30=very loose\n");
+    fprintf(f, "frustum_cull_x_margin = %d\n", g_pc_settings.frustum_cull_x_margin);
+    fprintf(f, "\n");
+    fprintf(f, "# Actor update distance: 0=off, or max XZ units for non-NPC logic\n");
+    fprintf(f, "actor_update_dist = %d\n", g_pc_settings.actor_update_dist);
+    fprintf(f, "\n");
+    fprintf(f, "# Weather particles: 0=full, 1=reduced, 2=off\n");
+    fprintf(f, "weather_particles = %d\n", g_pc_settings.weather_particles);
+    fprintf(f, "\n");
+    fprintf(f, "# Shadow quality: 0=all actors, 1=player only, 2=off\n");
+    fprintf(f, "shadow_quality = %d\n", g_pc_settings.shadow_quality);
+    fprintf(f, "\n");
+    fprintf(f, "# Acre background draw: 0=full 3x3, 1=cross (5 acres)\n");
+    fprintf(f, "reduce_acre_draw = %d\n", g_pc_settings.reduce_acre_draw);
+    fprintf(f, "\n");
+    fprintf(f, "# BG animation throttle: 1=every frame, 2=half-rate, 4=quarter-rate\n");
+    fprintf(f, "bg_anim_throttle = %d\n", g_pc_settings.bg_anim_throttle);
     fclose(f);
     printf("[Settings] Saved %s\n", SETTINGS_FILE);
 }

@@ -248,9 +248,13 @@ static void menu_get_value(int item, char* buf, int sz) {
         snprintf(buf, sz, "%s", snames[s]);
         break;
     }
-    case MI_REDUCE_ACRE_DRAW:
-        snprintf(buf, sz, "%s", g_pc_settings.reduce_acre_draw ? "Cross (5)" : "Full (9)");
+    case MI_REDUCE_ACRE_DRAW: {
+        static const char* arnames[] = {"Full", "Cross (5)", "Current"};
+        int ar = g_pc_settings.reduce_acre_draw;
+        if (ar < 0 || ar > 2) ar = 0;
+        snprintf(buf, sz, "%s", arnames[ar]);
         break;
+    }
     case MI_BG_ANIM_THROTTLE: {
         static const char* bnames[] = {"", "Full", "Half", "", "Quarter"};
         int t = g_pc_settings.bg_anim_throttle;
@@ -442,7 +446,13 @@ static void menu_adjust(int item, int dir) {
         g_pc_settings.shadow_quality = order[cur];
         break;
     }
-    case MI_REDUCE_ACRE_DRAW: g_pc_settings.reduce_acre_draw ^= 1; break;
+    case MI_REDUCE_ACRE_DRAW: {
+        int v = g_pc_settings.reduce_acre_draw + dir;
+        if (v < 0) v = 2;
+        if (v > 2) v = 0;
+        g_pc_settings.reduce_acre_draw = v;
+        break;
+    }
     case MI_BG_ANIM_THROTTLE: {
         static const int tvals[] = {1, 2, 4};
         int cur = 0;

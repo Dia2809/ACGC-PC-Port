@@ -128,7 +128,7 @@ static const char* DEFAULT_SETTINGS =
     "# Shadow quality: 0=all, 1=player only, 2=off (actors + trees/sign decals), 3=player+NPC\n"
     "shadow_quality = 0\n"
     "\n"
-    "# Acre background draw: 0=full 3x3 (9 acres), 1=cross (5 acres, skip diagonals)\n"
+    "# Acre background draw: 0=full (adjacent), 1=cross (orthogonal only), 2=current acre only\n"
     "reduce_acre_draw = 0\n"
     "\n"
     "# BG animation throttle: 1=every frame, 2=half-rate, 4=quarter-rate\n"
@@ -213,7 +213,7 @@ static void apply_setting(const char* key, const char* value) {
     } else if (strcmp(key, "shadow_quality") == 0) {
         if (val >= 0 && val <= 3) g_pc_settings.shadow_quality = val;
     } else if (strcmp(key, "reduce_acre_draw") == 0) {
-        if (val == 0 || val == 1) g_pc_settings.reduce_acre_draw = val;
+        if (val >= 0 && val <= 2) g_pc_settings.reduce_acre_draw = val;
     } else if (strcmp(key, "bg_anim_throttle") == 0) {
         if (val == 1 || val == 2 || val == 4) g_pc_settings.bg_anim_throttle = val;
     }
@@ -304,7 +304,7 @@ void pc_settings_save(void) {
     fprintf(f, "# Shadow quality: 0=all, 1=player only, 2=off, 3=player+NPC\n");
     fprintf(f, "shadow_quality = %d\n", g_pc_settings.shadow_quality);
     fprintf(f, "\n");
-    fprintf(f, "# Acre background draw: 0=full 3x3, 1=cross (5 acres)\n");
+    fprintf(f, "# Acre background draw: 0=full (adjacent), 1=cross (orthogonal only), 2=current acre only\n");
     fprintf(f, "reduce_acre_draw = %d\n", g_pc_settings.reduce_acre_draw);
     fprintf(f, "\n");
     fprintf(f, "# BG animation throttle: 1=every frame, 2=half-rate, 4=quarter-rate\n");

@@ -215,7 +215,7 @@ static void menu_get_value(int item, char* buf, int sz) {
     case MI_CULL_Z_MARGIN:   snprintf(buf, sz, "+%d", g_pc_settings.frustum_cull_z_margin); break;
     case MI_CULL_MAX_DISTANCE: {
         if (g_pc_settings.frustum_cull_max_distance == 0)
-            snprintf(buf, sz, "Off (no cap)");
+            snprintf(buf, sz, "No cap");
         else
             snprintf(buf, sz, "%d", g_pc_settings.frustum_cull_max_distance);
         break;

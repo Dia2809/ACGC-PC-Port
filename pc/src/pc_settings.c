@@ -38,11 +38,8 @@ PCSettings g_pc_settings = {
     .frustum_cull              = 0,
     .frustum_cull_z_margin     = 50,
     .frustum_cull_max_distance = 0,
-    .actor_update_dist      = 0,
-    .weather_particles      = 0,
     .shadow_quality         = 0,
     .reduce_acre_draw       = 0,
-    .bg_anim_throttle       = 1,
 };
 
 static const char* SETTINGS_FILE = "settings.ini";
@@ -119,20 +116,11 @@ static const char* DEFAULT_SETTINGS =
     "# Set e.g. 500-800 to see distant trees/props disappear (lower = more aggressive).\n"
     "frustum_cull_max_distance = 0\n"
     "\n"
-    "# Actor update distance: 0=off, or max XZ units for non-NPC logic (320/480/640)\n"
-    "actor_update_dist = 0\n"
-    "\n"
-    "# Weather particles: 0=full, 1=reduced (half spawn), 2=off\n"
-    "weather_particles = 0\n"
-    "\n"
     "# Shadow quality: 0=all, 1=player only, 2=off (actors + trees/sign decals), 3=player+NPC\n"
     "shadow_quality = 0\n"
     "\n"
     "# Acre background draw: 0=full (adjacent), 1=cross (orthogonal only), 2=current acre only\n"
-    "reduce_acre_draw = 0\n"
-    "\n"
-    "# BG animation throttle: 1=every frame, 2=half-rate, 4=quarter-rate\n"
-    "bg_anim_throttle = 1\n";
+    "reduce_acre_draw = 0\n";
 
 static const char* skip_ws(const char* s) {
     while (*s == ' ' || *s == '\t') s++;
@@ -206,16 +194,10 @@ static void apply_setting(const char* key, const char* value) {
     } else if (strcmp(key, "frustum_cull_x_margin") == 0) {
         /* Legacy ini key (was unused in-game). Ignored. */
         (void)val;
-    } else if (strcmp(key, "actor_update_dist") == 0) {
-        if (val >= 0) g_pc_settings.actor_update_dist = val;
-    } else if (strcmp(key, "weather_particles") == 0) {
-        if (val >= 0 && val <= 2) g_pc_settings.weather_particles = val;
     } else if (strcmp(key, "shadow_quality") == 0) {
         if (val >= 0 && val <= 3) g_pc_settings.shadow_quality = val;
     } else if (strcmp(key, "reduce_acre_draw") == 0) {
         if (val >= 0 && val <= 2) g_pc_settings.reduce_acre_draw = val;
-    } else if (strcmp(key, "bg_anim_throttle") == 0) {
-        if (val == 1 || val == 2 || val == 4) g_pc_settings.bg_anim_throttle = val;
     }
 }
 
@@ -295,20 +277,11 @@ void pc_settings_save(void) {
     fprintf(f, "# Max XZ draw distance (0=no cap). Lower = more culling (try 500-900 to verify).\n");
     fprintf(f, "frustum_cull_max_distance = %d\n", g_pc_settings.frustum_cull_max_distance);
     fprintf(f, "\n");
-    fprintf(f, "# Actor update distance: 0=off, or max XZ units for non-NPC logic\n");
-    fprintf(f, "actor_update_dist = %d\n", g_pc_settings.actor_update_dist);
-    fprintf(f, "\n");
-    fprintf(f, "# Weather particles: 0=full, 1=reduced, 2=off\n");
-    fprintf(f, "weather_particles = %d\n", g_pc_settings.weather_particles);
-    fprintf(f, "\n");
     fprintf(f, "# Shadow quality: 0=all, 1=player only, 2=off, 3=player+NPC\n");
     fprintf(f, "shadow_quality = %d\n", g_pc_settings.shadow_quality);
     fprintf(f, "\n");
     fprintf(f, "# Acre background draw: 0=full (adjacent), 1=cross (orthogonal only), 2=current acre only\n");
     fprintf(f, "reduce_acre_draw = %d\n", g_pc_settings.reduce_acre_draw);
-    fprintf(f, "\n");
-    fprintf(f, "# BG animation throttle: 1=every frame, 2=half-rate, 4=quarter-rate\n");
-    fprintf(f, "bg_anim_throttle = %d\n", g_pc_settings.bg_anim_throttle);
     fclose(f);
     printf("[Settings] Saved %s\n", SETTINGS_FILE);
 }

@@ -68,11 +68,8 @@ enum {
     MI_FRUSTUM_CULL,
     MI_CULL_Z_MARGIN,
     MI_CULL_MAX_DISTANCE,
-    MI_ACTOR_UPDATE_DIST,
-    MI_WEATHER_PARTICLES,
     MI_SHADOW_QUALITY,
     MI_REDUCE_ACRE_DRAW,
-    MI_BG_ANIM_THROTTLE,
     MI_KB_BASE,
     MI_COUNT = MI_KB_BASE + KB_COUNT,
 };
@@ -101,11 +98,8 @@ static const char* menu_labels[MI_COUNT] = {
     [MI_FRUSTUM_CULL]       = "Distance cull",
     [MI_CULL_Z_MARGIN]      = "Cull +range (units)",
     [MI_CULL_MAX_DISTANCE]  = "Cull max dist (u)",
-    [MI_ACTOR_UPDATE_DIST]  = "Actor Update Dist",
-    [MI_WEATHER_PARTICLES]  = "Weather Particles",
     [MI_SHADOW_QUALITY]     = "Shadow Quality",
     [MI_REDUCE_ACRE_DRAW]   = "Acre Draw",
-    [MI_BG_ANIM_THROTTLE]   = "BG Animation",
     /* MI_KB_BASE..MI_KB_BASE+KB_COUNT-1: NULL, handled via pc_keybinding_label() */
 };
 
@@ -144,11 +138,8 @@ static const int menu_item_tab[MI_COUNT] = {
     [MI_FRUSTUM_CULL]       = TAB_PERF,
     [MI_CULL_Z_MARGIN]      = TAB_PERF,
     [MI_CULL_MAX_DISTANCE]  = TAB_PERF,
-    [MI_ACTOR_UPDATE_DIST]  = TAB_PERF,
-    [MI_WEATHER_PARTICLES]  = TAB_PERF,
     [MI_SHADOW_QUALITY]     = TAB_PERF,
     [MI_REDUCE_ACRE_DRAW]   = TAB_PERF,
-    [MI_BG_ANIM_THROTTLE]   = TAB_PERF,
     /* MI_KB_BASE..MI_KB_BASE+KB_COUNT-1: handled by item_tab() helper below */
 };
 
@@ -229,18 +220,6 @@ static void menu_get_value(int item, char* buf, int sz) {
             snprintf(buf, sz, "%d", g_pc_settings.frustum_cull_max_distance);
         break;
     }
-    case MI_ACTOR_UPDATE_DIST: {
-        if (g_pc_settings.actor_update_dist == 0) snprintf(buf, sz, "Off");
-        else snprintf(buf, sz, "%d", g_pc_settings.actor_update_dist);
-        break;
-    }
-    case MI_WEATHER_PARTICLES: {
-        static const char* wnames[] = {"Full", "Reduced", "Off"};
-        int w = g_pc_settings.weather_particles;
-        if (w < 0 || w > 2) w = 0;
-        snprintf(buf, sz, "%s", wnames[w]);
-        break;
-    }
     case MI_SHADOW_QUALITY: {
         static const char* snames[] = {"All", "Player only", "Off", "Player + NPC"};
         int s = g_pc_settings.shadow_quality;
@@ -253,13 +232,6 @@ static void menu_get_value(int item, char* buf, int sz) {
         int ar = g_pc_settings.reduce_acre_draw;
         if (ar < 0 || ar > 2) ar = 0;
         snprintf(buf, sz, "%s", arnames[ar]);
-        break;
-    }
-    case MI_BG_ANIM_THROTTLE: {
-        static const char* bnames[] = {"", "Full", "Half", "", "Quarter"};
-        int t = g_pc_settings.bg_anim_throttle;
-        if (t == 1 || t == 2 || t == 4) snprintf(buf, sz, "%s", bnames[t]);
-        else snprintf(buf, sz, "%d", t);
         break;
     }
     default:
@@ -410,21 +382,6 @@ static void menu_adjust(int item, int dir) {
         g_pc_settings.frustum_cull_max_distance = caps[cur];
         break;
     }
-    case MI_ACTOR_UPDATE_DIST: {
-        static const int dvals[] = {0, 320, 480, 640};
-        int cur = 0;
-        for (int i = 0; i < 4; i++) if (dvals[i] == g_pc_settings.actor_update_dist) { cur = i; break; }
-        cur += dir;
-        if (cur < 0) cur = 3; if (cur > 3) cur = 0;
-        g_pc_settings.actor_update_dist = dvals[cur];
-        break;
-    }
-    case MI_WEATHER_PARTICLES: {
-        int v = g_pc_settings.weather_particles + dir;
-        if (v < 0) v = 2; if (v > 2) v = 0;
-        g_pc_settings.weather_particles = v;
-        break;
-    }
     case MI_SHADOW_QUALITY: {
         /* Cycle quality high→low: All → player+NPC → player only → off */
         static const int order[] = {0, 3, 1, 2};
@@ -451,15 +408,6 @@ static void menu_adjust(int item, int dir) {
         if (v < 0) v = 2;
         if (v > 2) v = 0;
         g_pc_settings.reduce_acre_draw = v;
-        break;
-    }
-    case MI_BG_ANIM_THROTTLE: {
-        static const int tvals[] = {1, 2, 4};
-        int cur = 0;
-        for (int i = 0; i < 3; i++) if (tvals[i] == g_pc_settings.bg_anim_throttle) { cur = i; break; }
-        cur += dir;
-        if (cur < 0) cur = 2; if (cur > 2) cur = 0;
-        g_pc_settings.bg_anim_throttle = tvals[cur];
         break;
     }
     default:
@@ -891,21 +839,24 @@ static void draw_menu(float cw, float ch, float pad) {
     ov_string("SETTINGS", title_x, ty, cw, ch, 1, 1, 1, 1);
     ty += row_h;
 
-    /* Tab bar — draw all tabs, highlight active one */
+    /* Tab bar — justified: distribute remaining width as equal gaps between tabs */
     {
-        int tab_col_w = cols / TAB_COUNT;
+        int total_lbl = 0;
+        for (int t = 0; t < TAB_COUNT; t++)
+            total_lbl += (int)strlen(tab_labels[t]);
+        float gap_w = (cols - total_lbl) * cw / (float)(TAB_COUNT - 1);
+        float tab_x = tx;
         for (int t = 0; t < TAB_COUNT; t++) {
-            float tab_x = tx + t * tab_col_w * cw;
             const char* lbl = tab_labels[t];
             int lbl_len = (int)strlen(lbl);
-            float lbl_x = tab_x + ((tab_col_w - lbl_len) / 2) * cw;
             if (t == s_active_tab) {
-                ov_string(lbl, lbl_x, ty, cw, ch, 1, 1, 0.3f, 1);
-                ov_quad(tab_x, ty + ch, tab_col_w * cw - pad, 2.0f,
+                ov_string(lbl, tab_x, ty, cw, ch, 1, 1, 0.3f, 1);
+                ov_quad(tab_x, ty + ch, lbl_len * cw, 2.0f,
                         BG_U, BG_V, BG_U, BG_V, 1, 1, 0.3f, 1);
             } else {
-                ov_string(lbl, lbl_x, ty, cw, ch, 0.5f, 0.5f, 0.5f, 1);
+                ov_string(lbl, tab_x, ty, cw, ch, 0.5f, 0.5f, 0.5f, 1);
             }
+            tab_x += lbl_len * cw + gap_w;
         }
         ty += row_h + pad;
     }

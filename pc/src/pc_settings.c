@@ -125,7 +125,7 @@ static const char* DEFAULT_SETTINGS =
     "# Weather particles: 0=full, 1=reduced (half spawn), 2=off\n"
     "weather_particles = 0\n"
     "\n"
-    "# Shadow quality: 0=all actors, 1=player only, 2=off\n"
+    "# Shadow quality: 0=all, 1=player only, 2=off (actors + trees/sign decals), 3=player+NPC\n"
     "shadow_quality = 0\n"
     "\n"
     "# Acre background draw: 0=full 3x3 (9 acres), 1=cross (5 acres, skip diagonals)\n"
@@ -211,7 +211,7 @@ static void apply_setting(const char* key, const char* value) {
     } else if (strcmp(key, "weather_particles") == 0) {
         if (val >= 0 && val <= 2) g_pc_settings.weather_particles = val;
     } else if (strcmp(key, "shadow_quality") == 0) {
-        if (val >= 0 && val <= 2) g_pc_settings.shadow_quality = val;
+        if (val >= 0 && val <= 3) g_pc_settings.shadow_quality = val;
     } else if (strcmp(key, "reduce_acre_draw") == 0) {
         if (val == 0 || val == 1) g_pc_settings.reduce_acre_draw = val;
     } else if (strcmp(key, "bg_anim_throttle") == 0) {
@@ -301,7 +301,7 @@ void pc_settings_save(void) {
     fprintf(f, "# Weather particles: 0=full, 1=reduced, 2=off\n");
     fprintf(f, "weather_particles = %d\n", g_pc_settings.weather_particles);
     fprintf(f, "\n");
-    fprintf(f, "# Shadow quality: 0=all actors, 1=player only, 2=off\n");
+    fprintf(f, "# Shadow quality: 0=all, 1=player only, 2=off, 3=player+NPC\n");
     fprintf(f, "shadow_quality = %d\n", g_pc_settings.shadow_quality);
     fprintf(f, "\n");
     fprintf(f, "# Acre background draw: 0=full 3x3, 1=cross (5 acres)\n");

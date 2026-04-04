@@ -1767,6 +1767,11 @@ static void bit_cmn_single_draw_loop_type1(GRAPH* graph, Gfx** gfx_pp, bIT_draw_
 
 static void bit_cmn_single_draw_item_shadow(GRAPH* graph, bg_item_draw_part_c* draw_part,
                                             bIT_draw_pos_entry_c* draw_pos_entry, f32 shadow_pos, const rgba_t* color) {
+#ifdef TARGET_PC
+    if (g_pc_settings.shadow_quality == 2) {
+        return;
+    }
+#endif
     bg_item_draw_list_c* draw_list = draw_part->shadow_draw_list;
 
     if (draw_list != NULL) {
@@ -3020,6 +3025,11 @@ static void bg_item_common_draw_item_shadow(GRAPH* graph, Gfx** gfx_pp, bg_item_
                                             bg_item_draw_pos_c* draw_pos, f32 shadow_pos, const rgba_t* shadow_color) {
     bg_item_draw_list_c* draw_list = draw_part->shadow_draw_list;
 
+#ifdef TARGET_PC
+    if (g_pc_settings.shadow_quality == 2) {
+        return;
+    }
+#endif
     if (draw_list != NULL) {
         Vtx* vtx = (Vtx*)GRAPH_ALLOC_TYPE(graph, Vtx, draw_part->shadow_vtx_count);
 

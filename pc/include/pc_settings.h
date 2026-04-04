@@ -34,7 +34,7 @@ typedef struct {
     int frustum_cull_max_distance; /* 0=no cap, else max XZ draw distance (world units); lower = more culling */
     int actor_update_dist;      /* 0=off, else max XZ world units for non-NPC mv_proc */
     int weather_particles;      /* 0=full, 1=reduced (half spawn rate), 2=off */
-    int shadow_quality;         /* 0=all, 1=player only, 2=off */
+    int shadow_quality;         /* 0=all actors+world decals, 1=player only, 2=off (no shadows), 3=player+NPC */
     int reduce_acre_draw;       /* 0=3x3 (9 acres), 1=cross (5 acres) */
     int bg_anim_throttle;       /* 1=every frame, 2=half-rate, 4=quarter-rate */
 } PCSettings;

@@ -266,7 +266,26 @@ static void Actor_draw(GAME_PLAY* play, ACTOR* actor) {
 
     /* Draw shadow */
     if (actor->shape_info.shadow_proc != NULL) {
+        int skip_shadow = FALSE;
+#ifdef TARGET_PC
+        {
+            int q = g_pc_settings.shadow_quality;
+
+            if (q < 0 || q > 3) {
+                q = 0;
+            }
+            if (q == 2) {
+                skip_shadow = TRUE;
+            } else if (q == 1) {
+                skip_shadow = (actor->part != ACTOR_PART_PLAYER);
+            } else if (q == 3) {
+                skip_shadow = (actor->part != ACTOR_PART_PLAYER && actor->part != ACTOR_PART_NPC);
+            }
+        }
+#endif
+        if (!skip_shadow) {
         (*actor->shape_info.shadow_proc)(actor, lights, play);
+        }
     }
 }
 

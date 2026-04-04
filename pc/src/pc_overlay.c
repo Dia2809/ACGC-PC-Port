@@ -103,7 +103,7 @@ static const char* menu_labels[MI_COUNT] = {
     [MI_CULL_MAX_DISTANCE]  = "Cull max dist (u)",
     [MI_ACTOR_UPDATE_DIST]  = "Actor Update Dist",
     [MI_WEATHER_PARTICLES]  = "Weather Particles",
-    [MI_SHADOW_QUALITY]     = "Shadows",
+    [MI_SHADOW_QUALITY]     = "Shadow Quality",
     [MI_REDUCE_ACRE_DRAW]   = "Acre Draw",
     [MI_BG_ANIM_THROTTLE]   = "BG Animation",
     /* MI_KB_BASE..MI_KB_BASE+KB_COUNT-1: NULL, handled via pc_keybinding_label() */
@@ -242,9 +242,9 @@ static void menu_get_value(int item, char* buf, int sz) {
         break;
     }
     case MI_SHADOW_QUALITY: {
-        static const char* snames[] = {"All", "Player Only", "Off"};
+        static const char* snames[] = {"All", "Player only", "Off", "Player + NPC"};
         int s = g_pc_settings.shadow_quality;
-        if (s < 0 || s > 2) s = 0;
+        if (s < 0 || s > 3) s = 0;
         snprintf(buf, sz, "%s", snames[s]);
         break;
     }
@@ -422,9 +422,24 @@ static void menu_adjust(int item, int dir) {
         break;
     }
     case MI_SHADOW_QUALITY: {
-        int v = g_pc_settings.shadow_quality + dir;
-        if (v < 0) v = 2; if (v > 2) v = 0;
-        g_pc_settings.shadow_quality = v;
+        /* Cycle quality high→low: All → player+NPC → player only → off */
+        static const int order[] = {0, 3, 1, 2};
+        int cur = 0;
+        int i;
+        for (i = 0; i < 4; i++) {
+            if (order[i] == g_pc_settings.shadow_quality) {
+                cur = i;
+                break;
+            }
+        }
+        cur += dir;
+        while (cur < 0) {
+            cur += 4;
+        }
+        while (cur > 3) {
+            cur -= 4;
+        }
+        g_pc_settings.shadow_quality = order[cur];
         break;
     }
     case MI_REDUCE_ACRE_DRAW: g_pc_settings.reduce_acre_draw ^= 1; break;

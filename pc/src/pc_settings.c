@@ -88,7 +88,7 @@ static const char* DEFAULT_SETTINGS =
     "right_deadzone = 0\n"
     "\n"
     "# Swap A↔B and X↔Y: 0 = off, 1 = on\n"
-    "swap_ab_xy = 0\n"
+    "swap_ab_xy = 0\n";
 
 static const char* skip_ws(const char* s) {
     while (*s == ' ' || *s == '\t') s++;

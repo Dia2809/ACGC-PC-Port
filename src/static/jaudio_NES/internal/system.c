@@ -1245,6 +1245,9 @@ static s32 __Nas_StartSeq(s32 group_idx, s32 seq_id, s32 param) {
     group->flags.enabled = TRUE;
     group->flags.finished = FALSE;
     group->group_idx = group_idx;
+#ifdef TARGET_PC
+    group->seq_gen = AG.seq_data_gen;
+#endif
 
     return 0;
 }

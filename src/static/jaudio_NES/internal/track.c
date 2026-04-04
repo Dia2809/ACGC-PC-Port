@@ -7,6 +7,22 @@
 #include "jaudio_NES/sub_sys.h"
 #include "jaudio_NES/system.h"
 #include "dolphin/os.h"
+#ifdef TARGET_PC
+#include <stdio.h>
+
+/* Validate m->pc is within the audiomemory buffer.
+ * seq_data (and thus macro PCs) are always allocated from the audio heap
+ * which lives inside the global audiomemory[] array. */
+#if UINTPTR_MAX > 0xFFFFFFFFu
+extern u8 audiomemory[0x120000];
+#else
+extern u8 audiomemory[0x90000];
+#endif
+
+static inline int pc_audio_ptr_valid(const u8* p) {
+    return p != NULL && p >= audiomemory && p < audiomemory + sizeof(audiomemory);
+}
+#endif
 
 #define COMMON_SCRIPT_END -1
 
@@ -388,6 +404,9 @@ extern void Nas_ReleaseSubTrack(sub* subtrack) {
 
     Nas_DeAllocAllVoices(&subtrack->channel_node);
     subtrack->enabled = FALSE;
+    /* PC port: clear macro player PC so stale pointers aren't dereferenced
+     * if this subtrack gets reused before pc is reinitialized */
+    subtrack->macro_player.pc = NULL;
 }
 
 static void Nas_AllocSub(group* grp, u16 subtrack_enable_flags) {
@@ -446,6 +465,8 @@ extern void Nas_ReleaseGroup(group* grp) {
     if (grp->flags.enabled) {
         grp->flags.enabled = FALSE;
         grp->flags.finished = TRUE;
+        /* Clear macro player PC so stale pointers don't get dereferenced */
+        grp->macro_player.pc = NULL;
 
         if (Nas_CheckIDseq(grp->seq_id)) {
             Nas_WriteIDseq(grp->seq_id, LOAD_STATUS_DISCARDABLE);
@@ -517,19 +538,38 @@ static void Nas_InitNoteList(void) {
 }
 
 static u8 Nas_ReadByteData(macro* m) {
+#ifdef TARGET_PC
+    if (!pc_audio_ptr_valid(m->pc)) {
+        m->value = COMMON_SCRIPT_END;
+        return COMMON_CMD_STOP_SCRIPT; /* 0xFF — triggers Nas_ReleaseSubTrack via Common_Com */
+    }
+#endif
     return *m->pc++;
 }
 
 static s16 Nas_ReadWordData(macro* m) {
-    s16 data = (*m->pc++) << 8;
-
+    s16 data;
+#ifdef TARGET_PC
+    if (!pc_audio_ptr_valid(m->pc)) {
+        m->value = COMMON_SCRIPT_END;
+        return 0;
+    }
+#endif
+    data = (*m->pc++) << 8;
     data = data | (*m->pc++);
     return data;
 }
 
 #define Nas_LENGTH_IS_U16(d) ((d) & 0x80)
 static u16 Nas_ReadLengthData(macro* m) {
-    u16 data = (*m->pc++);
+    u16 data;
+#ifdef TARGET_PC
+    if (!pc_audio_ptr_valid(m->pc)) {
+        m->value = COMMON_SCRIPT_END;
+        return 0;
+    }
+#endif
+    data = (*m->pc++);
 
     if (Nas_LENGTH_IS_U16(data)) {
         data = (data << 8) & 0x7F00;
@@ -1228,6 +1268,15 @@ static void Nas_SubSeq(sub* subtrack) {
     if (subtrack->stop_script == FALSE) {
         grp = subtrack->group;
 
+#ifdef TARGET_PC
+        /* If seq_data was evicted since this group was started, stop the subtrack */
+        if (grp->seq_gen != AG.seq_data_gen) {
+            subtrack->enabled = FALSE;
+            subtrack->macro_player.pc = NULL;
+            return;
+        }
+#endif
+
         if (grp->flags.muted && (subtrack->mute_flags & AUDIO_MUTE_FLAG_STOP_SCRIPT)) {
             return;
         }
@@ -1283,6 +1332,9 @@ static void Nas_SubSeq(sub* subtrack) {
                                 break;
                             case SUBTRACK_CMD_JMP_DYNTBL: // jump to entry in dynamic table
                                 if (m->value != -1) {
+#ifdef TARGET_PC
+                                    if (!pc_audio_ptr_valid((u8*)subtrack->dyn_tbl)) break;
+#endif
                                     data = (*subtrack->dyn_tbl)[m->value];
                                     cmdArgU16 = (u16)((data[0] << 8) + data[1]);
                                     m->pc = (u8*)&grp->seq_data[cmdArgU16];
@@ -1475,6 +1527,9 @@ static void Nas_SubSeq(sub* subtrack) {
                                 break;
                             case SUBTRACK_CMD_DYNTBL_CALL: // dynamic call
                                 if (m->value != -1) {
+#ifdef TARGET_PC
+                                    if (!pc_audio_ptr_valid((u8*)subtrack->dyn_tbl)) break;
+#endif
                                     data = (*subtrack->dyn_tbl)[m->value];
                                     /* @BUG - missing stack depth bounds check */
                                     m->stack[m->depth++] = m->pc;
@@ -1559,18 +1614,30 @@ static void Nas_SubSeq(sub* subtrack) {
                             case SUBTRACK_CMD_LOAD_DYNVAL_FROM_GROUP_SEQ: // load dynamic idx
                                 cmdArgU16 = (u16)cmdArgs[0];
                                 new_var3 = cmdArgU16 + (m->value * 2);
+#ifdef TARGET_PC
+                                if (!pc_audio_ptr_valid(&grp->seq_data[new_var3 + 1])) break;
+#endif
                                 subtrack->dynamic_value =
                                     (grp->seq_data[new_var3] << 8) | grp->seq_data[new_var3 + 1];
                                 break;
                             case SUBTRACK_CMD_SET_DYNTBL_FROM_GROUP_SEQ: // set dynamic table
+#ifdef TARGET_PC
+                                if (!pc_audio_ptr_valid(&grp->seq_data[subtrack->dynamic_value])) break;
+#endif
                                 subtrack->dyn_tbl = (unsigned char(*)[][2]) & grp->seq_data[subtrack->dynamic_value];
                                 break;
                             case SUBTRACK_CMD_LOAD_DYNVAL_FROM_DYNTBL: // read from dynamic table
+#ifdef TARGET_PC
+                                if (!pc_audio_ptr_valid((u8*)subtrack->dyn_tbl)) break;
+#endif
                                 data = (u8*)subtrack->dyn_tbl;
                                 new_var3 = m->value * 2;
                                 subtrack->dynamic_value = (data[new_var3] << 8) | data[new_var3 + 1];
                                 break;
                             case SUBTRACK_CMD_MACRO_LOAD_FROM_DYNTBL: // read to macro register from dynamic table
+#ifdef TARGET_PC
+                                if (!pc_audio_ptr_valid((u8*)subtrack->dyn_tbl)) break;
+#endif
                                 m->value = (*subtrack->dyn_tbl)[0][m->value];
                                 break;
                             case SUBTRACK_CMD_RANDOM_DYNVAL: // random dynamic value
@@ -1707,6 +1774,9 @@ static void Nas_SubSeq(sub* subtrack) {
                         case SUBTRACK_CMD_NOTE_START_DYNTBL_MASK: // start note layer and initialize note macro pc from data at macro register offset
                             if (m->value != -1) {
                                 if (Nas_EntryNoteTrack(subtrack, lo_bits) != -1) {
+#ifdef TARGET_PC
+                                    if (!pc_audio_ptr_valid((u8*)subtrack->dyn_tbl)) break;
+#endif
                                     data = (*subtrack->dyn_tbl)[m->value];
                                     cmdArgU16 = (u16)((data[0] << 8) + data[1]);
                                     subtrack->note_layers[lo_bits]->macro_player.pc = &grp->seq_data[cmdArgU16];
@@ -1810,6 +1880,45 @@ static void Nas_GroupSeq(group* grp) {
     s8 argS8;
     s16 argS16;
     u8 argU8;
+
+#ifdef TARGET_PC
+    /* Defensive: validate group pointer before dereferencing.
+     * Audio thread may receive a stale pointer if the game thread
+     * freed/reallocated the group concurrently. */
+    if (grp == NULL) return;
+    if (grp != &AG.main_group &&
+        (grp < (group*)&AG.groups[0] || grp >= (group*)&AG.groups[AG.audio_params.num_groups])) {
+        return;
+    }
+    /* Validate critical internal pointers that may become dangling */
+    if (grp->flags.enabled) {
+        if (grp->seq_data != NULL && !pc_audio_ptr_valid(grp->seq_data)) {
+            grp->flags.enabled = FALSE;
+            fprintf(stderr, "[PC] Nas_GroupSeq: group %p seq_data=%p invalid, disabling\n",
+                    (void*)grp, (void*)grp->seq_data);
+            return;
+        }
+        if (grp->macro_player.pc != NULL && !pc_audio_ptr_valid(grp->macro_player.pc)) {
+            grp->flags.enabled = FALSE;
+            fprintf(stderr, "[PC] Nas_GroupSeq: group %p macro.pc=%p invalid, disabling\n",
+                    (void*)grp, (void*)grp->macro_player.pc);
+            return;
+        }
+        /* Validate bank_id/seq_id are within array bounds */
+        if (grp->bank_id != 0xFF && grp->bank_id >= 172) {
+            fprintf(stderr, "[PC] Nas_GroupSeq: group %p bank_id=%d out of bounds, disabling\n",
+                    (void*)grp, grp->bank_id);
+            grp->flags.enabled = FALSE;
+            return;
+        }
+        if (grp->seq_id != 0xFF && grp->seq_id >= 252) {
+            fprintf(stderr, "[PC] Nas_GroupSeq: group %p seq_id=%d out of bounds, disabling\n",
+                    (void*)grp, grp->seq_id);
+            grp->flags.enabled = FALSE;
+            return;
+        }
+    }
+#endif
 
     if (grp->flags.enabled) {
         if (Nas_CheckIDseq(grp->seq_id) == FALSE || Nas_CheckIDbank(grp->bank_id) == FALSE) {

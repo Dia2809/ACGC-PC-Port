@@ -42,6 +42,7 @@ static SDL_atomic_t audio_thread_running;
 
 static int pc_audio_producer_func(void* data) {
     (void)data;
+
     while (SDL_AtomicGet(&audio_thread_running)) {
         int fill = pc_audio_get_buffer_fill();
         if (fill < AUDIO_PRODUCE_THRESHOLD) {

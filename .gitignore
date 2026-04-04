@@ -50,3 +50,4 @@ release.sh
 include/PR/
 include/gcc/
 include/compiler/gcc/stdlib.h
+pc/lib/SDL*

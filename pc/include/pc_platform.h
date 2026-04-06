@@ -89,6 +89,15 @@ extern int           g_pc_time_override;
 extern int           g_pc_min_override;
 extern int           g_pc_sec_override;
 
+/* --- Exit request from overlay menu --- */
+#define PC_EXIT_REQUEST_NONE           0
+#define PC_EXIT_REQUEST_QUIT           1
+#define PC_EXIT_REQUEST_SAVE_AND_QUIT  2
+#define PC_EXIT_REQUEST_QUIT_TO_TITLE  3
+extern int           g_pc_exit_request;
+extern int           g_pc_quicksave_request;  /* 1 = save & continue, 2 = save & quit */
+extern int           g_pc_save_continue_close_timer; /* overlay menu close delay after save */
+
 extern int g_pc_window_w;
 extern int g_pc_window_h;
 void pc_platform_update_window_size(void);

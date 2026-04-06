@@ -42,6 +42,12 @@ static Uint32 ctrl_clear_start  = 0;  /* SDL_GetTicks() when X/Del hold started 
 static int    ctrl_clear_kb_idx = -1; /* which kb_idx is being held for clear */
 #define CTRL_CLEAR_MS 1500            /* hold this long to clear a binding */
 
+/* ---- Quick Save feedback ---- */
+static int s_save_feedback_timer  = 0;   /* frames to show "Saved!" or "Save Failed" */
+static int s_save_feedback_failed = 0;   /* 1 = show failure message */
+#define SAVE_FEEDBACK_FRAMES 120         /* ~2 seconds at 60fps */
+int g_pc_save_continue_close_timer = 0;  /* frames before closing menu after "Save & Continue" */
+
 /* ---- Menu items ---- */
 enum {
     MI_FPS_COUNTER,
@@ -70,6 +76,11 @@ enum {
     MI_CULL_MAX_DISTANCE,
     MI_SHADOW_QUALITY,
     MI_REDUCE_ACRE_DRAW,
+    /* System tab */
+    MI_SAVE_CONTINUE,
+    MI_SAVE_QUIT,
+    MI_QUIT_TITLE,
+    MI_QUIT,
     MI_KB_BASE,
     MI_COUNT = MI_KB_BASE + KB_COUNT,
 };
@@ -100,6 +111,10 @@ static const char* menu_labels[MI_COUNT] = {
     [MI_CULL_MAX_DISTANCE]  = "Cull max dist (u)",
     [MI_SHADOW_QUALITY]     = "Shadow Quality",
     [MI_REDUCE_ACRE_DRAW]   = "Acre Draw",
+    [MI_SAVE_CONTINUE]      = "Save & Continue",
+    [MI_SAVE_QUIT]          = "Save & Quit",
+    [MI_QUIT_TITLE]         = "Quit to Title",
+    [MI_QUIT]               = "Quit",
     /* MI_KB_BASE..MI_KB_BASE+KB_COUNT-1: NULL, handled via pc_keybinding_label() */
 };
 
@@ -110,8 +125,8 @@ static const char* get_item_label(int i) {
 }
 
 /* ---- Menu tabs ---- */
-enum { TAB_VIDEO, TAB_AUDIO, TAB_CONTROLS, TAB_DEBUG, TAB_PERF, TAB_COUNT };
-static const char* tab_labels[TAB_COUNT] = { "VIDEO", "AUDIO", "CTRL", "DEBUG", "PERF" };
+enum { TAB_VIDEO, TAB_AUDIO, TAB_CONTROLS, TAB_DEBUG, TAB_PERF, TAB_SYS, TAB_COUNT };
+static const char* tab_labels[TAB_COUNT] = { "VIDEO", "AUDIO", "CTRL", "DEBUG", "PERF", "SYS" };
 static int s_active_tab = 0;
 
 /* Which tab each menu item belongs to (indexed by MI_*) */
@@ -140,6 +155,10 @@ static const int menu_item_tab[MI_COUNT] = {
     [MI_CULL_MAX_DISTANCE]  = TAB_PERF,
     [MI_SHADOW_QUALITY]     = TAB_PERF,
     [MI_REDUCE_ACRE_DRAW]   = TAB_PERF,
+    [MI_SAVE_CONTINUE]      = TAB_SYS,
+    [MI_SAVE_QUIT]          = TAB_SYS,
+    [MI_QUIT_TITLE]         = TAB_SYS,
+    [MI_QUIT]               = TAB_SYS,
     /* MI_KB_BASE..MI_KB_BASE+KB_COUNT-1: handled by item_tab() helper below */
 };
 
@@ -234,6 +253,12 @@ static void menu_get_value(int item, char* buf, int sz) {
         snprintf(buf, sz, "%s", arnames[ar]);
         break;
     }
+    case MI_SAVE_CONTINUE:
+    case MI_SAVE_QUIT:
+    case MI_QUIT_TITLE:
+    case MI_QUIT:
+        snprintf(buf, sz, "Press >");
+        break;
     default:
         if (item >= MI_KB_BASE && item < MI_KB_BASE + KB_COUNT) {
             int kb_idx = item - MI_KB_BASE;
@@ -412,6 +437,36 @@ static void menu_adjust(int item, int dir) {
         g_pc_settings.reduce_acre_draw = v;
         break;
     }
+    case MI_SAVE_CONTINUE:
+        if (dir > 0) {
+            /* Save and continue — set flag for play_main to handle save properly */
+            extern int g_pc_quicksave_request;
+            OSReport("[PC Overlay] 'Save & Continue' selected, setting save request\n");
+            g_pc_quicksave_request = 1; /* play_main will save + close menu */
+        }
+        break;
+    case MI_SAVE_QUIT:
+        if (dir > 0) {
+            /* Save and quit — set flag for play_main to handle save properly */
+            extern int g_pc_quicksave_request;
+            OSReport("[PC Overlay] 'Save & Quit' selected, setting save+exit request\n");
+            g_pc_quicksave_request = 2; /* play_main will save + set exit flag */
+        }
+        break;
+    case MI_QUIT_TITLE:
+        if (dir > 0) {
+            /* Quit to title — set flag, let play_main handle transition */
+            OSReport("[PC Overlay] 'Quit to Title' selected\n");
+            g_pc_exit_request = PC_EXIT_REQUEST_QUIT_TO_TITLE;
+        }
+        break;
+    case MI_QUIT:
+        if (dir > 0) {
+            /* Quit without saving */
+            OSReport("[PC Overlay] 'Quit' selected\n");
+            g_pc_exit_request = PC_EXIT_REQUEST_QUIT;
+        }
+        break;
     default:
         if (item >= MI_KB_BASE && item < MI_KB_BASE + KB_COUNT && dir == 1) {
             ctrl_capture_idx = item - MI_KB_BASE;
@@ -806,6 +861,46 @@ static void draw_fps(float cw, float ch, float pad) {
     ov_string(line2, px + pad, py + pad + ch + pad, cw, ch, 0.8f, 0.8f, 0.8f, 1);
 }
 
+/* ---- Draw: Save feedback (bottom-right corner) ---- */
+static void draw_save_feedback(float cw, float ch, float pad) {
+    extern int g_pc_quicksave_request;
+
+    /* Show "Saving..." if save is pending, "Game Saved" or "Save Failed" if complete */
+    int show_saving = (g_pc_quicksave_request != 0) || (g_pc_save_continue_close_timer > 0);
+    if (s_save_feedback_timer <= 0 && !show_saving) return;
+
+    const char* msg;
+    float r, g, b, alpha;
+
+    if (show_saving && s_save_feedback_timer <= 0) {
+        /* Still processing or menu closing delay — show "Saving..." */
+        msg = "Saving...";
+        r = 0.8f; g = 0.8f; b = 0.2f;  /* Yellow */
+        alpha = 1.0f;
+    } else {
+        /* Save completed — show result */
+        msg = s_save_feedback_failed ? "Save Failed" : "Game Saved";
+        r = s_save_feedback_failed ? 1.0f : 0.2f;
+        g = s_save_feedback_failed ? 0.2f : 1.0f;
+        b = s_save_feedback_failed ? 0.2f : 0.8f;
+
+        /* Calculate alpha: fade out in last 30 frames */
+        alpha = 1.0f;
+        if (s_save_feedback_timer < 30) {
+            alpha = s_save_feedback_timer / 30.0f;
+        }
+    }
+
+    int msg_len = (int)strlen(msg);
+    float pw = msg_len * cw + 2.0f * pad;
+    float ph = ch + 2.0f * pad;
+    float px = (float)g_pc_window_w - pw - pad;
+    float py = (float)g_pc_window_h - ph - pad;
+
+    ov_quad(px, py, pw, ph, BG_U, BG_V, BG_U, BG_V, 0, 0, 0, 0.65f);
+    ov_string(msg, px + pad, py + pad, cw, ch, r, g, b, alpha);
+}
+
 /* ---- Draw: Settings menu (centered) ---- */
 static void draw_menu(float cw, float ch, float pad) {
     int tab_count = tab_item_count();
@@ -1028,9 +1123,49 @@ void pc_overlay_menu_toggle(void) {
 void pc_overlay_draw(void) {
     if (!ov_prog) return;
 
+    /* ---- Check for Ctrl+S (Quick Save) ---- */
+    {
+        int nkeys;
+        const Uint8* keys = SDL_GetKeyboardState(&nkeys);
+        SDL_Keymod mod = SDL_GetModState();
+        int ctrl_s = keys[SDL_SCANCODE_S] && (mod & KMOD_CTRL);
+        static int prev_ctrl_s = 0;
+
+        if (ctrl_s && !prev_ctrl_s) {
+            /* Edge detect: Ctrl+S was just pressed */
+            extern int mCD_QuickSave(void);
+            OSReport("[PC Overlay] Ctrl+S pressed, attempting save...\n");
+            int save_ok = mCD_QuickSave();
+            s_save_feedback_timer = SAVE_FEEDBACK_FRAMES;
+            s_save_feedback_failed = !save_ok;
+            if (save_ok) {
+                OSReport("[PC Overlay] Save feedback: success\n");
+            } else {
+                OSReport("[PC Overlay] Save feedback: failed\n");
+            }
+        }
+        prev_ctrl_s = ctrl_s;
+    }
+
+    /* Decrement save feedback timer */
+    if (s_save_feedback_timer > 0) {
+        s_save_feedback_timer--;
+    }
+
+    /* Handle "Save & Continue" menu close delay */
+    if (g_pc_save_continue_close_timer > 0) {
+        g_pc_save_continue_close_timer--;
+        if (g_pc_save_continue_close_timer == 0) {
+            /* Close the menu now that feedback has been shown */
+            OSReport("[PC Overlay] Closing menu after save confirmation\n");
+            g_pc_menu_open = 0;
+        }
+    }
+
     /* Nothing to draw? */
     int want_fps = g_pc_settings.show_fps && !g_pc_menu_open;
-    if (!want_fps && !g_pc_menu_open) return;
+    int want_save_feedback = (s_save_feedback_timer > 0) || (g_pc_save_continue_close_timer > 0);
+    if (!want_fps && !want_save_feedback && !g_pc_menu_open) return;
 
     /* Process menu input */
     if (g_pc_menu_open) menu_process_input();
@@ -1076,6 +1211,9 @@ void pc_overlay_draw(void) {
     } else if (want_fps) {
         draw_fps(cw, ch, pad);
     }
+
+    /* Draw save feedback even if menu is open (shows in corner) */
+    draw_save_feedback(cw, ch, pad);
 
     /* ---- Upload & draw ---- */
     if (ov_nv > 0) {

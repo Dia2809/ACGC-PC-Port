@@ -21,6 +21,8 @@ __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 SDL_Window*   g_pc_window = NULL;
 SDL_GLContext  g_pc_gl_context = NULL;
 int           g_pc_running = 1;
+int           g_pc_exit_request = PC_EXIT_REQUEST_NONE; /* set by overlay menu */
+int           g_pc_quicksave_request = 0; /* 1=save&continue, 2=save&quit (set by overlay) */
 int           g_pc_no_framelimit = 0;
 int           g_pc_fast_forward = 0;
 int           g_pc_verbose = 0;

@@ -76,6 +76,7 @@ enum {
     MI_CULL_MAX_DISTANCE,
     MI_SHADOW_QUALITY,
     MI_REDUCE_ACRE_DRAW,
+    MI_PARTICLE_QUALITY,
     /* System tab */
     MI_SAVE_CONTINUE,
     MI_SAVE_QUIT,
@@ -111,6 +112,7 @@ static const char* menu_labels[MI_COUNT] = {
     [MI_CULL_MAX_DISTANCE]  = "Cull max dist (u)",
     [MI_SHADOW_QUALITY]     = "Shadow Quality",
     [MI_REDUCE_ACRE_DRAW]   = "Acre Draw",
+    [MI_PARTICLE_QUALITY]   = "Weather effects",
     [MI_SAVE_CONTINUE]      = "Save & Continue",
     [MI_SAVE_QUIT]          = "Save & Quit",
     [MI_QUIT_TITLE]         = "Quit to Title",
@@ -155,6 +157,7 @@ static const int menu_item_tab[MI_COUNT] = {
     [MI_CULL_MAX_DISTANCE]  = TAB_PERF,
     [MI_SHADOW_QUALITY]     = TAB_PERF,
     [MI_REDUCE_ACRE_DRAW]   = TAB_PERF,
+    [MI_PARTICLE_QUALITY]   = TAB_PERF,
     [MI_SAVE_CONTINUE]      = TAB_SYS,
     [MI_SAVE_QUIT]          = TAB_SYS,
     [MI_QUIT_TITLE]         = TAB_SYS,
@@ -247,10 +250,17 @@ static void menu_get_value(int item, char* buf, int sz) {
         break;
     }
     case MI_REDUCE_ACRE_DRAW: {
-        static const char* arnames[] = {"Full", "Cross (5)", "Current"};
+        static const char* arnames[] = {"Full (8)", "Cross (5)", "Current"};
         int ar = g_pc_settings.reduce_acre_draw;
         if (ar < 0 || ar > 2) ar = 0;
         snprintf(buf, sz, "%s", arnames[ar]);
+        break;
+    }
+    case MI_PARTICLE_QUALITY: {
+        static const char* pnames[] = {"Off", "25%", "50%", "75%", "100%"};
+        int pq = g_pc_settings.particle_quality;
+        if (pq < 0 || pq > 4) pq = 4;
+        snprintf(buf, sz, "%s", pnames[pq]);
         break;
     }
     case MI_SAVE_CONTINUE:
@@ -435,6 +445,13 @@ static void menu_adjust(int item, int dir) {
         if (v < 0) v = 2;
         if (v > 2) v = 0;
         g_pc_settings.reduce_acre_draw = v;
+        break;
+    }
+    case MI_PARTICLE_QUALITY: {
+        int v = g_pc_settings.particle_quality + dir;
+        if (v < 0) v = 4;
+        if (v > 4) v = 0;
+        g_pc_settings.particle_quality = v;
         break;
     }
     case MI_SAVE_CONTINUE:

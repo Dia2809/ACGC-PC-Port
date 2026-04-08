@@ -211,7 +211,7 @@ struct actor_structure_s {
 
     /* general purpose members with unique usage between structure actors */
     /* 0x2B8 */ int arg0;
-    /* 0x2BC */ int arg1;
+    /* 0x2BC */ intptr_t arg1;
     /* 0x2C0 */ int arg2;
     /* 0x2C4 */ int arg3;
 

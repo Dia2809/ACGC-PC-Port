@@ -322,6 +322,7 @@ extern int mCD_save_data_main_to_aram(void* src, u32 size, u32 idx);
 #ifdef TARGET_PC
 extern int pc_save_loaded;
 extern int pc_save_reload(void);
+extern int mCD_QuickSave(void);
 #endif
 
 #ifdef __cplusplus

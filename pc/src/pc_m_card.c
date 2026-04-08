@@ -536,6 +536,21 @@ void mCD_LoadLand(void) {
     (void)pc_save_loaded;
 }
 
+int mCD_QuickSave(void) {
+    if (!pc_save_loaded) {
+        OSReport("[PC] mCD_QuickSave: save not yet loaded, ignoring\n");
+        return FALSE;
+    }
+    OSReport("[PC] mCD_QuickSave: starting save...\n");
+    int result = pc_save_write_gci();
+    if (result) {
+        OSReport("[PC] mCD_QuickSave: success\n");
+    } else {
+        OSReport("[PC] mCD_QuickSave: FAILED\n");
+    }
+    return result;
+}
+
 int mCD_SaveHome_bg(int param_1, int* chan) {
     int result = pc_save_write_gci();
     if (chan) *chan = mCD_SLOT_A;

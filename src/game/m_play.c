@@ -862,6 +862,66 @@ extern void play_main(GAME* game) {
     GAME_PLAY* play = (GAME_PLAY*)game;
 
     PC_DIAG(5, "play_main: enter scene=%d frame=%d\n", play->scene_id, play->game_frame);
+
+    /* Check for quicksave requests from overlay menu */
+#ifdef TARGET_PC
+    {
+        extern int g_pc_quicksave_request;
+        extern int g_pc_exit_request;
+        extern int g_pc_running;
+        extern int pc_save_loaded;
+        extern int mCD_QuickSave(void);
+
+        if (g_pc_quicksave_request != 0) {
+            int save_type = g_pc_quicksave_request;
+            g_pc_quicksave_request = 0;
+
+            /* Restore structure IDs in FG grid before saving (RSV_NO → actual IDs) */
+            OSReport("[Play] Quicksave: restoring FG data for structures\n");
+            restore_fgdata_all(play);
+
+            /* Save game state */
+            OSReport("[Play] Quicksave: saving\n");
+            int save_ok = mCD_QuickSave();
+
+            if (save_ok) {
+                OSReport("[Play] Quicksave: saved successfully\n");
+                if (save_type == 1) {
+                    /* Save & Continue: show feedback, then close menu after delay
+                     * This prevents the right input from passing through to the game */
+                    g_pc_save_continue_close_timer = 45; /* ~0.75 seconds */
+                    OSReport("[Play] Quicksave: setting menu close delay\n");
+                } else if (save_type == 2) {
+                    /* Save & Quit: set exit flag */
+                    OSReport("[Play] Quicksave: setting save+quit exit request\n");
+                    g_pc_exit_request = 2; /* PC_EXIT_REQUEST_SAVE_AND_QUIT */
+                }
+            } else {
+                OSReport("[Play] Quicksave: FAILED\n");
+            }
+            /* Don't return; let frame continue normally */
+        }
+
+        /* Check for exit requests from overlay menu */
+        if (g_pc_exit_request == 2) { /* PC_EXIT_REQUEST_SAVE_AND_QUIT */
+            OSReport("[Play] Exit request: save and quit\n");
+            g_pc_running = 0;
+            g_pc_exit_request = 0;
+            return;
+        } else if (g_pc_exit_request == 3) { /* PC_EXIT_REQUEST_QUIT_TO_TITLE */
+            OSReport("[Play] Exit request: quit to title\n");
+            GAME_GOTO_NEXT(&play->game, trademark, TRADEMARK);
+            g_pc_exit_request = 0;
+            return;
+        } else if (g_pc_exit_request == 1) { /* PC_EXIT_REQUEST_QUIT */
+            OSReport("[Play] Exit request: quit\n");
+            g_pc_running = 0;
+            g_pc_exit_request = 0;
+            return;
+        }
+    }
+#endif
+
     game->doing_point = 0;
     game->doing_point_specific = 0x6E;
     fqrand();

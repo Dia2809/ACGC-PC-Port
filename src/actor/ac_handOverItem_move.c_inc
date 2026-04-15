@@ -410,7 +410,12 @@ static void aHOI_actor_move(ACTOR* actorx, GAME* game) {
           }
         }
 
-        tools->init_matrix = FALSE;
+        /* Mail items are placed on a surface (counter), not held in the player's hand.
+         * Their draw code uses a fixed trans offset and doesn't need the hand-joint
+         * matrix, so init_matrix can be set TRUE immediately. For all other items the
+         * hand-joint callback (Player_actor_draw_After_Larm2) sets it TRUE on the
+         * first draw frame. */
+        tools->init_matrix = (handOverItem->item_type == aHOI_ITEM_TYPE_MAIL) ? TRUE : FALSE;
         handOverItem->se_set_flag = TRUE;
         handOverItem->trans_flag = FALSE;
         break;

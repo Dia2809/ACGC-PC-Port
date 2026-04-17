@@ -58,7 +58,6 @@ add_compile_definitions(
     BUGFIXES       # Fix original game bugs (buffer overflows, etc.) that crash on modern platforms
     _LANGUAGE_C    # Required for N64 GBI/ultratypes headers
     PC_ENHANCEMENTS   # Optional visual improvements (MSAA, etc). Remove to get pure PC port.
-    KEYBOARD_TYPING   # Physical keyboard typing in text editor. Remove for platforms without keyboards.
 )
 if(APPLE)
     add_compile_definitions(GL_SILENCE_DEPRECATION)
@@ -158,7 +157,18 @@ if(NOT SDL2_FOUND)
         # target one, or when pkg-config is not installed.
         # Prefer shared libraries (.so) over static (.a) so the binary works
         # across devices with different SDL2 video/audio backends.
+        # Put the target arch directory first so multiarch hosts pick the right one.
+        if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|amd64")
+            set(_sdl2_arch_dir /usr/lib/x86_64-linux-gnu)
+        elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")
+            set(_sdl2_arch_dir /usr/lib/aarch64-linux-gnu)
+        elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "arm")
+            set(_sdl2_arch_dir /usr/lib/arm-linux-gnueabihf)
+        elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "i[3-6]86")
+            set(_sdl2_arch_dir /usr/lib/i386-linux-gnu)
+        endif()
         set(_sdl2_search_paths
+            ${_sdl2_arch_dir}              # target arch first
             /usr/lib/aarch64-linux-gnu     # Debian/Ubuntu multiarch arm64
             /usr/lib/arm-linux-gnueabihf   # Debian/Ubuntu multiarch armhf
             /usr/lib/i386-linux-gnu        # Debian/Ubuntu multiarch i386
@@ -202,7 +212,17 @@ endif()
 # Static SDL2 bakes in specific video/audio backends at compile time;
 # dynamic linking uses the target device's SDL2 which has the right backends.
 if(UNIX AND NOT APPLE AND SDL2_FOUND)
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|amd64")
+        set(_sdl2_so_arch_dir /usr/lib/x86_64-linux-gnu)
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")
+        set(_sdl2_so_arch_dir /usr/lib/aarch64-linux-gnu)
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "arm")
+        set(_sdl2_so_arch_dir /usr/lib/arm-linux-gnueabihf)
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "i[3-6]86")
+        set(_sdl2_so_arch_dir /usr/lib/i386-linux-gnu)
+    endif()
     set(_sdl2_so_search_paths
+        ${_sdl2_so_arch_dir}
         /usr/lib/aarch64-linux-gnu
         /usr/lib/arm-linux-gnueabihf
         /usr/lib/i386-linux-gnu

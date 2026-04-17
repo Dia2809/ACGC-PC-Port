@@ -32,22 +32,10 @@ export XDG_DATA_HOME="$CONFDIR"
 export LD_LIBRARY_PATH="/usr/lib32:$GAMEDIR/libs.${DEVICE_ARCH}:$LD_LIBRARY_PATH"
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 chmod +x ./AnimalCrossing
-chmod +x ./AnimalCrossing.arm64
 
 $GPTOKEYB "AnimalCrossing" &
 pm_platform_helper "$GAMEDIR/AnimalCrossing"
+./AnimalCrossing
 
-if [ "$DEVICE_HAS_ARMHF" != "Y" ]; then
-    ./AnimalCrossing.arm64
-    echo "TRIMUI DEVICE"
-elif [ "$CFW_NAME" == "muOS" ]; then
-    export PORT_32BIT="Y"
-    LD_LIBRARY_PATH=/usr/lib32 LD_PRELOAD=/usr/lib32/libSDL2.so ./AnimalCrossing 
-    echo "Running muOS"
-else
-    export PORT_32BIT="Y"
-    ./AnimalCrossing
-    echo "ARMHF and not muOS!"
-fi
 
 pm_finish

@@ -14,13 +14,21 @@ extern "C" unsigned int pc_image_end;
 #define SEG2K0_PAGE_CACHE_SIZE 32
 static struct { u32 page; u8 committed; } seg2k0_page_cache[SEG2K0_PAGE_CACHE_SIZE];
 static int seg2k0_cache_next = 0;
+static u32 seg2k0_hot_page = (u32)-1;
+static int seg2k0_hot_committed = 0;
 
 static int seg2k0_is_committed(u32 addr) {
     u32 page = addr & ~0xFFF;
-    /* Check cache first */
+    /* 1-entry hot cache: vertex batches repeatedly touch the same pages */
+    if (page == seg2k0_hot_page) {
+        return seg2k0_hot_committed;
+    }
+    /* Check ring-buffer cache */
     for (int i = 0; i < SEG2K0_PAGE_CACHE_SIZE; i++) {
         if (seg2k0_page_cache[i].page == page) {
-            return seg2k0_page_cache[i].committed;
+            seg2k0_hot_page = page;
+            seg2k0_hot_committed = seg2k0_page_cache[i].committed;
+            return seg2k0_hot_committed;
         }
     }
     /* Cache miss — query the OS */
@@ -38,6 +46,8 @@ static int seg2k0_is_committed(u32 addr) {
     seg2k0_page_cache[seg2k0_cache_next].page = page;
     seg2k0_page_cache[seg2k0_cache_next].committed = committed;
     seg2k0_cache_next = (seg2k0_cache_next + 1) % SEG2K0_PAGE_CACHE_SIZE;
+    seg2k0_hot_page = page;
+    seg2k0_hot_committed = committed;
     return committed;
 }
 

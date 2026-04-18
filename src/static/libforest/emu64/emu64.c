@@ -420,19 +420,12 @@ static void* texture_cache_alloc(texture_cache_t* cache, u32 size) {
     return cache->last_alloc_start;
 }
 
-static void* texture_cache_hot_original = nullptr;
-static void* texture_cache_hot_converted = nullptr;
-
 static void* texture_cache_data_search(void* original_addr) {
-    if (original_addr == texture_cache_hot_original) {
-        return texture_cache_hot_converted;
-    }
+    int i;
 
-    for (int i = 0; i < texture_cache_num; i++) {
+    for (i = 0; i < texture_cache_num; i++) {
         if (original_addr == texture_cache_list[i].original) {
-            texture_cache_hot_original = original_addr;
-            texture_cache_hot_converted = texture_cache_list[i].converted;
-            return texture_cache_hot_converted;
+            return texture_cache_list[i].converted;
         }
     }
 
@@ -462,8 +455,6 @@ static int texture_cache_bss_entry(void* original_addr, void* converted_addr) {
 static void texture_cache_list_clear() {
     texture_cache_clear(&texture_cache_data);
     texture_cache_num = 0;
-    texture_cache_hot_original = nullptr;
-    texture_cache_hot_converted = nullptr;
 }
 
 extern void emu64_refresh() {

@@ -4831,6 +4831,12 @@ void emu64::dl_G_VTX() {
             this->disp_matrix(position_mtx);
         }
 
+        /* Hoist loop-invariant aflags/geometry_mode checks outside the per-vertex loop */
+        const bool vtx_tex_gen = (aflags[AFLAGS_FORCE_VTX_FLAG_COPY] == 0) &&
+                                 ((this->geometry_mode & G_TEXTURE_GEN) != 0);
+        const int  normal_type  = aflags[AFLAGS_VTX_NORMAL_MODIFY_TYPE];
+        const bool do_normalize = (normal_type == 0) && ((this->geometry_mode & G_TEXTURE_GEN) != 0);
+
         while (n != 0) {
             /* Convert position */
             OSs16tof32(&vtx_p->n.ob[0], &emu_vtx_p->position.x);
@@ -4838,7 +4844,7 @@ void emu64::dl_G_VTX() {
             OSs16tof32(&vtx_p->n.ob[2], &emu_vtx_p->position.z);
 
             /* Flag */
-            if (aflags[AFLAGS_FORCE_VTX_FLAG_COPY] == 0 && (this->geometry_mode & G_TEXTURE_GEN) != 0) {
+            if (vtx_tex_gen) {
                 emu_vtx_p->flag = MTX_SHARED;
             } else {
                 emu_vtx_p->flag = vtx_p->n.flag & MTX_NONSHARED;
@@ -4854,13 +4860,13 @@ void emu64::dl_G_VTX() {
             emu_vtx_p->normal.z = fastcast_float(&vtx_p->n.n[2]);
 
             /* Check vertex normal modification type. In AC/e+ only VECNormalize is utilized. */
-            if (aflags[AFLAGS_VTX_NORMAL_MODIFY_TYPE] == 0 && (this->geometry_mode & G_TEXTURE_GEN) != 0) {
+            if (do_normalize) {
                 PSVECNormalize(&emu_vtx_p->normal, &emu_vtx_p->normal);
-            } else if (aflags[AFLAGS_VTX_NORMAL_MODIFY_TYPE] == 2) {
+            } else if (normal_type == 2) {
                 emu_vtx_p->normal.x *= (1.0f / 120.0f);
                 emu_vtx_p->normal.y *= (1.0f / 120.0f);
                 emu_vtx_p->normal.z *= (1.0f / 120.0f);
-            } else if (aflags[AFLAGS_VTX_NORMAL_MODIFY_TYPE] == 3) {
+            } else if (normal_type == 3) {
                 emu_vtx_p->normal.x *= (1.0f / 128.0f);
                 emu_vtx_p->normal.y *= (1.0f / 128.0f);
                 emu_vtx_p->normal.z *= (1.0f / 128.0f);

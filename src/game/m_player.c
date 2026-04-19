@@ -348,7 +348,7 @@ static int Player_actor_request_main_fall_pitfall_all(GAME* game, int prio);
 static int Player_actor_request_main_struggle_pitfall_all(GAME* game, int prio);
 static int Player_actor_request_main_climbup_pitfall_all(GAME* game, int prio);
 static int Player_actor_request_main_notice_bee_all(GAME* game, int prio);
-static int Player_actor_request_main_notice_mosquito(GAME* game, u32 label, int prio);
+static int Player_actor_request_main_notice_mosquito(GAME* game, uintptr_t label, int prio);
 static int Player_actor_request_main_demo_geton_boat_sitdown_all(GAME* game, int prio);
 static int Player_actor_request_main_demo_geton_boat_wait_all(GAME* game, int prio);
 static int Player_actor_request_main_demo_getoff_boat_all(GAME* game, const xyz_t* pos_p, s16 angle_y, int prio);

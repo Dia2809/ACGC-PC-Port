@@ -141,6 +141,225 @@ static xxh_u64 xxhash64(const void* input, int len) {
 static int g_has_bc7 = 0;
 static int g_has_s3tc = 0;
 
+/* ---- Software decompressors: BC1/BC3/BC7 fallback when GPU lacks extensions ---- */
+
+static unsigned long long sw_bc_bits(const unsigned char *src, int *bp, int n) {
+    unsigned long long v = 0;
+    for (int i = 0; i < n; i++) {
+        v |= (unsigned long long)((src[*bp >> 3] >> (*bp & 7)) & 1) << i;
+        ++*bp;
+    }
+    return v;
+}
+
+static unsigned char sw_expand8(unsigned char v, int n) {
+    if (n >= 8) return v;
+    return (unsigned char)((v << (8 - n)) | (v >> (2 * n - 8)));
+}
+
+static void sw_bc1_block(const unsigned char *s, unsigned char *d, int stride) {
+    unsigned short c0 = (unsigned short)(s[0] | (s[1] << 8));
+    unsigned short c1 = (unsigned short)(s[2] | (s[3] << 8));
+    unsigned char r[4], g[4], b[4], a[4];
+    r[0] = sw_expand8((c0 >> 11) & 31, 5); g[0] = sw_expand8((c0 >> 5) & 63, 6); b[0] = sw_expand8(c0 & 31, 5);
+    r[1] = sw_expand8((c1 >> 11) & 31, 5); g[1] = sw_expand8((c1 >> 5) & 63, 6); b[1] = sw_expand8(c1 & 31, 5);
+    if (c0 > c1) {
+        r[2]=(unsigned char)((2*r[0]+r[1]+1)/3); g[2]=(unsigned char)((2*g[0]+g[1]+1)/3); b[2]=(unsigned char)((2*b[0]+b[1]+1)/3);
+        r[3]=(unsigned char)((r[0]+2*r[1]+1)/3); g[3]=(unsigned char)((g[0]+2*g[1]+1)/3); b[3]=(unsigned char)((b[0]+2*b[1]+1)/3);
+        a[0]=a[1]=a[2]=a[3]=255;
+    } else {
+        r[2]=(unsigned char)((r[0]+r[1]+1)/2); g[2]=(unsigned char)((g[0]+g[1]+1)/2); b[2]=(unsigned char)((b[0]+b[1]+1)/2);
+        r[3]=g[3]=b[3]=0; a[0]=a[1]=a[2]=255; a[3]=0;
+    }
+    unsigned int bits = (unsigned int)(s[4]|(s[5]<<8)|(s[6]<<16)|(s[7]<<24));
+    for (int row=0;row<4;row++) for (int col=0;col<4;col++) {
+        int idx=(bits>>(2*(row*4+col)))&3;
+        unsigned char *p=d+row*stride+col*4;
+        p[0]=r[idx]; p[1]=g[idx]; p[2]=b[idx]; p[3]=a[idx];
+    }
+}
+
+static void sw_bc3_block(const unsigned char *s, unsigned char *d, int stride) {
+    unsigned char a0=s[0], a1=s[1], av[8];
+    av[0]=a0; av[1]=a1;
+    if (a0 > a1) {
+        for (int i=1;i<=6;i++) av[i+1]=(unsigned char)(((7-i)*(int)a0+i*(int)a1+3)/7);
+    } else {
+        for (int i=1;i<=4;i++) av[i+1]=(unsigned char)(((5-i)*(int)a0+i*(int)a1+2)/5);
+        av[6]=0; av[7]=255;
+    }
+    unsigned long long ab = (unsigned long long)s[2] | ((unsigned long long)s[3]<<8) |
+                            ((unsigned long long)s[4]<<16) | ((unsigned long long)s[5]<<24) |
+                            ((unsigned long long)s[6]<<32) | ((unsigned long long)s[7]<<40);
+    sw_bc1_block(s+8, d, stride);
+    for (int row=0;row<4;row++) for (int col=0;col<4;col++)
+        d[row*stride+col*4+3] = av[(ab>>(3*(row*4+col)))&7];
+}
+
+/* BC7 partition/anchor tables (from DirectX BC7 spec / OpenGL ARB_texture_compression_bptc) */
+static const unsigned short s_bc7_p2[64] = { /* 2-subset shapes, bit i = subset of pixel i */
+    0xCCCC,0x8888,0xEEEE,0xECC8,0xC880,0xFEEC,0xFEC8,0xEC80,
+    0xC800,0xFFEC,0xFE80,0xE800,0xFFE8,0xFF00,0xFFF0,0xF000,
+    0xF710,0x008E,0x7100,0x08CE,0x008C,0x7310,0x3100,0x8CCE,
+    0x088C,0x3110,0x6666,0x366C,0x17E8,0x0FF0,0x718E,0x399C,
+    0xAAAA,0xF0F0,0x5A5A,0x33CC,0x3C3C,0x55AA,0x9696,0xA55A,
+    0x73CE,0x13C8,0x324C,0x3BCE,0x69A0,0x4380,0x0EC8,0x194C,
+    0x384C,0xE74C,0x738C,0x3990,0x1340,0xE380,0x1390,0xF340,
+    0xABCC,0x4BBC,0x1DDC,0x0E74,0xBBCC,0x1EE4,0xCBC4,0x2C78
+};
+static const unsigned int s_bc7_p3[64] = { /* 3-subset shapes, 2 bits per pixel (pixel i = bits 2i+1:2i) */
+    0xAA685050,0x6A5A5040,0x5A5A4200,0x5450A0A8,0xA5A50000,0xA0A05050,0x5555A0A0,0x5A5A5050,
+    0xAA550000,0xAA555500,0xAAAA5500,0x90909090,0x94949494,0xA4A4A4A4,0xA9A59450,0x2A0A4250,
+    0xA5945040,0x0A425054,0xA5A5A500,0x55A0A0A0,0xA8A85454,0x6A6A4040,0xA4A45000,0x1A1A0500,
+    0x0050A4A4,0xAAA59090,0x14696914,0x69691400,0xA08585A0,0xAA821414,0x50A4A450,0x6A5A0200,
+    0xA9A58000,0x5090A0A8,0xA8A09050,0x24242424,0x00AA5500,0x24924924,0x24499224,0x50A50A50,
+    0x500AA550,0xAAAA4444,0x66660000,0xA5A0A5A0,0x50A050A0,0x69286928,0x44AAAA44,0x66666600,
+    0xAA444444,0x54A854A8,0x95809580,0x96A0A096,0xA850A850,0xAA485500,0x1A1A1A9A,0x4624A054,
+    0x9686A0A0,0x9A1A8500,0x1AA04250,0xAA910000,0xA4A04250,0x14681968,0x00142868,0xA8A808A0
+};
+/* Anchor pixel indices (highest index bit implicit 0) for each partition shape */
+static const unsigned char s_bc7_a2[64] = { /* 2-subset: anchor for subset 1 */
+     2, 3, 1, 3, 7, 2, 3, 7,11, 2, 7,11, 3, 8, 4,12,
+     4, 1, 8, 1, 2, 4, 8, 1, 2, 4, 1, 2, 3, 4, 1, 2,
+     1, 4, 1, 2, 2, 1, 1, 1, 1, 3, 2, 1, 5, 7, 3, 2,
+     2, 2, 2, 4, 6, 7, 4, 6, 2, 2, 2, 2, 2, 2, 2, 3
+};
+static const unsigned char s_bc7_a3a[64] = { /* 3-subset: anchor for subset 1 */
+     3, 3,15,15, 8, 3,15,15, 8, 8, 6, 6, 6, 5, 3, 3,
+     3, 3, 8,15, 3, 3, 6,10, 5, 8, 8, 6, 8, 5,15,15,
+     8,15, 3, 5, 6,10, 8,15,15, 3,15, 5,15,15,15,15,
+     3,15, 5, 5, 5, 8, 5,10, 5,10, 8,13,15,12, 3, 3
+};
+static const unsigned char s_bc7_a3b[64] = { /* 3-subset: anchor for subset 2 */
+    15, 8, 8, 3,15,15, 3, 8,15,15,15,15,15,15,15, 8,
+    15, 8,15, 3,15, 8,15, 8, 3,15, 6,10,15,15,10, 8,
+    15, 3,15,10,10, 8, 9,10, 6,15, 8,15, 3, 6, 6, 8,
+    15, 3,15,15,15,15,15,15,15,15,15,15, 3,15,15, 8
+};
+static const int s_bc7_iw[5][16] = {
+    {0},{0},{0,21,43,64},{0,9,18,27,37,46,55,64},
+    {0,4,9,13,17,21,26,30,34,38,43,47,51,55,60,64}
+};
+
+static void sw_bc7_block(const unsigned char *src, unsigned char *dst, int stride) {
+    /* {ns, pb, rb, isb, cb, ab, epb, spb, ib, ib2} */
+    static const int MD[8][10] = {
+        {3,4,0,0,4,0,1,0,3,0},{2,6,0,0,6,0,0,1,3,0},
+        {3,6,0,0,5,0,0,0,2,0},{2,6,0,0,7,0,1,0,2,0},
+        {1,0,2,1,5,6,0,0,2,3},{1,0,2,0,7,8,0,0,2,2},
+        {1,0,0,0,7,7,1,0,4,0},{2,6,0,0,5,5,1,0,2,0}
+    };
+    int bp = 0;
+    int mode = -1;
+    for (int m=0; m<=7; m++) if (sw_bc_bits(src,&bp,1)) { mode=m; break; }
+    if (mode < 0) {
+        for (int i=0;i<4;i++) for (int j=0;j<4;j++) {
+            unsigned char *p=dst+i*stride+j*4; p[0]=p[1]=p[2]=0; p[3]=255;
+        }
+        return;
+    }
+    const int *m = MD[mode];
+    int ns=m[0], pb=m[1], rb=m[2], isb=m[3], cb=m[4], ab=m[5], epb=m[6], spb=m[7], ib=m[8], ib2=m[9];
+    int part = pb  ? (int)sw_bc_bits(src,&bp,pb)  : 0;
+    int rot  = rb  ? (int)sw_bc_bits(src,&bp,rb)  : 0;
+    int isel = isb ? (int)sw_bc_bits(src,&bp,isb) : 0;
+    int ne = ns * 2;
+    unsigned char ep[6][4];
+    for (int i=0;i<ne;i++) { ep[i][0]=ep[i][1]=ep[i][2]=0; ep[i][3]=255; }
+    for (int c=0;c<3;c++) for (int e=0;e<ne;e++) ep[e][c]=(unsigned char)sw_bc_bits(src,&bp,cb);
+    if (ab) for (int e=0;e<ne;e++) ep[e][3]=(unsigned char)sw_bc_bits(src,&bp,ab);
+    if (epb) {
+        for (int e=0;e<ne;e++) {
+            int p=(int)sw_bc_bits(src,&bp,1);
+            for (int c=0;c<(ab?4:3);c++) ep[e][c]=(unsigned char)((ep[e][c]<<1)|p);
+        }
+    } else if (spb) {
+        for (int s=0;s<ns;s++) {
+            int p=(int)sw_bc_bits(src,&bp,1);
+            for (int e=s*2;e<s*2+2;e++) for (int c=0;c<3;c++) ep[e][c]=(unsigned char)((ep[e][c]<<1)|p);
+        }
+    }
+    int cbt = cb + (epb||spb ? 1 : 0);
+    int abt = ab + (epb ? 1 : 0);
+    for (int e=0;e<ne;e++) {
+        for (int c=0;c<3;c++) ep[e][c]=sw_expand8(ep[e][c],cbt);
+        if (ab) ep[e][3]=sw_expand8(ep[e][3],abt); /* else stays 255 */
+    }
+    /* Determine anchor pixels (one per subset, MSB of index implicit 0) */
+    int anc[3] = {0, 16, 16};
+    if (ns >= 2) anc[1] = (ns==2) ? s_bc7_a2[part] : s_bc7_a3a[part];
+    if (ns == 3) anc[2] = s_bc7_a3b[part];
+    /* Read primary indices */
+    unsigned char idx[16], idx2[16];
+    for (int pix=0;pix<16;pix++) {
+        int is_anc=(pix==anc[0]||pix==anc[1]||pix==anc[2]);
+        idx[pix]=(unsigned char)sw_bc_bits(src,&bp,ib-(is_anc?1:0));
+    }
+    /* Read secondary indices (modes 4 and 5 only) */
+    for (int pix=0;pix<16;pix++) {
+        idx2[pix]=0;
+        if (ib2) idx2[pix]=(unsigned char)sw_bc_bits(src,&bp,ib2-(pix==0?1:0));
+    }
+    /* Interpolate pixels */
+    for (int row=0;row<4;row++) for (int col=0;col<4;col++) {
+        int pix = row*4+col;
+        int sub = 0;
+        if (ns==2) sub=(s_bc7_p2[part]>>pix)&1;
+        else if (ns==3) sub=(s_bc7_p3[part]>>(pix*2))&3;
+        int e0=sub*2, e1=sub*2+1;
+        int ci, ai, cib, aib;
+        if (ib2==0)          { ci=idx[pix]; cib=ib;  ai=idx[pix];  aib=ib;  }
+        else if (mode==4&&isel){ ci=idx2[pix];cib=ib2; ai=idx[pix]; aib=ib; }
+        else                  { ci=idx[pix]; cib=ib;  ai=idx2[pix]; aib=ib2; }
+        unsigned char out[4];
+        for (int c=0;c<3;c++)
+            out[c]=(unsigned char)(((64-s_bc7_iw[cib][ci])*ep[e0][c]+s_bc7_iw[cib][ci]*ep[e1][c]+32)>>6);
+        out[3]=(unsigned char)(((64-s_bc7_iw[aib][ai])*ep[e0][3]+s_bc7_iw[aib][ai]*ep[e1][3]+32)>>6);
+        if      (rot==1){unsigned char t=out[0];out[0]=out[3];out[3]=t;}
+        else if (rot==2){unsigned char t=out[1];out[1]=out[3];out[3]=t;}
+        else if (rot==3){unsigned char t=out[2];out[2]=out[3];out[3]=t;}
+        unsigned char *p=dst+row*stride+col*4;
+        p[0]=out[0]; p[1]=out[1]; p[2]=out[2]; p[3]=out[3];
+    }
+}
+
+static void sw_decompress_bc1(const unsigned char *src, unsigned char *dst, int w, int h) {
+    int bx=(w+3)/4, by=(h+3)/4;
+    for (int y=0;y<by;y++) for (int x=0;x<bx;x++) {
+        unsigned char tmp[64]; sw_bc1_block(src,tmp,16);
+        int px=x*4, py=y*4;
+        for (int r=0;r<4&&(py+r)<h;r++) {
+            int cols=(px+4<=w)?4:(w-px);
+            memcpy(dst+((py+r)*w+px)*4, tmp+r*16, cols*4);
+        }
+        src+=8;
+    }
+}
+static void sw_decompress_bc3(const unsigned char *src, unsigned char *dst, int w, int h) {
+    int bx=(w+3)/4, by=(h+3)/4;
+    for (int y=0;y<by;y++) for (int x=0;x<bx;x++) {
+        unsigned char tmp[64]; sw_bc3_block(src,tmp,16);
+        int px=x*4, py=y*4;
+        for (int r=0;r<4&&(py+r)<h;r++) {
+            int cols=(px+4<=w)?4:(w-px);
+            memcpy(dst+((py+r)*w+px)*4, tmp+r*16, cols*4);
+        }
+        src+=16;
+    }
+}
+static void sw_decompress_bc7(const unsigned char *src, unsigned char *dst, int w, int h) {
+    int bx=(w+3)/4, by=(h+3)/4;
+    for (int y=0;y<by;y++) for (int x=0;x<bx;x++) {
+        unsigned char tmp[64]; sw_bc7_block(src,tmp,16);
+        int px=x*4, py=y*4;
+        for (int r=0;r<4&&(py+r)<h;r++) {
+            int cols=(px+4<=w)?4:(w-px);
+            memcpy(dst+((py+r)*w+px)*4, tmp+r*16, cols*4);
+        }
+        src+=16;
+    }
+}
+
 static int g_stat_lookups = 0;
 static int g_stat_hits = 0;
 static int g_stat_loaded = 0;
@@ -452,6 +671,7 @@ static GLuint load_dds_file(const char* filepath, int* out_w, int* out_h) {
     GLenum gl_internal = 0;
     int compressed = 0;
     int block_size = 0;
+    int sw_decomp = 0; /* 1=BC1, 3=BC3, 7=BC7 software decompression needed */
 
     if ((pf_flags & DDPF_FOURCC) && pf_fourcc == 0x30315844) {
         /* "DX10" FourCC — read extended header */
@@ -460,22 +680,19 @@ static GLuint load_dds_file(const char* filepath, int* out_w, int* out_h) {
 
         switch (dxgi_format) {
             case DXGI_FORMAT_BC7_UNORM:
-                if (!g_has_bc7) { fclose(f); return 0; }
-                gl_internal = GL_COMPRESSED_RGBA_BPTC_UNORM;
-                compressed = 1;
-                block_size = 16;
+                block_size = 16; compressed = 1;
+                if (g_has_bc7) gl_internal = GL_COMPRESSED_RGBA_BPTC_UNORM;
+                else { sw_decomp = 7; gl_internal = GL_RGBA; }
                 break;
             case DXGI_FORMAT_BC1_UNORM:
-                if (!g_has_s3tc) { fclose(f); return 0; }
-                gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
-                compressed = 1;
-                block_size = 8;
+                block_size = 8; compressed = 1;
+                if (g_has_s3tc) gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
+                else { sw_decomp = 1; gl_internal = GL_RGBA; }
                 break;
             case DXGI_FORMAT_BC3_UNORM:
-                if (!g_has_s3tc) { fclose(f); return 0; }
-                gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
-                compressed = 1;
-                block_size = 16;
+                block_size = 16; compressed = 1;
+                if (g_has_s3tc) gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
+                else { sw_decomp = 3; gl_internal = GL_RGBA; }
                 break;
             case DXGI_FORMAT_R8G8B8A8_UNORM:
             case DXGI_FORMAT_B8G8R8A8_UNORM:
@@ -487,17 +704,15 @@ static GLuint load_dds_file(const char* filepath, int* out_w, int* out_h) {
                 return 0;
         }
     } else if ((pf_flags & DDPF_FOURCC)) {
-        /* Legacy FourCC (DXT1, DXT3, DXT5) */
+        /* Legacy FourCC (DXT1, DXT5) */
         if (pf_fourcc == 0x31545844) { /* "DXT1" */
-            if (!g_has_s3tc) { fclose(f); return 0; }
-            gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
-            compressed = 1;
-            block_size = 8;
+            block_size = 8; compressed = 1;
+            if (g_has_s3tc) gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
+            else { sw_decomp = 1; gl_internal = GL_RGBA; }
         } else if (pf_fourcc == 0x35545844) { /* "DXT5" */
-            if (!g_has_s3tc) { fclose(f); return 0; }
-            gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
-            compressed = 1;
-            block_size = 16;
+            block_size = 16; compressed = 1;
+            if (g_has_s3tc) gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
+            else { sw_decomp = 3; gl_internal = GL_RGBA; }
         } else {
             fclose(f);
             return 0;
@@ -540,6 +755,20 @@ static GLuint load_dds_file(const char* filepath, int* out_w, int* out_h) {
             pixels[i] = pixels[i + 2];
             pixels[i + 2] = tmp;
         }
+    }
+
+    /* Software decompression fallback for GPUs without BC7/S3TC extensions */
+    if (sw_decomp) {
+        int rgba_size = (int)(dds_width * dds_height * 4);
+        unsigned char *rgba = (unsigned char*)malloc(rgba_size);
+        if (!rgba) { free(pixels); return 0; }
+        if      (sw_decomp == 1) sw_decompress_bc1(pixels, rgba, (int)dds_width, (int)dds_height);
+        else if (sw_decomp == 3) sw_decompress_bc3(pixels, rgba, (int)dds_width, (int)dds_height);
+        else                     sw_decompress_bc7(pixels, rgba, (int)dds_width, (int)dds_height);
+        free(pixels);
+        pixels = rgba;
+        data_size = rgba_size;
+        compressed = 0;
     }
 
     GLuint tex;
@@ -716,8 +945,8 @@ void pc_texture_pack_init(void) {
         g_texpack_active = 1;
         printf("[TexturePack] Loaded %d texture entries (BC7:%s S3TC:%s)\n",
                g_texpack_count,
-               g_has_bc7 ? "yes" : "no",
-               g_has_s3tc ? "yes" : "no");
+               g_has_bc7 ? "gpu" : "sw",
+               g_has_s3tc ? "gpu" : "sw");
     } else {
         printf("[TexturePack] No texture pack found in texture_pack/\n");
     }
@@ -856,32 +1085,38 @@ static unsigned char* load_dds_raw(const char* filepath, xxh_u32* out_w, xxh_u32
     GLenum gl_internal = 0;
     int compressed = 0;
     int block_size = 0;
+    int sw_decomp = 0;
 
     if ((pf_flags & DDPF_FOURCC) && pf_fourcc == 0x30315844) {
         if (fread(header + 128, 1, 20, f) != 20) { fclose(f); return NULL; }
         memcpy(&dxgi_format, header + 128, 4);
         switch (dxgi_format) {
             case DXGI_FORMAT_BC7_UNORM:
-                if (!g_has_bc7) { fclose(f); return NULL; }
-                gl_internal = GL_COMPRESSED_RGBA_BPTC_UNORM; compressed = 1; block_size = 16; break;
+                block_size=16; compressed=1;
+                if (g_has_bc7) gl_internal=GL_COMPRESSED_RGBA_BPTC_UNORM;
+                else { sw_decomp=7; gl_internal=GL_RGBA; } break;
             case DXGI_FORMAT_BC1_UNORM:
-                if (!g_has_s3tc) { fclose(f); return NULL; }
-                gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT; compressed = 1; block_size = 8; break;
+                block_size=8; compressed=1;
+                if (g_has_s3tc) gl_internal=GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
+                else { sw_decomp=1; gl_internal=GL_RGBA; } break;
             case DXGI_FORMAT_BC3_UNORM:
-                if (!g_has_s3tc) { fclose(f); return NULL; }
-                gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; compressed = 1; block_size = 16; break;
+                block_size=16; compressed=1;
+                if (g_has_s3tc) gl_internal=GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
+                else { sw_decomp=3; gl_internal=GL_RGBA; } break;
             case DXGI_FORMAT_R8G8B8A8_UNORM:
             case DXGI_FORMAT_B8G8R8A8_UNORM:
-                gl_internal = GL_RGBA; compressed = 0; break;
+                gl_internal=GL_RGBA; compressed=0; break;
             default: fclose(f); return NULL;
         }
     } else if ((pf_flags & DDPF_FOURCC)) {
         if (pf_fourcc == 0x31545844) {
-            if (!g_has_s3tc) { fclose(f); return NULL; }
-            gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT; compressed = 1; block_size = 8;
+            block_size=8; compressed=1;
+            if (g_has_s3tc) gl_internal=GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
+            else { sw_decomp=1; gl_internal=GL_RGBA; }
         } else if (pf_fourcc == 0x35545844) {
-            if (!g_has_s3tc) { fclose(f); return NULL; }
-            gl_internal = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; compressed = 1; block_size = 16;
+            block_size=16; compressed=1;
+            if (g_has_s3tc) gl_internal=GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
+            else { sw_decomp=3; gl_internal=GL_RGBA; }
         } else { fclose(f); return NULL; }
     } else {
         xxh_u32 rgb_bit_count;
@@ -908,6 +1143,20 @@ static unsigned char* load_dds_raw(const char* filepath, xxh_u32* out_w, xxh_u32
         for (int i = 0; i < data_size; i += 4) {
             unsigned char tmp = pixels[i]; pixels[i] = pixels[i + 2]; pixels[i + 2] = tmp;
         }
+    }
+
+    if (sw_decomp) {
+        int rgba_size = (int)(dds_width * dds_height * 4);
+        unsigned char *rgba = (unsigned char*)malloc(rgba_size);
+        if (!rgba) { free(pixels); return NULL; }
+        if      (sw_decomp == 1) sw_decompress_bc1(pixels, rgba, (int)dds_width, (int)dds_height);
+        else if (sw_decomp == 3) sw_decompress_bc3(pixels, rgba, (int)dds_width, (int)dds_height);
+        else                     sw_decompress_bc7(pixels, rgba, (int)dds_width, (int)dds_height);
+        free(pixels);
+        pixels = rgba;
+        data_size = rgba_size;
+        compressed = 0;
+        gl_internal = GL_RGBA;
     }
 
     *out_w = dds_width;

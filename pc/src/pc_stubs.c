@@ -1,6 +1,12 @@
 /* pc_stubs.c - stub definitions for symbols the decomp declares but we don't need */
 #include <stdarg.h>
 #include <stddef.h>  /* size_t */
+#include <stdio.h>
+#ifndef _WIN32
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#endif
 #include "types.h"
 
 typedef s32 OSPriority;
@@ -82,7 +88,42 @@ int famicom_get_disksystem_titles(int* n_games, char* title_name_bufp, int nameb
     (void)n_games; (void)title_name_bufp; (void)namebuf_size; return 0;
 }
 int famicom_init(int rom_idx, void* malloc_info, int player_no) {
-    (void)rom_idx; (void)malloc_info; (void)player_no; return 0;
+    (void)malloc_info; (void)player_no;
+    if (rom_idx <= 0) return -1;
+#ifndef _WIN32
+    /* Load the GBA ROM bundle for this game from the disc image and hand it to fixnes.
+     * famicom_gba_getImage reads /FAMICOM/GBA/jb_<name>.bin.szs via the JKR archive;
+     * the data is the GBA wireless-adapter binary that bundles an NES emulator + ROM.
+     * fixnes on ARKOS accepts this format directly.  If the game has no GBA bundle
+     * (NULL returned) we skip launch and return 0 so the room resumes cleanly. */
+    {
+        extern void* famicom_gba_getImage(u32 rom_id, size_t* size);
+        extern void  famicom_gba_removeImage(void* p);
+        size_t rom_size = 0;
+        void* rom_data = famicom_gba_getImage((u32)rom_idx, &rom_size);
+        if (rom_data != NULL && rom_size > 0) {
+            const char* tmp_path = "/tmp/acgc_nes_rom.bin";
+            FILE* f = fopen(tmp_path, "wb");
+            if (f != NULL) {
+                fwrite(rom_data, 1, rom_size, f);
+                fclose(f);
+                pid_t pid = fork();
+                if (pid == 0) {
+                    execlp("fixnes",          "fixnes", tmp_path, (char*)NULL);
+                    execl("/usr/bin/fixnes",   "fixnes", tmp_path, (char*)NULL);
+                    execl("/usr/local/bin/fixnes", "fixnes", tmp_path, (char*)NULL);
+                    _exit(127); /* fixnes not found */
+                } else if (pid > 0) {
+                    int status;
+                    waitpid(pid, &status, 0);
+                }
+                remove(tmp_path);
+            }
+            famicom_gba_removeImage(rom_data);
+        }
+    }
+#endif
+    return 0; /* return 0 so the room resumes without an error message */
 }
 int famicom_internal_data_load(void) { return 0; }
 int famicom_internal_data_save(void) { return 0; }

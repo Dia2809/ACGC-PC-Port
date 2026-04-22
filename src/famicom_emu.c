@@ -116,14 +116,19 @@ extern void famicom_emu_main(GAME* famicom) {
 
 extern void famicom_emu_init(GAME* game) {
 #ifdef TARGET_PC
-    /* NES emulators are not implemented on PC — immediately return to room */
-    game->exec = famicom_emu_main;
-    game->cleanup = famicom_emu_cleanup;
-    famicom_done = TRUE;
-    famicom_done_countdown = 0;
-    Common_Set(my_room_message_control_flags, Common_Get(my_room_message_control_flags) | 1);
-    return_emu_game(game);
-    return;
+    {
+        int rom_id = Common_Get(current_famicom_rom);
+        u8 player = Common_Get(player_no);
+        game->exec = famicom_emu_main;
+        game->cleanup = famicom_emu_cleanup;
+        famicom_done = TRUE;
+        famicom_done_countdown = 0;
+        if (famicom_init(rom_id, NULL, player) != 0) {
+            Common_Set(my_room_message_control_flags, Common_Get(my_room_message_control_flags) | 1);
+        }
+        return_emu_game(game);
+        return;
+    }
 #endif
     int rom_id;
     u8 player;

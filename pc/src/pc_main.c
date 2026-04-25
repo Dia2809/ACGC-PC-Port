@@ -7,6 +7,13 @@
 #include "pc_assets.h"
 #include "pc_disc.h"
 
+#ifdef _WIN32
+#include <dbghelp.h>
+#else
+#include <execinfo.h>
+#include <fcntl.h>
+#endif
+
 /* prefer discrete GPU on laptops */
 #ifdef _WIN32
 __declspec(dllexport) unsigned long NvOptimusEnablement = 1;
@@ -33,6 +40,121 @@ static volatile unsigned int pc_last_crash_addr = 0;
 
 static volatile unsigned int pc_last_crash_data_addr = 0;
 
+/* -------------------------------------------------------------------------
+ * Crash log — written to crash.log in the working directory on fatal crash.
+ * Uses only signal-safe primitives on POSIX (write/backtrace_symbols_fd).
+ * ------------------------------------------------------------------------- */
+#ifdef _WIN32
+static void pc_write_crash_log(PEXCEPTION_POINTERS ep) {
+    DWORD code = ep->ExceptionRecord->ExceptionCode;
+    void* fault = ep->ExceptionRecord->ExceptionAddress;
+
+    FILE* f = fopen("crash.log", "w");
+    if (!f) return;
+
+    const char* name = "Unknown Exception";
+    if      (code == EXCEPTION_ACCESS_VIOLATION)    name = "Access Violation";
+    else if (code == EXCEPTION_ILLEGAL_INSTRUCTION) name = "Illegal Instruction";
+    else if (code == EXCEPTION_INT_DIVIDE_BY_ZERO)  name = "Integer Divide by Zero";
+    else if (code == EXCEPTION_PRIV_INSTRUCTION)    name = "Privileged Instruction";
+    else if (code == EXCEPTION_STACK_OVERFLOW)      name = "Stack Overflow";
+
+    fprintf(f, "=== Animal Crossing PC - Crash Report ===\n");
+    fprintf(f, "Exception:     %s (0x%08lX)\n", name, code);
+    fprintf(f, "Crash address: 0x%08X\n", (unsigned int)(uintptr_t)fault);
+    if (code == EXCEPTION_ACCESS_VIOLATION) {
+        fprintf(f, "Access type:   %s\n",
+            ep->ExceptionRecord->ExceptionInformation[0] ? "write" : "read");
+        fprintf(f, "Fault address: 0x%08lX\n",
+            ep->ExceptionRecord->ExceptionInformation[1]);
+    }
+    fprintf(f, "\nStack trace:\n");
+
+    void* frames[62];
+    WORD n = CaptureStackBackTrace(0, 62, frames, NULL);
+
+    HANDLE proc = GetCurrentProcess();
+    SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS | SYMOPT_LOAD_LINES);
+    SymInitialize(proc, NULL, TRUE);
+
+    char sym_buf[sizeof(SYMBOL_INFO) + 256];
+    SYMBOL_INFO* sym = (SYMBOL_INFO*)sym_buf;
+    sym->SizeOfStruct = sizeof(SYMBOL_INFO);
+    sym->MaxNameLen   = 255;
+    IMAGEHLP_LINE ln;
+    ln.SizeOfStruct = sizeof(IMAGEHLP_LINE);
+
+    for (WORD i = 0; i < n; i++) {
+        DWORD64 addr     = (DWORD64)(uintptr_t)frames[i];
+        DWORD64 sym_disp = 0;
+        DWORD   ln_disp  = 0;
+        if (SymFromAddr(proc, addr, &sym_disp, sym)) {
+            fprintf(f, "  #%-2d  %s+0x%llX", i, sym->Name,
+                    (unsigned long long)sym_disp);
+            if (SymGetLineFromAddr(proc, (DWORD)addr, &ln_disp, &ln))
+                fprintf(f, "  (%s:%lu)", ln.FileName, ln.LineNumber);
+        } else {
+            fprintf(f, "  #%-2d  0x%08X", i, (unsigned int)(uintptr_t)frames[i]);
+        }
+        fprintf(f, "\n");
+    }
+
+    SymCleanup(proc);
+    fprintf(f, "\nFor full symbols build with debug info (-g), then use WinDbg or addr2line.\n");
+    fprintf(f, "Please attach crash.log when reporting this bug.\n");
+    fclose(f);
+
+    MessageBoxA(NULL,
+        "Animal Crossing has crashed!\n\n"
+        "A crash report has been saved to crash.log\n"
+        "in the game directory.\n\n"
+        "Please include it when reporting bugs.",
+        "Animal Crossing - Crash",
+        MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
+}
+#else
+/* Signal-safe helpers — only call write() which is async-signal-safe. */
+static void crash_write_str(int fd, const char* s) {
+    const char* p = s;
+    while (*p) p++;
+    write(fd, s, (size_t)(p - s));
+}
+static void crash_write_hex(int fd, unsigned long val) {
+    static const char hx[] = "0123456789abcdef";
+    char buf[10]; /* "0x" + 8 hex digits */
+    buf[0] = '0'; buf[1] = 'x';
+    for (int i = 9; i >= 2; i--) { buf[i] = hx[val & 0xF]; val >>= 4; }
+    write(fd, buf, 10);
+}
+static void pc_write_crash_log(int sig, void* fault) {
+    int fd = open("crash.log", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd < 0) fd = STDERR_FILENO;
+
+    crash_write_str(fd, "=== Animal Crossing PC - Crash Report ===\n");
+    crash_write_str(fd, "Signal:        ");
+    if      (sig == SIGSEGV) crash_write_str(fd, "SIGSEGV (Segmentation Fault)");
+    else if (sig == SIGILL)  crash_write_str(fd, "SIGILL (Illegal Instruction)");
+    else if (sig == SIGFPE)  crash_write_str(fd, "SIGFPE (Floating Point Exception)");
+    else                     crash_write_str(fd, "Unknown signal");
+    crash_write_str(fd, "\nCrash address: ");
+    crash_write_hex(fd, (unsigned long)(uintptr_t)fault);
+    crash_write_str(fd, "\nImage base:    ");
+    crash_write_hex(fd, (unsigned long)pc_image_base);
+    crash_write_str(fd, "\n\nStack trace:\n");
+
+    void* frames[64];
+    int n = backtrace(frames, 64);
+    backtrace_symbols_fd(frames, n, fd);
+
+    crash_write_str(fd, "\nFor full symbols build with -g, then use:\n");
+    crash_write_str(fd, "  addr2line -e AnimalCrossing -f 0x<address>\n");
+    crash_write_str(fd, "\nPlease attach crash.log when reporting this bug.\n");
+
+    fsync(fd);
+    if (fd != STDERR_FILENO) close(fd);
+}
+#endif
+
 #ifdef _WIN32
 /* longjmp from VEH is technically UB, but works on x86 MinGW (no SEH to corrupt).
  * GCC doesn't have __try/__except and checking every pointer in emu64 is impractical. */
@@ -51,6 +173,14 @@ static LONG WINAPI pc_veh_handler(PEXCEPTION_POINTERS ep) {
         jmp_buf* buf = pc_active_jmpbuf;
         pc_active_jmpbuf = NULL;
         longjmp(*buf, 1);
+    }
+    /* No recovery point — fatal crash, write log then let OS handle it */
+    if (code == EXCEPTION_ACCESS_VIOLATION    ||
+        code == EXCEPTION_ILLEGAL_INSTRUCTION ||
+        code == EXCEPTION_INT_DIVIDE_BY_ZERO  ||
+        code == EXCEPTION_PRIV_INSTRUCTION    ||
+        code == EXCEPTION_STACK_OVERFLOW) {
+        pc_write_crash_log(ep);
     }
     return EXCEPTION_CONTINUE_SEARCH;
 }
@@ -73,6 +203,8 @@ static void pc_signal_handler(int sig, siginfo_t* info, void* ucontext) {
         sigprocmask(SIG_UNBLOCK, &ss, NULL);
         longjmp(*buf, 1);
     }
+    /* No recovery point — fatal crash, write log then re-raise with default handler */
+    pc_write_crash_log(sig, info->si_addr);
     signal(sig, SIG_DFL);
     raise(sig);
 }

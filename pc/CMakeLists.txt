@@ -441,7 +441,7 @@ else()
 endif()
 
 if(WIN32)
-    target_link_libraries(ac_pc opengl32 winmm imm32 version setupapi)
+    target_link_libraries(ac_pc opengl32 winmm imm32 version setupapi dbghelp)
 elseif(PC_USE_GLES)
     target_link_libraries(ac_pc dl pthread m)
     find_library(GLESV2_LIB GLESv2)
@@ -459,6 +459,7 @@ if(NOT WIN32)
     # isn't thread-safe and crashes. This version script keeps them binary-local.
     target_link_options(ac_pc PRIVATE
         "LINKER:--version-script=${CMAKE_CURRENT_SOURCE_DIR}/version_script.lds"
+        -rdynamic
     )
 endif()
 
